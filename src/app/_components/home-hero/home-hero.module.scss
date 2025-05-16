@@ -32,6 +32,7 @@
       padding: tokens.$container-padding-top-with-nav-mobile tokens.$spacing-xs
         0;
       min-height: auto;
+      flex-direction: column;
     }
   }
 
@@ -41,6 +42,10 @@
     position: relative;
     flex: 1;
     padding-bottom: tokens.$spacing-xxl;
+
+    @include breakpoint-down("mobile") {
+      padding-bottom: tokens.$spacing-lg;
+    }
   }
 
   &__title {
@@ -70,7 +75,8 @@
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 3rem;
+      font-size: 2.5rem;
+      line-height: 1.1;
     }
   }
 
@@ -95,6 +101,7 @@
 
     @include breakpoint-down("mobile") {
       font-size: tokens.$font-size-sm;
+      margin-top: tokens.$spacing-xxs;
     }
   }
 
@@ -148,6 +155,8 @@
     @include breakpoint-down("mobile") {
       padding-bottom: tokens.$spacing-md;
       padding-right: 2.5rem;
+      margin-top: tokens.$spacing-lg;
+      min-height: 6rem;
 
       &::before {
         width: tokens.$line-thickness-small;
@@ -174,9 +183,12 @@
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       writing-mode: horizontal-tb;
       margin-bottom: tokens.$spacing-xxs;
+      display: flex;
+      gap: tokens.$spacing-xs;
+      justify-content: flex-end;
     }
   }
 
