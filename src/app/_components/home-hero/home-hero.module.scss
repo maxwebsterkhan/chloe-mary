@@ -1,5 +1,6 @@
 @use "../../_styles/animations" as *;
 @use "../../_styles/breakpoints" as *;
+@use "../../_styles/tokens" as tokens;
 
 .home-hero {
   background-color: var(--color-secondary);
@@ -11,23 +12,25 @@
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  padding-bottom: 4rem;
+  padding-bottom: tokens.$spacing-xl;
 
   &__container {
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: calc(2rem + 5.1875rem) 2rem 0;
+    padding: tokens.$container-padding-top-with-nav tokens.$spacing-md 0;
     position: relative;
     display: flex;
     flex-direction: row;
 
     @include breakpoint-down("tablet") {
-      padding: calc(2rem + 4rem) 1rem 0;
+      padding: tokens.$container-padding-top-with-nav-tablet tokens.$spacing-xs
+        0;
     }
 
     @include breakpoint-down("mobile") {
-      padding: calc(2rem + 3.5rem) 1rem 0;
+      padding: tokens.$container-padding-top-with-nav-mobile tokens.$spacing-xs
+        0;
       min-height: auto;
     }
   }
@@ -37,32 +40,33 @@
     margin: 0 auto;
     position: relative;
     flex: 1;
-    padding-bottom: 8rem;
+    padding-bottom: tokens.$spacing-xxl;
   }
 
   &__title {
     margin: 0;
     font-family: var(--font-inter-tight);
-    font-size: 8rem;
+    font-size: tokens.$font-size-display;
     font-weight: 700;
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: tokens.$letter-spacing-tight;
     text-transform: uppercase;
     color: var(--color-primary);
     text-align: left;
     opacity: 0;
     max-width: 62.5rem;
-    animation: slideInDown 1s ease-out forwards;
+    animation: slideInDown tokens.$animation-duration-slow
+      tokens.$animation-timing-function forwards;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
 
     @include breakpoint-down("desktop-small") {
-      font-size: 6rem;
+      font-size: tokens.$font-size-hero;
     }
 
     @include breakpoint-down("tablet") {
-      font-size: 4.5rem;
+      font-size: tokens.$font-size-xxl;
     }
 
     @include breakpoint-down("mobile") {
@@ -72,25 +76,34 @@
 
   &__subtitle {
     font-family: var(--font-inter-tight);
-    font-size: 2rem;
+    font-size: tokens.$font-size-lg;
     font-weight: 400;
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: tokens.$letter-spacing-tight;
     color: var(--color-primary);
-    margin-top: 1rem;
+    margin-top: tokens.$spacing-xs;
     text-align: left;
     opacity: 0;
-    animation: slideInLeft 0.8s ease-out 0.6s forwards;
+    animation: slideInLeft tokens.$animation-duration-slow
+      tokens.$animation-timing-function tokens.$animation-delay-short forwards;
     word-wrap: break-word;
     overflow-wrap: break-word;
 
     @include breakpoint-down("tablet") {
-      font-size: 1.5rem;
+      font-size: tokens.$font-size-md;
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 1.2rem;
+      font-size: tokens.$font-size-sm;
     }
+  }
+
+  &__dot-separator {
+    display: inline-block;
+    font-size: 1em;
+    margin: 0 0.55em;
+    vertical-align: middle;
+    line-height: 1;
   }
 
   &__memento {
@@ -100,9 +113,11 @@
     width: 100%;
     box-sizing: border-box;
     text-align: right;
-    padding-right: 4rem;
+    padding-right: tokens.$spacing-xl;
     opacity: 0;
-    animation: fadeIn 1.5s ease-out 1s forwards;
+    animation: fadeIn tokens.$animation-duration-slow
+      tokens.$animation-timing-function tokens.$animation-delay-extra-long
+      forwards;
     position: relative;
 
     &::before {
@@ -111,31 +126,31 @@
       top: 0;
       bottom: 0;
       right: 0;
-      width: 2px;
+      width: tokens.$line-thickness-large;
       height: 100%;
       background-color: var(--color-primary);
       transform-origin: top;
       transform: scaleY(0);
-      animation: drawLineTopDown 1.5s cubic-bezier(0.22, 1, 0.36, 1) 2.5s
-        forwards;
+      animation: drawLineTopDown tokens.$animation-duration-slow
+        tokens.$animation-timing-function 2s forwards;
     }
 
     @include breakpoint-down("tablet") {
       padding-bottom: 2.5rem;
-      padding-right: 3rem;
+      padding-right: tokens.$spacing-lg;
 
       &::before {
-        width: 1.5px;
+        width: tokens.$line-thickness-medium;
         right: 0;
       }
     }
 
     @include breakpoint-down("mobile") {
-      padding-bottom: 2rem;
+      padding-bottom: tokens.$spacing-md;
       padding-right: 2.5rem;
 
       &::before {
-        width: 1px;
+        width: tokens.$line-thickness-small;
         right: 0;
       }
     }
@@ -143,34 +158,34 @@
 
   &__vertical-text {
     font-family: var(--font-inter-tight);
-    font-size: 2.5rem;
+    font-size: tokens.$font-size-xl;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: tokens.$letter-spacing-tight;
     color: var(--color-primary);
     writing-mode: vertical-lr;
     text-orientation: mixed;
-    margin-bottom: 1.5rem;
+    margin-bottom: tokens.$spacing-sm;
     white-space: nowrap;
     margin-left: auto;
 
     @include breakpoint-down("tablet") {
-      font-size: 2rem;
+      font-size: tokens.$font-size-lg;
     }
 
     @include breakpoint-down("mobile") {
       font-size: 1.8rem;
       writing-mode: horizontal-tb;
-      margin-bottom: 0.5rem;
+      margin-bottom: tokens.$spacing-xxs;
     }
   }
 
   &__horizontal-text {
     font-family: var(--font-inter-tight);
-    font-size: 1.2rem;
+    font-size: tokens.$font-size-sm;
     font-weight: 400;
     line-height: 1.2;
-    letter-spacing: 0.1em;
+    letter-spacing: tokens.$letter-spacing-wide;
     color: var(--color-primary);
     white-space: nowrap;
     width: fit-content;
@@ -179,32 +194,32 @@
     overflow: hidden;
 
     @include breakpoint-down("mobile") {
-      font-size: 1rem;
+      font-size: tokens.$font-size-xs;
     }
   }
 
   &__animated-line {
-    height: 2px;
+    height: tokens.$line-thickness-large;
     background-color: var(--color-primary);
-    width: calc(100% - 4rem);
+    width: calc(100% - #{tokens.$spacing-xl});
     position: absolute;
     bottom: 0;
-    left: 2rem;
-    right: 2rem;
+    left: tokens.$spacing-md;
+    right: tokens.$spacing-md;
     transform-origin: right;
     transform: scaleX(0);
-    animation: drawLineRightToLeft 1.5s cubic-bezier(0.22, 1, 0.36, 1) 2.5s
-      forwards;
+    animation: drawLineRightToLeft tokens.$animation-duration-slow
+      tokens.$animation-timing-function 2s forwards;
 
     @include breakpoint-down("tablet") {
-      height: 1.5px;
-      width: calc(100% - 2rem);
-      left: 1rem;
-      right: 1rem;
+      height: tokens.$line-thickness-medium;
+      width: calc(100% - #{tokens.$spacing-md});
+      left: tokens.$spacing-xs;
+      right: tokens.$spacing-xs;
     }
 
     @include breakpoint-down("mobile") {
-      height: 1px;
+      height: tokens.$line-thickness-small;
     }
   }
 
@@ -214,7 +229,8 @@
     &__letter {
       display: inline-block;
       opacity: 0;
-      animation: fadeIn 0.5s ease-out var(--delay) forwards;
+      animation: fadeIn tokens.$animation-duration-fast
+        tokens.$animation-timing-function var(--delay) forwards;
     }
   }
 }

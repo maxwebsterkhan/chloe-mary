@@ -1,45 +1,5 @@
 import styles from "./home-hero.module.scss";
-
-type CustomCSSProperties = {
-  "--delay": string;
-} & React.CSSProperties;
-
-const CascadingText = ({
-  text,
-  className,
-  direction = "vertical",
-  startDelay = 0,
-}: {
-  text: string;
-  className: string;
-  direction?: "vertical" | "horizontal";
-  startDelay?: number;
-}) => {
-  return (
-    <div className={className}>
-      {text.split("").map((letter, index) => {
-        const totalLetters = text.length;
-        const delay =
-          direction === "vertical"
-            ? index * 0.06
-            : (totalLetters - index - 1) * 0.04;
-        return (
-          <span
-            key={index}
-            className={styles["home-hero__cascading-text__letter"]}
-            style={
-              {
-                "--delay": `${startDelay + delay}s`,
-              } as CustomCSSProperties
-            }
-          >
-            {letter}
-          </span>
-        );
-      })}
-    </div>
-  );
-};
+import CascadingText from "../helpers/cascading-text";
 
 export default function HomeHero() {
   return (
@@ -51,7 +11,14 @@ export default function HomeHero() {
             Authentic Modern Love Stories
           </h1>
           <p className={styles["home-hero__subtitle"]}>
-            CAPTURED BY CHLOE MARY - TOLD BY YOU.
+            Told by you
+            <span
+              aria-hidden="true"
+              className={styles["home-hero__dot-separator"]}
+            >
+              •
+            </span>
+            Captured by Chloe Mary
           </p>
         </div>
         <div className={styles["home-hero__memento"]}>
@@ -59,11 +26,13 @@ export default function HomeHero() {
             <CascadingText
               text="MEMENTO"
               className={styles["home-hero__cascading-text"]}
+              letterClassName={styles["home-hero__cascading-text__letter"]}
               direction="vertical"
             />
             <CascadingText
               text="VIVERE"
               className={styles["home-hero__cascading-text"]}
+              letterClassName={styles["home-hero__cascading-text__letter"]}
               direction="vertical"
               startDelay={0.4}
             />
@@ -72,6 +41,7 @@ export default function HomeHero() {
             <CascadingText
               text="R E M E M B E R T O L I V E"
               className={styles["home-hero__cascading-text"]}
+              letterClassName={styles["home-hero__cascading-text__letter"]}
               direction="horizontal"
               startDelay={0.8}
             />

@@ -1,0 +1,51 @@
+// Animation timing
+$animation-duration-fast: 0.5s;
+$animation-duration-normal: 1s;
+$animation-duration-slow: 1.5s;
+
+// Animation delays
+$animation-delay-none: 0s;
+$animation-delay-short: 0.3s;
+$animation-delay-medium: 0.6s;
+$animation-delay-long: 0.8s;
+$animation-delay-extra-long: 1s;
+$animation-delay-cascading-vertical: 0.06s;
+$animation-delay-cascading-horizontal: 0.04s;
+
+// Animation timings
+$animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+// Spacing
+$spacing-xxs: 0.5rem;
+$spacing-xs: 1rem;
+$spacing-sm: 1.5rem;
+$spacing-md: 2rem;
+$spacing-lg: 3rem;
+$spacing-xl: 4rem;
+$spacing-xxl: 8rem;
+
+// Line dimensions
+$line-thickness-small: 1px;
+$line-thickness-medium: 1.5px;
+$line-thickness-large: 2px;
+
+// Typography sizes
+$font-size-xs: 1rem;
+$font-size-sm: 1.2rem;
+$font-size-md: 1.5rem;
+$font-size-lg: 2rem;
+$font-size-xl: 2.5rem;
+$font-size-xxl: 4.5rem;
+$font-size-hero: 6rem;
+$font-size-display: 8rem;
+
+// Letter spacing
+$letter-spacing-tight: -0.02em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.1em;
+
+// Container widths
+$container-width-default: calc(100% - #{$spacing-md * 2});
+$container-padding-top-with-nav: calc(#{$spacing-md} + 5.1875rem);
+$container-padding-top-with-nav-tablet: calc(#{$spacing-md} + 4rem);
+$container-padding-top-with-nav-mobile: calc(#{$spacing-md} + 3.5rem);
