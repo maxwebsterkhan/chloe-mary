@@ -1,0 +1,50 @@
+// Breakpoint tokens
+$breakpoints: (
+  "mobile": 480px,
+  // 320px - 480px: Smartphones (portrait)
+  "tablet": 768px,
+  // 481px - 768px: Tablets (portrait), small laptops
+  "desktop-small": 1024px,
+  // 769px - 1024px: Tablets (landscape), smaller laptops
+  "desktop-large": 1025px // 1025px and up: Desktop monitors, larger laptops,,
+);
+
+// Mixin for min-width (mobile first approach)
+@mixin breakpoint-up($breakpoint) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @if $breakpoint-value {
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+// Mixin for max-width
+@mixin breakpoint-down($breakpoint) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @if $breakpoint-value {
+    @media (max-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+// Mixin for between breakpoints
+@mixin breakpoint-between($lower, $upper) {
+  $lower-breakpoint: map-get($breakpoints, $lower);
+  $upper-breakpoint: map-get($breakpoints, $upper);
+
+  @if $lower-breakpoint and $upper-breakpoint {
+    @media (min-width: $lower-breakpoint) and (max-width: $upper-breakpoint) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$lower} or #{$upper}";
+  }
+}

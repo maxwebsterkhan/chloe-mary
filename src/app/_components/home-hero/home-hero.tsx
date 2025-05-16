@@ -44,6 +44,7 @@ const CascadingText = ({
 export default function HomeHero() {
   return (
     <div className={styles["home-hero"]}>
+      <div className={styles["home-hero__vertical-line"]}></div>
       <div className={styles["home-hero__container"]}>
         <div className={styles["home-hero__content"]}>
           <h1 className={styles["home-hero__title"]}>
@@ -77,6 +78,7 @@ export default function HomeHero() {
           </div>
         </div>
       </div>
+      <div className={styles["home-hero__animated-line"]}></div>
     </div>
   );
 }

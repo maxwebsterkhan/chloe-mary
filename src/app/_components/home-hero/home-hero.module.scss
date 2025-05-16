@@ -1,4 +1,5 @@
 @use "../../_styles/animations" as *;
+@use "../../_styles/breakpoints" as *;
 
 .home-hero {
   background-color: var(--color-secondary);
@@ -8,19 +9,36 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  padding-bottom: 4rem;
 
   &__container {
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: calc(2rem + 5.1875rem) 2rem 4rem;
+    padding: calc(2rem + 5.1875rem) 2rem 0;
     position: relative;
+    display: flex;
+    flex-direction: row;
+
+    @include breakpoint-down("tablet") {
+      padding: calc(2rem + 4rem) 1rem 0;
+      min-height: 90vh;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding: calc(2rem + 3.5rem) 1rem 0;
+      min-height: auto;
+    }
   }
 
   &__content {
     width: 100%;
     margin: 0 auto;
     position: relative;
+    flex: 1;
+    padding-bottom: 6rem;
   }
 
   &__title {
@@ -36,6 +54,21 @@
     opacity: 0;
     max-width: 62.5rem;
     animation: slideInDown 1s ease-out forwards;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+
+    @include breakpoint-down("desktop-small") {
+      font-size: 6rem;
+    }
+
+    @include breakpoint-down("tablet") {
+      font-size: 4.5rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      font-size: 3rem;
+    }
   }
 
   &__subtitle {
@@ -49,17 +82,38 @@
     text-align: left;
     opacity: 0;
     animation: slideInLeft 0.8s ease-out 0.6s forwards;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    @include breakpoint-down("tablet") {
+      font-size: 1.5rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      font-size: 1.2rem;
+    }
   }
 
   &__memento {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out 1s forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 100%;
     box-sizing: border-box;
     text-align: right;
+    padding-right: 4rem;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1s forwards;
+    position: relative;
+    padding-bottom: 3rem;
+
+    @include breakpoint-down("tablet") {
+      padding-bottom: 2.5rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding-bottom: 2rem;
+    }
   }
 
   &__vertical-text {
@@ -74,6 +128,16 @@
     margin-bottom: 1.5rem;
     white-space: nowrap;
     margin-left: auto;
+
+    @include breakpoint-down("tablet") {
+      font-size: 2rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      font-size: 1.8rem;
+      writing-mode: horizontal-tb;
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__horizontal-text {
@@ -86,6 +150,37 @@
     white-space: nowrap;
     width: fit-content;
     margin-left: auto;
+    max-width: 100%;
+    overflow: hidden;
+
+    @include breakpoint-down("mobile") {
+      font-size: 1rem;
+    }
+  }
+
+  &__animated-line {
+    height: 2px;
+    background-color: var(--color-primary);
+    width: calc(100% - 4rem);
+    position: absolute;
+    bottom: 0;
+    left: 2rem;
+    right: 2rem;
+    transform-origin: right;
+    transform: scaleX(0);
+    animation: drawLineRightToLeft 1.5s cubic-bezier(0.22, 1, 0.36, 1) 2.5s
+      forwards;
+
+    @include breakpoint-down("tablet") {
+      height: 1.5px;
+      width: calc(100% - 2rem);
+      left: 1rem;
+      right: 1rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      height: 1px;
+    }
   }
 
   &__cascading-text {
@@ -127,5 +222,14 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes drawLineRightToLeft {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
   }
 }

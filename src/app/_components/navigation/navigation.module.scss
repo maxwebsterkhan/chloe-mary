@@ -1,3 +1,5 @@
+@use "../../_styles/breakpoints" as *;
+
 .navigation {
   display: flex;
   justify-content: center;
@@ -8,14 +10,15 @@
   transform: translateX(-50%);
   padding: 1.2rem 1.8rem;
   z-index: 100;
-  background-color: rgba(243, 240, 235, 0.3);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: none;
+  background-color: rgba(243, 240, 235, 0.75);
+  backdrop-filter: blur(0.625rem);
+  -webkit-backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.03);
   border-radius: 3rem;
   width: auto;
-  max-width: fit-content;
+  max-width: calc(100% - 2rem);
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   &__list {
@@ -26,10 +29,44 @@
     padding: 0;
     width: 100%;
     justify-content: center;
+
+    @include breakpoint-down("tablet") {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 20rem;
+      background-color: var(--color-secondary);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 99;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__list--open {
+    transform: translateX(0);
   }
 
   &__item {
     position: relative;
+
+    @include breakpoint-down("tablet") {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition-delay: calc(var(--index) * 0.1s);
+
+      &.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 
   &__link {
@@ -43,7 +80,12 @@
     padding: 0.5rem 0;
     transition: all 0.3s ease;
     position: relative;
-    opacity: 0.85;
+    opacity: 0.95;
+
+    @include breakpoint-down("tablet") {
+      font-size: 1.25rem;
+      padding: 0.75rem 0;
+    }
 
     &:focus {
       outline: 2px solid var(--color-accent);
@@ -75,9 +117,56 @@
     }
   }
 
+  &__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1.75rem;
+    height: 1.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+
+    @include breakpoint-down("tablet") {
+      display: flex;
+    }
+
+    &-line {
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      transition: all 0.3s ease;
+    }
+
+    &--open {
+      .navigation__burger-line {
+        &:first-child {
+          transform: translateY(0.575rem) rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          transform: translateY(-0.575rem) rotate(-45deg);
+        }
+      }
+    }
+  }
+
   &--hidden {
     transform: translate(-50%, -100px);
     opacity: 0;
     pointer-events: none;
+  }
+
+  @include breakpoint-down("tablet") {
+    padding: 1rem 1.5rem;
+    top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
   }
 }
