@@ -44,35 +44,37 @@ const CascadingText = ({
 export default function HomeHero() {
   return (
     <div className={styles["home-hero"]}>
-      <div className={styles["home-hero__content"]}>
-        <h1 className={styles["home-hero__title"]}>
-          Authentic Modern Love Stories
-        </h1>
-        <p className={styles["home-hero__subtitle"]}>
-          CAPTURED BY CHLOE MARY - TOLD BY YOU.
-        </p>
-      </div>
-      <div className={styles["home-hero__memento"]}>
-        <div className={styles["home-hero__vertical-text"]}>
-          <CascadingText
-            text="MEMENTO"
-            className={styles["home-hero__cascading-text"]}
-            direction="vertical"
-          />
-          <CascadingText
-            text="VIVERE"
-            className={styles["home-hero__cascading-text"]}
-            direction="vertical"
-            startDelay={0.4}
-          />
+      <div className={styles["home-hero__container"]}>
+        <div className={styles["home-hero__content"]}>
+          <h1 className={styles["home-hero__title"]}>
+            Authentic Modern Love Stories
+          </h1>
+          <p className={styles["home-hero__subtitle"]}>
+            CAPTURED BY CHLOE MARY - TOLD BY YOU.
+          </p>
         </div>
-        <div className={styles["home-hero__horizontal-text"]}>
-          <CascadingText
-            text="R E M E M B E R T O L I V E"
-            className={styles["home-hero__cascading-text"]}
-            direction="horizontal"
-            startDelay={0.8}
-          />
+        <div className={styles["home-hero__memento"]}>
+          <div className={styles["home-hero__vertical-text"]}>
+            <CascadingText
+              text="MEMENTO"
+              className={styles["home-hero__cascading-text"]}
+              direction="vertical"
+            />
+            <CascadingText
+              text="VIVERE"
+              className={styles["home-hero__cascading-text"]}
+              direction="vertical"
+              startDelay={0.4}
+            />
+          </div>
+          <div className={styles["home-hero__horizontal-text"]}>
+            <CascadingText
+              text="R E M E M B E R T O L I V E"
+              className={styles["home-hero__cascading-text"]}
+              direction="horizontal"
+              startDelay={0.8}
+            />
+          </div>
         </div>
       </div>
     </div>
