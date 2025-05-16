@@ -1,10 +1,30 @@
+"use client";
+
 import styles from "./home-hero.module.scss";
 import CascadingText from "../helpers/cascading-text";
+import { useEffect, useState } from "react";
 
 export default function HomeHero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkMobile);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <div className={styles["home-hero"]}>
-      <div className={styles["home-hero__vertical-line"]}></div>
+      {!isMobile && <div className={styles["home-hero__vertical-line"]}></div>}
       <div className={styles["home-hero__container"]}>
         <div className={styles["home-hero__content"]}>
           <h1 className={styles["home-hero__title"]}>

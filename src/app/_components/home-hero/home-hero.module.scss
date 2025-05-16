@@ -14,6 +14,13 @@
   overflow-x: hidden;
   padding-bottom: tokens.$spacing-xl;
 
+  @include breakpoint-down("mobile") {
+    padding-bottom: tokens.$spacing-sm;
+    min-height: auto;
+    justify-content: flex-start;
+    padding-top: calc(4rem + 2.75rem);
+  }
+
   &__container {
     width: 100%;
     max-width: var(--max-width);
@@ -24,15 +31,29 @@
     flex-direction: row;
 
     @include breakpoint-down("tablet") {
-      padding: tokens.$container-padding-top-with-nav-tablet tokens.$spacing-xs
-        0;
+      padding: tokens.$container-padding-top-with-nav tokens.$spacing-sm 0;
     }
 
     @include breakpoint-down("mobile") {
-      padding: tokens.$container-padding-top-with-nav-mobile tokens.$spacing-xs
-        0;
-      min-height: auto;
+      padding: 0 tokens.$spacing-xs 0 tokens.$spacing-xs;
       flex-direction: column;
+      gap: tokens.$spacing-sm;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: tokens.$spacing-xs;
+        width: tokens.$line-thickness-small;
+        height: 100%;
+        background-color: var(--color-primary);
+        transform-origin: top;
+        transform: scaleY(0);
+        animation: drawLineTopDown tokens.$animation-duration-slow
+          tokens.$animation-timing-function 1.5s forwards;
+      }
     }
   }
 
@@ -44,7 +65,8 @@
     padding-bottom: tokens.$spacing-xxl;
 
     @include breakpoint-down("mobile") {
-      padding-bottom: tokens.$spacing-lg;
+      padding-bottom: tokens.$spacing-sm;
+      padding-right: tokens.$spacing-sm;
     }
   }
 
@@ -71,7 +93,8 @@
     }
 
     @include breakpoint-down("tablet") {
-      font-size: tokens.$font-size-xxl;
+      font-size: 3.5rem;
+      max-width: 100%;
     }
 
     @include breakpoint-down("mobile") {
@@ -143,24 +166,21 @@
     }
 
     @include breakpoint-down("tablet") {
-      padding-bottom: 2.5rem;
-      padding-right: tokens.$spacing-lg;
+      padding-right: tokens.$spacing-md;
 
       &::before {
         width: tokens.$line-thickness-medium;
-        right: 0;
       }
     }
 
     @include breakpoint-down("mobile") {
-      padding-bottom: tokens.$spacing-md;
-      padding-right: 2.5rem;
-      margin-top: tokens.$spacing-lg;
-      min-height: 6rem;
+      padding-right: tokens.$spacing-sm;
+      padding-bottom: 0;
+      margin-top: tokens.$spacing-xs;
+      min-height: auto;
 
       &::before {
-        width: tokens.$line-thickness-small;
-        right: 0;
+        display: none;
       }
     }
   }
@@ -179,16 +199,12 @@
     margin-left: auto;
 
     @include breakpoint-down("tablet") {
-      font-size: tokens.$font-size-lg;
+      font-size: 2.5rem;
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 1.5rem;
-      writing-mode: horizontal-tb;
+      font-size: 1.8rem;
       margin-bottom: tokens.$spacing-xxs;
-      display: flex;
-      gap: tokens.$spacing-xs;
-      justify-content: flex-end;
     }
   }
 
@@ -204,6 +220,11 @@
     margin-left: auto;
     max-width: 100%;
     overflow: hidden;
+
+    @include breakpoint-down("tablet") {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+    }
 
     @include breakpoint-down("mobile") {
       font-size: tokens.$font-size-xs;

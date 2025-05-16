@@ -20,6 +20,9 @@ export default function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [menuItems, setMenuItems] = useState<boolean[]>(
+    Array(navigationItems.length).fill(false)
+  );
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -58,7 +61,17 @@ export default function Navigation() {
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
+
+      // Animate menu items in
+      const itemsTimeout = setTimeout(() => {
+        setMenuItems(Array(navigationItems.length).fill(true));
+      }, 50);
+
+      return () => clearTimeout(itemsTimeout);
     } else {
+      // Animate menu items out
+      setMenuItems(Array(navigationItems.length).fill(false));
+
       const scrollY = document.body.style.top;
 
       // Small delay to avoid animation glitches
@@ -86,12 +99,39 @@ export default function Navigation() {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+
+    if (isMobileMenuOpen) {
+      // If closing, animate items out first
+      setMenuItems(Array(navigationItems.length).fill(false));
+
+      // Then close the menu after a brief delay
+      setTimeout(() => {
+        setIsMobileMenuOpen(false);
+      }, 150);
+    } else {
+      // If opening, open menu first
+      setIsMobileMenuOpen(true);
+    }
 
     // Allow time for the transition to complete
     setTimeout(() => {
       setIsTransitioning(false);
     }, 350); // Match CSS transition timing
+  };
+
+  const handleLinkClick = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setMenuItems(Array(navigationItems.length).fill(false));
+
+      setTimeout(() => {
+        setIsMobileMenuOpen(false);
+      }, 150);
+
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 350);
+    }
   };
 
   return (
@@ -130,21 +170,13 @@ export default function Navigation() {
             style={{ "--index": index } as React.CSSProperties}
             className={clsx(
               styles.navigation__item,
-              isMobileMenuOpen && styles.visible
+              menuItems[index] && styles.visible
             )}
           >
             <Link
               href={item.href}
               className={styles.navigation__link}
-              onClick={() => {
-                if (!isTransitioning) {
-                  setIsTransitioning(true);
-                  setIsMobileMenuOpen(false);
-                  setTimeout(() => {
-                    setIsTransitioning(false);
-                  }, 350);
-                }
-              }}
+              onClick={handleLinkClick}
             >
               {item.label}
             </Link>
