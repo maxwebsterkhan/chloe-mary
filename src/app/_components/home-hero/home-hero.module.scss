@@ -34,6 +34,24 @@
 
     @include breakpoint-down("tablet") {
       padding: tokens.$container-padding-top-with-nav tokens.$spacing-sm 0;
+      flex-direction: column;
+      gap: tokens.$spacing-sm;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: tokens.$container-padding-top-with-nav;
+        bottom: 0;
+        right: tokens.$spacing-sm;
+        width: tokens.$line-thickness-medium;
+        height: calc(100% - #{tokens.$container-padding-top-with-nav});
+        background-color: var(--color-primary);
+        transform-origin: top;
+        transform: scaleY(0);
+        animation: drawLineTopDown tokens.$animation-duration-slow
+          tokens.$animation-timing-function 1.5s forwards;
+      }
     }
 
     @include breakpoint-down("mobile") {
@@ -43,18 +61,10 @@
       position: relative;
 
       &::after {
-        content: "";
-        position: absolute;
         top: 0;
-        bottom: 0;
         right: tokens.$spacing-xs;
         width: tokens.$line-thickness-small;
         height: 100%;
-        background-color: var(--color-primary);
-        transform-origin: top;
-        transform: scaleY(0);
-        animation: drawLineTopDown tokens.$animation-duration-slow
-          tokens.$animation-timing-function 1.5s forwards;
       }
     }
   }
@@ -66,8 +76,12 @@
     flex: 1;
     padding-bottom: tokens.$spacing-xxl;
 
-    @include breakpoint-down("mobile") {
+    @include breakpoint-down("tablet") {
       padding-bottom: tokens.$spacing-sm;
+      padding-right: tokens.$spacing-sm;
+    }
+
+    @include breakpoint-down("mobile") {
       padding-right: tokens.$spacing-sm;
     }
   }
@@ -170,22 +184,19 @@
     }
 
     @include breakpoint-down("tablet") {
-      padding-right: tokens.$spacing-md;
-
-      &::before {
-        width: tokens.$line-thickness-medium;
-      }
-    }
-
-    @include breakpoint-down("mobile") {
-      padding-right: tokens.$spacing-sm;
+      padding-right: 0;
       padding-bottom: 0;
       margin-top: tokens.$spacing-xs;
       min-height: auto;
+      text-align: left;
 
       &::before {
         display: none;
       }
+    }
+
+    @include breakpoint-down("mobile") {
+      text-align: left;
     }
   }
 
@@ -203,7 +214,11 @@
     margin-left: auto;
 
     @include breakpoint-down("tablet") {
+      writing-mode: horizontal-tb;
+      text-orientation: unset;
       font-size: 2.5rem;
+      margin-left: 0;
+      margin-bottom: tokens.$spacing-xs;
     }
 
     @include breakpoint-down("mobile") {
@@ -228,6 +243,7 @@
     @include breakpoint-down("tablet") {
       font-size: 1rem;
       letter-spacing: 0.15em;
+      margin-left: 0;
     }
 
     @include breakpoint-down("mobile") {
@@ -238,7 +254,7 @@
   &__animated-line {
     height: tokens.$line-thickness-large;
     background-color: var(--color-primary);
-    width: calc(100% - #{tokens.$spacing-xl});
+    width: calc(100% - #{tokens.$spacing-md * 2});
     position: absolute;
     bottom: 0;
     left: tokens.$spacing-md;
@@ -250,13 +266,16 @@
 
     @include breakpoint-down("tablet") {
       height: tokens.$line-thickness-medium;
-      width: calc(100% - #{tokens.$spacing-md});
-      left: tokens.$spacing-xs;
-      right: tokens.$spacing-xs;
+      width: calc(100% - #{tokens.$spacing-sm * 2});
+      left: tokens.$spacing-sm;
+      right: tokens.$spacing-sm;
     }
 
     @include breakpoint-down("mobile") {
       height: tokens.$line-thickness-small;
+      width: calc(100% - #{tokens.$spacing-xs * 2});
+      left: tokens.$spacing-xs;
+      right: tokens.$spacing-xs;
     }
   }
 
