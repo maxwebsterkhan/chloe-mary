@@ -1,0 +1,218 @@
+@use "../../_styles/breakpoints" as *;
+@use "../../_styles/tokens" as tokens;
+
+.achievements {
+  position: relative;
+  padding: 0;
+  background-color: var(--color-secondary);
+
+  &__container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 tokens.$spacing-md;
+    position: relative;
+
+    @include breakpoint-down("tablet") {
+      padding: 0 tokens.$spacing-sm;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding: 0 tokens.$spacing-xs;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    border-radius: 2px;
+    overflow: hidden;
+
+    @include breakpoint-down("tablet") {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 1rem;
+      border-radius: 2px;
+    }
+
+    @include breakpoint-down("mobile") {
+      gap: 0.75rem;
+    }
+  }
+
+  &__item {
+    position: relative;
+    padding: 4rem 3rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 2px;
+
+    @include breakpoint-down("tablet") {
+      padding: 3rem 2rem;
+      min-height: 250px;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding: 2.5rem 1.5rem;
+      min-height: 200px;
+    }
+
+    // Linked items get hover states
+    &--linked {
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      &.achievements__item--dark:hover {
+        background-color: #1a1a1a;
+      }
+
+      &.achievements__item--light:hover {
+        background-color: #f3f0eb;
+
+        .achievements__year {
+          background-color: var(--color-accent);
+          color: #fff;
+        }
+
+        .achievements__title {
+          color: var(--color-primary);
+        }
+
+        .achievements__subtitle {
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
+
+    // Dark variant with light text (indices 0, 3 - top-left, bottom-right)
+    &--dark {
+      background-color: var(--color-primary);
+      color: var(--color-secondary);
+
+      .achievements__year {
+        background-color: rgba(243, 240, 235, 0.2);
+        color: var(--color-accent);
+      }
+
+      .achievements__title {
+        color: var(--color-secondary);
+      }
+
+      .achievements__subtitle {
+        color: rgba(243, 240, 235, 0.85);
+      }
+    }
+
+    // Light variant with dark text (indices 1, 2 - top-right, bottom-left)
+    &--light {
+      background-color: #fafaf9;
+      color: var(--color-primary);
+
+      .achievements__year {
+        background-color: rgba(139, 109, 66, 0.15);
+        color: var(--color-accent);
+      }
+
+      .achievements__title {
+        color: var(--color-primary);
+      }
+
+      .achievements__subtitle {
+        color: rgba(0, 0, 0, 0.75);
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__year {
+    font-family: var(--font-geist-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  &__title {
+    font-family: var(--font-inter-tight);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.2;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    @include breakpoint-down("tablet") {
+      font-size: 1.6rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__subtitle {
+    font-family: var(--font-nunito-sans);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.5;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    @include breakpoint-down("tablet") {
+      font-size: 1rem;
+    }
+
+    @include breakpoint-down("mobile") {
+      font-size: 0.9rem;
+    }
+  }
+
+  // Animation when visible
+  &--visible {
+    .achievements__item {
+      opacity: 1;
+      transform: translateY(0);
+      animation: slideInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+      animation-delay: calc(var(--index) * 0.15s);
+    }
+  }
+}
+
+// Animations
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
