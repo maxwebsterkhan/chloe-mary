@@ -23,8 +23,12 @@ export const metadata: Metadata = {
   title: "Chloe Mary",
   description: "Capturing beauty, one photo at a time",
   icons: {
-    icon: "/cm-icon.png",
-    shortcut: "/cm-icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/cm-icon.png", sizes: "any" },
+      { url: "/cm-icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
     apple: "/cm-icon.png",
   },
 };
