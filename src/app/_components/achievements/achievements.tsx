@@ -31,6 +31,7 @@ const achievements = [
 
 export default function Achievements() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [hoverEnabled, setHoverEnabled] = useState<boolean[]>([
     false,
     false,
@@ -38,6 +39,21 @@ export default function Achievements() {
     false,
   ]);
   const achievementsRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkMobile);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,10 +83,15 @@ export default function Achievements() {
     return () => observer.disconnect();
   }, []);
 
-  // Checkerboard pattern for 2x2 grid: dark-light-light-dark
+  // Responsive alternating pattern
   const getCardVariant = (index: number) => {
-    // For 2x2 grid: positions 0,3 = dark, positions 1,2 = light
-    return index === 0 || index === 3 ? "dark" : "light";
+    if (isMobile) {
+      // Mobile: simple alternating pattern (0,2 dark, 1,3 light)
+      return index % 2 === 0 ? "dark" : "light";
+    } else {
+      // Desktop: checkerboard pattern (0,3 dark, 1,2 light)
+      return index === 0 || index === 3 ? "dark" : "light";
+    }
   };
 
   return (

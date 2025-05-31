@@ -88,7 +88,7 @@
       tokens.$animation-timing-function forwards;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    hyphens: auto;
+    hyphens: none;
 
     @include breakpoint-down("desktop-small") {
       font-size: tokens.$font-size-hero;
@@ -102,6 +102,8 @@
     @include breakpoint-down("mobile") {
       font-size: 2.5rem;
       line-height: 1.1;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
   }
 
