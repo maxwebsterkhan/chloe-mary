@@ -22,6 +22,7 @@ export default function Navigation() {
   const [isMobileMenuClosing, setIsMobileMenuClosing] = useState(false);
   const [isBurgerClosing, setIsBurgerClosing] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
 
   const toggleMobileMenu = () => {
     if (isMobileMenuOpen) {
@@ -75,11 +76,31 @@ export default function Navigation() {
     };
   }, [lastScrollY, isMobileMenuOpen, isTransitioning]);
 
+  useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
+
+    const handleResize = () => {
+      setIsResizing(true);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        setIsResizing(false);
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
+    };
+  }, []);
+
   return (
     <div
       className={clsx(styles.navigation, {
         [styles["navigation--hidden"]]: !isVisible,
         [styles["menu-open"]]: isMobileMenuOpen,
+        [styles["navigation--resizing"]]: isResizing,
       })}
     >
       <Link href="/" className={styles.navigation__logo}>

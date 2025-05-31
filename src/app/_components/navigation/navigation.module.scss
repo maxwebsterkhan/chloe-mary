@@ -408,6 +408,32 @@
       }
     }
   }
+
+  // Disable all animations during resize to prevent unwanted animations
+  &--resizing {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    &::before,
+    &::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .navigation__burger {
+      &::before,
+      &::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      &-line {
+        transition: none !important;
+      }
+    }
+  }
 }
 
 // Animation for initial bracket growth
