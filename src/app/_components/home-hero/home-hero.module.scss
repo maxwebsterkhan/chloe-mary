@@ -75,7 +75,7 @@
     font-family: var(--font-inter-tight);
     font-size: tokens.$font-size-display;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.05;
     letter-spacing: tokens.$letter-spacing-tight;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -104,13 +104,13 @@
   }
 
   &__subtitle {
-    font-family: var(--font-inter-tight);
+    font-family: var(--font-nunito-sans);
     font-size: tokens.$font-size-lg;
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: tokens.$letter-spacing-tight;
     color: var(--color-primary);
-    margin-top: tokens.$spacing-xs;
+    margin-top: tokens.$spacing-xl;
     text-align: left;
     opacity: 0;
     animation: slideInLeft tokens.$animation-duration-slow
@@ -209,7 +209,7 @@
   }
 
   &__horizontal-text {
-    font-family: var(--font-inter-tight);
+    font-family: var(--font-nunito-sans);
     font-size: tokens.$font-size-sm;
     font-weight: 400;
     line-height: 1.2;

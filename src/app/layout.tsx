@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Geist_Mono } from "next/font/google";
+import { Inter_Tight, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
@@ -11,6 +11,11 @@ const interTight = Inter_Tight({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const nunitoSans = Nunito_Sans({
+  variable: "--font-nunito-sans",
   subsets: ["latin"],
 });
 
@@ -26,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interTight.variable} ${geistMono.variable}`}>
+      <body
+        className={`${interTight.variable} ${geistMono.variable} ${nunitoSans.variable}`}
+      >
         <Navigation />
         {children}
         <Footer />
