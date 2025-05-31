@@ -22,6 +22,11 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   title: "Chloe Mary",
   description: "Capturing beauty, one photo at a time",
+  icons: {
+    icon: "/cm-icon.png",
+    shortcut: "/cm-icon.png",
+    apple: "/cm-icon.png",
+  },
 };
 
 export default function RootLayout({
