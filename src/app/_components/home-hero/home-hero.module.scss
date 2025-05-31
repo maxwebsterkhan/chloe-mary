@@ -13,14 +13,14 @@
   max-width: 100%;
   overflow-x: hidden;
   padding-bottom: tokens.$spacing-xl;
-  margin-bottom: 6rem;
+  margin-bottom: tokens.$spacing-xl;
 
   @include breakpoint-down("mobile") {
     padding-bottom: tokens.$spacing-sm;
     min-height: auto;
     justify-content: flex-start;
     padding-top: calc(4rem + 2.75rem);
-    margin-bottom: 4rem;
+    margin-bottom: tokens.$spacing-xl;
   }
 
   &__container {
@@ -77,7 +77,7 @@
     padding-bottom: tokens.$spacing-xxl;
 
     @include breakpoint-down("tablet") {
-      padding-bottom: tokens.$spacing-sm;
+      padding-bottom: tokens.$spacing-xl;
       padding-right: tokens.$spacing-sm;
     }
 
@@ -142,7 +142,7 @@
 
     @include breakpoint-down("mobile") {
       font-size: tokens.$font-size-sm;
-      margin-top: tokens.$spacing-xxs;
+      margin-top: tokens.$spacing-md;
     }
   }
 
