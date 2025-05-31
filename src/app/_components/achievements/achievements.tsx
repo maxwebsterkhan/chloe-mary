@@ -31,7 +31,12 @@ const achievements = [
 
 export default function Achievements() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [hoverEnabled, setHoverEnabled] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
   const achievementsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -39,6 +44,17 @@ export default function Achievements() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+
+          // Enable hover states after each animation completes
+          achievements.forEach((_, index) => {
+            setTimeout(() => {
+              setHoverEnabled((prev) => {
+                const newState = [...prev];
+                newState[index] = true;
+                return newState;
+              });
+            }, (index * 0.4 + 0.6) * 1000);
+          });
         }
       },
       { threshold: 0.3 }
@@ -51,24 +67,10 @@ export default function Achievements() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Desktop: checkerboard pattern (0,3 dark and 1,2 light)
-  // Mobile: alternating pattern (0,2 dark and 1,3 light)
+  // Checkerboard pattern for 2x2 grid: dark-light-light-dark
   const getCardVariant = (index: number) => {
-    if (isMobile) {
-      return index % 2 === 0 ? "dark" : "light";
-    } else {
-      return index === 0 || index === 3 ? "dark" : "light";
-    }
+    // For 2x2 grid: positions 0,3 = dark, positions 1,2 = light
+    return index === 0 || index === 3 ? "dark" : "light";
   };
 
   return (
@@ -95,14 +97,21 @@ export default function Achievements() {
               </div>
             );
 
+            const cardClasses = [
+              styles.achievements__item,
+              styles[`achievements__item--${getCardVariant(index)}`],
+              achievement.link ? styles["achievements__item--linked"] : "",
+              achievement.link && hoverEnabled[index]
+                ? styles["achievements__item--hover-enabled"]
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
             return (
               <div
                 key={index}
-                className={`${styles.achievements__item} ${
-                  styles[`achievements__item--${getCardVariant(index)}`]
-                } ${
-                  achievement.link ? styles["achievements__item--linked"] : ""
-                }`}
+                className={cardClasses}
                 style={{ "--index": index } as React.CSSProperties}
               >
                 {achievement.link ? (

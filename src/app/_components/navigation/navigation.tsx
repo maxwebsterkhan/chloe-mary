@@ -5,7 +5,6 @@ import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
 
 const navigationItems = [
   { href: "/", label: "Home" },
@@ -121,11 +120,11 @@ export default function Navigation() {
         aria-label="Toggle navigation menu"
         aria-expanded={isMobileMenuOpen}
       >
-        {isMobileMenuOpen ? (
-          <X className={styles["navigation__burger-icon"]} />
-        ) : (
-          <Menu className={styles["navigation__burger-icon"]} />
-        )}
+        <div className={styles["navigation__burger-lines"]}>
+          <span className={styles["navigation__burger-line"]}></span>
+          <span className={styles["navigation__burger-line"]}></span>
+          <span className={styles["navigation__burger-line"]}></span>
+        </div>
       </button>
     </div>
   );

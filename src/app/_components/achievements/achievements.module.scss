@@ -45,9 +45,8 @@
   &__item {
     position: relative;
     padding: 4rem 3rem;
-    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     opacity: 0;
-    transform: translateY(30px);
+    visibility: hidden;
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -64,38 +63,12 @@
       min-height: 200px;
     }
 
-    // Linked items get hover states
+    // Linked items get hover states (only after animation completes)
     &--linked {
       cursor: pointer;
-
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      &.achievements__item--dark:hover {
-        background-color: #1a1a1a;
-      }
-
-      &.achievements__item--light:hover {
-        background-color: #f3f0eb;
-
-        .achievements__year {
-          background-color: var(--color-accent);
-          color: #fff;
-        }
-
-        .achievements__title {
-          color: var(--color-primary);
-        }
-
-        .achievements__subtitle {
-          color: rgba(0, 0, 0, 0.8);
-        }
-      }
     }
 
-    // Dark variant with light text (indices 0, 3 - top-left, bottom-right)
+    // Dark variant with light text
     &--dark {
       background-color: var(--color-primary);
       color: var(--color-secondary);
@@ -114,7 +87,7 @@
       }
     }
 
-    // Light variant with dark text (indices 1, 2 - top-right, bottom-left)
+    // Light variant with dark text
     &--light {
       background-color: #fafaf9;
       color: var(--color-primary);
@@ -156,8 +129,8 @@
     margin-bottom: 1.5rem;
     display: inline-block;
     padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border-radius: 6px;
+    transition: all 0.3s ease;
   }
 
   &__title {
@@ -166,7 +139,6 @@
     font-weight: 700;
     margin: 0 0 1.25rem 0;
     line-height: 1.2;
-    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     @include breakpoint-down("tablet") {
       font-size: 1.6rem;
@@ -183,7 +155,6 @@
     font-weight: 400;
     margin: 0;
     line-height: 1.5;
-    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     @include breakpoint-down("tablet") {
       font-size: 1rem;
@@ -197,22 +168,57 @@
   // Animation when visible
   &--visible {
     .achievements__item {
-      opacity: 1;
-      transform: translateY(0);
-      animation: slideInUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-      animation-delay: calc(var(--index) * 0.15s);
+      animation: cleanFadeIn 0.6s ease-out forwards;
+      animation-delay: calc(var(--index) * 0.4s);
+    }
+
+    // Add hover states after animation completes
+    .achievements__item--linked {
+      // Enable transitions after animation
+      animation: cleanFadeIn 0.6s ease-out forwards,
+        enableHover 0s linear calc(var(--index) * 0.4s + 0.6s) forwards;
+      animation-delay: calc(var(--index) * 0.4s);
+    }
+  }
+
+  // Hover-enabled state (added after animation)
+  &__item--hover-enabled {
+    transition: background-color 0.3s ease;
+
+    &.achievements__item--dark:hover {
+      background-color: #1a1a1a;
+    }
+
+    &.achievements__item--light:hover {
+      background-color: #f3f0eb;
+
+      .achievements__year {
+        background-color: var(--color-accent);
+        color: #fff;
+        transition: all 0.3s ease;
+      }
     }
   }
 }
 
-// Animations
-@keyframes slideInUp {
-  from {
+// Clean fade-in animation only
+@keyframes cleanFadeIn {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
+    visibility: hidden;
   }
-  to {
+  1% {
+    visibility: visible;
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+// Enable hover state after animation
+@keyframes enableHover {
+  to {
+    /* This just acts as a trigger to add hover class via JS if needed */
   }
 }
