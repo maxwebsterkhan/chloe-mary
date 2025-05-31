@@ -20,20 +20,24 @@ export default function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileMenuClosing, setIsMobileMenuClosing] = useState(false);
+  const [isBurgerClosing, setIsBurgerClosing] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const toggleMobileMenu = () => {
     if (isMobileMenuOpen) {
       setIsMobileMenuClosing(true);
+      setIsBurgerClosing(true);
       setIsMobileMenuOpen(false);
       setIsTransitioning(true);
 
       setTimeout(() => {
         setIsMobileMenuClosing(false);
+        setIsBurgerClosing(false);
         setIsTransitioning(false);
       }, 1200); // Increased time for items to animate out
     } else {
       setIsMobileMenuOpen(true);
+      setIsBurgerClosing(false);
     }
   };
 
@@ -115,6 +119,7 @@ export default function Navigation() {
       <button
         className={clsx(styles.navigation__burger, {
           [styles["navigation__burger--open"]]: isMobileMenuOpen,
+          [styles["navigation__burger--closing"]]: isBurgerClosing,
         })}
         onClick={toggleMobileMenu}
         aria-label="Toggle navigation menu"
