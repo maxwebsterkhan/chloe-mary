@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navigationItems = [
@@ -82,6 +83,16 @@ export default function Navigation() {
         [styles["menu-open"]]: isMobileMenuOpen,
       })}
     >
+      <Link href="/" className={styles.navigation__logo}>
+        <Image
+          src="/cm-icon.png"
+          alt="CM Logo"
+          width={66}
+          height={32}
+          className={styles.navigation__logoImage}
+        />
+      </Link>
+
       <ul
         className={clsx(styles.navigation__list, {
           [styles["navigation__list--open"]]: isMobileMenuOpen,

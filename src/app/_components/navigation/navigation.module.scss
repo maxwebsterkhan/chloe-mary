@@ -11,13 +11,33 @@
   padding: 1.2rem 1.8rem;
   z-index: 1000;
   background-color: rgba(243, 240, 235, 0.75);
-  backdrop-filter: blur(0.625rem);
-  -webkit-backdrop-filter: blur(0.625rem);
-  border-radius: 3rem;
+  backdrop-filter: blur(0.2rem);
+  border-radius: 2px;
   width: fit-content;
   max-width: calc(100% - 2rem);
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  position: relative;
+
+  // Logo styles
+  &__logo {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    @include breakpoint-down("tablet") {
+      display: none;
+    }
+  }
+
+  &__logoImage {
+    width: 66px;
+    height: 32px;
+    object-fit: contain;
+  }
 
   // Default brackets: start small and grow from corners
   &::before {
