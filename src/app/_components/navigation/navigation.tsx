@@ -34,7 +34,7 @@ export default function Navigation() {
         setIsMobileMenuClosing(false);
         setIsBurgerClosing(false);
         setIsTransitioning(false);
-      }, 1200); // Increased time for items to animate out
+      }, 600); // Match CSS transition duration
     } else {
       setIsMobileMenuOpen(true);
       setIsBurgerClosing(false);

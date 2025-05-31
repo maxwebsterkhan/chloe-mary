@@ -178,7 +178,7 @@
   &__list--closing {
     @include breakpoint-down("tablet") {
       transform: translateX(0) !important;
-      transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 
       .navigation__item {
         opacity: 0 !important;
