@@ -20,25 +20,21 @@ export default function Navigation() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuClosing, setIsMobileMenuClosing] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [menuItems, setMenuItems] = useState<boolean[]>(
-    Array(navigationItems.length).fill(false)
-  );
 
   const toggleMobileMenu = () => {
     if (isMobileMenuOpen) {
+      setIsMobileMenuClosing(true);
+      setIsMobileMenuOpen(false);
       setIsTransitioning(true);
-      setMenuItems(Array(navigationItems.length).fill(false));
 
       setTimeout(() => {
-        setIsMobileMenuOpen(false);
+        setIsMobileMenuClosing(false);
         setIsTransitioning(false);
-      }, 300);
+      }, 1200); // Increased time for items to animate out
     } else {
       setIsMobileMenuOpen(true);
-      setTimeout(() => {
-        setMenuItems(Array(navigationItems.length).fill(true));
-      }, 100);
     }
   };
 
@@ -95,15 +91,15 @@ export default function Navigation() {
 
       <ul
         className={clsx(styles.navigation__list, {
-          [styles["navigation__list--open"]]: isMobileMenuOpen,
+          [styles["navigation__list--open"]]:
+            isMobileMenuOpen && !isMobileMenuClosing,
+          [styles["navigation__list--closing"]]: isMobileMenuClosing,
         })}
       >
         {navigationItems.map((item, index) => (
           <li
             key={item.href}
-            className={clsx(styles.navigation__item, {
-              [styles.visible]: menuItems[index],
-            })}
+            className={styles.navigation__item}
             style={{ "--index": index } as React.CSSProperties}
           >
             <Link
