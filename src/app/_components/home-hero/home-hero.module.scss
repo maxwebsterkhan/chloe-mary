@@ -109,18 +109,18 @@
     }
 
     @include breakpoint-down("tablet") {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
       max-width: 100%;
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 2.5rem;
+      font-size: 3rem;
       line-height: 1.1;
       word-break: keep-all;
       overflow-wrap: break-word;
 
       @media (min-width: 376px) {
-        font-size: 3rem;
+        font-size: 3.5rem;
       }
     }
   }
@@ -141,11 +141,11 @@
     overflow-wrap: break-word;
 
     @include breakpoint-down("tablet") {
-      font-size: tokens.$font-size-md;
+      font-size: tokens.$font-size-lg;
     }
 
     @include breakpoint-down("mobile") {
-      font-size: tokens.$font-size-sm;
+      font-size: tokens.$font-size-md;
       margin-top: tokens.$spacing-md;
     }
   }
