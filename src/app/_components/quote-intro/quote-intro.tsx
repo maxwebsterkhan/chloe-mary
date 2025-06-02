@@ -1,19 +1,64 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import styles from "./quote-intro.module.scss";
 
 export default function QuoteIntro() {
+  const greetingRef = useRef<HTMLHeadingElement>(null);
+  const taglineRef = useRef<HTMLParagraphElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const greeting = greetingRef.current;
+    const tagline = taglineRef.current;
+    const content = contentRef.current;
+
+    if (!greeting || !tagline || !content) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === greeting) {
+              entry.target.classList.add(styles.greetingVisible);
+            } else if (entry.target === tagline) {
+              entry.target.classList.add(styles.taglineVisible);
+            } else if (entry.target === content) {
+              entry.target.classList.add(styles.contentVisible);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px",
+      }
+    );
+
+    observer.observe(greeting);
+    observer.observe(tagline);
+    observer.observe(content);
+
+    return () => {
+      observer.unobserve(greeting);
+      observer.unobserve(tagline);
+      observer.unobserve(content);
+    };
+  }, []);
+
   return (
     <section className={styles.intro}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.greeting}>Hi, I&apos;m Chloe</h2>
-          <p className={styles.tagline}>
+          <h2 ref={greetingRef} className={styles.greeting}>
+            Hi, I&apos;m Chloe
+          </h2>
+          <p ref={taglineRef} className={styles.tagline}>
             &quot;Self Professed Queen of Monochrome&quot;
           </p>
         </div>
 
-        <div className={styles.content}>
+        <div ref={contentRef} className={styles.content}>
           <div className={styles.description}>
             <p className={styles.paragraphLeft}>
               I&apos;m passionate about working with creative and carefree
