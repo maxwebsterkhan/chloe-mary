@@ -3,8 +3,16 @@
 
 .achievements {
   position: relative;
-  padding: 0;
+  padding: 4rem 0;
   background-color: var(--color-secondary);
+
+  @include breakpoint-down("tablet") {
+    padding: 3rem 0;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: 2.5rem 0;
+  }
 
   &__container {
     width: 100%;

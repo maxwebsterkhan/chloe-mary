@@ -22,6 +22,12 @@ body {
   background-color: var(--color-secondary);
 }
 
+body.scroll-locked {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;

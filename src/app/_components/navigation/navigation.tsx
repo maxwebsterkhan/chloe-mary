@@ -95,6 +95,30 @@ export default function Navigation() {
     };
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      // Store the current scroll position
+      const scrollY = window.scrollY;
+
+      // Add the scroll lock class and store scroll position
+      document.body.classList.add("scroll-locked");
+      document.body.style.top = `-${scrollY}px`;
+    } else {
+      // Get the scroll position before unlocking
+      const scrollY = document.body.style.top;
+
+      // Remove the scroll lock class and clean up
+      document.body.classList.remove("scroll-locked");
+      document.body.style.top = "";
+
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <div
       className={clsx(styles.navigation, {

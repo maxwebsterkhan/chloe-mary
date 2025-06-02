@@ -1,0 +1,186 @@
+@use "../../_styles/breakpoints" as *;
+
+.intro {
+  padding: 4rem 2rem;
+  background-color: #fafafa;
+
+  @include breakpoint-down("tablet") {
+    padding: 3rem 1.5rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: 2.5rem 1rem;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  position: relative;
+  margin-bottom: 3rem;
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 2rem;
+  }
+}
+
+.greeting {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: #333;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transform: translateX(-4rem);
+
+  @include breakpoint-down("tablet") {
+    transform: translateX(-3rem);
+  }
+
+  @include breakpoint-down("mobile") {
+    transform: translateX(-1.5rem);
+  }
+}
+
+.tagline {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0.5rem 0 0 0;
+  opacity: 0.7;
+  background: linear-gradient(135deg, #000 0%, #666 50%, #333 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  position: relative;
+  transform: translateX(4rem);
+
+  @include breakpoint-down("tablet") {
+    transform: translateX(3rem);
+    font-size: 0.8rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    transform: translateX(1.5rem);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out 0.5s forwards;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include breakpoint-down("mobile") {
+    gap: 1.5rem;
+  }
+}
+
+// Base paragraph styles
+.paragraphLeft,
+.paragraphRight,
+.paragraphCenter {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+  max-width: 700px;
+  opacity: 0;
+
+  @include breakpoint-down("tablet") {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+// Left-aligned paragraph (slides in from left)
+.paragraphLeft {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 650px;
+  transform: translateX(-30px);
+  animation: slideInFromLeft 0.8s ease-out 0.8s forwards;
+}
+
+// Right-aligned paragraph (slides in from right)
+.paragraphRight {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 600px;
+  transform: translateX(30px);
+  animation: slideInFromRight 0.8s ease-out 1.2s forwards;
+}
+
+// Center-aligned paragraph (slides in from center)
+.paragraphCenter {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+  transform: translateY(30px);
+  animation: slideInFromCenter 0.8s ease-out 1.6s forwards;
+}
+
+// Philosophy quote special styling
+.philosophy {
+  font-style: italic;
+  font-weight: 500;
+  color: #333 !important;
+  font-size: 1.3rem !important;
+  position: relative;
+
+  @include breakpoint-down("tablet") {
+    font-size: 1.2rem !important;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: 1.1rem !important;
+  }
+}
+
+// Animation keyframes
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromCenter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
