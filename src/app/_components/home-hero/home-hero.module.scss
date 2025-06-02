@@ -98,11 +98,12 @@
     text-align: left;
     opacity: 0;
     max-width: 62.5rem;
-    animation: slideInDown tokens.$animation-duration-slow
-      tokens.$animation-timing-function forwards;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: none;
+    transform: translateY(-25px) scale(0.98);
+    animation: sophisticatedSlideInDown 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s
+      forwards;
 
     @include breakpoint-down("desktop-small") {
       font-size: tokens.$font-size-hero;
@@ -135,10 +136,11 @@
     margin-top: tokens.$spacing-xl;
     text-align: left;
     opacity: 0;
-    animation: slideInLeft tokens.$animation-duration-slow
-      tokens.$animation-timing-function tokens.$animation-delay-short forwards;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    transform: translateX(-30px) scale(0.98);
+    animation: sophisticatedSlideInLeft 0.9s cubic-bezier(0.25, 0.1, 0.25, 1)
+      0.6s forwards;
 
     @include breakpoint-down("tablet") {
       font-size: tokens.$font-size-lg;
@@ -156,6 +158,14 @@
     margin: 0 0.55em;
     vertical-align: middle;
     line-height: 1;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: sophisticatedDotFadeIn 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 1.1s
+      forwards;
+
+    @include breakpoint-down("mobile") {
+      display: none;
+    }
   }
 
   &__memento {
@@ -263,10 +273,10 @@
     bottom: 0;
     left: tokens.$spacing-md;
     right: tokens.$spacing-md;
-    transform-origin: right;
+    transform-origin: left;
     transform: scaleX(0);
-    animation: drawLineRightToLeft tokens.$animation-duration-slow
-      tokens.$animation-timing-function 2s forwards;
+    animation: sophisticatedLineGrow tokens.$animation-duration-slow
+      cubic-bezier(0.19, 1, 0.22, 1) 1.8s forwards;
 
     @include breakpoint-down("tablet") {
       height: tokens.$line-thickness-medium;
@@ -295,25 +305,45 @@
   }
 }
 
-@keyframes slideInDown {
+@keyframes sophisticatedSlideInDown {
   0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-25px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes slideInLeft {
+@keyframes sophisticatedSlideInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-30px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes sophisticatedDotFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sophisticatedLineGrow {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
   }
 }
 
@@ -323,15 +353,6 @@
   }
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes drawLineRightToLeft {
-  0% {
-    transform: scaleX(0);
-  }
-  100% {
-    transform: scaleX(1);
   }
 }
 

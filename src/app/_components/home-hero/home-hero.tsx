@@ -41,6 +41,7 @@ export default function HomeHero() {
             Captured by Chloe Mary
           </p>
         </div>
+
         <div className={styles["home-hero__memento"]}>
           <div className={styles["home-hero__vertical-text"]}>
             <CascadingText
