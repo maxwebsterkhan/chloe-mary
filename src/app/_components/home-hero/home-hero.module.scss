@@ -272,10 +272,12 @@
     height: tokens.$line-thickness-large;
     background-color: var(--color-primary);
     width: calc(100% - #{tokens.$spacing-md * 2});
+    max-width: calc(var(--max-width) - #{tokens.$spacing-md * 2});
     position: absolute;
     bottom: 0;
     left: tokens.$spacing-md;
     right: tokens.$spacing-md;
+    margin: 0 auto;
     transform-origin: left;
     transform: scaleX(0);
     animation: sophisticatedLineGrow tokens.$animation-duration-slow
@@ -284,6 +286,7 @@
     @include breakpoint-down("tablet") {
       height: tokens.$line-thickness-medium;
       width: calc(100% - #{tokens.$spacing-sm * 2});
+      max-width: calc(var(--max-width) - #{tokens.$spacing-sm * 2});
       left: tokens.$spacing-sm;
       right: tokens.$spacing-sm;
     }
@@ -291,6 +294,7 @@
     @include breakpoint-down("mobile") {
       height: tokens.$line-thickness-small;
       width: calc(100% - #{tokens.$spacing-xs * 2});
+      max-width: calc(var(--max-width) - #{tokens.$spacing-xs * 2});
       left: tokens.$spacing-xs;
       right: tokens.$spacing-xs;
     }
