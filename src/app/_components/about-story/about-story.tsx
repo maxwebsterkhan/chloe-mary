@@ -62,24 +62,17 @@ export default function AboutStory() {
       const contentRect = content.getBoundingClientRect();
       const imageRect = imageSection.getBoundingClientRect();
 
-      // Only trigger when content is passing the sticky image
-      if (
-        contentRect.bottom < imageRect.top ||
-        contentRect.top > imageRect.bottom
-      ) {
-        return;
-      }
+      // Track how much content has scrolled past the image
+      const contentHeight = contentRect.height;
+      const imageTop = imageRect.top;
+      const contentTop = contentRect.top;
 
-      // Calculate progress based on how much content has scrolled past the image
-      const contentStart = contentRect.top;
-      const imageCenter = imageRect.top + imageRect.height / 2;
-
-      // Calculate progress over a shorter distance (image height * 1.5) for quicker transition
-      const fadeDistance = imageRect.height * 1.5;
-      const scrolledDistance = Math.max(0, imageCenter - contentStart);
+      // Progress based on content position relative to image
+      // 0 when content top aligns with image top, 1 when content has scrolled past
+      const relativePosition = contentTop - imageTop;
       const progress = Math.max(
         0,
-        Math.min(1, scrolledDistance / fadeDistance)
+        Math.min(1, -relativePosition / (contentHeight * 0.8))
       );
 
       setScrollProgress(progress);
