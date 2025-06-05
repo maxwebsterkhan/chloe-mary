@@ -1,0 +1,666 @@
+@use "../../_styles/breakpoints" as *;
+@use "../../_styles/tokens" as tokens;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary);
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(4rem + 2.75rem);
+
+  @include breakpoint-down("mobile") {
+    padding-top: calc(3rem + 2.75rem);
+    min-height: 90vh;
+  }
+}
+
+// Background decorative elements
+.decorativeElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease-out;
+
+  .titleVisible & {
+    opacity: 1;
+  }
+}
+
+.decorativeCircle {
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(139, 109, 66, 0.1);
+  border-radius: 50%;
+  transform: scale(0.8);
+  transition: all 3s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1s;
+
+  .titleVisible & {
+    transform: scale(1);
+  }
+
+  @include breakpoint-down("tablet") {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 5%;
+  }
+
+  @include breakpoint-down("mobile") {
+    display: none;
+  }
+}
+
+.decorativeLine {
+  position: absolute;
+  bottom: 20%;
+  left: 8%;
+  width: 2px;
+  height: 150px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 2s ease-out;
+  transition-delay: 1.5s;
+
+  .titleVisible & {
+    transform: scaleY(1);
+  }
+
+  @include breakpoint-down("tablet") {
+    height: 100px;
+    left: 5%;
+  }
+
+  @include breakpoint-down("mobile") {
+    display: none;
+  }
+}
+
+.decorativeShape {
+  position: absolute;
+  top: 25%;
+  left: 12%;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 109, 66, 0.05) 0%,
+    rgba(139, 109, 66, 0.15) 100%
+  );
+  transform: rotate(45deg) scale(0);
+  transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 2s;
+
+  .titleVisible & {
+    transform: rotate(45deg) scale(1);
+  }
+
+  @include breakpoint-down("tablet") {
+    width: 40px;
+    height: 40px;
+    left: 8%;
+  }
+
+  @include breakpoint-down("mobile") {
+    display: none;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 tokens.$spacing-md;
+  position: relative;
+  z-index: 2;
+
+  @include breakpoint-down("tablet") {
+    padding: 0 tokens.$spacing-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: 0 tokens.$spacing-xs;
+  }
+}
+
+.content {
+  text-align: center;
+  position: relative;
+}
+
+.titleSection {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &.titleVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Hero main section
+.heroMain {
+  margin-bottom: 5rem;
+  position: relative;
+
+  @include breakpoint-down("tablet") {
+    margin-bottom: 4rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 3rem;
+  }
+}
+
+.heroPreTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  transition-delay: 0.3s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.preTitleText {
+  font-family: var(--font-nunito-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-right: 2rem;
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.9rem;
+    margin-right: 1rem;
+  }
+}
+
+.preTitleLine {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-accent);
+  opacity: 0.6;
+
+  @include breakpoint-down("mobile") {
+    width: 40px;
+  }
+}
+
+.heroTitle {
+  font-family: var(--font-inter-tight);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+  margin: 0 0 2rem 0;
+  text-transform: uppercase;
+  position: relative;
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.heroTitleWord {
+  display: inline-block;
+  margin-right: 0.2em;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:nth-child(1) {
+    transition-delay: 0.5s;
+  }
+  &:nth-child(2) {
+    transition-delay: 0.7s;
+  }
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include breakpoint-down("mobile") {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0.1em;
+  }
+}
+
+.heroSubtitle {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  transition-delay: 0.9s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroSubtitleText {
+  font-family: var(--font-nunito-sans);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  color: rgba(10, 10, 10, 0.7);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+// Traits section with varied styling
+.traitsSection {
+  margin-bottom: 6rem;
+
+  @include breakpoint-down("tablet") {
+    margin-bottom: 5rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 4rem;
+  }
+}
+
+.traitPrimary {
+  margin-bottom: 4rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1.1s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 3rem;
+  }
+}
+
+.traitNumber {
+  font-family: var(--font-inter-tight);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+
+  @include breakpoint-down("mobile") {
+    font-size: 1rem;
+  }
+}
+
+.traitTitleLarge {
+  font-family: var(--font-inter-tight);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.traitWord {
+  display: inline-block;
+  margin-right: 0.3em;
+
+  @include breakpoint-down("mobile") {
+    display: block;
+    margin-right: 0;
+  }
+}
+
+.traitWordAccent {
+  display: inline-block;
+  color: var(--color-accent);
+  margin-right: 0.3em;
+
+  @include breakpoint-down("mobile") {
+    display: block;
+    margin-right: 0;
+  }
+}
+
+.traitSecondary {
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1.3s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 2rem;
+  }
+}
+
+.traitGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  @include breakpoint-down("tablet") {
+    gap: 2rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.traitItem {
+  text-align: center;
+  padding: 1.5rem;
+  border: 1px solid rgba(139, 109, 66, 0.1);
+  border-radius: 2px;
+
+  @include breakpoint-down("mobile") {
+    padding: 1rem;
+  }
+}
+
+.traitLabel {
+  display: block;
+  font-family: var(--font-nunito-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.traitText {
+  display: block;
+  font-family: var(--font-inter-tight);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.traitHighlight {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1.5s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.highlightBox {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 109, 66, 0.05) 0%,
+    rgba(139, 109, 66, 0.12) 100%
+  );
+  padding: 2.5rem 2rem;
+  border-radius: 2px;
+  border: 1px solid rgba(139, 109, 66, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  @include breakpoint-down("mobile") {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.traitTitleSpecial {
+  font-family: var(--font-inter-tight);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+
+  @include breakpoint-down("mobile") {
+    gap: 0.3em;
+  }
+}
+
+.specialWord {
+  display: inline-block;
+}
+
+.specialWordSmall {
+  font-size: 0.7em;
+  font-weight: 300;
+  color: var(--color-accent);
+  font-style: italic;
+  text-transform: lowercase;
+}
+
+.highlightAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-primary) 100%
+  );
+}
+
+// Tagline section
+.taglineSection {
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 1.7s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: 3rem;
+  }
+}
+
+.taglineWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  @include breakpoint-down("mobile") {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.taglineDecorator {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
+  margin: 0 2rem;
+
+  @include breakpoint-down("mobile") {
+    width: 60px;
+    margin: 0;
+  }
+}
+
+.tagline {
+  font-family: var(--font-nunito-sans);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin: 0;
+
+  &.taglineVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("mobile") {
+    letter-spacing: 0.2em;
+  }
+}
+
+.taglineSubtext {
+  font-family: var(--font-nunito-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(10, 10, 10, 0.6);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.8rem;
+  }
+}
+
+// Scroll section
+.scrollSection {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  transition-delay: 1.9s;
+
+  .titleVisible & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scrollIndicator {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  padding: 1rem;
+
+  &:hover {
+    transform: translateY(-3px);
+
+    .scrollLine {
+      background: linear-gradient(
+        180deg,
+        var(--color-accent) 0%,
+        var(--color-primary) 100%
+      );
+    }
+
+    .scrollText {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.scrollContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollLine {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    transparent 100%
+  );
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-out;
+
+  @include breakpoint-down("mobile") {
+    height: 40px;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.scrollText {
+  font-family: var(--font-nunito-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease-out;
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.75rem;
+  }
+}
+
+.scrollSubtext {
+  font-family: var(--font-nunito-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgba(10, 10, 10, 0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.65rem;
+  }
+}
