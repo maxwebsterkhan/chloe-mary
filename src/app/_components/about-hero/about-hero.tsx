@@ -75,13 +75,13 @@ export default function AboutHero() {
             {/* Characteristic traits with varied styling */}
             <div className={styles.traitsSection}>
               <div className={styles.traitPrimary}>
-                <div className={styles.traitIcon}>•</div>
+                <div className={styles.traitIcon}>—</div>
                 <h2 className={styles.traitTitleLarge}>
                   <span className={styles.traitWord}>EMBRACER</span>
                   <span className={styles.traitWord}>OF THE</span>
                   <span className={styles.traitWordAccent}>IMPERFECT</span>
                 </h2>
-                <div className={styles.traitIcon}>•</div>
+                <div className={styles.traitIcon}>—</div>
               </div>
 
               <div className={styles.traitSecondary}>
