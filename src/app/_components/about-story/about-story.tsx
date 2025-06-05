@@ -10,25 +10,21 @@ export default function AboutStory() {
   const contentRef = useRef<HTMLDivElement>(null);
   const philosophyRef = useRef<HTMLDivElement>(null);
   const closingRef = useRef<HTMLDivElement>(null);
-  const [isImageVisible, setIsImageVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [isPhilosophyVisible, setIsPhilosophyVisible] = useState(false);
   const [isClosingVisible, setIsClosingVisible] = useState(false);
 
   useEffect(() => {
-    const image = imageRef.current;
     const content = contentRef.current;
     const philosophy = philosophyRef.current;
     const closing = closingRef.current;
 
-    if (!image || !content || !philosophy || !closing) return;
+    if (!content || !philosophy || !closing) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target === image) {
-            setIsImageVisible(entry.isIntersecting);
-          } else if (entry.target === content) {
+          if (entry.target === content) {
             setIsContentVisible(entry.isIntersecting);
           } else if (entry.target === philosophy) {
             setIsPhilosophyVisible(entry.isIntersecting);
@@ -43,13 +39,11 @@ export default function AboutStory() {
       }
     );
 
-    observer.observe(image);
     observer.observe(content);
     observer.observe(philosophy);
     observer.observe(closing);
 
     return () => {
-      observer.unobserve(image);
       observer.unobserve(content);
       observer.unobserve(philosophy);
       observer.unobserve(closing);
@@ -60,15 +54,10 @@ export default function AboutStory() {
     <section id="about-story" className={styles.story} ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.layout}>
-          <div
-            ref={imageRef}
-            className={`${styles.imageSection} ${
-              isImageVisible ? styles.imageVisible : ""
-            }`}
-          >
+          <div ref={imageRef} className={styles.imageSection}>
             <div className={styles.imageWrapper}>
               <Image
-                src="/chloe-about.jpg"
+                src="/chloe-mary-portrait.jpg"
                 alt="Chloe Mary - Photographer"
                 width={600}
                 height={800}

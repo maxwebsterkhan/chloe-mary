@@ -313,17 +313,28 @@
   }
 }
 
-.traitNumber {
+.traitIcon {
   font-family: var(--font-inter-tight);
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 400;
   color: var(--color-accent);
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   opacity: 0.8;
+  text-align: center;
+  display: block;
+
+  &:last-child {
+    margin-bottom: 0;
+    margin-top: 0.75rem;
+  }
 
   @include breakpoint-down("mobile") {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-top: 0.5rem;
+    }
   }
 }
 
@@ -482,6 +493,31 @@
   color: var(--color-accent);
   font-style: italic;
   text-transform: lowercase;
+}
+
+.specialWordGradient {
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-accent) 50%,
+    var(--color-primary) 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .highlightAccent {

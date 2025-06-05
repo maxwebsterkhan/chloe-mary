@@ -48,24 +48,13 @@
 
 .imageSection {
   position: sticky;
-  top: 8rem;
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-
-  &.imageVisible {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  top: 6rem;
+  align-self: start;
+  height: fit-content;
 
   @include breakpoint-down("tablet") {
     position: relative;
     top: auto;
-    transform: translateY(50px);
-
-    &.imageVisible {
-      transform: translateY(0);
-    }
   }
 }
 
@@ -75,6 +64,8 @@
   border-radius: 2px;
   background-color: #f8f8f8;
   aspect-ratio: 3/4;
+  width: 100%;
+  max-width: 600px;
 
   @include breakpoint-down("mobile") {
     aspect-ratio: 4/5;
@@ -355,15 +346,11 @@
 
 // Full-width philosophy section
 .philosophySection {
-  margin-top: 6rem;
-  padding: 5rem 0;
-  background: linear-gradient(
-    135deg,
-    rgba(139, 109, 66, 0.02) 0%,
-    rgba(139, 109, 66, 0.06) 100%
-  );
-  border-top: 1px solid rgba(139, 109, 66, 0.15);
-  border-bottom: 1px solid rgba(139, 109, 66, 0.15);
+  margin-top: 3rem;
+  padding: 4rem 0;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  position: relative;
   opacity: 0;
   transform: translateY(30px);
   transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -373,14 +360,30 @@
     transform: translateY(0);
   }
 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(139, 109, 66, 0.1) 50%,
+      transparent 100%
+    );
+    opacity: 0.3;
+  }
+
   @include breakpoint-down("tablet") {
-    margin-top: 5rem;
-    padding: 4rem 0;
+    margin-top: 2.5rem;
+    padding: 3rem 0;
   }
 
   @include breakpoint-down("mobile") {
-    margin-top: 4rem;
-    padding: 3rem 0;
+    margin-top: 2rem;
+    padding: 2.5rem 0;
   }
 }
 
@@ -389,6 +392,8 @@
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
   text-align: center;
+  position: relative;
+  z-index: 1;
 
   @include breakpoint-down("tablet") {
     padding: 0 tokens.$spacing-sm;
@@ -410,7 +415,7 @@
   font-size: clamp(1.2rem, 2.8vw, 1.6rem);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   font-style: italic;
   margin: 0;
 
@@ -421,15 +426,12 @@
 
 // Full-width closing section
 .closingSection {
-  margin-top: 6rem;
-  padding: 4rem 0;
-  background: linear-gradient(
-    135deg,
-    rgba(139, 109, 66, 0.03) 0%,
-    rgba(139, 109, 66, 0.08) 100%
-  );
-  border-top: 1px solid rgba(139, 109, 66, 0.1);
-  border-bottom: 1px solid rgba(139, 109, 66, 0.1);
+  margin-top: 3rem;
+  padding: 3rem 0;
+  background: none;
+  border: none;
+  border-top: 2px solid rgba(139, 109, 66, 0.2);
+  position: relative;
   opacity: 0;
   transform: translateY(30px);
   transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -439,13 +441,25 @@
     transform: translateY(0);
   }
 
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: var(--color-accent);
+    margin-top: -1px;
+  }
+
   @include breakpoint-down("tablet") {
-    margin-top: 5rem;
-    padding: 3rem 0;
+    margin-top: 2.5rem;
+    padding: 2.5rem 0;
   }
 
   @include breakpoint-down("mobile") {
-    margin-top: 4rem;
+    margin-top: 2rem;
     padding: 2rem 0;
   }
 }
