@@ -65,7 +65,6 @@
   background-color: #f8f8f8;
   aspect-ratio: 3/4;
   width: 100%;
-  max-width: 600px;
 
   @include breakpoint-down("mobile") {
     aspect-ratio: 4/5;
@@ -120,6 +119,10 @@
   color: var(--color-primary);
   text-transform: uppercase;
   opacity: 0.7;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @include breakpoint-down("mobile") {
     margin-top: 1rem;

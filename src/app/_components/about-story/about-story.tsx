@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function AboutStory() {
   const sectionRef = useRef<HTMLElement>(null);
+  const layoutRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const philosophyRef = useRef<HTMLDivElement>(null);
@@ -54,25 +55,25 @@ export default function AboutStory() {
   // Scroll-based image fade effect
   useEffect(() => {
     const handleScroll = () => {
-      const content = contentRef.current;
-      const imageSection = imageRef.current;
+      const layout = layoutRef.current;
 
-      if (!content || !imageSection) return;
+      if (!layout) return;
 
-      const contentRect = content.getBoundingClientRect();
-      const imageRect = imageSection.getBoundingClientRect();
+      const layoutRect = layout.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
 
-      // Track how much content has scrolled past the image
-      const contentHeight = contentRect.height;
-      const imageTop = imageRect.top;
-      const contentTop = contentRect.top;
+      // Calculate when layout center aligns with viewport center
+      const viewportCenter = viewportHeight / 2;
+      const layoutTriggerPoint = layoutRect.top + layoutRect.height * 0.6; // 60% down the layout
 
-      // Progress based on content position relative to image
-      // 0 when content top aligns with image top, 1 when content has scrolled past
-      const relativePosition = contentTop - imageTop;
+      // Distance from alignment (negative when trigger point is below viewport center)
+      const distanceFromAlignment = layoutTriggerPoint - viewportCenter;
+
+      // Quick fade around the alignment point
+      const fadeDistance = viewportHeight * 0.1; // Quick fade over 10% of viewport height
       const progress = Math.max(
         0,
-        Math.min(1, -relativePosition / (contentHeight * 0.5))
+        Math.min(1, (-distanceFromAlignment + fadeDistance / 2) / fadeDistance)
       );
 
       setScrollProgress(progress);
@@ -89,7 +90,7 @@ export default function AboutStory() {
   return (
     <section id="about-story" className={styles.story} ref={sectionRef}>
       <div className={styles.container}>
-        <div className={styles.layout}>
+        <div className={styles.layout} ref={layoutRef}>
           <div ref={imageRef} className={styles.imageSection}>
             <div className={styles.imageWrapper}>
               <Image
