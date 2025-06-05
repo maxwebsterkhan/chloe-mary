@@ -36,9 +36,10 @@ const CascadingText = ({
                 "--delay": `${startDelay + delay}s`,
               } as CustomCSSProperties
             }
-          >
-            {letter}
-          </span>
+            dangerouslySetInnerHTML={{
+              __html: letter === " " ? "&nbsp;" : letter,
+            }}
+          />
         );
       })}
     </div>

@@ -9,7 +9,7 @@ export default function HomeHero() {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1100);
     };
 
     // Initial check
@@ -31,14 +31,23 @@ export default function HomeHero() {
             Authentic Modern Love Stories
           </h1>
           <p className={styles["home-hero__subtitle"]}>
-            Told By You
-            <span
-              aria-hidden="true"
-              className={styles["home-hero__dot-separator"]}
-            >
-              •
-            </span>
-            Captured by Chloe Mary
+            {isMobile ? (
+              <>
+                <span>Told By You</span>
+                <span>— Captured by Chloe Mary</span>
+              </>
+            ) : (
+              <>
+                Told By You
+                <span
+                  aria-hidden="true"
+                  className={styles["home-hero__dot-separator"]}
+                >
+                  •
+                </span>
+                Captured by Chloe Mary
+              </>
+            )}
           </p>
         </div>
 
