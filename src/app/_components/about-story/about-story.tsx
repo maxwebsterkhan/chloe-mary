@@ -13,6 +13,7 @@ export default function AboutStory() {
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [isPhilosophyVisible, setIsPhilosophyVisible] = useState(false);
   const [isClosingVisible, setIsClosingVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const content = contentRef.current;
@@ -50,6 +51,48 @@ export default function AboutStory() {
     };
   }, []);
 
+  // Scroll-based image fade effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const content = contentRef.current;
+      const imageSection = imageRef.current;
+
+      if (!content || !imageSection) return;
+
+      const contentRect = content.getBoundingClientRect();
+      const imageRect = imageSection.getBoundingClientRect();
+
+      // Only trigger when content is passing the sticky image
+      if (
+        contentRect.bottom < imageRect.top ||
+        contentRect.top > imageRect.bottom
+      ) {
+        return;
+      }
+
+      // Calculate progress based on how much content has scrolled past the image
+      const contentStart = contentRect.top;
+      const imageCenter = imageRect.top + imageRect.height / 2;
+
+      // Calculate progress over a shorter distance (image height * 1.5) for quicker transition
+      const fadeDistance = imageRect.height * 1.5;
+      const scrolledDistance = Math.max(0, imageCenter - contentStart);
+      const progress = Math.max(
+        0,
+        Math.min(1, scrolledDistance / fadeDistance)
+      );
+
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section id="about-story" className={styles.story} ref={sectionRef}>
       <div className={styles.container}>
@@ -62,6 +105,16 @@ export default function AboutStory() {
                 width={600}
                 height={800}
                 className={styles.image}
+                style={{ opacity: 1 - scrollProgress }}
+                priority
+              />
+              <Image
+                src="/chloe-mary-portrait-2.jpg"
+                alt="Chloe Mary - Photographer"
+                width={600}
+                height={800}
+                className={`${styles.image} ${styles.imageSecond}`}
+                style={{ opacity: scrollProgress }}
                 priority
               />
               <div className={styles.imageOverlay}></div>
