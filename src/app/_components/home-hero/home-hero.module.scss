@@ -130,6 +130,8 @@
   }
 
   &__subtitle {
+    display: flex;
+    align-items: c;
     font-family: var(--font-nunito-sans);
     font-size: tokens.$font-size-lg;
     font-weight: 400;

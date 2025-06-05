@@ -67,12 +67,12 @@ export default function Footer() {
           <div ref={sideRef} className={styles.footer__side}>
             <div className={styles.footer__vertical_text}>Follow</div>
             <a
-              href="https://instagram.com/chloemary"
+              href="https://instagram.com/bychloemary"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.footer__instagram}
             >
-              @chloemary
+              @bychloemary
             </a>
           </div>
         </div>

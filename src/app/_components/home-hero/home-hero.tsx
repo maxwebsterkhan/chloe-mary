@@ -31,6 +31,7 @@ export default function HomeHero() {
             Authentic Modern Love Stories
           </h1>
           <p className={styles["home-hero__subtitle"]}>
+            Told By You
             <span
               aria-hidden="true"
               className={styles["home-hero__dot-separator"]}

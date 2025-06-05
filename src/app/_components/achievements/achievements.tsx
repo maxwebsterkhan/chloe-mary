@@ -14,6 +14,7 @@ const achievements = [
     title: "Who What Wear",
     subtitle: "Featured on wedding Issue 2025",
     year: "2025",
+    link: "https://www.whowhatwear.com/living/wedding/fashion-editor-wedding-directory#section-3-suppliers",
   },
   {
     title: "World's Best Wedding Photos",
