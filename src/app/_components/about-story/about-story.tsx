@@ -72,7 +72,7 @@ export default function AboutStory() {
       const relativePosition = contentTop - imageTop;
       const progress = Math.max(
         0,
-        Math.min(1, -relativePosition / (contentHeight * 0.8))
+        Math.min(1, -relativePosition / (contentHeight * 0.5))
       );
 
       setScrollProgress(progress);
