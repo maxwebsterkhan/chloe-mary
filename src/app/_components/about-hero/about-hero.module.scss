@@ -9,10 +9,10 @@
   background-color: var(--color-secondary);
   position: relative;
   overflow: hidden;
-  padding-top: calc(4rem + 2.75rem);
+  padding-top: calc(6rem + 2.75rem);
 
   @include breakpoint-down("mobile") {
-    padding-top: calc(3rem + 2.75rem);
+    padding-top: calc(4rem + 2.75rem);
     min-height: 90vh;
   }
 }

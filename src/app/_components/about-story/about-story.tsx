@@ -8,17 +8,20 @@ export default function AboutStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const philosophyRef = useRef<HTMLDivElement>(null);
   const closingRef = useRef<HTMLDivElement>(null);
   const [isImageVisible, setIsImageVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [isPhilosophyVisible, setIsPhilosophyVisible] = useState(false);
   const [isClosingVisible, setIsClosingVisible] = useState(false);
 
   useEffect(() => {
     const image = imageRef.current;
     const content = contentRef.current;
+    const philosophy = philosophyRef.current;
     const closing = closingRef.current;
 
-    if (!image || !content || !closing) return;
+    if (!image || !content || !philosophy || !closing) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,6 +30,8 @@ export default function AboutStory() {
             setIsImageVisible(entry.isIntersecting);
           } else if (entry.target === content) {
             setIsContentVisible(entry.isIntersecting);
+          } else if (entry.target === philosophy) {
+            setIsPhilosophyVisible(entry.isIntersecting);
           } else if (entry.target === closing) {
             setIsClosingVisible(entry.isIntersecting);
           }
@@ -40,11 +45,13 @@ export default function AboutStory() {
 
     observer.observe(image);
     observer.observe(content);
+    observer.observe(philosophy);
     observer.observe(closing);
 
     return () => {
       observer.unobserve(image);
       observer.unobserve(content);
+      observer.unobserve(philosophy);
       observer.unobserve(closing);
     };
   }, []);
@@ -135,20 +142,28 @@ export default function AboutStory() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div className={styles.philosophy}>
-              <blockquote className={styles.quote}>
-                <p className={styles.quoteText}>
-                  &quot;My style blends a relaxed documentary approach with an
-                  artful, editorial edge that resonates with modern lovers
-                  across the UK and beyond. On your wedding day, I won&apos;t be
-                  directing you or orchestrating moments; I&apos;ll be your
-                  trusted partner capturing the joy, emotions, and connections
-                  as they naturally unfold, aiding with a little artistic
-                  direction if needed or wanted.&quot;
-                </p>
-              </blockquote>
-            </div>
+        {/* Full-width philosophy section */}
+        <div
+          ref={philosophyRef}
+          className={`${styles.philosophySection} ${
+            isPhilosophyVisible ? styles.philosophyVisible : ""
+          }`}
+        >
+          <div className={styles.philosophyContent}>
+            <blockquote className={styles.quote}>
+              <p className={styles.quoteText}>
+                &quot;My style blends a relaxed documentary approach with an
+                artful, editorial edge that resonates with modern lovers across
+                the UK and beyond. On your wedding day, I won&apos;t be
+                directing you or orchestrating moments; I&apos;ll be your
+                trusted partner capturing the joy, emotions, and connections as
+                they naturally unfold, aiding with a little artistic direction
+                if needed or wanted.&quot;
+              </p>
+            </blockquote>
           </div>
         </div>
 

@@ -147,8 +147,7 @@
     .story1,
     .story2,
     .story3,
-    .pullQuote,
-    .philosophy {
+    .pullQuote {
       opacity: 1;
       transform: translateY(0);
     }
@@ -354,25 +353,50 @@
   margin: 0;
 }
 
-// Philosophy quote section
-.philosophy {
-  margin: 5rem 0 0 0;
-  padding: 3rem 0;
-  border-top: 1px solid rgba(10, 10, 10, 0.1);
-  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+// Full-width philosophy section
+.philosophySection {
+  margin-top: 6rem;
+  padding: 5rem 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 109, 66, 0.02) 0%,
+    rgba(139, 109, 66, 0.06) 100%
+  );
+  border-top: 1px solid rgba(139, 109, 66, 0.15);
+  border-bottom: 1px solid rgba(139, 109, 66, 0.15);
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  transition-delay: 1.4s;
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &.philosophyVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @include breakpoint-down("tablet") {
-    margin: 4rem 0 0 0;
-    padding: 2rem 0;
+    margin-top: 5rem;
+    padding: 4rem 0;
   }
 
   @include breakpoint-down("mobile") {
-    margin: 3rem 0 0 0;
-    padding: 1.5rem 0;
+    margin-top: 4rem;
+    padding: 3rem 0;
+  }
+}
+
+.philosophyContent {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 tokens.$spacing-md;
+  text-align: center;
+
+  @include breakpoint-down("tablet") {
+    padding: 0 tokens.$spacing-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    text-align: left;
+    padding: 0 tokens.$spacing-xs;
   }
 }
 
@@ -383,16 +407,15 @@
 
 .quoteText {
   font-family: var(--font-nunito-sans);
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1.2rem, 2.8vw, 1.6rem);
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-primary);
   font-style: italic;
   margin: 0;
-  text-align: center;
 
   @include breakpoint-down("mobile") {
-    text-align: left;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   }
 }
 
