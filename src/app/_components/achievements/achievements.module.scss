@@ -53,8 +53,9 @@
   &__item {
     position: relative;
     padding: 4rem 3rem;
+    // Start hidden for GSAP but visible by default
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -187,25 +188,13 @@
     }
   }
 
-  // Animation when visible
-  &--visible {
-    .achievements__item {
-      animation: cleanFadeIn 0.6s ease-out forwards;
-      animation-delay: calc(var(--index) * 0.4s);
-    }
-
-    // Add hover states after animation completes
-    .achievements__item--linked {
-      // Enable transitions after animation
-      animation: cleanFadeIn 0.6s ease-out forwards,
-        enableHover 0s linear calc(var(--index) * 0.4s + 0.6s) forwards;
-      animation-delay: calc(var(--index) * 0.4s);
-    }
-  }
-
   // Hover-enabled state (added after animation)
   &__item--hover-enabled {
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     &.achievements__item--dark:hover {
       background-color: #1a1a1a;
@@ -220,27 +209,5 @@
         transition: all 0.3s ease;
       }
     }
-  }
-}
-
-// Clean fade-in animation only
-@keyframes cleanFadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  1% {
-    visibility: visible;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-// Enable hover state after animation
-@keyframes enableHover {
-  to {
-    /* This just acts as a trigger to add hover class via JS if needed */
   }
 }

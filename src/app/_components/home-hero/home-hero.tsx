@@ -29,34 +29,48 @@ export default function HomeHero() {
   }, []);
 
   useEffect(() => {
+    const animations: gsap.core.Tween[] = [];
+
     // Set initial states with softer animations
     if (titleRef.current) {
-      animationUtils.softTitleReveal(titleRef.current, { delay: 0.3 });
+      const anim = animationUtils.softTitleReveal(titleRef.current, {
+        delay: 0.3,
+      });
+      if (anim) animations.push(anim);
     }
 
     if (subtitleRef.current) {
-      animationUtils.softSlideIn(subtitleRef.current, { delay: 0.8 });
+      const anim = animationUtils.softSlideIn(subtitleRef.current, {
+        delay: 0.8,
+      });
+      if (anim) animations.push(anim);
     }
 
     if (lineRef.current) {
-      animationUtils.drawLineX(lineRef.current, { delay: 1.8 });
+      const anim = animationUtils.drawLineX(lineRef.current, { delay: 1.8 });
+      if (anim) animations.push(anim);
     }
 
     // Animate text with SplitText (removed conflicting fadeIn on parent)
     if (verticalTextRef.current) {
-      animationUtils.splitTextAnimation(verticalTextRef.current, {
+      const anim = animationUtils.splitTextAnimation(verticalTextRef.current, {
         type: "chars",
         direction: "vertical",
         startDelay: 0.2,
       });
+      if (anim) animations.push(anim);
     }
 
     if (horizontalTextRef.current) {
-      animationUtils.splitTextAnimation(horizontalTextRef.current, {
-        type: "chars",
-        direction: "horizontal",
-        startDelay: 0.8,
-      });
+      const anim = animationUtils.splitTextAnimation(
+        horizontalTextRef.current,
+        {
+          type: "chars",
+          direction: "horizontal",
+          startDelay: 0.8,
+        }
+      );
+      if (anim) animations.push(anim);
     }
 
     // Animate dot separator
@@ -64,8 +78,16 @@ export default function HomeHero() {
       `.${styles["home-hero__dot-separator"]}`
     );
     if (dotSeparator) {
-      animationUtils.scaleIn(dotSeparator as HTMLElement, { delay: 1.1 });
+      const anim = animationUtils.scaleIn(dotSeparator as HTMLElement, {
+        delay: 1.1,
+      });
+      if (anim) animations.push(anim);
     }
+
+    // Cleanup function to kill all animations
+    return () => {
+      animations.forEach((anim) => anim?.kill());
+    };
   }, []);
 
   return (

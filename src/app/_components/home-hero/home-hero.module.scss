@@ -164,7 +164,8 @@
     margin: 0 0.55em;
     vertical-align: middle;
     line-height: 1;
-    // GSAP will handle animations
+    opacity: 0;
+    transform: scale(0);
   }
 
   &__memento {

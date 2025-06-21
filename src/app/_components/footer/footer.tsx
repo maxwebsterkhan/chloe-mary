@@ -2,65 +2,79 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./footer.module.scss";
+import {
+  animationUtils,
+  createScrollTrigger,
+} from "../helpers/gsap-animations";
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleLine1Ref = useRef<HTMLDivElement>(null);
+  const titleLine2Ref = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
   const copyrightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const line = lineRef.current;
-    const title = titleRef.current;
-    const side = sideRef.current;
-    const copyright = copyrightRef.current;
+    if (!footerRef.current) return;
 
-    if (!line || !title || !side || !copyright) return;
+    // Set up scroll trigger for footer animations - only once
+    createScrollTrigger(footerRef.current, {
+      start: "top 75%",
+      once: true, // This prevents the animation from running multiple times
+      onEnter: () => {
+        // Animated line first
+        if (lineRef.current) {
+          animationUtils.drawLineX(lineRef.current, {
+            delay: 0,
+            duration: 1.2,
+          });
+        }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === line) {
-              entry.target.classList.add(styles.lineVisible);
-            } else if (entry.target === title) {
-              entry.target.classList.add(styles.titleVisible);
-            } else if (entry.target === side) {
-              entry.target.classList.add(styles.sideVisible);
-            } else if (entry.target === copyright) {
-              entry.target.classList.add(styles.copyrightVisible);
-            }
-          }
-        });
+        // Animate each title line separately to preserve structure
+        if (titleLine1Ref.current) {
+          animationUtils.slideInUp(titleLine1Ref.current, {
+            delay: 0.3,
+          });
+        }
+
+        if (titleLine2Ref.current) {
+          animationUtils.slideInUp(titleLine2Ref.current, {
+            delay: 0.5,
+          });
+        }
+
+        // Soft slide in for the side content
+        if (sideRef.current) {
+          animationUtils.softSlideIn(sideRef.current, {
+            delay: 0.8,
+          });
+        }
+
+        // Elegant fade in for copyright
+        if (copyrightRef.current) {
+          animationUtils.slideInUp(copyrightRef.current, {
+            delay: 1.2,
+          });
+        }
       },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -10% 0px",
-      }
-    );
-
-    observer.observe(line);
-    observer.observe(title);
-    observer.observe(side);
-    observer.observe(copyright);
-
-    return () => {
-      observer.unobserve(line);
-      observer.unobserve(title);
-      observer.unobserve(side);
-      observer.unobserve(copyright);
-    };
+    });
   }, []);
 
   return (
-    <footer className={styles.footer}>
+    <footer ref={footerRef} className={styles.footer}>
       <div className={styles.footer__container}>
         <div className={styles.footer__content}>
           <div className={styles.footer__main}>
-            <h2 ref={titleRef} className={styles.footer__title}>
-              Let&apos;s Create
-              <br />
-              Something Beautiful
+            <h2 className={styles.footer__title}>
+              <div ref={titleLine1Ref} className={styles.footer__title_line}>
+                <span>Let&apos;s</span>
+                <span>Create</span>
+              </div>
+              <div ref={titleLine2Ref} className={styles.footer__title_line}>
+                <span>Something</span>
+                <span>Beautiful</span>
+              </div>
             </h2>
           </div>
 

@@ -1,4 +1,5 @@
 @use "../../_styles/breakpoints" as *;
+@use "../../_styles/tokens" as tokens;
 
 .intro {
   padding: 6rem 2rem;
@@ -34,29 +35,14 @@
   color: #f3f0eb;
   margin: 0;
   letter-spacing: -0.01em;
-  transform: translateX(-4rem);
-  opacity: 0;
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0; // Start hidden for GSAP animation
 
   @include breakpoint-down("tablet") {
-    transform: translateX(-3rem);
+    // Remove transform
   }
 
   @include breakpoint-down("mobile") {
-    transform: translateX(-1.5rem);
-  }
-
-  &.greetingVisible {
-    opacity: 1;
-    transform: translateX(-4rem);
-
-    @include breakpoint-down("tablet") {
-      transform: translateX(-3rem);
-    }
-
-    @include breakpoint-down("mobile") {
-      transform: translateX(-1.5rem);
-    }
+    // Remove transform
   }
 }
 
@@ -64,50 +50,26 @@
   font-size: 0.85rem;
   font-style: italic;
   margin: 0.5rem 0 0 0;
-  opacity: 0;
   background: linear-gradient(135deg, #f3f0eb 0%, #d4c4a0 50%, #b8a082 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   position: relative;
-  transform: translateX(4rem);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+  opacity: 0; // Start hidden for GSAP typewriter animation
 
   @include breakpoint-down("tablet") {
-    transform: translateX(3rem);
     font-size: 0.8rem;
   }
 
   @include breakpoint-down("mobile") {
-    transform: translateX(1.5rem);
     font-size: 0.75rem;
     margin-top: 0.25rem;
-  }
-
-  &.taglineVisible {
-    opacity: 0.9;
-    transform: translateX(4rem);
-
-    @include breakpoint-down("tablet") {
-      transform: translateX(3rem);
-    }
-
-    @include breakpoint-down("mobile") {
-      transform: translateX(1.5rem);
-    }
   }
 }
 
 .content {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
-
-  &.contentVisible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  // Remove old CSS animations - GSAP will handle this
 }
 
 .description {
@@ -120,16 +82,14 @@
   }
 }
 
-// Base paragraph styles
-.paragraphLeft,
-.paragraphRight,
-.paragraphCenter {
+// Base paragraph styles for GSAP animations
+.paragraph {
   font-size: 1.1rem;
   line-height: 1.7;
   color: rgba(243, 240, 235, 0.85);
   margin: 0;
   max-width: 700px;
-  opacity: 0;
+  opacity: 1;
 
   @include breakpoint-down("tablet") {
     font-size: 1rem;
@@ -143,52 +103,28 @@
   }
 }
 
-// Left-aligned paragraph (slides in from left)
+// Left-aligned paragraph
 .paragraphLeft {
   text-align: left;
   margin-left: 0;
   margin-right: auto;
   max-width: 650px;
-  transform: translateX(-30px);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.6s;
 }
 
-// Right-aligned paragraph (slides in from right)
+// Right-aligned paragraph
 .paragraphRight {
   text-align: right;
   margin-left: auto;
   margin-right: 0;
   max-width: 600px;
-  transform: translateX(30px);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
 
-// Center-aligned paragraph (slides in from center)
+// Center-aligned paragraph
 .paragraphCenter {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   max-width: 700px;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1) 1s;
-}
-
-// When content is visible, animate paragraphs
-.contentVisible {
-  .paragraphLeft {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .paragraphRight {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .paragraphCenter {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 // Philosophy quote special styling
@@ -205,34 +141,5 @@
 
   @include breakpoint-down("mobile") {
     font-size: 1.1rem !important;
-  }
-}
-
-// Remove old animation keyframes since we're using intersection observer
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInFromLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromRight {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromCenter {
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

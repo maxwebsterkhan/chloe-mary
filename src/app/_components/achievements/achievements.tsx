@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./achievements.module.scss";
 import {
   animationUtils,
@@ -35,82 +35,33 @@ const achievements = [
 ];
 
 export default function Achievements() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [hoverEnabled, setHoverEnabled] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-  ]);
   const achievementsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    if (!achievementsRef.current) return;
 
-    // Initial check
-    checkMobile();
+    const items = Array.from(
+      achievementsRef.current.querySelectorAll(`.${styles.achievements__item}`)
+    ) as HTMLElement[];
 
-    // Add event listener
-    window.addEventListener("resize", checkMobile);
-
-    // Clean up
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (achievementsRef.current) {
-      // Use GSAP stagger animation for achievement items
-      const items = achievementsRef.current.querySelectorAll(
-        `.${styles.achievements__item}`
-      );
-
-      animationUtils.staggerFadeIn(Array.from(items) as HTMLElement[], {
-        delay: 0.2,
-        duration: 0.6,
-        stagger: 0.4,
-      });
-
-      // Set up scroll trigger for visibility
-      createScrollTrigger(achievementsRef.current, {
-        start: "top 80%",
-        onEnter: () => {
-          setIsVisible(true);
-          // Enable hover states after each animation completes
-          achievements.forEach((_, index) => {
-            setTimeout(() => {
-              setHoverEnabled((prev) => {
-                const newState = [...prev];
-                newState[index] = true;
-                return newState;
-              });
-            }, (index * 0.4 + 0.6) * 1000);
-          });
-        },
-      });
-    }
+    // Set up scroll trigger for stagger fade animation - only once
+    createScrollTrigger(achievementsRef.current, {
+      start: "top 75%",
+      once: true,
+      onEnter: () => {
+        animationUtils.staggerFadeIn(items);
+      },
+    });
   }, []);
 
   // Responsive alternating pattern
   const getCardVariant = (index: number) => {
-    if (isMobile) {
-      // Mobile: simple alternating pattern (0,2 dark, 1,3 light)
-      return index % 2 === 0 ? "dark" : "light";
-    } else {
-      // Desktop: checkerboard pattern (0,3 dark, 1,2 light)
-      return index === 0 || index === 3 ? "dark" : "light";
-    }
+    // Desktop: checkerboard pattern (0,3 dark, 1,2 light)
+    return index === 0 || index === 3 ? "dark" : "light";
   };
 
   return (
-    <section
-      ref={achievementsRef}
-      className={`${styles.achievements} ${
-        isVisible ? styles["achievements--visible"] : ""
-      }`}
-    >
+    <section ref={achievementsRef} className={styles.achievements}>
       <div className={styles.achievements__container}>
         <div className={styles.achievements__grid}>
           {achievements.map((achievement, index) => {
@@ -132,9 +83,6 @@ export default function Achievements() {
               styles.achievements__item,
               styles[`achievements__item--${getCardVariant(index)}`],
               achievement.link ? styles["achievements__item--linked"] : "",
-              achievement.link && hoverEnabled[index]
-                ? styles["achievements__item--hover-enabled"]
-                : "",
             ]
               .filter(Boolean)
               .join(" ");

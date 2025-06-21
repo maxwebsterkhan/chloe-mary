@@ -1,9 +1,10 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { TextPlugin } from "gsap/TextPlugin";
 
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText, TextPlugin);
 
 // Animation utilities
 export const animationUtils = {
@@ -157,6 +158,18 @@ export const animationUtils = {
       staggerAmount = direction === "vertical" ? 0.06 : 0.04
     } = options || {};
     
+    const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
+    if (!el) return;
+    
+    // Store original text if not already stored
+    if (!el.dataset.originalText) {
+      el.dataset.originalText = el.textContent || "";
+    }
+    
+    // Reset to original text to ensure clean state
+    const originalText = el.dataset.originalText;
+    el.textContent = originalText;
+    
     try {
       // Try to use SplitText first
       const split = new SplitText(element, { type });
@@ -184,20 +197,14 @@ export const animationUtils = {
     } catch (error) {
       console.log("SplitText not available, using manual approach:", error);
       
-      // Fallback to manual text splitting
-      const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
-      if (!el) return;
-      
-      const text = el.textContent || "";
-      
-      // Clear original text and create spans for each character
+      // Clear and create spans for each character
       el.innerHTML = "";
       const spans: HTMLSpanElement[] = [];
       
       if (type === "chars") {
         // Split into characters
-        for (let i = 0; i < text.length; i++) {
-          const char = text[i];
+        for (let i = 0; i < originalText.length; i++) {
+          const char = originalText[i];
           const span = document.createElement("span");
           span.textContent = char;
           span.style.display = "inline-block";
@@ -213,7 +220,7 @@ export const animationUtils = {
         }
       } else {
         // Split into words
-        const words = text.split(" ");
+        const words = originalText.split(" ");
         words.forEach((word, index) => {
           const span = document.createElement("span");
           span.textContent = word;
@@ -233,7 +240,7 @@ export const animationUtils = {
         });
       }
       
-      console.log("Manual split created", spans.length, "spans for text:", text);
+      console.log("Manual split created", spans.length, "spans for text:", originalText);
       
       // Animate the spans
       return gsap.fromTo(
@@ -482,8 +489,9 @@ export const animationUtils = {
     words.forEach((word, index) => {
       const span = document.createElement("span");
       span.textContent = word;
-      span.style.display = "inline-block";
+      span.style.display = "inline";
       span.style.opacity = "0";
+      span.style.whiteSpace = "nowrap";
       
       el.appendChild(span);
       wordSpans.push(span);
@@ -491,8 +499,8 @@ export const animationUtils = {
       // Add space after word (except last)
       if (index < words.length - 1) {
         const space = document.createElement("span");
-        space.innerHTML = "&nbsp;";
-        space.style.display = "inline-block";
+        space.innerHTML = " ";
+        space.style.display = "inline";
         el.appendChild(space);
       }
     });
@@ -533,6 +541,316 @@ export const animationUtils = {
       }
     );
   },
+
+  // NEW ANIMATION VARIANTS FOR DIFFERENT COMPONENTS
+
+  // Floating entrance - perfect for intro sections
+  floatingEntrance: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    return gsap.fromTo(
+      element,
+      { 
+        opacity: 0,
+        y: 60,
+        rotationX: 45,
+        transformPerspective: 1000,
+        transformOrigin: "50% 50%",
+      },
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        duration: 1.2,
+        ease: "back.out(1.4)",
+        ...options,
+      }
+    );
+  },
+
+  // Magnetic pull animation - great for cards
+  magneticPull: (elements: HTMLElement[] | string, options?: gsap.TweenVars) => {
+    return gsap.fromTo(
+      elements,
+      { 
+        opacity: 0,
+        scale: 0.7,
+        rotation: gsap.utils.random(-15, 15, true),
+        x: gsap.utils.random(-100, 100, true),
+        y: gsap.utils.random(-50, 50, true),
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        x: 0,
+        y: 0,
+        duration: 1.0,
+        ease: "back.out(1.2)",
+        stagger: {
+          amount: 0.8,
+          from: "random"
+        },
+        ...options,
+      }
+    );
+  },
+
+  // Prismatic text reveal - for special headings
+  prismaticReveal: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
+    if (!el) return;
+    
+    const text = el.textContent || "";
+    const chars = text.split("");
+    
+    // Store original text
+    if (!el.dataset.originalText) {
+      el.dataset.originalText = text;
+    }
+    
+    // Clear and create character spans
+    el.innerHTML = "";
+    const charSpans: HTMLSpanElement[] = [];
+    
+    chars.forEach((char) => {
+      const span = document.createElement("span");
+      span.textContent = char === " " ? "\u00A0" : char;
+      span.style.display = "inline-block";
+      span.style.opacity = "0";
+      span.style.transformOrigin = "50% 50%";
+      
+      el.appendChild(span);
+      charSpans.push(span);
+    });
+    
+    return gsap.fromTo(
+      charSpans,
+      { 
+        opacity: 0,
+        scale: 0.3,
+        rotationY: 90,
+        filter: "blur(10px)",
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        filter: "blur(0px)",
+        duration: 0.8,
+        ease: "back.out(1.5)",
+        stagger: {
+          amount: 1.2,
+          from: "center"
+        },
+        ...options,
+      }
+    );
+  },
+
+  // Typewriter effect using GSAP TextPlugin
+  typewriter: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
+    if (!el) return;
+    
+    const originalText = el.textContent || "";
+    
+    // Store original text if not already stored
+    if (!el.dataset.originalText) {
+      el.dataset.originalText = originalText;
+    }
+    
+    // Clear the text first
+    el.textContent = "";
+    
+    // Use TextPlugin to animate the text in - much faster
+    return gsap.to(el, {
+      duration: Math.max(0.8, originalText.length * 0.02), // Faster: minimum 0.8s, faster per character
+      text: {
+        value: originalText,
+        delimiter: "" // Character by character
+      },
+      ease: "none",
+      ...options,
+    });
+  },
+
+  // Particle burst entrance
+  particleBurst: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
+    if (!el) return;
+    
+    // Create particle container
+    const particleContainer = document.createElement("div");
+    particleContainer.style.position = "relative";
+    particleContainer.style.display = "inline-block";
+    
+    // Wrap element
+    const parent = el.parentNode;
+    parent?.insertBefore(particleContainer, el);
+    particleContainer.appendChild(el);
+    
+    // Create particles
+    const particles: HTMLElement[] = [];
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement("div");
+      particle.style.position = "absolute";
+      particle.style.width = "4px";
+      particle.style.height = "4px";
+      particle.style.backgroundColor = "var(--color-accent)";
+      particle.style.borderRadius = "50%";
+      particle.style.left = "50%";
+      particle.style.top = "50%";
+      particle.style.transform = "translate(-50%, -50%)";
+      particle.style.pointerEvents = "none";
+      
+      particleContainer.appendChild(particle);
+      particles.push(particle);
+    }
+    
+    const tl = gsap.timeline();
+    
+    // Animate particles bursting out
+    particles.forEach((particle, index) => {
+      const angle = (index / particles.length) * Math.PI * 2;
+      const distance = 80;
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+      
+      tl.fromTo(particle, 
+        { opacity: 1, scale: 0.5 },
+        { 
+          x, y, 
+          opacity: 0, 
+          scale: 1.5,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        0
+      );
+    });
+    
+    // Animate main element
+    tl.fromTo(el,
+      { opacity: 0, scale: 0.5 },
+      { 
+        opacity: 1, 
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(2)",
+        ...options,
+      },
+      0.2
+    );
+    
+    // Clean up particles
+    tl.call(() => {
+      particles.forEach(p => p.remove());
+    }, [], 1);
+    
+    return tl;
+  },
+
+  // Wave text animation
+  waveText: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    const el = typeof element === "string" ? document.querySelector(element) as HTMLElement : element;
+    if (!el) return;
+    
+    const text = el.textContent || "";
+    const words = text.split(" ");
+    
+    // Store original text
+    if (!el.dataset.originalText) {
+      el.dataset.originalText = text;
+    }
+    
+    // Clear and create word spans
+    el.innerHTML = "";
+    const wordSpans: HTMLSpanElement[] = [];
+    
+    words.forEach((word, index) => {
+      const span = document.createElement("span");
+      span.textContent = word;
+      span.style.display = "inline-block";
+      span.style.opacity = "0";
+      
+      el.appendChild(span);
+      wordSpans.push(span);
+      
+      // Add space after word (except last)
+      if (index < words.length - 1) {
+        const space = document.createElement("span");
+        space.innerHTML = "&nbsp;";
+        space.style.display = "inline-block";
+        el.appendChild(space);
+      }
+    });
+    
+    return gsap.fromTo(
+      wordSpans,
+      { 
+        opacity: 0,
+        y: 50,
+        rotationX: -90,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        duration: 0.6,
+        ease: "sine.out",
+        stagger: {
+          amount: 0.8,
+          ease: "sine.inOut"
+        },
+        ...options,
+      }
+    );
+  },
+
+  // Spiral entrance for footer
+  spiralEntrance: (element: HTMLElement | string, options?: gsap.TweenVars) => {
+    return gsap.fromTo(
+      element,
+      { 
+        opacity: 0,
+        scale: 0.1,
+        rotation: 720,
+        transformOrigin: "center center",
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 1.5,
+        ease: "back.out(1.2)",
+        ...options,
+      }
+    );
+  },
+
+  // Liquid morph for cards
+  liquidMorph: (elements: HTMLElement[] | string, options?: gsap.TweenVars) => {
+    return gsap.fromTo(
+      elements,
+      { 
+        opacity: 0,
+        scaleY: 0,
+        skewX: 45,
+        transformOrigin: "bottom center",
+      },
+      {
+        opacity: 1,
+        scaleY: 1,
+        skewX: 0,
+        duration: 1.2,
+        ease: "elastic.out(1, 0.3)",
+        stagger: {
+          amount: 0.6,
+          from: "start"
+        },
+        ...options,
+      }
+    );
+  },
 };
 
 // Timeline utilities
@@ -541,10 +859,13 @@ export const createTimeline = (options?: gsap.TimelineVars) => {
 };
 
 // Scroll trigger utilities
-export const createScrollTrigger = (element: HTMLElement | string, options: ScrollTrigger.Vars) => {
+export const createScrollTrigger = (element: HTMLElement | string, options: ScrollTrigger.Vars & { once?: boolean }) => {
+  const { once, ...scrollTriggerOptions } = options;
+  
   return ScrollTrigger.create({
     trigger: element,
-    ...options,
+    once: once || false, // Use the once parameter to prevent multiple runs
+    ...scrollTriggerOptions,
   });
 };
 
