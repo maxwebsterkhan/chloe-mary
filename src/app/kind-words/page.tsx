@@ -163,7 +163,7 @@ export default function KindWords() {
             </div>
             <div className={styles.heroRight}>
               <p className={styles.heroSubtitle}>
-                Heartfelt messages from the wonderful couples I've had the
+                Heartfelt messages from the wonderful couples I&apos;ve had the
                 privilege of working alongside on their most intimate and
                 special days.
               </p>
