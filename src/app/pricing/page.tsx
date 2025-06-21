@@ -33,8 +33,14 @@ export default function PricingPage() {
       if (titleRef.current) {
         tl.fromTo(
           titleRef.current,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
+          { opacity: 0, x: -100, rotationY: -15 },
+          {
+            opacity: 1,
+            x: 0,
+            rotationY: 0,
+            duration: 1.4,
+            ease: "back.out(1.7)",
+          },
           0.2
         );
       }
@@ -196,6 +202,14 @@ export default function PricingPage() {
                 <span className={styles.titleBreak}>COVERAGE</span>
               </h2>
 
+              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
+                <span className={styles.noteHighlight}>INCLUDED</span>
+                <p>One roll of black and white film</p>
+                <span className={styles.noteAddition}>
+                  Additional rolls available for £50 each
+                </span>
+              </div>
+
               <div className={styles.priceMatrix}>
                 <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                   <div className={styles.priceLabel}>ESSENTIAL</div>
@@ -260,6 +274,25 @@ export default function PricingPage() {
                 <span className={styles.titleBreak}>MOMENTS</span>
               </h2>
 
+              <div
+                className={`${styles.mobileMetaExtensions} ${styles.animateIn}`}
+              >
+                <div className={styles.extensionItem}>
+                  <span className={styles.extensionLabel}>
+                    EXTEND YOUR STORY
+                  </span>
+                  <span className={styles.extensionPrice}>
+                    £375 per additional hour
+                  </span>
+                </div>
+                <div className={styles.extensionItem}>
+                  <span className={styles.extensionLabel}>ADDITIONAL FILM</span>
+                  <span className={styles.extensionPrice}>
+                    £50 per film roll
+                  </span>
+                </div>
+              </div>
+
               <div className={styles.priceMatrix}>
                 <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                   <div className={styles.priceLabel}>FOCUSED</div>
@@ -316,6 +349,14 @@ export default function PricingPage() {
                 BEYOND
                 <span className={styles.titleBreak}>BORDERS</span>
               </h2>
+
+              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
+                <span className={styles.noteHighlight}>ADVENTURE INCLUDES</span>
+                <p>One roll of black and white film</p>
+                <span className={styles.noteAddition}>
+                  Additional rolls available for £50 each
+                </span>
+              </div>
 
               <div className={styles.destinationMatrix}>
                 <div
