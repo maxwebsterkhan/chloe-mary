@@ -9,6 +9,7 @@ export default function PricingPage() {
   const heroRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const gradientRef = useRef<HTMLSpanElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const decorRef = useRef<HTMLDivElement>(null);
   const fullDayRef = useRef<HTMLElement>(null);
@@ -80,6 +81,23 @@ export default function PricingPage() {
           );
         }
       }
+
+      // Animate gradient with striking visual effect
+      if (gradientRef.current) {
+        // Set initial background position
+        gsap.set(gradientRef.current, {
+          backgroundPosition: "-100% 0%",
+        });
+
+        // Create a smooth left-to-right gradient sweep
+        gsap.to(gradientRef.current, {
+          backgroundPosition: "100% 0%",
+          duration: 6,
+          ease: "power1.inOut",
+          repeat: -1,
+          delay: 1.5,
+        });
+      }
     }
 
     // Animate sections on scroll
@@ -123,7 +141,9 @@ export default function PricingPage() {
               </div>
               <h1 ref={titleRef} className={styles.heroTitle}>
                 EVERYTHING
-                <span className={styles.titleAccent}>YOU NEED</span>
+                <span ref={gradientRef} className={styles.titleAccent}>
+                  YOU NEED
+                </span>
                 <span className={styles.titleSecondary}>TO KNOW</span>
               </h1>
             </div>

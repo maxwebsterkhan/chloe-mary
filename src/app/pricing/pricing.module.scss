@@ -66,7 +66,16 @@
 
   .titleAccent {
     display: block;
-    color: var(--color-accent);
+    background: linear-gradient(
+      90deg,
+      #b8956a 0%,
+      var(--color-accent) 50%,
+      #b8956a 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-left: 0;
   }
 
@@ -289,6 +298,16 @@
 
   @include breakpoint-down("mobile") {
     display: none;
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
 
