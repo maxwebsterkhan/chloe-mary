@@ -603,6 +603,10 @@
         opacity: 0.5;
       }
     }
+
+    .inclusionLabel::after {
+      background: var(--color-accent);
+    }
   }
 }
 
@@ -681,24 +685,47 @@
   }
 }
 
-// Clean Row Layout
+// Clean Row Layout - Creative Magazine Style
 .inclusionsList {
   display: flex;
   flex-direction: column;
-  gap: tokens.$spacing-lg;
+  gap: 0;
+  position: relative;
 }
 
 .inclusionRow {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: tokens.$spacing-lg;
-  align-items: start;
-  padding: tokens.$spacing-md 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: tokens.$spacing-md 20px;
   position: relative;
+  margin-left: 0;
+
+  // Consistent left-aligned layout for better UX
+  align-items: flex-start;
+
+  .inclusionLabel {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .inclusionDesc {
+    text-align: left;
+    align-self: flex-start;
+  }
 
   @include breakpoint-down("tablet") {
-    grid-template-columns: 1fr;
-    gap: tokens.$spacing-xs;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+
+    .inclusionLabel {
+      align-self: flex-start !important;
+      text-align: left !important;
+    }
+
+    .inclusionDesc {
+      text-align: left !important;
+    }
   }
 
   &:not(:last-child) {
@@ -708,10 +735,10 @@
   &::before {
     content: "";
     position: absolute;
-    left: -20px;
-    top: 0;
+    left: 0;
+    top: tokens.$spacing-md;
     width: 2px;
-    height: 100%;
+    height: calc(100% - #{tokens.$spacing-md * 2});
     background: linear-gradient(
       180deg,
       var(--color-accent) 0%,
@@ -726,6 +753,25 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: tokens.$letter-spacing-tight;
+  margin-bottom: tokens.$spacing-sm;
+  position: relative;
+
+  // Add decorative elements
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.4;
+  }
+}
+
+.inclusionRow:nth-child(even) .inclusionLabel::after {
+  left: auto;
+  right: 0;
 }
 
 .inclusionDesc {
@@ -842,10 +888,17 @@
 
   .inclusionRow {
     grid-template-columns: 1fr;
+    padding: tokens.$spacing-md 15px;
 
     &::before {
-      left: -10px;
-      height: 60px;
+      left: 0;
+      top: tokens.$spacing-md;
+      height: calc(100% - #{tokens.$spacing-md * 2});
+    }
+
+    &:nth-child(even)::before {
+      left: 0;
+      right: auto;
     }
   }
 }
