@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./achievements.module.scss";
+import {
+  animationUtils,
+  createScrollTrigger,
+} from "../helpers/gsap-animations";
 
 const achievements = [
   {
@@ -57,11 +61,23 @@ export default function Achievements() {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
+    if (achievementsRef.current) {
+      // Use GSAP stagger animation for achievement items
+      const items = achievementsRef.current.querySelectorAll(
+        `.${styles.achievements__item}`
+      );
 
+      animationUtils.staggerFadeIn(Array.from(items) as HTMLElement[], {
+        delay: 0.2,
+        duration: 0.6,
+        stagger: 0.4,
+      });
+
+      // Set up scroll trigger for visibility
+      createScrollTrigger(achievementsRef.current, {
+        start: "top 80%",
+        onEnter: () => {
+          setIsVisible(true);
           // Enable hover states after each animation completes
           achievements.forEach((_, index) => {
             setTimeout(() => {
@@ -72,16 +88,9 @@ export default function Achievements() {
               });
             }, (index * 0.4 + 0.6) * 1000);
           });
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (achievementsRef.current) {
-      observer.observe(achievementsRef.current);
+        },
+      });
     }
-
-    return () => observer.disconnect();
   }, []);
 
   // Responsive alternating pattern

@@ -1,8 +1,5 @@
-import React from "react";
-
-type CustomCSSProperties = {
-  "--delay": string;
-} & React.CSSProperties;
+import React, { useEffect, useRef } from "react";
+import { animationUtils } from "./gsap-animations";
 
 type CascadingTextProps = {
   text: string;
@@ -19,29 +16,40 @@ const CascadingText = ({
   direction = "vertical",
   startDelay = 0,
 }: CascadingTextProps) => {
-  return (
-    <div className={className}>
-      {text.split("").map((letter, index) => {
-        const totalLetters = text.length;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      // Use GSAP to animate the letters
+      const letters =
+        containerRef.current.querySelectorAll(`.cascading-letter`);
+      letters.forEach((letter, index) => {
         const delay =
           direction === "vertical"
-            ? index * 0.06
-            : (totalLetters - index - 1) * 0.04;
-        return (
-          <span
-            key={index}
-            className={letterClassName}
-            style={
-              {
-                "--delay": `${startDelay + delay}s`,
-              } as CustomCSSProperties
-            }
-            dangerouslySetInnerHTML={{
-              __html: letter === " " ? "&nbsp;" : letter,
-            }}
-          />
-        );
-      })}
+            ? startDelay + index * 0.06
+            : startDelay + (text.length - index - 1) * 0.04;
+
+        animationUtils.fadeIn(letter as HTMLElement, {
+          delay,
+          duration: 0.5,
+          y: direction === "vertical" ? 20 : 0,
+          x: direction === "horizontal" ? -10 : 0,
+        });
+      });
+    }
+  }, [text, direction, startDelay]);
+
+  return (
+    <div ref={containerRef} className={className}>
+      {text.split("").map((letter, index) => (
+        <span
+          key={index}
+          className={`${letterClassName} cascading-letter`}
+          dangerouslySetInnerHTML={{
+            __html: letter === " " ? "&nbsp;" : letter,
+          }}
+        />
+      ))}
     </div>
   );
 };

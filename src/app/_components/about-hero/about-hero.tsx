@@ -2,32 +2,48 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./about-hero.module.scss";
+import {
+  animationUtils,
+  createScrollTrigger,
+} from "../helpers/gsap-animations";
 
 export default function AboutHero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleSectionRef = useRef<HTMLDivElement>(null);
+  const decorativeElementsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    if (titleSectionRef.current) {
+      // Animate the main title section
+      animationUtils.slideInUp(titleSectionRef.current, { delay: 0.2 });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.3,
-        rootMargin: "0px 0px -20% 0px",
+      // Animate decorative elements
+      if (decorativeElementsRef.current) {
+        const circle = decorativeElementsRef.current.querySelector(
+          `.${styles.decorativeCircle}`
+        );
+        const line = decorativeElementsRef.current.querySelector(
+          `.${styles.decorativeLine}`
+        );
+        const shape = decorativeElementsRef.current.querySelector(
+          `.${styles.decorativeShape}`
+        );
+
+        if (circle) animationUtils.scaleIn(circle as HTMLElement, { delay: 1 });
+        if (line) animationUtils.drawLineY(line as HTMLElement, { delay: 1.5 });
+        if (shape) animationUtils.scaleIn(shape as HTMLElement, { delay: 2 });
       }
-    );
 
-    observer.observe(section);
-
-    return () => {
-      observer.unobserve(section);
-    };
+      // Set up scroll trigger for visibility state
+      createScrollTrigger(titleSectionRef.current, {
+        start: "top 80%",
+        onEnter: () => setIsVisible(true),
+        onLeave: () => setIsVisible(false),
+        onEnterBack: () => setIsVisible(true),
+        onLeaveBack: () => setIsVisible(false),
+      });
+    }
   }, []);
 
   const handleScrollClick = () => {
@@ -40,7 +56,7 @@ export default function AboutHero() {
   return (
     <section className={styles.hero} ref={sectionRef}>
       {/* Background decorative elements */}
-      <div className={styles.decorativeElements}>
+      <div ref={decorativeElementsRef} className={styles.decorativeElements}>
         <div className={styles.decorativeCircle}></div>
         <div className={styles.decorativeLine}></div>
         <div className={styles.decorativeShape}></div>
@@ -49,6 +65,7 @@ export default function AboutHero() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div
+            ref={titleSectionRef}
             className={`${styles.titleSection} ${
               isVisible ? styles.titleVisible : ""
             }`}

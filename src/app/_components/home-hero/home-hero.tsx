@@ -1,11 +1,17 @@
 "use client";
 
 import styles from "./home-hero.module.scss";
-import CascadingText from "../helpers/cascading-text";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { animationUtils } from "../helpers/gsap-animations";
 
 export default function HomeHero() {
   const [isMobile, setIsMobile] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const mementoRef = useRef<HTMLDivElement>(null);
+  const verticalTextRef = useRef<HTMLDivElement>(null);
+  const horizontalTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -22,15 +28,54 @@ export default function HomeHero() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  useEffect(() => {
+    // Set initial states with softer animations
+    if (titleRef.current) {
+      animationUtils.softTitleReveal(titleRef.current, { delay: 0.3 });
+    }
+
+    if (subtitleRef.current) {
+      animationUtils.softSlideIn(subtitleRef.current, { delay: 0.8 });
+    }
+
+    if (lineRef.current) {
+      animationUtils.drawLineX(lineRef.current, { delay: 1.8 });
+    }
+
+    // Animate text with SplitText (removed conflicting fadeIn on parent)
+    if (verticalTextRef.current) {
+      animationUtils.splitTextAnimation(verticalTextRef.current, {
+        type: "chars",
+        direction: "vertical",
+        startDelay: 0.2,
+      });
+    }
+
+    if (horizontalTextRef.current) {
+      animationUtils.splitTextAnimation(horizontalTextRef.current, {
+        type: "chars",
+        direction: "horizontal",
+        startDelay: 0.8,
+      });
+    }
+
+    // Animate dot separator
+    const dotSeparator = document.querySelector(
+      `.${styles["home-hero__dot-separator"]}`
+    );
+    if (dotSeparator) {
+      animationUtils.scaleIn(dotSeparator as HTMLElement, { delay: 1.1 });
+    }
+  }, []);
+
   return (
     <div className={styles["home-hero"]}>
-      {!isMobile && <div className={styles["home-hero__vertical-line"]}></div>}
       <div className={styles["home-hero__container"]}>
         <div className={styles["home-hero__content"]}>
-          <h1 className={styles["home-hero__title"]}>
+          <h1 ref={titleRef} className={styles["home-hero__title"]}>
             Authentic Modern Love Stories
           </h1>
-          <p className={styles["home-hero__subtitle"]}>
+          <p ref={subtitleRef} className={styles["home-hero__subtitle"]}>
             {isMobile ? (
               <>
                 <span>Told By You</span>
@@ -51,34 +96,22 @@ export default function HomeHero() {
           </p>
         </div>
 
-        <div className={styles["home-hero__memento"]}>
-          <div className={styles["home-hero__vertical-text"]}>
-            <CascadingText
-              text="MEMENTO"
-              className={styles["home-hero__cascading-text"]}
-              letterClassName={styles["home-hero__cascading-text__letter"]}
-              direction="vertical"
-            />
-            <CascadingText
-              text="VIVERE"
-              className={styles["home-hero__cascading-text"]}
-              letterClassName={styles["home-hero__cascading-text__letter"]}
-              direction="vertical"
-              startDelay={0.4}
-            />
+        <div ref={mementoRef} className={styles["home-hero__memento"]}>
+          <div
+            ref={verticalTextRef}
+            className={styles["home-hero__vertical-text"]}
+          >
+            MEMENTO VIVERE
           </div>
-          <div className={styles["home-hero__horizontal-text"]}>
-            <CascadingText
-              text="R E M E M B E R T O L I V E"
-              className={styles["home-hero__cascading-text"]}
-              letterClassName={styles["home-hero__cascading-text__letter"]}
-              direction="horizontal"
-              startDelay={0.8}
-            />
+          <div
+            ref={horizontalTextRef}
+            className={styles["home-hero__horizontal-text"]}
+          >
+            REMEMBER TO LIVE
           </div>
         </div>
       </div>
-      <div className={styles["home-hero__animated-line"]}></div>
+      <div ref={lineRef} className={styles["home-hero__animated-line"]}></div>
     </div>
   );
 }

@@ -11,7 +11,7 @@ const navigationItems = [
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/connect", label: "Connect" },
-  { href: "/info", label: "Info" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/stories", label: "Stories" },
 ] as const;
 

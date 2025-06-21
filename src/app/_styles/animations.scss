@@ -1,5 +1,9 @@
 @use "tokens" as tokens;
 
+// Note: Most animations are now handled by GSAP
+// These keyframes are kept for legacy compatibility or specific CSS-only animations
+
+// Simple fade in (fallback)
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -9,6 +13,7 @@
   }
 }
 
+// Basic transform animations (fallback)
 @keyframes slideInLeft {
   0% {
     opacity: 0;
@@ -31,15 +36,7 @@
   }
 }
 
-@keyframes expandWidth {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
+// Line drawing animations (fallback)
 @keyframes drawLineRightToLeft {
   0% {
     transform: scaleX(0);
