@@ -192,6 +192,7 @@
 
   &__item {
     position: relative;
+    white-space: nowrap;
 
     @include breakpoint-down("tablet") {
       opacity: 0;
