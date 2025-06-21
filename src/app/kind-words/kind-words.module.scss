@@ -269,20 +269,23 @@
 }
 
 .testimonialsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: tokens.$spacing-md;
+  columns: 4;
+  column-gap: tokens.$spacing-lg;
   margin-bottom: tokens.$spacing-xxl;
-  align-items: start;
 
-  @include breakpoint-down("tablet") {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: tokens.$spacing-sm;
+  @media (max-width: 1199px) {
+    columns: 3;
+    column-gap: tokens.$spacing-md;
+  }
+
+  @media (max-width: 899px) {
+    columns: 2;
+    column-gap: tokens.$spacing-sm;
   }
 
   @include breakpoint-down("mobile") {
-    grid-template-columns: 1fr;
-    gap: tokens.$spacing-md;
+    columns: 1;
+    column-gap: 0;
   }
 }
 
@@ -295,6 +298,10 @@
   gap: tokens.$spacing-sm;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  break-inside: avoid;
+  margin-bottom: tokens.$spacing-md;
+  width: 100%;
+  box-sizing: border-box;
 
   &:hover {
     transform: translateY(-1px);
@@ -356,9 +363,14 @@
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-md;
     border-radius: 8px;
+    margin-bottom: tokens.$spacing-sm;
   }
 
-  // Simple size and style variations
+  @include breakpoint-down("mobile") {
+    margin-bottom: tokens.$spacing-md;
+  }
+
+  // Simple size and style variations - remove fixed heights
   &.compact {
     .testimonialText {
       font-size: 0.9rem;
