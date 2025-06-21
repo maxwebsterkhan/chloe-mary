@@ -74,7 +74,7 @@ export default function PricingPage() {
         <div className={styles.heroContainer}>
           <div className={styles.heroLayout}>
             <div className={styles.heroLeft}>
-              <div className={styles.heroLabel}>PRICING</div>
+              <div className={styles.heroLabel}>PRICING AND</div>
               <h1 ref={titleRef} className={styles.heroTitle}>
                 EVERYTHING
                 <span className={styles.titleAccent}>YOU NEED</span>
@@ -84,13 +84,43 @@ export default function PricingPage() {
             <div className={styles.heroRight}>
               <p ref={subtitleRef} className={styles.heroSubtitle}>
                 Full day coverage, intimate sessions
-                <br />& destination weddings
+                <br />& destination weddings.
               </p>
+
               <div className={styles.heroDecor}>
                 <div className={styles.decorLine}></div>
                 <span className={styles.decorText}>
                   BRISTOL BASED • UK & BEYOND
                 </span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.heroFooter}>
+            <div className={styles.heroFooterContent}>
+              <div className={styles.heroStatement}>
+                <p className={styles.statementText}>
+                  Transparent pricing with no hidden costs. Every package
+                  includes professional editing, online gallery access, and
+                  personal printing rights.
+                </p>
+              </div>
+
+              <div className={styles.heroMetrics}>
+                <div className={styles.metricGroup}>
+                  <span className={styles.metricLabel}>Starting from</span>
+                  <span className={styles.metricValue}>£1,350</span>
+                </div>
+                <div className={styles.metricDivider}></div>
+                <div className={styles.metricGroup}>
+                  <span className={styles.metricLabel}>Delivery timeline</span>
+                  <span className={styles.metricValue}>1-12 weeks</span>
+                </div>
+                <div className={styles.metricDivider}></div>
+                <div className={styles.metricGroup}>
+                  <span className={styles.metricLabel}>Coverage options</span>
+                  <span className={styles.metricValue}>3-12 hours</span>
+                </div>
               </div>
             </div>
           </div>
