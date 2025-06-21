@@ -7,8 +7,10 @@ import gsap from "gsap";
 
 export default function PricingPage() {
   const heroRef = useRef<HTMLElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const decorRef = useRef<HTMLDivElement>(null);
   const fullDayRef = useRef<HTMLElement>(null);
   const setHoursRef = useRef<HTMLElement>(null);
   const destinationRef = useRef<HTMLElement>(null);
@@ -19,12 +21,21 @@ export default function PricingPage() {
     if (heroRef.current) {
       const tl = gsap.timeline({ delay: 0.5 });
 
+      if (labelRef.current) {
+        tl.fromTo(
+          labelRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          0
+        );
+      }
+
       if (titleRef.current) {
         tl.fromTo(
           titleRef.current,
           { opacity: 0, y: 50 },
           { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
-          0
+          0.2
         );
       }
 
@@ -33,8 +44,35 @@ export default function PricingPage() {
           subtitleRef.current,
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-          0.3
+          0.5
         );
+      }
+
+      if (decorRef.current) {
+        const decorLine = decorRef.current.querySelector(
+          `.${styles.decorLine}`
+        );
+        const decorText = decorRef.current.querySelector(
+          `.${styles.decorText}`
+        );
+
+        if (decorLine) {
+          tl.fromTo(
+            decorLine,
+            { scaleX: 0 },
+            { scaleX: 1, duration: 0.8, ease: "power2.out" },
+            0.8
+          );
+        }
+
+        if (decorText) {
+          tl.fromTo(
+            decorText,
+            { opacity: 0, x: -20 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+            1.0
+          );
+        }
       }
     }
 
@@ -74,7 +112,9 @@ export default function PricingPage() {
         <div className={styles.heroContainer}>
           <div className={styles.heroLayout}>
             <div className={styles.heroLeft}>
-              <div className={styles.heroLabel}>PRICING AND</div>
+              <div ref={labelRef} className={styles.heroLabel}>
+                PRICING AND
+              </div>
               <h1 ref={titleRef} className={styles.heroTitle}>
                 EVERYTHING
                 <span className={styles.titleAccent}>YOU NEED</span>
@@ -87,7 +127,7 @@ export default function PricingPage() {
                 <br />& destination weddings.
               </p>
 
-              <div className={styles.heroDecor}>
+              <div ref={decorRef} className={styles.heroDecor}>
                 <div className={styles.decorLine}></div>
                 <span className={styles.decorText}>
                   BRISTOL BASED • UK & BEYOND

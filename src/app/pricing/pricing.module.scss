@@ -146,21 +146,40 @@
   display: flex;
   align-items: center;
   gap: tokens.$spacing-sm;
+  margin-top: tokens.$spacing-lg;
+
+  @include breakpoint-down("mobile") {
+    justify-content: center;
+    margin-top: tokens.$spacing-md;
+  }
 }
 
 .decorLine {
   width: 60px;
   height: 1px;
   background: var(--color-secondary);
-  opacity: 0.3;
+  opacity: 0.4;
+  transform-origin: left;
+
+  @include breakpoint-down("mobile") {
+    width: 40px;
+    opacity: 0.3;
+  }
 }
 
 .decorText {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   color: var(--color-secondary);
-  opacity: 0.5;
+  opacity: 0.6;
   text-transform: uppercase;
+  font-weight: 400;
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
 }
 
 .heroFooter {
