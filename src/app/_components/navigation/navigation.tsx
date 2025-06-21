@@ -9,7 +9,7 @@ import Image from "next/image";
 const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
+  { href: "/kind-words", label: "Kind Words" },
   { href: "/connect", label: "Connect" },
   { href: "/pricing", label: "Pricing" },
   { href: "/stories", label: "Stories" },
