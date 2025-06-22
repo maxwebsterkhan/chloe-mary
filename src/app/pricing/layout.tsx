@@ -85,7 +85,7 @@ export default function PricingLayout({
                 description:
                   "Professional wedding photography services in Bristol and across the UK",
                 url: "https://www.chloemary.com",
-                telephone: "+44-xxx-xxx-xxxx",
+                telephone: "07719011701",
                 email: "hello@chloemary.com",
                 address: {
                   "@type": "PostalAddress",
