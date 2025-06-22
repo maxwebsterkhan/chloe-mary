@@ -89,7 +89,6 @@ export default function QuoteIntro() {
 
         // 4. Finally: Philosophy quote - simple fade with slight scale
         if (paragraphCenterRef.current) {
-          console.log("Starting philosophy quote animation");
           tl.fromTo(
             paragraphCenterRef.current,
             { opacity: 0, scale: 0.9 },
