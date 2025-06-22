@@ -198,6 +198,15 @@ export default function ConnectPage() {
                 </div>
               </div>
 
+              {/* Spacer between Philosophy and Process */}
+              <div className={styles.sectionSpacer}>
+                <div className={styles.decorativeDivider}>
+                  <div className={styles.dividerLine}></div>
+                  <div className={styles.dividerDot}></div>
+                  <div className={styles.dividerLine}></div>
+                </div>
+              </div>
+
               <div className={styles.processSection}>
                 <h3 className={styles.processTitle}>My Process</h3>
                 <div className={styles.processSteps}>
@@ -242,6 +251,19 @@ export default function ConnectPage() {
                 </div>
               </div>
 
+              {/* Spacer between Process and Ready */}
+              <div className={styles.sectionSpacer}>
+                <div className={styles.elegantDivider}>
+                  <div className={styles.elegantLine}></div>
+                  <div className={styles.elegantCenter}>
+                    <div className={styles.elegantDot}></div>
+                    <div className={styles.elegantDiamond}></div>
+                    <div className={styles.elegantDot}></div>
+                  </div>
+                  <div className={styles.elegantLine}></div>
+                </div>
+              </div>
+
               <div className={styles.readySection}>
                 <div className={styles.readyContent}>
                   <div className={styles.readyLabel}>ARE YOU READY?</div>
@@ -266,6 +288,15 @@ export default function ConnectPage() {
                     </span>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Spacer between Ready and Form */}
+            <div className={styles.sectionSpacer}>
+              <div className={styles.decorativeDivider}>
+                <div className={styles.dividerLine}></div>
+                <div className={styles.dividerShape}></div>
+                <div className={styles.dividerLine}></div>
               </div>
             </div>
 
