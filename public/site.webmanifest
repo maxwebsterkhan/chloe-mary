@@ -1,0 +1,34 @@
+{
+  "name": "Chloe Mary Photography - Bristol & London Wedding Photographer",
+  "short_name": "Chloe Mary Photo",
+  "description": "Contemporary reportage wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, artistic images for creative couples. Professional Photos Top 50 UK 2025.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f0eb",
+  "theme_color": "#8b6d42",
+  "orientation": "portrait-primary",
+  "categories": ["photography", "wedding", "lifestyle"],
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "/cm-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/cm-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/chloe-mary-portrait.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Chloe Mary - Bristol & London Wedding Photographer - UK & International"
+    }
+  ]
+} 
