@@ -796,8 +796,8 @@ export default function ConnectPage() {
           <div className={styles.footerContent}>
             <div className={styles.footerText}>
               <p className={styles.footerParagraph}>
-                Thank you so much for your interest in working with me. I
-                carefully select just <strong>25 couples each year</strong>,
+                Thank you so much for your interest in working with me. I limit
+                my bookings to just <strong>25 couples each year</strong>,
                 ensuring I can dedicate the time, attention, and personal care
                 that your love story deserves. This allows me to craft a truly
                 bespoke experience tailored to your unique vision.
