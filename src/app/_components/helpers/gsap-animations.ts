@@ -175,7 +175,7 @@ export const animationUtils = {
       const split = new SplitText(element, { type });
       const targets = type === "chars" ? split.chars : type === "words" ? split.words : split.lines;
       
-      console.log("SplitText working, targets:", targets.length);
+ 
       
       return gsap.fromTo(
         targets,
@@ -240,8 +240,7 @@ export const animationUtils = {
         });
       }
       
-      console.log("Manual split created", spans.length, "spans for text:", originalText);
-      
+
       // Animate the spans
       return gsap.fromTo(
         spans,
