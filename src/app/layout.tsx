@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter_Tight, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
@@ -19,17 +19,99 @@ const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#8B6D42", // Your accent color
+};
+
 export const metadata: Metadata = {
-  title: "Chloe Mary",
-  description: "Capturing beauty, one photo at a time",
+  metadataBase: new URL("https://www.chloemary.com"),
+  title: {
+    default:
+      "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
+    template: "%s | Chloe Mary Photography",
+  },
+  description:
+    "Contemporary reportage wedding photographer in Bristol. Passionate about working with creative couples who value relaxed, artistic images. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025.",
+  keywords: [
+    "bristol wedding photographer",
+    "uk wedding photography",
+    "contemporary reportage photographer",
+    "creative wedding photography",
+    "artistic wedding photographer bristol",
+    "candid wedding photography",
+    "natural wedding photographer uk",
+    "professional photos top 50",
+    "who what wear wedding photographer",
+    "authentic love stories",
+    "memento vivere photography",
+  ],
+  authors: [{ name: "Chloe Mary", url: "https://www.chloemary.com" }],
+  creator: "Chloe Mary Photography",
+  publisher: "Chloe Mary Photography",
+  applicationName: "Chloe Mary Photography",
+  referrer: "origin-when-cross-origin",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://www.chloemary.com",
+    siteName: "Chloe Mary Photography",
+    title:
+      "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
+    description:
+      "Contemporary reportage wedding photographer in Bristol. Capturing authentic, artistic images for creative couples. Top 50 UK photographer 2025.",
+    images: [
+      {
+        url: "/chloe-mary-portrait.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Chloe Mary - Bristol Wedding Photographer",
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chloe Mary Photography | Bristol Wedding Photographer",
+    description:
+      "Contemporary reportage wedding photographer in Bristol. Capturing authentic, artistic images for creative couples.",
+    creator: "@chloemary_photo",
+    images: ["/chloe-mary-portrait.jpg"],
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/cm-icon.png", sizes: "any" },
-      { url: "/cm-icon.png", type: "image/png" },
+      { url: "/cm-icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/cm-icon.png", sizes: "16x16", type: "image/png" },
     ],
     shortcut: "/favicon.ico",
-    apple: "/cm-icon.png",
+    apple: [{ url: "/cm-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  manifest: "/site.webmanifest",
+  alternates: {
+    canonical: "https://www.chloemary.com",
+  },
+  category: "Photography",
+  classification: "Wedding Photography Services",
+  other: {
+    "geo.region": "GB-ENG",
+    "geo.placename": "Bristol",
+    "geo.position": "51.4545;-2.5879",
+    ICBM: "51.4545, -2.5879",
+    "business-type": "Photography Services",
+    "service-area": "Bristol, UK & International",
   },
 };
 
@@ -39,7 +121,68 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
+      <head>
+        {/* JSON-LD Structured Data for Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "@id": "https://www.chloemary.com/#organization",
+              name: "Chloe Mary Photography",
+              alternateName: "Chloe Mary",
+              description:
+                "Contemporary reportage wedding photographer specializing in authentic, artistic images for creative couples in Bristol and beyond.",
+              url: "https://www.chloemary.com",
+              email: "hello@chloemary.com",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bristol",
+                addressRegion: "England",
+                addressCountry: "GB",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: "51.4545",
+                longitude: "-2.5879",
+              },
+              areaServed: [
+                {
+                  "@type": "Place",
+                  name: "Bristol, UK",
+                },
+                {
+                  "@type": "Place",
+                  name: "United Kingdom",
+                },
+                {
+                  "@type": "Place",
+                  name: "Europe",
+                },
+              ],
+              serviceType: "Wedding Photography",
+              priceRange: "£1,350 - £4,750",
+              paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
+              currenciesAccepted: "GBP",
+              foundingDate: "2020",
+              awards: [
+                "Professional Photos Top 50 Wedding Photographers UK 2025",
+                "Featured on Who What Wear Wedding Issue 2025",
+                "World's Best Wedding Photos Top 20 UK 2024/2025",
+                "Trusted member of La Lista",
+              ],
+              sameAs: [
+                "https://www.instagram.com/chloemary_photo",
+                "https://www.facebook.com/chloemary.photography",
+              ],
+              image: "https://www.chloemary.com/chloe-mary-portrait.jpg",
+              logo: "https://www.chloemary.com/cm-icon.png",
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${interTight.variable} ${geistMono.variable} ${nunitoSans.variable}`}
       >
