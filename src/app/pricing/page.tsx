@@ -222,14 +222,6 @@ export default function PricingPage() {
                 <span className={styles.titleBreak}>COVERAGE</span>
               </h2>
 
-              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
-                <span className={styles.noteHighlight}>INCLUDED</span>
-                <p>One roll of black and white film</p>
-                <span className={styles.noteAddition}>
-                  Additional rolls available for £50 each
-                </span>
-              </div>
-
               <div className={styles.priceMatrix}>
                 <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                   <div className={styles.priceLabel}>ESSENTIAL</div>
@@ -250,6 +242,14 @@ export default function PricingPage() {
                     </span>
                   </div>
                 </div>
+              </div>
+
+              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
+                <span className={styles.noteHighlight}>INCLUDED</span>
+                <p>One roll of black and white film</p>
+                <span className={styles.noteAddition}>
+                  Additional rolls available for £50 each
+                </span>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default function PricingPage() {
                   </span>
                 </div>
                 <div className={styles.extensionItem}>
-                  <span className={styles.extensionLabel}>ADDITIONAL FILM</span>
+                  <span className={styles.extensionLabel}>FILM</span>
                   <span className={styles.extensionPrice}>
                     £50 per film roll
                   </span>
@@ -293,25 +293,6 @@ export default function PricingPage() {
                 INTIMATE
                 <span className={styles.titleBreak}>MOMENTS</span>
               </h2>
-
-              <div
-                className={`${styles.mobileMetaExtensions} ${styles.animateIn}`}
-              >
-                <div className={styles.extensionItem}>
-                  <span className={styles.extensionLabel}>
-                    EXTEND YOUR STORY
-                  </span>
-                  <span className={styles.extensionPrice}>
-                    £375 per additional hour
-                  </span>
-                </div>
-                <div className={styles.extensionItem}>
-                  <span className={styles.extensionLabel}>ADDITIONAL FILM</span>
-                  <span className={styles.extensionPrice}>
-                    £50 per film roll
-                  </span>
-                </div>
-              </div>
 
               <div className={styles.priceMatrix}>
                 <div className={`${styles.priceBlock} ${styles.animateIn}`}>
@@ -334,6 +315,25 @@ export default function PricingPage() {
                       Limited peak season availability
                     </span>
                   </div>
+                </div>
+              </div>
+
+              <div
+                className={`${styles.mobileMetaExtensions} ${styles.animateIn}`}
+              >
+                <div className={styles.extensionItem}>
+                  <span className={styles.extensionLabel}>
+                    EXTEND YOUR STORY
+                  </span>
+                  <span className={styles.extensionPrice}>
+                    £375 per additional hour
+                  </span>
+                </div>
+                <div className={styles.extensionItem}>
+                  <span className={styles.extensionLabel}>FILM</span>
+                  <span className={styles.extensionPrice}>
+                    £50 per film roll
+                  </span>
                 </div>
               </div>
             </div>
@@ -370,14 +370,6 @@ export default function PricingPage() {
                 <span className={styles.titleBreak}>BORDERS</span>
               </h2>
 
-              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
-                <span className={styles.noteHighlight}>ADVENTURE INCLUDES</span>
-                <p>One roll of black and white film</p>
-                <span className={styles.noteAddition}>
-                  Additional rolls available for £50 each
-                </span>
-              </div>
-
               <div className={styles.destinationMatrix}>
                 <div
                   className={`${styles.destinationBlock} ${styles.animateIn}`}
@@ -402,6 +394,14 @@ export default function PricingPage() {
                     </span>
                   </div>
                 </div>
+              </div>
+
+              <div className={`${styles.mobileMetaNote} ${styles.animateIn}`}>
+                <span className={styles.noteHighlight}>ADVENTURE INCLUDES</span>
+                <p>One roll of black and white film</p>
+                <span className={styles.noteAddition}>
+                  Additional rolls available for £50 each
+                </span>
               </div>
             </div>
           </div>

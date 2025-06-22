@@ -18,7 +18,7 @@
 
   @include breakpoint-down("mobile") {
     min-height: 90vh;
-    padding: calc(4rem + 2.75rem) 0 tokens.$spacing-xl 0;
+    padding: calc(4rem + 2.75rem) 0 tokens.$spacing-lg 0;
   }
 }
 
@@ -27,6 +27,10 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
+
+  @include breakpoint-down("mobile") {
+    padding: 0 tokens.$spacing-sm;
+  }
 }
 
 .heroLayout {
@@ -155,7 +159,7 @@
   position: relative;
 
   @include breakpoint-down("mobile") {
-    margin-top: tokens.$spacing-xl;
+    margin-top: tokens.$spacing-lg;
   }
 }
 
@@ -249,7 +253,7 @@
   background: var(--color-secondary);
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-xl 0;
+    padding: tokens.$spacing-lg 0;
   }
 }
 
@@ -264,48 +268,81 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: 0 tokens.$spacing-xs;
+    padding: 0 tokens.$spacing-sm;
   }
 }
 
 .testimonialsGrid {
-  columns: 4;
-  column-gap: tokens.$spacing-lg;
-  margin-bottom: tokens.$spacing-xxl;
-
-  @media (max-width: 1199px) {
-    columns: 3;
-    column-gap: tokens.$spacing-md;
-  }
-
-  @media (max-width: 899px) {
-    columns: 2;
-    column-gap: tokens.$spacing-sm;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$spacing-lg;
+  max-width: 800px;
+  margin: 0 auto;
 
   @include breakpoint-down("mobile") {
-    columns: 1;
-    column-gap: 0;
+    gap: tokens.$spacing-md;
   }
 }
 
-// All testimonials - natural flow with varied sizes
+// All testimonials - storytelling flow with varied presentation
 .testimonialCard {
   padding: tokens.$spacing-lg;
-  border-radius: 16px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: tokens.$spacing-sm;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  break-inside: avoid;
-  margin-bottom: tokens.$spacing-md;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  // Alternating alignment for visual interest
+  &:nth-child(even) {
+    align-self: flex-end;
+    max-width: 85%;
+
+    @include breakpoint-down("tablet") {
+      align-self: stretch;
+      max-width: 100%;
+    }
+  }
+
+  &:nth-child(odd) {
+    align-self: flex-start;
+    max-width: 85%;
+
+    @include breakpoint-down("tablet") {
+      align-self: stretch;
+      max-width: 100%;
+    }
+  }
+
+  // Featured testimonials (larger, full width)
+  &:nth-child(3n) {
+    align-self: stretch;
+    max-width: 100%;
+    padding: tokens.$spacing-xl;
+    background: var(--color-primary);
+    color: var(--color-secondary);
+
+    .testimonialAuthor {
+      color: rgba(243, 240, 235, 0.8);
+    }
+
+    .testimonialText {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding: tokens.$spacing-lg;
+    }
   }
 
   // Theme 1: Black background
@@ -362,12 +399,12 @@
 
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-md;
-    border-radius: 8px;
-    margin-bottom: tokens.$spacing-sm;
+    border-radius: 12px;
   }
 
   @include breakpoint-down("mobile") {
-    margin-bottom: tokens.$spacing-md;
+    padding: tokens.$spacing-sm;
+    border-radius: 12px;
   }
 
   // Simple size and style variations - remove fixed heights
@@ -389,6 +426,10 @@
 
     @include breakpoint-down("tablet") {
       padding: tokens.$spacing-lg;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding: tokens.$spacing-md;
     }
   }
 

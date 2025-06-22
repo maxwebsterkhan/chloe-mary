@@ -187,7 +187,6 @@ export default function KindWords() {
               <div className={`${styles.metricGroup} ${styles.metricWithLine}`}>
                 <span className={styles.metricLabel}>Years experience</span>
                 <span className={styles.metricValue}>5+</span>
-                <div className={styles.metricLine}></div>
               </div>
               <div className={styles.metricDivider}></div>
               <div className={styles.metricGroup}>
