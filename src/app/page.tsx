@@ -7,20 +7,22 @@ export const metadata: Metadata = {
   title:
     "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
   description:
-    "Contemporary reportage wedding photographer in Bristol. Passionate about capturing authentic love stories for creative couples. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025. Memento vivere - remember to live.",
+    "Contemporary documentary wedding photographer in Bristol. Passionate about capturing authentic love stories and candid moments for creative couples. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025. Memento vivere - remember to live.",
   keywords: [
     "bristol wedding photographer",
-    "contemporary reportage photographer",
+    "contemporary documentary photographer",
     "authentic love stories",
     "creative wedding photography bristol",
     "candid wedding photographer uk",
     "artistic wedding photography",
+    "natural wedding photography",
+    "unposed wedding photography",
     "memento vivere photography",
     "professional photos top 50",
     "who what wear wedding photographer",
     "worlds best wedding photos",
     "la lista photographer",
-    "natural wedding photography bristol",
+    "documentary wedding photography bristol",
   ],
   authors: [{ name: "Chloe Mary" }],
   creator: "Chloe Mary Photography",
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
     title:
       "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
     description:
-      "Contemporary reportage wedding photographer in Bristol. Capturing authentic love stories for creative couples. Top 50 UK photographer 2025.",
+      "Contemporary documentary wedding photographer in Bristol. Capturing authentic love stories and candid moments for creative couples. Top 50 UK photographer 2025.",
     url: "https://www.chloemary.com",
     siteName: "Chloe Mary Photography",
     locale: "en_GB",
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chloe Mary Photography | Bristol Wedding Photographer",
     description:
-      "Contemporary reportage wedding photographer in Bristol. Capturing authentic love stories for creative couples.",
+      "Contemporary documentary wedding photographer in Bristol. Capturing authentic love stories and candid moments for creative couples.",
     creator: "@chloemary_photo",
     images: ["/chloe-mary-portrait.jpg"],
   },
@@ -68,7 +70,7 @@ export const metadata: Metadata = {
   },
   other: {
     "business-type": "Wedding Photography",
-    "photographer-style": "Contemporary Reportage",
+    "photographer-style": "Contemporary Documentary",
     location: "Bristol, UK",
     philosophy: "Memento vivere - remember to live",
     awards: "Professional Photos Top 50 UK 2025, Who What Wear 2025",
@@ -91,7 +93,7 @@ export default function Home() {
                 url: "https://www.chloemary.com",
                 name: "Chloe Mary Photography",
                 description:
-                  "Contemporary reportage wedding photographer in Bristol capturing authentic modern love stories.",
+                  "Contemporary documentary wedding photographer in Bristol capturing authentic modern love stories and candid moments.",
                 publisher: {
                   "@id": "https://www.chloemary.com/#organization",
                 },
@@ -130,7 +132,7 @@ export default function Home() {
                 datePublished: "2020-01-01T00:00:00+00:00",
                 dateModified: "2025-01-01T00:00:00+00:00",
                 description:
-                  "Contemporary reportage wedding photographer in Bristol. Passionate about capturing authentic love stories for creative couples.",
+                  "Contemporary documentary wedding photographer in Bristol capturing authentic modern love stories and candid moments.",
                 breadcrumb: {
                   "@id": "https://www.chloemary.com/#breadcrumb",
                 },

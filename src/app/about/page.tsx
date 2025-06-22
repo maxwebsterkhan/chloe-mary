@@ -5,15 +5,16 @@ import AboutStory from "../_components/about-story/about-story";
 export const metadata: Metadata = {
   title: "About Chloe Mary | Contemporary Wedding Photographer Bristol",
   description:
-    "Meet Chloe Mary, a contemporary reportage photographer passionate about capturing authentic love stories. Based in Bristol, working with creative couples across the UK and beyond. Memento vivere - remember to live.",
+    "Meet Chloe Mary, a contemporary documentary photographer passionate about capturing authentic love stories and candid moments. Based in Bristol, working with creative couples across the UK and beyond. Memento vivere - remember to live.",
   keywords: [
     "about chloe mary photographer",
     "bristol wedding photographer bio",
-    "contemporary reportage photographer",
+    "contemporary documentary photographer",
     "creative wedding photographer bristol",
     "authentic wedding photography",
     "candid wedding photographer uk",
     "artistic wedding photography",
+    "natural wedding photography",
     "memento vivere photographer",
     "professional photos top 50 photographer",
     "who what wear wedding photographer",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Chloe Mary | Contemporary Wedding Photographer Bristol",
     description:
-      "Meet Chloe Mary, a contemporary reportage photographer passionate about capturing authentic love stories. Based in Bristol, working with creative couples across the UK.",
+      "Meet Chloe Mary, a contemporary documentary photographer passionate about capturing authentic love stories and candid moments. Based in Bristol, working with creative couples across the UK.",
     url: "https://www.chloemary.com/about",
     siteName: "Chloe Mary Photography",
     locale: "en_GB",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Chloe Mary | Contemporary Wedding Photographer Bristol",
     description:
-      "Meet Chloe Mary, a contemporary reportage photographer passionate about capturing authentic love stories.",
+      "Meet Chloe Mary, a contemporary documentary photographer passionate about capturing authentic love stories and candid moments.",
     creator: "@chloemary_photo",
     images: ["/chloe-mary-portrait-2.jpg"],
   },
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     canonical: "https://www.chloemary.com/about",
   },
   other: {
-    "photographer-style": "Contemporary Reportage",
+    "photographer-style": "Contemporary Documentary",
     specialization: "Wedding Photography",
     location: "Bristol, UK",
     philosophy: "Memento vivere - remember to live",
@@ -83,7 +84,7 @@ export default function About() {
             name: "Chloe Mary",
             jobTitle: "Wedding Photographer",
             description:
-              "Contemporary reportage photographer passionate about working with creative and carefree couples who value relaxed, artistic images that truly reflect who they are.",
+              "Contemporary documentary photographer passionate about working with creative and carefree couples who value relaxed, artistic images that truly reflect who they are.",
             url: "https://www.chloemary.com",
             email: "hello@chloemary.com",
             image: "https://www.chloemary.com/chloe-mary-portrait-2.jpg",
@@ -110,10 +111,11 @@ export default function About() {
                 name: "Bristol, UK",
               },
               skills: [
-                "Contemporary Reportage Photography",
+                "Contemporary Documentary Photography",
                 "Candid Wedding Photography",
                 "Artistic Wedding Photography",
                 "Creative Portrait Photography",
+                "Natural Wedding Photography",
               ],
             },
             award: [
@@ -124,10 +126,11 @@ export default function About() {
             ],
             knowsAbout: [
               "Wedding Photography",
-              "Reportage Photography",
+              "Documentary Photography",
               "Creative Photography",
               "Artistic Photography",
               "Portrait Photography",
+              "Candid Photography",
             ],
           }),
         }}

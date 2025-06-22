@@ -3,18 +3,19 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Chloe Mary | Bristol Wedding Photographer - Get In Touch",
   description:
-    "Ready to capture your love story? Contact Chloe Mary, Bristol's contemporary reportage wedding photographer. Complimentary consultations available. Only 25 couples per year for personalized service.",
+    "Ready to capture your love story? Contact Chloe Mary, Bristol's contemporary documentary wedding photographer. Complimentary consultations available. Only 25 couples per year for personalized service.",
   keywords: [
     "contact chloe mary photographer",
     "bristol wedding photographer contact",
     "wedding photography enquiry bristol",
-    "contemporary reportage photographer contact",
+    "contemporary documentary photographer contact",
     "book wedding photographer bristol",
     "wedding photography consultation bristol",
     "creative wedding photographer enquiry",
     "authentic wedding photography bristol",
     "candid wedding photographer contact uk",
     "artistic wedding photography enquiry",
+    "natural wedding photography contact",
     "memento vivere photographer contact",
     "professional photos top 50 photographer contact",
   ],
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Chloe Mary | Bristol Wedding Photographer - Get In Touch",
     description:
-      "Ready to capture your love story? Contact Chloe Mary for contemporary reportage wedding photography in Bristol. Complimentary consultations available.",
+      "Ready to capture your love story? Contact Chloe Mary for contemporary documentary wedding photography in Bristol. Complimentary consultations available.",
     url: "https://www.chloemary.com/connect",
     siteName: "Chloe Mary Photography",
     locale: "en_GB",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Chloe Mary | Bristol Wedding Photographer",
     description:
-      "Ready to capture your love story? Contact Chloe Mary for contemporary reportage wedding photography in Bristol.",
+      "Ready to capture your love story? Contact Chloe Mary for contemporary documentary wedding photography in Bristol.",
     creator: "@chloemary_photo",
     images: ["/chloe-mary-portrait.jpg"],
   },
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     canonical: "https://www.chloemary.com/connect",
   },
   other: {
-    "photographer-style": "Contemporary Reportage",
+    "photographer-style": "Contemporary Documentary",
     specialization: "Wedding Photography Contact",
     location: "Bristol, UK",
     philosophy: "Memento vivere - remember to live",
@@ -97,7 +98,7 @@ export default function ConnectLayout({
                   "@id": "https://www.chloemary.com/about#person",
                 },
                 description:
-                  "Contact Chloe Mary for contemporary reportage wedding photography in Bristol. Complimentary consultations available for couples.",
+                  "Contact Chloe Mary for contemporary documentary wedding photography in Bristol. Complimentary consultations available for couples.",
                 breadcrumb: {
                   "@id": "https://www.chloemary.com/connect#breadcrumb",
                 },

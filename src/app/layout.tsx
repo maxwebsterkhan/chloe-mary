@@ -33,19 +33,21 @@ export const metadata: Metadata = {
     template: "%s | Chloe Mary Photography",
   },
   description:
-    "Contemporary reportage wedding photographer based in Bristol, serving London, UK & internationally. Passionate about working with creative couples who value relaxed, artistic images. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025.",
+    "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Passionate about capturing authentic, candid moments for creative couples who value natural, artistic images. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025.",
   keywords: [
     "bristol wedding photographer",
     "london wedding photographer",
     "uk wedding photography",
     "international wedding photographer",
     "destination wedding photographer",
-    "contemporary reportage photographer",
+    "contemporary documentary photographer",
     "creative wedding photography",
     "artistic wedding photographer bristol",
     "artistic wedding photographer london",
     "candid wedding photography",
     "natural wedding photographer uk",
+    "authentic wedding photography",
+    "unposed wedding photography",
     "professional photos top 50",
     "who what wear wedding photographer",
     "authentic love stories",
@@ -92,7 +94,7 @@ export const metadata: Metadata = {
     title:
       "Chloe Mary Photography | Bristol & London Wedding Photographer - UK & International",
     description:
-      "Contemporary reportage wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, artistic images for creative couples. Top 50 UK photographer 2025.",
+      "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, candid moments for creative couples. Top 50 UK photographer 2025.",
     images: [
       {
         url: "/chloe-mary-portrait.jpg",
@@ -108,7 +110,7 @@ export const metadata: Metadata = {
     title:
       "Chloe Mary Photography | Bristol & London Wedding Photographer - UK & International",
     description:
-      "Contemporary reportage wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, artistic images for creative couples.",
+      "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, candid moments for creative couples.",
     creator: "@chloemary_photo",
     images: ["/chloe-mary-portrait.jpg"],
   },
@@ -155,7 +157,7 @@ export default function RootLayout({
               name: "Chloe Mary Photography",
               alternateName: "Chloe Mary",
               description:
-                "Contemporary reportage wedding photographer specializing in authentic, artistic images for creative couples. Based in Bristol, serving London, throughout the UK, and internationally for destination weddings.",
+                "Contemporary documentary wedding photographer specializing in authentic, candid images for creative couples. Based in Bristol, serving London, throughout the UK, and internationally for destination weddings.",
               url: "https://www.chloemary.com",
               email: "hello@chloemary.com",
               address: {

@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kind Words & Testimonials | Chloe Mary Photography Bristol",
   description:
-    "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings. 5-star Google rating. Contemporary reportage wedding photography in Bristol and beyond.",
+    "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings. 5-star Google rating. Contemporary documentary wedding photography in Bristol and beyond.",
   keywords: [
     "wedding photography testimonials",
     "bristol wedding photographer reviews",
@@ -12,9 +12,11 @@ export const metadata: Metadata = {
     "happy couples testimonials",
     "5 star wedding photographer bristol",
     "contemporary wedding photography reviews",
-    "reportage wedding photographer testimonials",
+    "documentary wedding photographer testimonials",
+    "candid wedding photography reviews",
     "creative wedding photography reviews",
     "authentic wedding photography testimonials",
+    "natural wedding photography reviews",
   ],
   authors: [{ name: "Chloe Mary" }],
   creator: "Chloe Mary Photography",
@@ -102,7 +104,7 @@ export default function KindWordsLayout({
                 "@type": "ProfessionalService",
                 name: "Chloe Mary Photography",
                 description:
-                  "Contemporary reportage wedding photography services",
+                  "Contemporary documentary wedding photography services",
                 url: "https://www.chloemary.com",
                 address: {
                   "@type": "PostalAddress",

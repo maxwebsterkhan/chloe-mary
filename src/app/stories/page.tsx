@@ -3,16 +3,18 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Wedding Photography Stories | Chloe Mary Photography Bristol",
   description:
-    "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary reportage wedding photography showcasing real couples and their beautiful love stories across Bristol and the UK.",
+    "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories across Bristol and the UK.",
   keywords: [
     "wedding photography portfolio",
     "bristol wedding photography stories",
     "contemporary wedding photography",
-    "reportage wedding photography",
+    "documentary wedding photography",
+    "candid wedding photography",
     "creative wedding photography bristol",
     "authentic wedding stories",
     "artistic wedding photography",
-    "candid wedding photography uk",
+    "natural wedding photography uk",
+    "unposed wedding photography",
     "wedding photography gallery",
     "real wedding stories bristol",
   ],
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wedding Photography Stories | Chloe Mary Photography",
     description:
-      "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary reportage wedding photography showcasing real couples and their beautiful love stories.",
+      "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories.",
     url: "https://www.chloemary.com/stories",
     siteName: "Chloe Mary Photography",
     locale: "en_GB",
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wedding Photography Stories | Chloe Mary Photography",
     description:
-      "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary reportage wedding photography.",
+      "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing candid moments.",
     creator: "@chloemary_photo",
     images: ["/chloe-mary-portrait.jpg"],
   },
@@ -61,7 +63,7 @@ export const metadata: Metadata = {
   },
   other: {
     "content-type": "Wedding Photography Portfolio",
-    "photography-style": "Contemporary Reportage",
+    "photography-style": "Contemporary Documentary",
     location: "Bristol, UK & International",
   },
 };
@@ -80,7 +82,7 @@ export default function Page() {
             url: "https://www.chloemary.com/stories",
             name: "Wedding Photography Stories | Chloe Mary Photography",
             description:
-              "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary reportage wedding photography showcasing real couples and their beautiful love stories.",
+              "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories.",
             isPartOf: {
               "@id": "https://www.chloemary.com/#website",
             },
@@ -96,10 +98,11 @@ export default function Page() {
               },
               genre: "Wedding Photography",
               keywords: [
-                "Contemporary Reportage Photography",
+                "Contemporary Documentary Photography",
                 "Candid Wedding Photography",
                 "Artistic Wedding Photography",
                 "Creative Wedding Photography",
+                "Natural Wedding Photography",
               ],
             },
             breadcrumb: {
