@@ -38,6 +38,7 @@
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: tokens.$spacing-lg;
+    min-height: fit-content;
 
     @include breakpoint-down("tablet") {
       flex-direction: column;
@@ -101,9 +102,13 @@
     align-items: flex-end;
     justify-content: flex-end;
     opacity: 1;
+    align-self: flex-end;
+    margin-bottom: 0.2em; // Align with title baseline
 
     @include breakpoint-down("tablet") {
       align-items: flex-start;
+      align-self: flex-start;
+      margin-bottom: 0;
     }
   }
 

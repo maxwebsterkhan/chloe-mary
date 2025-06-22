@@ -3,6 +3,7 @@ import { Inter_Tight, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
+import ScrollSmootherProvider from "./_components/scroll-smoother-provider";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",

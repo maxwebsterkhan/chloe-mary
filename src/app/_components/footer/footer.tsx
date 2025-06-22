@@ -6,6 +6,7 @@ import {
   animationUtils,
   createScrollTrigger,
 } from "../helpers/gsap-animations";
+import gsap from "gsap";
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -18,47 +19,124 @@ export default function Footer() {
   useEffect(() => {
     if (!footerRef.current) return;
 
-    // Set up scroll trigger for footer animations - only once
-    createScrollTrigger(footerRef.current, {
-      start: "top 75%",
-      once: true, // This prevents the animation from running multiple times
-      onEnter: () => {
-        // Animated line first
-        if (lineRef.current) {
-          animationUtils.drawLineX(lineRef.current, {
-            delay: 0,
-            duration: 1.2,
+    // Set initial states to prevent glitches with varied properties
+    if (lineRef.current) {
+      gsap.set(lineRef.current, { opacity: 0, scaleX: 0 });
+    }
+    if (titleLine1Ref.current) {
+      gsap.set(titleLine1Ref.current, { opacity: 0, x: -60, scale: 0.95 });
+    }
+    if (titleLine2Ref.current) {
+      gsap.set(titleLine2Ref.current, { opacity: 0, x: 60, scale: 0.95 });
+    }
+    if (sideRef.current) {
+      gsap.set(sideRef.current, { opacity: 0, scale: 0.8, rotation: 5 });
+    }
+    if (copyrightRef.current) {
+      gsap.set(copyrightRef.current, { opacity: 0, y: 30 });
+    }
+
+    // Small delay to ensure ScrollSmoother is ready
+    const timer = setTimeout(() => {
+      // Check if footer is already in view
+      const rect = footerRef.current?.getBoundingClientRect();
+      const isInView = rect && rect.top < window.innerHeight * 0.75;
+
+      if (isInView) {
+        // If already in view, animate immediately without ScrollTrigger
+        animateFooterElements();
+      } else {
+        // Set up scroll trigger for footer animations
+        if (footerRef.current) {
+          createScrollTrigger(footerRef.current, {
+            start: "top 75%",
+            once: true,
+            onEnter: animateFooterElements,
           });
         }
+      }
+    }, 100);
 
-        // Animate each title line separately to preserve structure
-        if (titleLine1Ref.current) {
-          animationUtils.slideInUp(titleLine1Ref.current, {
+    function animateFooterElements() {
+      // Animated line first
+      if (lineRef.current) {
+        animationUtils.drawLineX(lineRef.current, {
+          delay: 0,
+          duration: 1.2,
+        });
+      }
+
+      // Title Line 1: Slide in from left with bounce
+      if (titleLine1Ref.current) {
+        gsap.fromTo(
+          titleLine1Ref.current,
+          { opacity: 0, x: -60, scale: 0.95 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1.4,
+            ease: "back.out(1.4)",
             delay: 0.3,
-          });
-        }
+            clearProps: "transform",
+          }
+        );
+      }
 
-        if (titleLine2Ref.current) {
-          animationUtils.slideInUp(titleLine2Ref.current, {
+      // Title Line 2: Slide in from right with different timing
+      if (titleLine2Ref.current) {
+        gsap.fromTo(
+          titleLine2Ref.current,
+          { opacity: 0, x: 60, scale: 0.95 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1.4,
+            ease: "back.out(1.4)",
             delay: 0.5,
-          });
-        }
+            clearProps: "transform",
+          }
+        );
+      }
 
-        // Soft slide in for the side content
-        if (sideRef.current) {
-          animationUtils.softSlideIn(sideRef.current, {
+      // Side content: Elegant fade with scale and rotation
+      if (sideRef.current) {
+        gsap.fromTo(
+          sideRef.current,
+          { opacity: 0, scale: 0.8, rotation: 5 },
+          {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1.6,
+            ease: "elastic.out(1, 0.6)",
             delay: 0.8,
-          });
-        }
+            clearProps: "transform",
+          }
+        );
+      }
 
-        // Elegant fade in for copyright
-        if (copyrightRef.current) {
-          animationUtils.slideInUp(copyrightRef.current, {
+      // Copyright: Slide up from bottom (classic)
+      if (copyrightRef.current) {
+        gsap.fromTo(
+          copyrightRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: "power2.out",
             delay: 1.2,
-          });
-        }
-      },
-    });
+            clearProps: "transform",
+          }
+        );
+      }
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

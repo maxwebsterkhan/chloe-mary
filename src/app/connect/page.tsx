@@ -29,11 +29,18 @@ export default function ConnectPage() {
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.5 });
 
+    // Connect page: Gentle fade + soft scale variation
     if (labelRef.current) {
       tl.fromTo(
         labelRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        { opacity: 0, y: 15, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.0,
+          ease: "power2.out",
+        },
         0
       );
     }
@@ -41,13 +48,13 @@ export default function ConnectPage() {
     if (titleRef.current) {
       tl.fromTo(
         titleRef.current,
-        { opacity: 0, x: -100, rotationY: -15 },
+        { opacity: 0, y: -30, scale: 0.96 },
         {
           opacity: 1,
-          x: 0,
-          rotationY: 0,
-          duration: 1.4,
-          ease: "back.out(1.7)",
+          y: 0,
+          scale: 1,
+          duration: 1.3,
+          ease: "power3.out",
         },
         0.2
       );
@@ -56,8 +63,14 @@ export default function ConnectPage() {
     if (subtitleRef.current) {
       tl.fromTo(
         subtitleRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+        { opacity: 0, x: -25, scale: 0.98 },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1.0,
+          ease: "power2.out",
+        },
         0.5
       );
     }
@@ -69,8 +82,12 @@ export default function ConnectPage() {
       if (decorLine) {
         tl.fromTo(
           decorLine,
-          { scaleX: 0 },
-          { scaleX: 1, duration: 0.8, ease: "power2.out" },
+          { scaleX: 0, transformOrigin: "center center" },
+          {
+            scaleX: 1,
+            duration: 1.0,
+            ease: "power3.out",
+          },
           0.8
         );
       }
@@ -78,9 +95,15 @@ export default function ConnectPage() {
       if (decorText) {
         tl.fromTo(
           decorText,
-          { opacity: 0, x: -20 },
-          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
-          1.0
+          { opacity: 0, y: 10, scale: 0.98 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          1.1
         );
       }
     }

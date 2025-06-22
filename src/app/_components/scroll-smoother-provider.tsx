@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,41 +15,76 @@ export default function ScrollSmootherProvider({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const smootherRef = useRef<ScrollSmoother | null>(null);
+  const isInitialized = useRef(false);
 
+  // Initialize ScrollSmoother once
   useEffect(() => {
-    // Ensure DOM is ready and elements exist
-    const wrapper = document.getElementById("smooth-wrapper");
-    const content = document.getElementById("smooth-content");
+    if (isInitialized.current) return;
 
-    if (wrapper && content) {
-      ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: 1,
-        effects: true,
-        smoothTouch: 0.1,
-      });
+    // Prevent browser scroll restoration
+    if (typeof window !== "undefined" && "scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
     }
 
-    // Cleanup function
+    // Small delay to ensure DOM is ready
+    const initTimer = setTimeout(() => {
+      const wrapper = document.getElementById("smooth-wrapper");
+      const content = document.getElementById("smooth-content");
+
+      if (wrapper && content && !smootherRef.current) {
+        smootherRef.current = ScrollSmoother.create({
+          wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 1,
+          effects: true,
+          smoothTouch: 0.1,
+          normalizeScroll: true,
+          ignoreMobileResize: true,
+        });
+
+        isInitialized.current = true;
+      }
+    }, 50);
+
     return () => {
-      ScrollSmoother.get()?.kill();
+      clearTimeout(initTimer);
     };
   }, []);
 
   // Handle route changes
   useEffect(() => {
-    // Kill all ScrollTriggers and refresh on route change
+    if (!isInitialized.current) return;
+
+    // Scroll to top on route change
+    if (smootherRef.current) {
+      smootherRef.current.scrollTo(0, false); // Instant scroll to top
+    }
+
+    // Kill all ScrollTriggers and refresh
     ScrollTrigger.killAll();
 
-    // Small delay to ensure DOM is updated
-    const timer = setTimeout(() => {
+    // Delay to ensure DOM is updated
+    const refreshTimer = setTimeout(() => {
       ScrollTrigger.refresh();
-      ScrollSmoother.get()?.refresh();
+      if (smootherRef.current) {
+        smootherRef.current.refresh();
+      }
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(refreshTimer);
   }, [pathname]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (smootherRef.current) {
+        smootherRef.current.kill();
+        smootherRef.current = null;
+      }
+      isInitialized.current = false;
+    };
+  }, []);
 
   return (
     <div id="smooth-wrapper">

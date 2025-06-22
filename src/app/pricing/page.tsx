@@ -22,11 +22,18 @@ export default function PricingPage() {
     if (heroRef.current) {
       const tl = gsap.timeline({ delay: 0.5 });
 
+      // Pricing page: Subtle directional + refined timing variation
       if (labelRef.current) {
         tl.fromTo(
           labelRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          { opacity: 0, x: -15, scale: 0.98 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power2.out",
+          },
           0
         );
       }
@@ -34,24 +41,30 @@ export default function PricingPage() {
       if (titleRef.current) {
         tl.fromTo(
           titleRef.current,
-          { opacity: 0, x: -100, rotationY: -15 },
+          { opacity: 0, x: 40, scale: 0.97 },
           {
             opacity: 1,
             x: 0,
-            rotationY: 0,
-            duration: 1.4,
-            ease: "back.out(1.7)",
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
           },
-          0.2
+          0.15
         );
       }
 
       if (subtitleRef.current) {
         tl.fromTo(
           subtitleRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-          0.5
+          { opacity: 0, y: 25, scale: 0.98 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.0,
+            ease: "power2.out",
+          },
+          0.4
         );
       }
 
@@ -66,17 +79,27 @@ export default function PricingPage() {
         if (decorLine) {
           tl.fromTo(
             decorLine,
-            { scaleX: 0 },
-            { scaleX: 1, duration: 0.8, ease: "power2.out" },
-            0.8
+            { scaleX: 0, transformOrigin: "right center" },
+            {
+              scaleX: 1,
+              duration: 0.9,
+              ease: "power3.out",
+            },
+            0.7
           );
         }
 
         if (decorText) {
           tl.fromTo(
             decorText,
-            { opacity: 0, x: -20 },
-            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
+            { opacity: 0, x: 15, scale: 0.98 },
+            {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 0.8,
+              ease: "power2.out",
+            },
             1.0
           );
         }
