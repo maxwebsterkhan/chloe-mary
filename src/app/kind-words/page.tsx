@@ -129,17 +129,22 @@ export default function KindWords() {
       if (testimonialsRef.current) {
         const testimonials =
           testimonialsRef.current.querySelectorAll("[data-animate]");
-        gsap.from(testimonials, {
-          y: 60,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: "top 80%",
-            once: true,
-          },
+        testimonials.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%", // Adjust as needed
+                once: true,
+              },
+            }
+          );
         });
       }
     });
