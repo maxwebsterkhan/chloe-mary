@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import Link from "next/link";
@@ -16,6 +17,7 @@ const navigationItems = [
 ] as const;
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -144,21 +146,27 @@ export default function Navigation() {
           [styles["navigation__list--closing"]]: isMobileMenuClosing,
         })}
       >
-        {navigationItems.map((item, index) => (
-          <li
-            key={item.href}
-            className={styles.navigation__item}
-            style={{ "--index": index } as React.CSSProperties}
-          >
-            <Link
-              href={item.href}
-              className={styles.navigation__link}
-              onClick={handleLinkClick}
+        {navigationItems.map((item, index) => {
+          const isActive = pathname === item.href;
+
+          return (
+            <li
+              key={item.href}
+              className={styles.navigation__item}
+              style={{ "--index": index } as React.CSSProperties}
             >
-              {item.label}
-            </Link>
-          </li>
-        ))}
+              <Link
+                href={item.href}
+                className={clsx(styles.navigation__link, {
+                  [styles["navigation__link--active"]]: isActive,
+                })}
+                onClick={handleLinkClick}
+              >
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
 
       <button

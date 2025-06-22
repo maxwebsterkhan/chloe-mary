@@ -268,6 +268,45 @@
         background-color: var(--color-accent);
       }
     }
+
+    // Active state styling
+    &--active {
+      color: var(--color-accent);
+      opacity: 1;
+      font-weight: 600;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+        background-color: var(--color-accent);
+      }
+
+      // Subtle glow effect for active state
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(100% + 1rem);
+        height: calc(100% + 0.5rem);
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(184, 149, 106, 0.08) 50%,
+          transparent 100%
+        );
+        border-radius: 4px;
+        z-index: -1;
+        opacity: 0.8;
+
+        @include breakpoint-down("tablet") {
+          width: calc(100% + 2rem);
+          height: calc(100% + 1rem);
+          opacity: 0.6;
+        }
+      }
+    }
   }
 
   &__burger {

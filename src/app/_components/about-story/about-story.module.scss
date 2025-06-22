@@ -297,7 +297,7 @@
 
   @include breakpoint-down("mobile") {
     margin: 2rem 0;
-    padding: 1rem 0;
+    padding: 1rem 0 1rem 2rem; // Add left padding to create space from pseudo-element
 
     &::before {
       left: 0;

@@ -946,9 +946,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-secondary) 20%,
-    var(--color-accent) 50%,
-    var(--color-secondary) 80%,
+    var(--color-accent) 20%,
+    var(--color-secondary) 50%,
+    var(--color-accent) 80%,
     transparent 100%
   );
   opacity: 0.4;
@@ -1005,10 +1005,12 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-accent) 50%,
+    var(--color-accent) 20%,
+    var(--color-secondary) 50%,
+    var(--color-accent) 80%,
     transparent 100%
   );
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .elegantCenter {
