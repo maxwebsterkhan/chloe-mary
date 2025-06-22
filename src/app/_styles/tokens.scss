@@ -17,7 +17,7 @@ $animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 
 // Spacing
 $spacing-xxs: 0.5rem;
-$spacing-xs: 1rem;
+$spacing-xs: 1.25rem;
 $spacing-sm: 1.5rem;
 $spacing-md: 2rem;
 $spacing-lg: 3rem;
@@ -38,6 +38,11 @@ $font-size-xl: 2.5rem;
 $font-size-xxl: 4.5rem;
 $font-size-hero: 6rem;
 $font-size-display: 8rem;
+
+// Additional typography sizes
+$font-size-xxs: 0.75rem;
+$font-size-body: 1.1rem;
+$font-size-caption: 0.9rem;
 
 // Letter spacing
 $letter-spacing-tight: -0.02em;

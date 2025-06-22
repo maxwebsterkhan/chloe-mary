@@ -1,4 +1,5 @@
 @use "../_styles/breakpoints" as *;
+@use "../_styles/tokens" as tokens;
 
 :root {
   --color-primary: #0a0a0a;
@@ -36,10 +37,10 @@ a {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 tokens.$spacing-md;
 
   @include breakpoint-down("tablet") {
-    padding: 0 1rem;
+    padding: 0 tokens.$spacing-sm;
   }
 }
 

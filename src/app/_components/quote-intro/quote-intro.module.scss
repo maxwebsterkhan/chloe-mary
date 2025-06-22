@@ -2,15 +2,15 @@
 @use "../../_styles/tokens" as tokens;
 
 .intro {
-  padding: 6rem 2rem;
+  padding: tokens.$spacing-xxl tokens.$spacing-md;
   background-color: #101010;
 
   @include breakpoint-down("tablet") {
-    padding: 5rem 1.5rem;
+    padding: tokens.$spacing-xl tokens.$spacing-sm;
   }
 
   @include breakpoint-down("mobile") {
-    padding: 4rem 1rem;
+    padding: tokens.$spacing-xl tokens.$spacing-sm;
   }
 }
 
@@ -22,10 +22,10 @@
 
 .header {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: tokens.$spacing-lg;
 
   @include breakpoint-down("mobile") {
-    margin-bottom: 2rem;
+    margin-bottom: tokens.$spacing-md;
   }
 }
 
@@ -49,7 +49,7 @@
 .tagline {
   font-size: 0.85rem;
   font-style: italic;
-  margin: 0.5rem 0 0 0;
+  margin: tokens.$spacing-xxs 0 0 0;
   background: linear-gradient(135deg, #f3f0eb 0%, #d4c4a0 50%, #b8a082 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -75,16 +75,16 @@
 .description {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: tokens.$spacing-md;
 
   @include breakpoint-down("mobile") {
-    gap: 1.5rem;
+    gap: tokens.$spacing-sm;
   }
 }
 
 // Base paragraph styles for GSAP animations
 .paragraph {
-  font-size: 1.1rem;
+  font-size: tokens.$font-size-body;
   line-height: 1.7;
   color: rgba(243, 240, 235, 0.85);
   margin: 0;
@@ -92,7 +92,7 @@
   opacity: 1;
 
   @include breakpoint-down("tablet") {
-    font-size: 1rem;
+    font-size: tokens.$font-size-xs;
     line-height: 1.6;
     max-width: 100%;
   }
@@ -136,10 +136,10 @@
   position: relative;
 
   @include breakpoint-down("tablet") {
-    font-size: 1.2rem !important;
+    font-size: tokens.$font-size-sm !important;
   }
 
   @include breakpoint-down("mobile") {
-    font-size: 1.1rem !important;
+    font-size: tokens.$font-size-body !important;
   }
 }

@@ -6,10 +6,10 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 1rem;
+  top: tokens.$spacing-xs;
   left: 50%;
   transform: translateX(-50%);
-  padding: 1.2rem 1.8rem;
+  padding: tokens.$spacing-xs tokens.$spacing-sm;
   z-index: 1000;
   background-color: rgba(243, 240, 235, 0.75);
   backdrop-filter: blur(0.2rem);
@@ -20,7 +20,7 @@
 
   // Logo styles
   &__logo {
-    margin-right: 2rem;
+    margin-right: tokens.$spacing-md;
     display: flex;
     align-items: center;
     transition: opacity 0.3s ease;
@@ -132,14 +132,14 @@
       position: fixed;
 
       @include breakpoint-down("mobile") {
-        right: tokens.$spacing-xs;
+        right: tokens.$spacing-sm;
       }
     }
   }
 
   &__list {
     display: flex;
-    gap: 2rem;
+    gap: tokens.$spacing-md;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -158,13 +158,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: tokens.$spacing-md;
       transform: translateX(100%);
       transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
       z-index: 1002;
 
       @include breakpoint-down("mobile") {
-        right: calc(-1 * #{tokens.$spacing-xs} - 0.5rem);
+        right: calc(-1 * #{tokens.$spacing-sm} - 0.5rem);
         width: calc(100vw + 2rem);
       }
     }
@@ -225,7 +225,7 @@
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    padding: 0.5rem 0;
+    padding: tokens.$spacing-xxs 0;
     transition: all 0.3s ease;
     position: relative;
     opacity: 0.95;

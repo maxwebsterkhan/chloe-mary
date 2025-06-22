@@ -58,14 +58,14 @@
     }
 
     @include breakpoint-down("mobile") {
-      padding: 0 tokens.$spacing-xs 0 tokens.$spacing-xs;
+      padding: 0 tokens.$spacing-sm 0 tokens.$spacing-sm;
       flex-direction: column;
       gap: tokens.$spacing-sm;
       position: relative;
 
       &::after {
         top: 0;
-        right: tokens.$spacing-xs;
+        right: tokens.$spacing-sm;
         width: tokens.$line-thickness-small;
         height: 100%;
       }

@@ -135,7 +135,7 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: 0 tokens.$spacing-xs;
+    padding: 0 tokens.$spacing-sm;
   }
 }
 
@@ -157,15 +157,15 @@
 
 // Hero main section
 .heroMain {
-  margin-bottom: 5rem;
+  margin-bottom: tokens.$spacing-xl;
   position: relative;
 
   @include breakpoint-down("tablet") {
-    margin-bottom: 4rem;
+    margin-bottom: tokens.$spacing-xl;
   }
 
   @include breakpoint-down("mobile") {
-    margin-bottom: 3rem;
+    margin-bottom: tokens.$spacing-lg;
   }
 }
 
@@ -173,7 +173,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: tokens.$spacing-md;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease-out;
@@ -185,22 +185,22 @@
   }
 
   @include breakpoint-down("mobile") {
-    margin-bottom: 1.5rem;
+    margin-bottom: tokens.$spacing-sm;
   }
 }
 
 .preTitleText {
   font-family: var(--font-nunito-sans);
-  font-size: 1rem;
+  font-size: tokens.$font-size-xs;
   font-weight: 400;
   color: var(--color-accent);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-right: 2rem;
+  margin-right: tokens.$spacing-md;
 
   @include breakpoint-down("mobile") {
-    font-size: 0.9rem;
-    margin-right: 1rem;
+    font-size: tokens.$font-size-caption;
+    margin-right: tokens.$spacing-sm;
   }
 }
 

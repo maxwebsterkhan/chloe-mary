@@ -11,14 +11,9 @@ export default function Loading() {
   useEffect(() => {
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      console.log("Loading component mounted");
-      console.log("GSAP:", gsap);
-
       if (bubbleLoaderRef.current) {
         // Try selecting by class name directly
         const dots = bubbleLoaderRef.current.children;
-        console.log("Found dots:", dots.length);
-        console.log("Dots:", Array.from(dots));
 
         if (dots.length > 0) {
           // Convert to array and try animation
@@ -26,7 +21,6 @@ export default function Loading() {
 
           // Test with a very simple animation
           dotArray.forEach((dot, index) => {
-            console.log(`Animating dot ${index}:`, dot);
             gsap.to(dot, {
               scale: 1.5,
               duration: 0.5,
@@ -36,8 +30,6 @@ export default function Loading() {
               ease: "power2.inOut",
             });
           });
-
-          console.log("Animation applied to", dotArray.length, "dots");
         }
       }
 

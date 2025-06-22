@@ -24,9 +24,13 @@
 
 .heroContainer {
   width: 100%;
-  max-width: 1400px;
+  max-width: 100rem;
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
+
+  @include breakpoint-down("mobile") {
+    padding: 0 tokens.$spacing-sm;
+  }
 }
 
 .heroLayout {
@@ -656,7 +660,7 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-md; // Even less padding on mobile
+    padding: tokens.$spacing-md 0; // Remove left/right padding on mobile
   }
 }
 

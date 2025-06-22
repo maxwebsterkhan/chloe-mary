@@ -1,10 +1,12 @@
+@use "_styles/tokens" as tokens;
+
 .loadingContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 50vh;
-  padding: 2rem;
+  padding: tokens.$spacing-md;
   background: var(--color-background, #f3f0eb);
 }
 
@@ -13,7 +15,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: tokens.$spacing-sm;
 }
 
 .bubble {
@@ -26,7 +28,7 @@
 
 .loadingText {
   color: var(--color-primary, #2c2c2c);
-  font-size: 1rem;
+  font-size: tokens.$font-size-xs;
   font-weight: 400;
   text-align: center;
   margin: 0;
@@ -56,7 +58,7 @@
 @media (max-width: 768px) {
   .loadingContainer {
     min-height: 40vh;
-    padding: 1rem;
+    padding: tokens.$spacing-sm;
   }
 
   .bubble {
@@ -70,6 +72,6 @@
   }
 
   .loadingText {
-    font-size: 0.9rem;
+    font-size: tokens.$font-size-caption;
   }
 }

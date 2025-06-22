@@ -3,15 +3,15 @@
 
 .story {
   background-color: var(--color-secondary);
-  padding: 8rem 0;
+  padding: tokens.$spacing-xxl 0;
   position: relative;
 
   @include breakpoint-down("tablet") {
-    padding: 6rem 0;
+    padding: tokens.$spacing-xxl 0;
   }
 
   @include breakpoint-down("mobile") {
-    padding: 4rem 0;
+    padding: tokens.$spacing-xl 0;
   }
 }
 
@@ -26,23 +26,23 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: 0 tokens.$spacing-xs;
+    padding: 0 tokens.$spacing-sm;
   }
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 6rem;
+  gap: tokens.$spacing-xxl;
   align-items: start;
 
   @include breakpoint-down("tablet") {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: tokens.$spacing-xl;
   }
 
   @include breakpoint-down("mobile") {
-    gap: 3rem;
+    gap: tokens.$spacing-lg;
   }
 }
 
@@ -131,7 +131,7 @@
 }
 
 .captionDivider {
-  margin: 0 0.5rem;
+  margin: 0 tokens.$spacing-xxs;
   opacity: 0.5;
 }
 
@@ -219,7 +219,7 @@
 
 .storyNumber {
   font-family: var(--font-inter-tight);
-  font-size: 1rem;
+  font-size: tokens.$font-size-xs;
   font-weight: 700;
   color: var(--color-accent);
   letter-spacing: 0.1em;
@@ -227,7 +227,7 @@
   opacity: 0.8;
 
   @include breakpoint-down("mobile") {
-    font-size: 0.9rem;
+    font-size: tokens.$font-size-caption;
   }
 }
 

@@ -3,15 +3,15 @@
 
 .achievements {
   position: relative;
-  padding: 6rem 0;
+  padding: tokens.$spacing-xxl 0;
   background-color: var(--color-secondary);
 
   @include breakpoint-down("tablet") {
-    padding: 5rem 0;
+    padding: tokens.$spacing-xl 0;
   }
 
   @include breakpoint-down("mobile") {
-    padding: 4rem 0;
+    padding: tokens.$spacing-xl 0;
   }
 
   &__container {
@@ -26,7 +26,7 @@
     }
 
     @include breakpoint-down("mobile") {
-      padding: 0 tokens.$spacing-xs;
+      padding: 0 tokens.$spacing-sm;
     }
   }
 
@@ -52,7 +52,7 @@
 
   &__item {
     position: relative;
-    padding: 4rem 3rem;
+    padding: tokens.$spacing-xl tokens.$spacing-lg;
     // Start hidden for GSAP but visible by default
     opacity: 0;
     visibility: visible;
@@ -63,12 +63,12 @@
     border-radius: 2px;
 
     @include breakpoint-down("tablet") {
-      padding: 3rem 2rem;
+      padding: tokens.$spacing-lg tokens.$spacing-md;
       min-height: 250px;
     }
 
     @include breakpoint-down("mobile") {
-      padding: 2.5rem 1.5rem;
+      padding: tokens.$spacing-lg tokens.$spacing-sm;
       min-height: 200px;
     }
 
@@ -131,11 +131,11 @@
 
   &__year {
     font-family: var(--font-geist-mono);
-    font-size: 0.75rem;
+    font-size: tokens.$font-size-xxs;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    margin-bottom: tokens.$spacing-sm;
     display: inline-block;
     padding: 0.6rem 1.2rem;
     border-radius: 3px;
@@ -144,7 +144,7 @@
 
   &__title {
     font-family: var(--font-inter-tight);
-    font-size: 2rem;
+    font-size: tokens.$font-size-lg;
     font-weight: 700;
     margin: 0 0 1.25rem 0;
     line-height: 1.2;
@@ -167,7 +167,7 @@
 
   &__subtitle {
     font-family: var(--font-nunito-sans);
-    font-size: 1.1rem;
+    font-size: tokens.$font-size-body;
     font-weight: 400;
     margin: 0;
     line-height: 1.5;
@@ -176,11 +176,11 @@
     overflow-wrap: break-word;
 
     @include breakpoint-down("tablet") {
-      font-size: 1rem;
+      font-size: tokens.$font-size-xs;
     }
 
     @include breakpoint-down("mobile") {
-      font-size: 0.9rem;
+      font-size: tokens.$font-size-caption;
       line-height: 1.4;
       hyphens: none;
       word-break: keep-all;

@@ -28,7 +28,7 @@
     }
 
     @include breakpoint-down("mobile") {
-      padding: tokens.$spacing-xs tokens.$spacing-xs 0;
+      padding: tokens.$spacing-sm tokens.$spacing-sm 0;
     }
   }
 
