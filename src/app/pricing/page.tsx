@@ -380,7 +380,7 @@ export default function PricingPage() {
 
               <div className={`${styles.metaNote} ${styles.animateIn}`}>
                 <span className={styles.noteHighlight}>ADVENTURE INCLUDES</span>
-                <p>One roll of black and white film</p>
+                <p>Two rolls of black and white film</p>
                 <span className={styles.noteAddition}>
                   Additional rolls available for £50 each
                 </span>

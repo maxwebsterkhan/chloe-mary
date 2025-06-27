@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Geist_Mono, Nunito_Sans } from "next/font/google";
+import { Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
 import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
+import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -14,9 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const nunitoSans = Nunito_Sans({
-  variable: "--font-nunito-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -197,7 +199,7 @@ export default function RootLayout({
               priceRange: "£1,350 - £4,750",
               paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
               currenciesAccepted: "GBP",
-              foundingDate: "2020",
+              foundingDate: "2018",
               awards: [
                 "Professional Photos Top 50 Wedding Photographers UK 2025",
                 "Featured on Who What Wear Wedding Issue 2025",
@@ -239,11 +241,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${interTight.variable} ${geistMono.variable} ${nunitoSans.variable}`}
+        className={`${interTight.variable} ${geistMono.variable} ${poppins.variable}`}
       >
-        <Navigation />
-        {children}
-        <Footer />
+        <LenisScrollWrapper>
+          <Navigation />
+          {children}
+          <Footer />
+        </LenisScrollWrapper>
       </body>
     </html>
   );

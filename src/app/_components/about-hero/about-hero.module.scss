@@ -190,7 +190,7 @@
 }
 
 .preTitleText {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: tokens.$font-size-xs;
   font-weight: 400;
   color: var(--color-accent);
@@ -274,7 +274,7 @@
 }
 
 .heroSubtitleText {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-weight: 300;
   color: rgba(10, 10, 10, 0.7);
@@ -415,7 +415,7 @@
 
 .traitLabel {
   display: block;
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-accent);
@@ -581,7 +581,7 @@
 }
 
 .tagline {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   font-weight: 400;
   letter-spacing: 0.3em;
@@ -600,7 +600,7 @@
 }
 
 .taglineSubtext {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: 0.9rem;
   font-weight: 400;
   color: rgba(10, 10, 10, 0.6);
@@ -674,7 +674,7 @@
 }
 
 .scrollText {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -689,7 +689,7 @@
 }
 
 .scrollSubtext {
-  font-family: var(--font-nunito-sans);
+  font-family: var(--font-poppins);
   font-size: 0.7rem;
   font-weight: 400;
   color: rgba(10, 10, 10, 0.5);

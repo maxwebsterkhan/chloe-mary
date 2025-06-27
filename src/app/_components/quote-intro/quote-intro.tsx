@@ -127,10 +127,10 @@ export default function QuoteIntro() {
               ref={paragraphRightRef}
               className={`${styles.paragraphRight} ${styles.paragraph}`}
             >
-              Instead of orchestrating moments, I move quietly through your day,
-              a trusted presence witnessing your story unfold naturally.
-              I&apos;m not just documenting—I&apos;m becoming part of the story
-              you&apos;re telling.
+              Instead of orchestrating moments, I move quietly through your day
+              as a trusted presence. Your story writes itself while I quietly
+              document each moment—the stolen glances, whispered promises, and
+              authentic emotions that make your love uniquely yours.
             </p>
 
             <p
