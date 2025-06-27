@@ -227,12 +227,12 @@
   position: relative;
   padding: tokens.$spacing-xl;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
+  border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 
   @include breakpoint-down("mobile") {
     padding: tokens.$spacing-lg;
-    border-radius: 15px;
+    border-radius: 2px;
   }
 }
 
@@ -292,7 +292,7 @@
   gap: tokens.$spacing-lg;
   padding: tokens.$spacing-lg;
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 15px;
+  border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 
@@ -304,7 +304,7 @@
   @include breakpoint-down("mobile") {
     gap: tokens.$spacing-md;
     padding: tokens.$spacing-md;
-    border-radius: 12px;
+    border-radius: 2px;
   }
 }
 
@@ -640,7 +640,7 @@
 // Form Section
 .formSection {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 2px;
   padding: 0; // Remove padding to let form breathe
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -648,7 +648,7 @@
   overflow: hidden; // Ensure border-radius is respected
 
   @include breakpoint-down("mobile") {
-    border-radius: 15px;
+    border-radius: 2px;
   }
 }
 
@@ -696,7 +696,7 @@
 .iframeWrapper {
   width: 100%;
   position: relative;
-  border-radius: 15px;
+  border-radius: 2px;
   overflow: hidden;
   background: transparent; // Remove grey background
   min-height: 900px;
@@ -707,12 +707,12 @@
 
   @include breakpoint-down("tablet") {
     min-height: 800px;
-    border-radius: 12px;
+    border-radius: 2px;
   }
 
   @include breakpoint-down("mobile") {
     min-height: 750px; // Reduced height for mobile
-    border-radius: 10px;
+    border-radius: 2px;
   }
 }
 
@@ -770,7 +770,7 @@
 .fieldSelect {
   padding: tokens.$spacing-sm;
   border: tokens.$line-thickness-medium solid #e9ecef;
-  border-radius: 8px;
+  border-radius: 2px;
   font-size: tokens.$font-size-xs;
   color: var(--color-primary);
   background: #fff;
@@ -885,7 +885,7 @@
 // Response times section
 .responseInfo {
   background: #f8f9fa;
-  border-radius: 15px;
+  border-radius: 2px;
   padding: tokens.$spacing-lg;
   margin-top: tokens.$spacing-lg;
   border-left: 4px solid var(--color-accent);
