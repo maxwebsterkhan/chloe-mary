@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  createRef,
+} from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -9,6 +15,7 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import styles from "./horizontal-gallery.module.scss";
+import { useMediaQuery } from "react-responsive";
 
 interface GalleryStory {
   id: string;
@@ -103,6 +110,20 @@ export default function HorizontalGallery() {
   // Parallax refs
   const tweenNodes = useRef<(HTMLElement | null)[]>([]);
   const tweenFactor = useRef(0);
+
+  // Animation state for hero image
+  const [imageFadeKey, setImageFadeKey] = useState(0);
+
+  // Refs for thumbnail buttons
+  const thumbButtonRefs = useRef(
+    galleryStories.map(() =>
+      Array(5)
+        .fill(null)
+        .map(() => createRef<HTMLButtonElement>())
+    )
+  );
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   // Parallax effect logic
   const setTweenNodes = useCallback((emblaApi: any): void => {
@@ -203,10 +224,21 @@ export default function HorizontalGallery() {
                         <div className={styles.heroImageWrapper}>
                           <div className={styles.embla__parallax__bg}>
                             <Image
-                              src={story.images[activeThumbs[index]]}
+                              key={
+                                imageFadeKey +
+                                "-" +
+                                (isMobile ? 0 : activeThumbs[index])
+                              }
+                              src={
+                                story.images[isMobile ? 0 : activeThumbs[index]]
+                              }
                               alt={`${story.title} - Hero`}
                               fill
-                              className={`${styles.heroImageUnified} ${styles.embla__parallax__img}`}
+                              className={
+                                styles.heroImageUnified +
+                                " " +
+                                styles.fadeInHeroImage
+                              }
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
                               priority={index < 2}
                               quality={90}
@@ -220,57 +252,104 @@ export default function HorizontalGallery() {
                           </p>
                         </div>
                       </div>
-                      <div
-                        className={styles.thumbsRowUnified}
-                        role="tablist"
-                        aria-label={`Gallery thumbnails for ${story.title}`}
-                      >
-                        {story.images.map((image, thumbIdx) => (
-                          <button
-                            key={thumbIdx}
-                            className={
-                              styles.thumbButton +
-                              (activeThumbs[index] === thumbIdx
-                                ? " " + styles.activeThumb
-                                : "")
-                            }
-                            aria-selected={activeThumbs[index] === thumbIdx}
-                            aria-label={`Show image ${thumbIdx + 1} for ${
-                              story.title
-                            }`}
-                            tabIndex={activeThumbs[index] === thumbIdx ? 0 : -1}
-                            onClick={() => {
-                              setActiveThumbs((prev) => {
-                                const newThumbs = [...prev];
-                                newThumbs[index] = thumbIdx;
-                                return newThumbs;
-                              });
-                            }}
-                            type="button"
-                            role="tab"
+                      {!isMobile && (
+                        <div className={styles.thumbsCtaRow}>
+                          <div
+                            className={styles.thumbsRowUnified}
+                            role="tablist"
+                            aria-label={`Gallery thumbnails for ${story.title}`}
                           >
-                            <span className="sr-only">{`Show image ${
-                              thumbIdx + 1
-                            }`}</span>
-                            <Image
-                              src={image}
-                              alt={`Thumbnail ${thumbIdx + 1} for ${
-                                story.title
-                              }`}
-                              fill
-                              className={styles.thumbImageUnified}
-                              sizes="100px"
-                            />
-                          </button>
-                        ))}
-                      </div>
+                            {story.images.map((image, thumbIdx) => (
+                              <button
+                                key={thumbIdx}
+                                ref={thumbButtonRefs.current[index][thumbIdx]}
+                                className={
+                                  styles.thumbButton +
+                                  (activeThumbs[index] === thumbIdx
+                                    ? " " + styles.activeThumb
+                                    : "")
+                                }
+                                aria-selected={activeThumbs[index] === thumbIdx}
+                                aria-label={`Show image ${thumbIdx + 1} for ${
+                                  story.title
+                                }`}
+                                tabIndex={
+                                  activeThumbs[index] === thumbIdx ? 0 : -1
+                                }
+                                onClick={() => {
+                                  setActiveThumbs((prev) => {
+                                    const newThumbs = [...prev];
+                                    newThumbs[index] = thumbIdx;
+                                    return newThumbs;
+                                  });
+                                  setImageFadeKey((k) => k + 1);
+                                }}
+                                type="button"
+                                role="tab"
+                                onKeyDown={(e) => {
+                                  if (e.key === "ArrowRight") {
+                                    e.preventDefault();
+                                    const next =
+                                      (thumbIdx + 1) % story.images.length;
+                                    thumbButtonRefs.current[index][
+                                      next
+                                    ].current?.focus();
+                                  } else if (e.key === "ArrowLeft") {
+                                    e.preventDefault();
+                                    const prev =
+                                      (thumbIdx - 1 + story.images.length) %
+                                      story.images.length;
+                                    thumbButtonRefs.current[index][
+                                      prev
+                                    ].current?.focus();
+                                  } else if (
+                                    e.key === "Enter" ||
+                                    e.key === " "
+                                  ) {
+                                    e.preventDefault();
+                                    setActiveThumbs((prev) => {
+                                      const newThumbs = [...prev];
+                                      newThumbs[index] = thumbIdx;
+                                      return newThumbs;
+                                    });
+                                    setImageFadeKey((k) => k + 1);
+                                  }
+                                }}
+                              >
+                                <span className="sr-only">{`Show image ${
+                                  thumbIdx + 1
+                                }`}</span>
+                                <Image
+                                  src={image}
+                                  alt={`Thumbnail ${thumbIdx + 1} for ${
+                                    story.title
+                                  }`}
+                                  fill
+                                  className={styles.thumbImageUnified}
+                                  sizes="100px"
+                                />
+                              </button>
+                            ))}
+                          </div>
+                          <div className={styles.ctaTextWithDivider}>
+                            <a
+                              href={story.ctaLink}
+                              className={styles.ctaTextLink}
+                            >
+                              <span>View</span>
+                              <span>Gallery</span>
+                            </a>
+                            <span
+                              className={styles.ctaDivider}
+                              aria-hidden="true"
+                            ></span>
+                          </div>
+                        </div>
+                      )}
                       <div className={styles.bottomSectionUnified}>
                         <p className={styles.storyDescription}>
                           {story.description}
                         </p>
-                        <a href={story.ctaLink} className={styles.storyCta}>
-                          {story.ctaText}
-                        </a>
                       </div>
                     </div>
                   </div>
