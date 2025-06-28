@@ -6,7 +6,7 @@
 // Simple fade in (fallback)
 @keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity: 0.1;
   }
   100% {
     opacity: 1;
@@ -16,7 +16,7 @@
 // Basic transform animations (fallback)
 @keyframes slideInLeft {
   0% {
-    opacity: 0;
+    opacity: 0.1;
     transform: translateX(-30px);
   }
   100% {
@@ -27,7 +27,7 @@
 
 @keyframes slideInDown {
   0% {
-    opacity: 0;
+    opacity: 0.1;
     transform: translateY(-20px);
   }
   100% {

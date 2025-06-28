@@ -54,7 +54,7 @@
     position: relative;
     padding: tokens.$spacing-xl tokens.$spacing-lg;
     // Start hidden for GSAP but visible by default
-    opacity: 0;
+    opacity: 0.1;
     visibility: visible;
     min-height: 300px;
     display: flex;

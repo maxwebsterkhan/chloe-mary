@@ -35,7 +35,7 @@
   color: #f3f0eb;
   margin: 0;
   letter-spacing: -0.01em;
-  opacity: 0; // Start hidden for GSAP animation
+  opacity: 0.1; // Start hidden for GSAP animation
 
   @include breakpoint-down("tablet") {
     // Remove transform
@@ -56,7 +56,7 @@
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   position: relative;
-  opacity: 0; // Start hidden for GSAP typewriter animation
+  opacity: 0.1; // Start hidden for GSAP typewriter animation
 
   @include breakpoint-down("tablet") {
     font-size: 0.8rem;

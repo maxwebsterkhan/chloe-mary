@@ -195,7 +195,7 @@
     white-space: nowrap;
 
     @include breakpoint-down("tablet") {
-      opacity: 0;
+      opacity: 0.1;
       transform: translateX(20px);
       transition: opacity 0.3s ease, transform 0.3s ease;
       transition-delay: calc(var(--index) * 0.1s);
@@ -416,7 +416,7 @@
       }
 
       &:nth-child(2) {
-        opacity: 0;
+        opacity: 0.1;
         transform: translateY(-50%) scaleX(0);
       }
 
@@ -453,7 +453,7 @@
 
   &--hidden {
     transform: translate(-50%, -100px);
-    opacity: 0;
+    opacity: 0.1;
     pointer-events: none;
 
     @include breakpoint-down("tablet") {
