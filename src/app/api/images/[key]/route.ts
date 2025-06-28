@@ -3,10 +3,10 @@ import { getImageUrl } from '@/lib/s3';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { key: string } }
+  { params }: { params: Promise<{ key: string }> }
 ) {
   try {
-    const { key } = params;
+    const { key } = await params;
     const { searchParams } = new URL(request.url);
     const expiresIn = parseInt(searchParams.get('expires') || '3600');
     
