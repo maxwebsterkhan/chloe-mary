@@ -4,6 +4,7 @@ import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
 import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
+import FooterWrapper from "./_components/footer/footer-wrapper";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -246,7 +247,9 @@ export default function RootLayout({
         <LenisScrollWrapper>
           <Navigation />
           {children}
-          <Footer />
+          <FooterWrapper>
+            <Footer />
+          </FooterWrapper>
         </LenisScrollWrapper>
       </body>
     </html>
