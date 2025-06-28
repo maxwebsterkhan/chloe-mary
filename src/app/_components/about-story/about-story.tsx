@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./about-story.module.scss";
 import Image from "next/image";
+import { useS3Images } from "@/hooks/useS3Images";
 
 export default function AboutStory() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -15,6 +16,8 @@ export default function AboutStory() {
   const [isPhilosophyVisible, setIsPhilosophyVisible] = useState(false);
   const [isClosingVisible, setIsClosingVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const { images: aboutImages, loading } = useS3Images({ prefix: "about" });
 
   useEffect(() => {
     const content = contentRef.current;
@@ -93,24 +96,36 @@ export default function AboutStory() {
         <div className={styles.layout} ref={layoutRef}>
           <div ref={imageRef} className={styles.imageSection}>
             <div className={styles.imageWrapper}>
-              <Image
-                src="/chloe-mary-portrait.jpg"
-                alt="Chloe Mary - Photographer"
-                width={600}
-                height={800}
-                className={styles.image}
-                style={{ opacity: 1 - scrollProgress }}
-                priority
-              />
-              <Image
-                src="/chloe-mary-portrait-2.jpg"
-                alt="Chloe Mary - Photographer"
-                width={600}
-                height={800}
-                className={`${styles.image} ${styles.imageSecond}`}
-                style={{ opacity: scrollProgress }}
-                priority
-              />
+              {loading ? (
+                <div className={styles.imageLoadingPlaceholder}>Loading...</div>
+              ) : (
+                <>
+                  <Image
+                    src={
+                      aboutImages.find((img) =>
+                        img.key.includes("chloe-mary-portrait.jpg")
+                      )?.url || "/chloe-mary-portrait.jpg"
+                    }
+                    alt="Chloe Mary - Photographer"
+                    width={600}
+                    height={800}
+                    className={styles.image}
+                    style={{ opacity: 1 - scrollProgress }}
+                  />
+                  <Image
+                    src={
+                      aboutImages.find((img) =>
+                        img.key.includes("chloe-mary-portrait-2.jpg")
+                      )?.url || "/chloe-mary-portrait-2.jpg"
+                    }
+                    alt="Chloe Mary - Photographer"
+                    width={600}
+                    height={800}
+                    className={`${styles.image} ${styles.imageSecond}`}
+                    style={{ opacity: scrollProgress }}
+                  />
+                </>
+              )}
               <div className={styles.imageOverlay}></div>
             </div>
             <div className={styles.imageCaption}>
