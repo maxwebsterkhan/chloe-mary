@@ -1,0 +1,268 @@
+@import "../../_styles/tokens.scss";
+@import "../../_styles/breakpoints.scss";
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-secondary);
+
+  @include breakpoint-down("tablet") {
+    height: 100vh;
+  }
+}
+
+// Progress indicator
+.progressIndicator {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1001;
+
+  @include breakpoint-down("tablet") {
+    right: 1rem;
+    gap: 0.5rem;
+  }
+}
+
+.progressDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(139, 109, 66, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &.active {
+    background: var(--color-accent);
+    transform: scale(1.2);
+  }
+
+  &:hover {
+    background: rgba(139, 109, 66, 0.4);
+  }
+}
+
+.gallery {
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: fit-content;
+}
+
+.story {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  min-height: 100vh;
+
+  @include breakpoint-down("tablet") {
+    padding: 2rem 1rem;
+  }
+}
+
+.storyContent {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
+
+  @include breakpoint-down("tablet") {
+    gap: 2rem;
+  }
+}
+
+.storyHeader {
+  margin-bottom: 1rem;
+}
+
+.storyTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0 0 1rem 0;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  font-family: var(--font-inter-tight);
+
+  @include breakpoint-down("tablet") {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
+}
+
+.storyLocation {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+  font-family: var(--font-poppins);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  @include breakpoint-down("tablet") {
+    font-size: 0.9rem;
+  }
+}
+
+.storyImages {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem 0;
+
+  @include breakpoint-down("tablet") {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @include breakpoint-down("mobile") {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  @include breakpoint-down("tablet") {
+    border-radius: 3px;
+  }
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.storyFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 600px;
+
+  @include breakpoint-down("tablet") {
+    gap: 1.5rem;
+  }
+}
+
+.storyDescription {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+  font-family: var(--font-poppins);
+
+  @include breakpoint-down("tablet") {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.storyCta {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-poppins);
+
+  &:hover {
+    background: #7a5f3a;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include breakpoint-down("tablet") {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+  color: #666;
+  font-size: 1.1rem;
+  font-family: var(--font-poppins);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid var(--color-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Simple scroll indicator
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.6;
+
+  @include breakpoint-down("tablet") {
+    bottom: 1rem;
+    width: 40px;
+  }
+}
