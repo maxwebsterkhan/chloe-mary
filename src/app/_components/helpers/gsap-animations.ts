@@ -172,10 +172,19 @@ export const animationUtils = {
     
     try {
       // Try to use SplitText first
-      const split = new SplitText(element, { type });
+      const split = new SplitText(element, { 
+        type,
+        position: "relative"
+      });
       const targets = type === "chars" ? split.chars : type === "words" ? split.words : split.lines;
       
- 
+      // Remove any ARIA attributes that SplitText might have added
+      targets.forEach((target: Element) => {
+        const htmlTarget = target as HTMLElement;
+        htmlTarget.removeAttribute('aria-hidden');
+        htmlTarget.removeAttribute('aria-label');
+        htmlTarget.removeAttribute('role');
+      });
       
       return gsap.fromTo(
         targets,

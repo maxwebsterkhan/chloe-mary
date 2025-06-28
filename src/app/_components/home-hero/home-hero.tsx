@@ -106,12 +106,7 @@ export default function HomeHero() {
             ) : (
               <>
                 Told By You
-                <span
-                  aria-hidden="true"
-                  className={styles["home-hero__dot-separator"]}
-                >
-                  •
-                </span>
+                <span className={styles["home-hero__dot-separator"]}>•</span>
                 Captured by Chloe Mary
               </>
             )}
