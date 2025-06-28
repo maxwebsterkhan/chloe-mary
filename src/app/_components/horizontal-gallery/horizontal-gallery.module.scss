@@ -74,16 +74,15 @@
     outline-offset: 2px;
   }
 }
-
 .gallery {
-  position: relative;
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content; // allows the container to be as wide as needed
   height: 100%;
-  width: fit-content;
 }
 
-.story {
-  position: relative;
+.animationWrap {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -355,6 +354,12 @@
   overflow: hidden;
 }
 
+.heroImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .layoutUnified {
   display: flex;
   flex-direction: column;
@@ -367,11 +372,39 @@
 .heroImageContainerUnified {
   position: relative;
   width: 100%;
-  height: 50vh;
-  min-height: 320px;
-  max-height: 480px;
+  height: 400px;
+  min-height: 200px;
+  max-height: 600px;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.horizontal {
+  position: relative;
+  width: 100vw;
+  min-height: 100dvh; // <--- This is crucial!
+  overflow: hidden;
+}
+
+.animationWrap {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  height: 100%;
+}
+.story {
+  background-color: red;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  width: 100dvw;
+  min-width: 100dvw;
+  max-width: 100dvw;
+  min-height: 100dvh;
+  flex: 0 0 100dvw;
+  box-sizing: border-box;
 }
 
 .heroImageUnified {
@@ -379,6 +412,7 @@
   width: 100%;
   height: 100%;
   border-radius: 2px;
+  z-index: 1;
 }
 
 .heroOverlayUnified {
@@ -390,9 +424,9 @@
   padding: tokens.$spacing-xl tokens.$spacing-lg;
   background: linear-gradient(
     135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.28) 100%
   );
   color: var(--color-secondary);
   z-index: 2;
@@ -529,4 +563,114 @@
   margin-left: auto;
   min-width: 200px;
   text-align: center;
+}
+
+// Parallax layout styles
+.parallaxContainer {
+  position: relative;
+  width: 100%;
+  background: var(--color-primary);
+  overflow: hidden;
+}
+
+.storySection {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.$spacing-xl 0;
+  // min-height: 100vh; // removed for natural flow
+
+  @include breakpoint-down("tablet") {
+    padding: tokens.$spacing-lg 0;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-md 0;
+  }
+}
+
+.storySection .storyContent {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 tokens.$spacing-lg;
+
+  @include breakpoint-down("tablet") {
+    padding: 0 tokens.$spacing-md;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: 0 tokens.$spacing-sm;
+  }
+}
+
+.storySection .heroImageContainerUnified {
+  min-height: 400px;
+  max-height: 600px;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  @include breakpoint-down("tablet") {
+    min-height: 300px;
+    max-height: 450px;
+  }
+
+  @include breakpoint-down("mobile") {
+    min-height: 250px;
+    max-height: 350px;
+  }
+}
+
+.storySection .thumbsRowUnified {
+  justify-content: center;
+  margin-top: tokens.$spacing-lg;
+  gap: tokens.$spacing-md;
+  flex-wrap: wrap;
+
+  @include breakpoint-down("tablet") {
+    gap: tokens.$spacing-sm;
+    margin-top: tokens.$spacing-md;
+  }
+}
+
+.storySection .thumbButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  transition: all 0.3s tokens.$animation-timing-function;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  @include breakpoint-down("tablet") {
+    width: 80px;
+    height: 80px;
+  }
+
+  @include breakpoint-down("mobile") {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.storySection .activeThumb {
+  box-shadow: 0 0 0 4px var(--color-accent), 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  z-index: 3;
+
+  &:hover {
+    transform: scale(1.05) translateY(-4px);
+  }
+}
+
+.storySection .bottomSectionUnified {
+  margin-top: tokens.$spacing-lg;
+  padding: 0;
+
+  @include breakpoint-down("tablet") {
+    margin-top: tokens.$spacing-md;
+  }
 }
