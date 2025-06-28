@@ -49,11 +49,13 @@ a {
   max-width: 100%;
   overflow-x: hidden;
 }
+
 body {
   position: relative;
   width: 100%;
   background-color: var(--color-secondary);
   z-index: 1;
+  overflow-x: hidden;
 }
 
 .footer-element {

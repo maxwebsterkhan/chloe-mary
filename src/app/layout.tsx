@@ -2,9 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
 import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
-import Footer from "./_components/footer/footer";
 import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
-import FooterWrapper from "./_components/footer/footer-wrapper";
+import FooterBoundary from "./_components/footer/footer-boundary";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -246,10 +245,8 @@ export default function RootLayout({
       >
         <LenisScrollWrapper>
           <Navigation />
-          {children}
-          <FooterWrapper>
-            <Footer />
-          </FooterWrapper>
+          <main id="main">{children}</main>
+          <FooterBoundary />
         </LenisScrollWrapper>
       </body>
     </html>
