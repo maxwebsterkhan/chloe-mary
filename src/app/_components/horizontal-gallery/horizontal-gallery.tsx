@@ -326,7 +326,7 @@ export default function HorizontalGallery() {
                                   }`}
                                   fill
                                   className={styles.thumbImageUnified}
-                                  sizes="100px"
+                                  loading="lazy"
                                 />
                               </button>
                             ))}
