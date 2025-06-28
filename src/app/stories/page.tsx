@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import StoriesHero from "@/app/_components/stories-hero/stories-hero";
 import HorizontalGallery from "@/app/_components/horizontal-gallery/horizontal-gallery";
+import StoriesFooter from "@/app/_components/stories-footer/stories-footer";
 
 export const metadata: Metadata = {
   title: "Wedding Photography Stories | Chloe Mary Photography Bristol",
@@ -131,6 +132,7 @@ export default function Page() {
       <main>
         <StoriesHero />
         <HorizontalGallery />
+        <StoriesFooter />
       </main>
     </>
   );

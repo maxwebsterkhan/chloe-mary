@@ -656,13 +656,16 @@ export default function ConnectPage() {
       }
     );
 
-    if (iframeContainerRef.current) {
-      iframeObserver.observe(iframeContainerRef.current);
+    // Capture the ref value to avoid stale closure issues
+    const currentIframeContainer = iframeContainerRef.current;
+
+    if (currentIframeContainer) {
+      iframeObserver.observe(currentIframeContainer);
     }
 
     return () => {
-      if (iframeContainerRef.current) {
-        iframeObserver.unobserve(iframeContainerRef.current);
+      if (currentIframeContainer) {
+        iframeObserver.unobserve(currentIframeContainer);
       }
     };
   }, []);
