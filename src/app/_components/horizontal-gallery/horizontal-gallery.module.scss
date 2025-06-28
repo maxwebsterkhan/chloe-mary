@@ -378,13 +378,18 @@
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
 
-.horizontal {
-  position: relative;
-  width: 100vw;
-  min-height: 100dvh; // <--- This is crucial!
-  overflow: hidden;
+  @include breakpoint-down("tablet") {
+    height: 300px;
+    min-height: 250px;
+    max-height: 400px;
+  }
+
+  @include breakpoint-down("mobile") {
+    height: 250px;
+    min-height: 200px;
+    max-height: 300px;
+  }
 }
 
 .animationWrap {
@@ -398,13 +403,6 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-
-  width: 100dvw;
-  min-width: 100dvw;
-  max-width: 100dvw;
-  min-height: 100dvh;
-  flex: 0 0 100dvw;
-  box-sizing: border-box;
 }
 
 .heroImageUnified {
@@ -422,19 +420,14 @@
   right: 0;
   bottom: 0;
   padding: tokens.$spacing-xl tokens.$spacing-lg;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.18) 0%,
-    rgba(0, 0, 0, 0.1) 50%,
-    rgba(0, 0, 0, 0.28) 100%
-  );
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
   color: var(--color-secondary);
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(0.5px);
 
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-lg tokens.$spacing-md;
@@ -536,33 +529,108 @@
 
 .bottomSectionUnified {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: tokens.$spacing-xl;
-  margin-top: tokens.$spacing-xl;
-  padding: 0 tokens.$spacing-xl;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+  padding: 32px 24px 0 24px;
+  position: relative;
+
+  // Add a subtle separator line
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+  }
 
   @include breakpoint-down("tablet") {
-    flex-direction: column;
-    gap: tokens.$spacing-md;
-    padding: 0 tokens.$spacing-md;
+    gap: 20px;
+    margin-top: 24px;
+    padding: 24px 16px 0 16px;
+
+    &::before {
+      width: 40px;
+    }
+  }
+
+  @include breakpoint-down("mobile") {
+    gap: 16px;
+    margin-top: 20px;
+    padding: 20px 12px 0 12px;
+
+    &::before {
+      width: 30px;
+    }
   }
 }
 
 .bottomSectionUnified .storyDescription {
-  flex: 2;
-  font-size: tokens.$font-size-body;
-  color: var(--color-secondary);
+  flex: none;
+  font-size: tokens.$font-size-md;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0;
+  text-align: center;
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: 500px;
+  font-style: italic;
+  letter-spacing: 0.2px;
+
+  @include breakpoint-down("tablet") {
+    font-size: tokens.$font-size-sm;
+    max-width: 400px;
+  }
+  @include breakpoint-down("mobile") {
+    font-size: tokens.$font-size-xs;
+    max-width: 300px;
+    line-height: 1.6;
+  }
 }
 
 .bottomSectionUnified .storyCta {
-  flex: 1;
-  align-self: flex-end;
-  margin-left: auto;
-  min-width: 200px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-poppins);
+  font-weight: 500;
+  font-size: tokens.$font-size-sm;
+  letter-spacing: tokens.$letter-spacing-wide;
+  text-transform: uppercase;
+  border-radius: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s tokens.$animation-timing-function;
+  min-width: 180px;
   text-align: center;
+
+  &:hover {
+    background: #7a5f3a;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  @include breakpoint-down("mobile") {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 0;
+    font-size: tokens.$font-size-xs;
+    border-radius: 24px;
+  }
 }
 
 // Parallax layout styles
@@ -580,7 +648,6 @@
   align-items: center;
   justify-content: center;
   padding: tokens.$spacing-xl 0;
-  // min-height: 100vh; // removed for natural flow
 
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-lg 0;
@@ -594,14 +661,12 @@
 .storySection .storyContent {
   max-width: 1200px;
   width: 100%;
-  padding: 0 tokens.$spacing-lg;
-
+  // padding: 0 tokens.$spacing-lg; // Remove horizontal padding
   @include breakpoint-down("tablet") {
-    padding: 0 tokens.$spacing-md;
+    // padding: 0 tokens.$spacing-md;
   }
-
   @include breakpoint-down("mobile") {
-    padding: 0 tokens.$spacing-sm;
+    // padding: 0 tokens.$spacing-sm;
   }
 }
 
@@ -673,4 +738,176 @@
   @include breakpoint-down("tablet") {
     margin-top: tokens.$spacing-md;
   }
+}
+
+.horizontalSections {
+  position: relative;
+  width: 100vw;
+
+  overflow: hidden;
+}
+
+.embla {
+  position: relative;
+  margin: 0 auto;
+  --slide-height: 19rem;
+  --slide-spacing: 0.5rem;
+  --slide-size: 90%;
+  background: var(--color-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 2rem 0 2.5rem 0;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+
+  // First slide - add left padding to match site guttering
+  &:first-child {
+    padding-left: max(var(--slide-spacing), 2rem);
+  }
+
+  // Last slide - add right padding to match site guttering
+  &:last-child {
+    padding-right: 2rem;
+  }
+}
+
+.embla__parallax {
+  border-radius: 2px;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-primary);
+}
+.embla__slide__img {
+  border-radius: 2px;
+  display: block;
+  height: var(--slide-height);
+  width: 100%;
+  object-fit: cover;
+}
+.embla__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+.embla__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 3.6rem;
+  height: 3.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+}
+.embla__button:disabled {
+  color: var(--detail-high-contrast);
+}
+.embla__button__svg {
+  width: 35%;
+  height: 35%;
+}
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+.embla__dot {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+.embla__dot:after {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  content: "";
+}
+.embla__dot--selected:after {
+  box-shadow: inset 0 0 0 0.2rem var(--text-body);
+}
+.embla__parallax__layer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.embla__parallax__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(115% + (var(--slide-spacing) * 2));
+  height: 100%;
+  will-change: transform;
+}
+
+.embla__parallax__img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  image-rendering: auto;
+}
+
+.embla__slide__content {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 1rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.embla__progressBarWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.embla__progressBar {
+  height: 100%;
+  background: var(--color-accent, #b89b67);
+  border-radius: 0;
+  box-shadow: 0 0 8px rgba(184, 155, 103, 0.3);
 }

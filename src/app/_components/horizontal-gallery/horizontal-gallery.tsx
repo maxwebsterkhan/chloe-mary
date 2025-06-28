@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useEmblaCarousel from "embla-carousel-react";
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons,
+} from "./EmblaCarouselArrowButtons";
 import styles from "./horizontal-gallery.module.scss";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface GalleryStory {
   id: string;
@@ -82,160 +84,223 @@ const mockGalleryStories: GalleryStory[] = [
   },
 ];
 
+const TWEEN_FACTOR_BASE = 0.15;
+
 export default function HorizontalGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const storyRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [galleryStories] = useState<GalleryStory[]>(mockGalleryStories);
   const [activeThumbs, setActiveThumbs] = useState<number[]>(
     new Array(galleryStories.length).fill(0)
   );
-  const thumbRefs = useRef<(HTMLButtonElement | null)[][]>(
-    galleryStories.map(() => [])
-  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    dragFree: true,
+    align: "start",
+  });
+
+  // Progress bar state
+  const [progress, setProgress] = useState(0);
+
+  // Parallax refs
+  const tweenNodes = useRef<(HTMLElement | null)[]>([]);
+  const tweenFactor = useRef(0);
+
+  // Parallax effect logic
+  const setTweenNodes = useCallback((emblaApi: any): void => {
+    tweenNodes.current = emblaApi.slideNodes().map((slideNode: HTMLElement) => {
+      return slideNode.querySelector(`.${styles.embla__parallax__bg}`);
+    });
+  }, []);
+
+  const setTweenFactor = useCallback((emblaApi: any) => {
+    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
+  }, []);
+
+  const tweenParallax = useCallback((emblaApi: any, eventName?: string) => {
+    const engine = emblaApi.internalEngine();
+    const scrollProgress = emblaApi.scrollProgress();
+    const slidesInView = emblaApi.slidesInView();
+    const isScrollEvent = eventName === "scroll";
+
+    emblaApi
+      .scrollSnapList()
+      .forEach((scrollSnap: number, snapIndex: number) => {
+        let diffToTarget = scrollSnap - scrollProgress;
+        const slidesInSnap = engine.slideRegistry[snapIndex];
+
+        slidesInSnap.forEach((slideIndex: number) => {
+          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
+
+          if (engine.options.loop) {
+            engine.slideLooper.loopPoints.forEach((loopItem: any) => {
+              const target = loopItem.target();
+              if (slideIndex === loopItem.index && target !== 0) {
+                const sign = Math.sign(target);
+                if (sign === -1) {
+                  diffToTarget = scrollSnap - (1 + scrollProgress);
+                }
+                if (sign === 1) {
+                  diffToTarget = scrollSnap + (1 - scrollProgress);
+                }
+              }
+            });
+          }
+
+          const translate = diffToTarget * (-1 * tweenFactor.current) * 100;
+          const tweenNode = tweenNodes.current[slideIndex];
+          if (tweenNode) {
+            (
+              tweenNode as HTMLElement
+            ).style.transform = `translateX(${translate}%)`;
+          }
+        });
+      });
+  }, []);
+
+  // Progress bar effect
+  useEffect(() => {
+    if (!emblaApi) return;
+    const updateProgress = () => {
+      setProgress(emblaApi.scrollProgress());
+    };
+    updateProgress();
+    emblaApi.on("scroll", updateProgress);
+    return () => {
+      emblaApi.off("scroll", updateProgress);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!emblaApi) return;
+    setTweenNodes(emblaApi);
+    setTweenFactor(emblaApi);
+    tweenParallax(emblaApi);
+    emblaApi
+      .on("reInit", setTweenNodes)
+      .on("reInit", setTweenFactor)
+      .on("reInit", tweenParallax)
+      .on("scroll", tweenParallax)
+      .on("slideFocus", tweenParallax);
+  }, [emblaApi, setTweenNodes, setTweenFactor, tweenParallax]);
 
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-    // Initialize story refs array
-    storyRefs.current = storyRefs.current.slice(0, galleryStories.length);
-
-    // Create parallax animations for each story
-    storyRefs.current.forEach((storyRef) => {
-      if (!storyRef) return;
-
-      const heroImage = storyRef.querySelector(`.${styles.heroImageWrapper}`);
-      const content = storyRef.querySelector(`.${styles.storyContent}`);
-
-      if (heroImage && content) {
-        // Parallax effect for hero image
-        gsap.to(heroImage, {
-          yPercent: -20,
-          ease: "none",
-          scrollTrigger: {
-            trigger: storyRef,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-
-        // Fade in content as story enters viewport
-        gsap.fromTo(
-          content,
-          {
-            opacity: 0,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: storyRef,
-              start: "top 80%",
-              end: "top 20%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [galleryStories]);
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className={styles.parallaxContainer} ref={containerRef}>
-      {galleryStories.map((story, index) => (
-        <div
-          key={story.id}
-          ref={(el) => {
-            storyRefs.current[index] = el;
-          }}
-          className={styles.storySection}
-          data-story-id={story.id}
-        >
-          <div className={styles.storyContent}>
-            <div className={styles.layoutUnified}>
-              <div className={styles.heroImageContainerUnified}>
-                <div className={styles.heroImageWrapper}>
-                  <Image
-                    src={story.images[activeThumbs[index]]}
-                    alt={`${story.title} - Hero`}
-                    fill
-                    className={styles.heroImageUnified}
-                    sizes="100vw"
-                    priority={index < 2}
-                  />
+    <div className={styles.embla}>
+      <div className={styles.embla__viewport} ref={emblaRef}>
+        <div className={styles.embla__container}>
+          {galleryStories.map((story, index) => (
+            <div className={styles.embla__slide} key={story.id}>
+              <div className={styles.embla__parallax}>
+                <div className={styles.embla__parallax__layer}>
+                  <div className={styles.embla__slide__content}>
+                    <div className={styles.layoutUnified}>
+                      <div className={styles.heroImageContainerUnified}>
+                        <div className={styles.heroImageWrapper}>
+                          <div className={styles.embla__parallax__bg}>
+                            <Image
+                              src={story.images[activeThumbs[index]]}
+                              alt={`${story.title} - Hero`}
+                              fill
+                              className={`${styles.heroImageUnified} ${styles.embla__parallax__img}`}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                              priority={index < 2}
+                              quality={90}
+                            />
+                          </div>
+                        </div>
+                        <div className={styles.heroOverlayUnified}>
+                          <h2 className={styles.storyTitle}>{story.title}</h2>
+                          <p className={styles.storyLocation}>
+                            {story.location}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        className={styles.thumbsRowUnified}
+                        role="tablist"
+                        aria-label={`Gallery thumbnails for ${story.title}`}
+                      >
+                        {story.images.map((image, thumbIdx) => (
+                          <button
+                            key={thumbIdx}
+                            className={
+                              styles.thumbButton +
+                              (activeThumbs[index] === thumbIdx
+                                ? " " + styles.activeThumb
+                                : "")
+                            }
+                            aria-selected={activeThumbs[index] === thumbIdx}
+                            aria-label={`Show image ${thumbIdx + 1} for ${
+                              story.title
+                            }`}
+                            tabIndex={activeThumbs[index] === thumbIdx ? 0 : -1}
+                            onClick={() => {
+                              setActiveThumbs((prev) => {
+                                const newThumbs = [...prev];
+                                newThumbs[index] = thumbIdx;
+                                return newThumbs;
+                              });
+                            }}
+                            type="button"
+                            role="tab"
+                          >
+                            <span className="sr-only">{`Show image ${
+                              thumbIdx + 1
+                            }`}</span>
+                            <Image
+                              src={image}
+                              alt={`Thumbnail ${thumbIdx + 1} for ${
+                                story.title
+                              }`}
+                              fill
+                              className={styles.thumbImageUnified}
+                              sizes="100px"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                      <div className={styles.bottomSectionUnified}>
+                        <p className={styles.storyDescription}>
+                          {story.description}
+                        </p>
+                        <a href={story.ctaLink} className={styles.storyCta}>
+                          {story.ctaText}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.heroOverlayUnified}>
-                  <h2 className={styles.storyTitle}>{story.title}</h2>
-                  <p className={styles.storyLocation}>{story.location}</p>
-                </div>
-              </div>
-              <div
-                className={styles.thumbsRowUnified}
-                role="tablist"
-                aria-label={`Gallery thumbnails for ${story.title}`}
-              >
-                {story.images.map((image, thumbIdx) => (
-                  <button
-                    key={thumbIdx}
-                    ref={(el) => {
-                      if (thumbRefs.current[index]) {
-                        thumbRefs.current[index][thumbIdx] = el;
-                      }
-                    }}
-                    className={
-                      styles.thumbButton +
-                      (activeThumbs[index] === thumbIdx
-                        ? " " + styles.activeThumb
-                        : "")
-                    }
-                    aria-selected={activeThumbs[index] === thumbIdx}
-                    aria-label={`Show image ${thumbIdx + 1} for ${story.title}`}
-                    tabIndex={activeThumbs[index] === thumbIdx ? 0 : -1}
-                    onClick={() => {
-                      console.log(
-                        `Clicked thumbnail ${thumbIdx} for story ${story.title}`
-                      );
-                      setActiveThumbs((prev) => {
-                        const newThumbs = [...prev];
-                        newThumbs[index] = thumbIdx;
-                        return newThumbs;
-                      });
-                    }}
-                    type="button"
-                    role="tab"
-                  >
-                    <span className="sr-only">{`Show image ${
-                      thumbIdx + 1
-                    }`}</span>
-                    <Image
-                      src={image}
-                      alt={`Thumbnail ${thumbIdx + 1} for ${story.title}`}
-                      fill
-                      className={styles.thumbImageUnified}
-                      sizes="100px"
-                    />
-                  </button>
-                ))}
-              </div>
-              <div className={styles.bottomSectionUnified}>
-                <p className={styles.storyDescription}>{story.description}</p>
-                <a href={story.ctaLink} className={styles.storyCta}>
-                  {story.ctaText}
-                </a>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </section>
+      </div>
+      {/* Progress Bar */}
+      <div className={styles.embla__progressBarWrap}>
+        <div
+          className={styles.embla__progressBar}
+          style={{ width: `${Math.max(0, Math.min(1, progress)) * 100}%` }}
+        />
+      </div>
+      <div className={styles.embla__controls}>
+        <div className={styles.embla__buttons}>
+          <PrevButton
+            onClick={onPrevButtonClick}
+            disabled={prevBtnDisabled}
+            className={styles.embla__button}
+          />
+          <NextButton
+            onClick={onNextButtonClick}
+            disabled={nextBtnDisabled}
+            className={styles.embla__button}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // Modern SEO & Performance Optimizations for 2025 (Stable Version)
   experimental: {
     // Optimize bundling for better performance
-    optimizePackageImports: ['lucide-react', 'gsap'],
+    optimizePackageImports: ['lucide-react', 'gsap', '@phosphor-icons/react'],
   },
   
   // Image configuration - direct serving without optimization
