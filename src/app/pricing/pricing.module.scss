@@ -800,6 +800,7 @@
 // New Row-Based Inclusions Section
 .inclusionsSection {
   padding-top: tokens.$spacing-xxl;
+  padding-bottom: tokens.$spacing-lg;
   position: relative;
 
   @include breakpoint-down("mobile") {
