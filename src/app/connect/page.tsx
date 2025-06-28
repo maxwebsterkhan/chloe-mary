@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import styles from "./connect.module.scss";
+import { Skeleton } from "@radix-ui/themes";
 
 export default function ConnectPage() {
   // Refs for animations
@@ -24,6 +25,12 @@ export default function ConnectPage() {
   const spacer3Ref = useRef<HTMLDivElement>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
+
+  // Iframe optimization states
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [iframeVisible, setIframeVisible] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeContainerRef = useRef<HTMLDivElement>(null);
 
   // Hero animations
   useEffect(() => {
@@ -632,6 +639,39 @@ export default function ConnectPage() {
     }
   }, []);
 
+  useEffect(() => {
+    // Intersection Observer for iframe lazy loading
+    const iframeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIframeVisible(true);
+            iframeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: "200px", // Start loading 200px before the iframe comes into view
+        threshold: 0.1,
+      }
+    );
+
+    if (iframeContainerRef.current) {
+      iframeObserver.observe(iframeContainerRef.current);
+    }
+
+    return () => {
+      if (iframeContainerRef.current) {
+        iframeObserver.unobserve(iframeContainerRef.current);
+      }
+    };
+  }, []);
+
+  // Handle iframe load event
+  const handleIframeLoad = () => {
+    setIframeLoaded(true);
+  };
+
   return (
     <div className={styles.connectPage}>
       {/* Hero Section */}
@@ -798,14 +838,23 @@ export default function ConnectPage() {
                   </p>
                 </div>
 
-                <div className={styles.iframeWrapper}>
-                  <iframe
-                    src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
-                    width="100%"
-                    height="800"
-                    title="Contact Form - Chloe Mary Photography"
-                    className={styles.contactIframe}
-                  ></iframe>
+                <div className={styles.iframeWrapper} ref={iframeContainerRef}>
+                  {!iframeVisible && <Skeleton width="100%" height="800px" />}
+                  {iframeVisible && !iframeLoaded && (
+                    <Skeleton width="100%" height="800px" />
+                  )}
+                  {iframeVisible && (
+                    <iframe
+                      src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
+                      width="100%"
+                      height="800"
+                      title="Contact Form - Chloe Mary Photography"
+                      className={styles.contactIframe}
+                      ref={iframeRef}
+                      onLoad={handleIframeLoad}
+                      style={{ display: iframeLoaded ? "block" : "none" }}
+                    ></iframe>
+                  )}
                 </div>
               </div>
             </div>
