@@ -19,25 +19,25 @@ export default function Footer() {
   useEffect(() => {
     if (!footerRef.current) return;
 
-    // Set initial states to prevent glitches with varied properties
-    if (lineRef.current) {
-      gsap.set(lineRef.current, { opacity: 0, scaleX: 0 });
-    }
-    if (titleLine1Ref.current) {
-      gsap.set(titleLine1Ref.current, { opacity: 0, x: -60, scale: 0.95 });
-    }
-    if (titleLine2Ref.current) {
-      gsap.set(titleLine2Ref.current, { opacity: 0, x: 60, scale: 0.95 });
-    }
-    if (sideRef.current) {
-      gsap.set(sideRef.current, { opacity: 0, scale: 0.8, rotation: 5 });
-    }
-    if (copyrightRef.current) {
-      gsap.set(copyrightRef.current, { opacity: 0, y: 30 });
-    }
-
-    // Small delay to ensure ScrollSmoother is ready
+    // Small delay to ensure hydration is complete before any GSAP operations
     const timer = setTimeout(() => {
+      // Set initial states to prevent glitches with varied properties
+      if (lineRef.current) {
+        gsap.set(lineRef.current, { opacity: 0, scaleX: 0 });
+      }
+      if (titleLine1Ref.current) {
+        gsap.set(titleLine1Ref.current, { opacity: 0, x: -60, scale: 0.95 });
+      }
+      if (titleLine2Ref.current) {
+        gsap.set(titleLine2Ref.current, { opacity: 0, x: 60, scale: 0.95 });
+      }
+      if (sideRef.current) {
+        gsap.set(sideRef.current, { opacity: 0, scale: 0.8, rotation: 5 });
+      }
+      if (copyrightRef.current) {
+        gsap.set(copyrightRef.current, { opacity: 0, y: 30 });
+      }
+
       // Check if footer is already in view
       const rect = footerRef.current?.getBoundingClientRect();
       const isInView = rect && rect.top < window.innerHeight * 0.75;
@@ -55,7 +55,7 @@ export default function Footer() {
           });
         }
       }
-    }, 100);
+    }, 0);
 
     function animateFooterElements() {
       // Animated line first

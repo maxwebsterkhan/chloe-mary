@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
+import { Skeleton } from "@radix-ui/themes";
 import styles from "./s3-gallery.module.scss";
 
 interface S3GalleryProps {
@@ -22,8 +23,15 @@ export default function S3Gallery({
   if (loading && showLoadingState) {
     return (
       <div className={styles.gallery}>
-        <div className={styles.loading}>
-          <p>Loading gallery images...</p>
+        <div
+          className={styles.grid}
+          style={{ "--columns": columns } as React.CSSProperties}
+        >
+          {Array.from({ length: 12 }).map((_, index) => (
+            <div key={index} className={styles.imageItem}>
+              <Skeleton width="100%" height="300px" />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -43,14 +51,7 @@ export default function S3Gallery({
   }
 
   if (images.length === 0) {
-    return (
-      <div className={styles.gallery}>
-        <div className={styles.empty}>
-          <p>No images found in the gallery.</p>
-          {prefix && <p>Looking in folder: {prefix}</p>}
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (
