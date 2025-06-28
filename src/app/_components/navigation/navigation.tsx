@@ -131,7 +131,7 @@ export default function Navigation() {
     >
       <Link href="/" className={styles.navigation__logo}>
         <Image
-          src="/cm-icon.png"
+          src="/logo.webp"
           alt="CM Logo"
           width={66}
           height={32}

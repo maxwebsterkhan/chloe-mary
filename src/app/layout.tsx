@@ -119,11 +119,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/cm-icon.png", sizes: "32x32", type: "image/png" },
-      { url: "/cm-icon.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo.webp", sizes: "32x32", type: "image/webp" },
+      { url: "/logo.webp", sizes: "16x16", type: "image/webp" },
     ],
     shortcut: "/favicon.ico",
-    apple: [{ url: "/cm-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/logo.webp", sizes: "180x180", type: "image/webp" }],
   },
   alternates: {
     canonical: "https://www.chloemary.com",
@@ -235,7 +235,7 @@ export default function RootLayout({
                 "https://www.facebook.com/chloemary.photography",
               ],
               image: "https://www.chloemary.com/chloe-mary-portrait.jpg",
-              logo: "https://www.chloemary.com/cm-icon.png",
+              logo: "https://www.chloemary.com/logo.webp",
             }),
           }}
         />
