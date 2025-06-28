@@ -20,8 +20,8 @@ const FooterWrapper = ({
   // Helper to (re)initialize ScrollTrigger
   const initScrollTrigger = () => {
     const footer = footerRef.current;
-    const main = document.querySelector("#main");
-    if (!footer || !main) return;
+    const boundary = document.querySelector("#boundary");
+    if (!footer || !boundary) return;
 
     // Kill previous instances
     scrollTriggerRef.current?.kill();
@@ -35,7 +35,7 @@ const FooterWrapper = ({
     timelineRef.current = uncover;
 
     scrollTriggerRef.current = ScrollTrigger.create({
-      trigger: main,
+      trigger: boundary,
       start: "bottom bottom",
       end: `+=${footerHeight}`,
       animation: uncover,
@@ -46,17 +46,17 @@ const FooterWrapper = ({
   useLayoutEffect(() => {
     initScrollTrigger();
 
-    // Observe main element for size changes
-    const main = document.querySelector("#main");
-    if (!main) return;
+    // Observe boundary element for size changes
+    const boundary = document.querySelector("#boundary");
+    if (!boundary) return;
 
     const resizeObserver = new ResizeObserver(() => {
-      // Re-init ScrollTrigger on main height change
+      // Re-init ScrollTrigger on boundary height change
       initScrollTrigger();
       ScrollTrigger.refresh();
     });
 
-    resizeObserver.observe(main);
+    resizeObserver.observe(boundary);
 
     return () => {
       resizeObserver.disconnect();

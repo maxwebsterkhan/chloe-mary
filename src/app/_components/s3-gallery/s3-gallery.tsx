@@ -65,10 +65,23 @@ export default function S3Gallery({
             key={image.key}
             className={styles.imageItem}
             onClick={() => setSelectedImage(image.url)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedImage(image.url);
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`View ${image.key
+              .replace(/[-_]/g, " ")
+              .replace(/\.[^/.]+$/, "")} in full size`}
           >
             <Image
               src={image.url}
-              alt={`Gallery image: ${image.key}`}
+              alt={`Wedding photography: ${image.key
+                .replace(/[-_]/g, " ")
+                .replace(/\.[^/.]+$/, "")}`}
               fill
               className={styles.image}
               sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
@@ -92,6 +105,7 @@ export default function S3Gallery({
             <button
               className={styles.closeButton}
               onClick={() => setSelectedImage(null)}
+              aria-label="Close image view"
             >
               ×
             </button>

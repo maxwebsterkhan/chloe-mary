@@ -736,12 +736,12 @@ export default function ConnectPage() {
               </div>
 
               <div ref={processRef} className={styles.processSection}>
-                <h3 className={styles.processTitle}>My Process</h3>
+                <h2 className={styles.processTitle}>My Process</h2>
                 <div className={styles.processSteps}>
                   <div className={styles.processStep}>
                     <div className={styles.stepNumber}>01</div>
                     <div className={styles.stepContent}>
-                      <h4 className={styles.stepTitle}>Initial Enquiry</h4>
+                      <h3 className={styles.stepTitle}>Initial Enquiry</h3>
                       <p className={styles.stepDescription}>
                         Share your wedding details, vision, and what drew you to
                         my work. I love learning about what makes your
@@ -753,7 +753,7 @@ export default function ConnectPage() {
                   <div className={styles.processStep}>
                     <div className={styles.stepNumber}>02</div>
                     <div className={styles.stepContent}>
-                      <h4 className={styles.stepTitle}>Personal Response</h4>
+                      <h3 className={styles.stepTitle}>Personal Response</h3>
                       <p className={styles.stepDescription}>
                         I&apos;ll send you a thoughtful, personalised response
                         within a few days, including my availability, package
@@ -765,9 +765,9 @@ export default function ConnectPage() {
                   <div className={styles.processStep}>
                     <div className={styles.stepNumber}>03</div>
                     <div className={styles.stepContent}>
-                      <h4 className={styles.stepTitle}>
+                      <h3 className={styles.stepTitle}>
                         Complimentary Consultation
-                      </h4>
+                      </h3>
                       <p className={styles.stepDescription}>
                         We&apos;ll have a relaxed video chat to get to know each
                         other better. This helps me understand your vision and
@@ -795,11 +795,11 @@ export default function ConnectPage() {
               <div ref={readyRef} className={styles.readySection}>
                 <div className={styles.readyContent}>
                   <div className={styles.readyLabel}>ARE YOU READY?</div>
-                  <h3 className={styles.readyTitle}>
+                  <h2 className={styles.readyTitle}>
                     Let&apos;s Create Something
                     <span className={styles.readyAccent}>Extraordinary</span>
                     Together
-                  </h3>
+                  </h2>
                   <div className={styles.readyDivider}>
                     <div className={styles.readyLine}></div>
                     <div className={styles.readyDot}></div>

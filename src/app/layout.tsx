@@ -4,6 +4,7 @@ import "./styles/globals.scss";
 import Navigation from "./_components/navigation/navigation";
 import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
 import FooterBoundary from "./_components/footer/footer-boundary";
+import SkipLink from "./_components/skip-link";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -243,9 +244,10 @@ export default function RootLayout({
       <body
         className={`${interTight.variable} ${geistMono.variable} ${poppins.variable}`}
       >
+        <SkipLink />
         <LenisScrollWrapper>
           <Navigation />
-          <main id="main">{children}</main>
+          <div id="boundary">{children}</div>
           <FooterBoundary />
         </LenisScrollWrapper>
       </body>
