@@ -7,12 +7,17 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'gsap'],
   },
   
-  // Image optimization for better LCP scores
+  // Image configuration - direct serving without optimization
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year
+    unoptimized: true, // Serve images directly without Vercel processing
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   
   // Security headers for better SEO trust signals

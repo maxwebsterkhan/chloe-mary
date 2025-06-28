@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import S3Gallery from "@/app/_components/s3-gallery/s3-gallery";
 
 export const metadata: Metadata = {
   title: "Wedding Photography Stories | Chloe Mary Photography Bristol",
@@ -125,7 +126,24 @@ export default function Page() {
           }),
         }}
       />
-      <h1>Stories</h1>
+      <main style={{ padding: "2rem 0" }}>
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>Stories</h1>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              color: "#666",
+              maxWidth: "600px",
+              margin: "0 auto",
+            }}
+          >
+            Authentic moments captured through contemporary documentary
+            photography. Each story is unique, showcasing the genuine emotions
+            and candid beauty of real love.
+          </p>
+        </div>
+        <S3Gallery prefix="stories" columns={3} />
+      </main>
     </>
   );
 }
