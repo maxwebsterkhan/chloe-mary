@@ -67,7 +67,7 @@
 }
 
 .section {
-  padding: tokens.$spacing-xxl 0;
+  padding: tokens.$spacing-xl 0;
   background: var(--color-secondary);
 
   &:nth-child(even) {
@@ -128,7 +128,7 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-xl 0;
+    padding: tokens.$spacing-lg 0;
   }
 }
 
