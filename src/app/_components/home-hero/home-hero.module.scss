@@ -128,12 +128,12 @@
 
   &__subtitle {
     display: flex;
-    align-items: c;
+    align-items: centre;
     font-family: var(--font-poppins);
     font-size: tokens.$font-size-lg;
     font-weight: 400;
     line-height: 1.2;
-    letter-spacing: tokens.$letter-spacing-tight;
+    letter-spacing: tokens.$letter-spacing-extra-tight;
     color: var(--color-primary);
     margin-top: tokens.$spacing-xl;
     text-align: left;
