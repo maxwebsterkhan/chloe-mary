@@ -7,6 +7,24 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'gsap', '@phosphor-icons/react'],
   },
   
+  // Redirect configuration for old site URLs
+  async redirects() {
+    return [
+      // Redirect old fees page to new pricing page
+      {
+        source: '/fees',
+        destination: '/pricing',
+        permanent: true,
+      },
+      // Handle old image paths
+      {
+        source: '/uploads/:path*',
+        destination: '/img/:path*',
+        permanent: true,
+      }
+    ];
+  },
+  
   // Image configuration - direct serving without optimization
   images: {
     unoptimized: true, // Serve images directly without Vercel processing
@@ -46,6 +64,19 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          // Additional SEO and security headers
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, must-revalidate',
+          },
+          {
+            key: 'Link',
+            value: '</logo.webp>; rel=preload; as=image',
+          },
         ],
       },
     ];
@@ -59,6 +90,16 @@ const nextConfig: NextConfig = {
   
   // Enable static optimization
   trailingSlash: false,
+
+  // Additional build optimizations
+  swcMinify: true,
+  reactStrictMode: true,
+  
+  // Configure TypeScript for better performance
+  typescript: {
+    ignoreBuildErrors: false,
+    tsconfigPath: './tsconfig.json',
+  },
 };
 
 export default nextConfig;
