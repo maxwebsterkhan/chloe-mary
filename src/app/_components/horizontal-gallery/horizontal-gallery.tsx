@@ -86,27 +86,31 @@ export default function HorizontalGallery() {
       // Story descriptions to match your couples
       const storyDescriptions: Record<
         string,
-        { description: string; location: string }
+        { description: string; location: string; picTimeUrl: string }
       > = {
         "beth-alex": {
           description:
             "An urban city celebration where modern elegance met timeless romance. A day of pure magic and genuine emotion.",
           location: "100 Barrington, London",
+          picTimeUrl: "https://chloemaryphoto.pic-time.com/INDUdpnmxfz33",
         },
         "hannah-jake": {
           description:
             "A theatrical city wedding with a modern twist, with a focus on the couple and their love story.",
           location: "St. John & Asylum Chapel, London",
+          picTimeUrl: "https://chloemaryphoto.pic-time.com/cduUXU5KYqrs4",
         },
         "kat-patrick": {
           description:
             "A romantic countryside wedding with a modern twist, capturing the romance of the south of France.",
           location: "Chateau La Durantie, France",
+          picTimeUrl: "https://chloemaryphoto.pic-time.com/i0561DkOwQM8Q",
         },
         "marj-ellis": {
           description:
             "A beautiful family centric city wedding. In the heart of Bristol City Centre",
           location: "The Mount Without, Bristol",
+          picTimeUrl: "https://chloemaryphoto.pic-time.com/y00bovLaECnZY",
         },
       };
 
@@ -126,7 +130,7 @@ export default function HorizontalGallery() {
             description: storyData.description,
             location: storyData.location,
             ctaText: "View Full Gallery",
-            ctaLink: `/gallery/${folderName}`,
+            ctaLink: storyData.picTimeUrl,
             images: groupedImages[folderName].slice(0, 5), // Limit to 5 images for thumbnails
           };
           stories.push(story);
@@ -290,7 +294,7 @@ export default function HorizontalGallery() {
                               src={
                                 story.images[isMobile ? 0 : activeThumbs[index]]
                               }
-                              alt={`${story.title} - Hero`}
+                              alt={`${story.title} wedding photography at ${story.location}`}
                               fill
                               className={
                                 styles.heroImageUnified +
@@ -384,8 +388,10 @@ export default function HorizontalGallery() {
                               }`}</span>
                               <Image
                                 src={image}
-                                alt={`Thumbnail ${thumbIdx + 1} for ${
+                                alt={`${
                                   story.title
+                                } wedding photography thumbnail ${
+                                  thumbIdx + 1
                                 }`}
                                 fill
                                 className={styles.thumbImageUnified}
@@ -398,6 +404,8 @@ export default function HorizontalGallery() {
                           <a
                             href={story.ctaLink}
                             className={styles.ctaTextLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <span>View</span>
                             <span>Gallery</span>
