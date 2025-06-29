@@ -781,6 +781,31 @@ export default function ConnectPage() {
                         </p>
                       </div>
                     </div>
+                    <div className={styles.processStep}>
+                      <div className={styles.stepNumber}>04</div>
+                      <div className={styles.stepContent}>
+                        <h3 className={styles.stepTitle}>Secure Your Date</h3>
+                        <p className={styles.stepDescription}>
+                          Once you&apos;re ready to move forward, we&apos;ll
+                          sign a contract and you&apos;ll leave a non-refundable
+                          deposit to secure your wedding date. This ensures your
+                          special day is reserved exclusively for you.
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.processStep}>
+                      <div className={styles.stepNumber}>05</div>
+                      <div className={styles.stepContent}>
+                        <h3 className={styles.stepTitle}>Final Preparations</h3>
+                        <p className={styles.stepDescription}>
+                          Four weeks before your wedding, I&apos;ll request your
+                          detailed timeline and final balance payment.
+                          We&apos;ll then have a final consultation call to go
+                          over every detail, ensuring your wedding day
+                          photography will be absolutely perfect.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

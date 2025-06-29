@@ -148,9 +148,9 @@ export default function AboutStory() {
             <div className={styles.intro}>
               <h2 className={styles.introTitle}>Meet Me</h2>
               <p className={styles.introText}>
-                Mary is actually my middle name given to me in honour of my
-                great grandmother. I&apos;m a photographer based in Bristol who
-                captures weddings for the creative and carefree.
+                Hi, I&apos;m Chloe - Mary is actually my middle name given to me
+                in honour of my great grandmother. I&apos;m a photographer based
+                in Bristol who captures weddings for the creative and carefree.
               </p>
             </div>
 

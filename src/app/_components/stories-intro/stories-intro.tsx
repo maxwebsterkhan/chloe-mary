@@ -129,7 +129,7 @@ export default function StoriesIntro() {
             >
               From intimate elopements to grand celebrations, these stories
               showcase the raw emotions, genuine connections, and authentic
-              moments that happen when couples simply be themselves on their
+              moments that happen when couples simply are themselves on their
               wedding day.
             </p>
 
@@ -137,8 +137,8 @@ export default function StoriesIntro() {
               ref={paragraphCenterRef}
               className={`${styles.philosophy} ${styles.paragraphCenter} ${styles.paragraph}`}
             >
-              &quot;Every love story deserves to be told with honesty and
-              beauty.&quot;
+              &quot;Every love story deserves to be told with honesty, artistry
+              and heart.&quot;
             </p>
           </div>
         </div>

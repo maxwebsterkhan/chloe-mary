@@ -119,8 +119,8 @@ export default function QuoteIntro() {
               className={`${styles.paragraphLeft} ${styles.paragraph}`}
             >
               I&apos;m drawn to creative, carefree couples who seek images that
-              capture not just how you look, but who you truly are—relaxed,
-              authentic, and beautifully yourselves.
+              capture not just how you look, but who you truly are-relaxed,
+              authentic and beautifully yourselves.
             </p>
 
             <p
@@ -129,7 +129,7 @@ export default function QuoteIntro() {
             >
               Instead of orchestrating moments, I move quietly through your day
               as a trusted presence. Your story writes itself while I quietly
-              document each moment—the stolen glances, whispered promises, and
+              document each moment-the stolen glances, whispered promises and
               authentic emotions that make your love uniquely yours.
             </p>
 
