@@ -25,7 +25,7 @@ export default function StoriesHero() {
           <div className={styles.heroLeft}>
             <div className={styles.heroLabel}>REAL MOMENTS</div>
             <h1 ref={titleRef} className={styles.heroTitle}>
-              YOUR STORY,{" "}
+              YOUR STORY{" "}
               <span className={styles.heroAccent}>BEAUTIFULLY TOLD</span>
             </h1>
           </div>
