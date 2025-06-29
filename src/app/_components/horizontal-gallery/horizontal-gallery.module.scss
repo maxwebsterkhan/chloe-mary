@@ -761,7 +761,7 @@
 
 .embla {
   position: relative;
-  margin: 0 auto;
+  width: 100%;
   --slide-height: 19rem;
   --slide-spacing: 0.5rem;
   --slide-size: 98%;
@@ -769,8 +769,11 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   padding: 1rem 0 2.5rem 0;
 }
+
 .embla__viewport {
   overflow: hidden;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 .embla__container {
   display: flex;
@@ -803,6 +806,10 @@
   justify-content: center;
   gap: 1.2rem;
   margin-top: 0;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 .embla__buttons {
   display: grid;

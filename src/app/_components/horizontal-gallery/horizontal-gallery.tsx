@@ -15,6 +15,7 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
+import { useS3ImageCategories } from "@/hooks/useS3Images";
 import styles from "./horizontal-gallery.module.scss";
 
 interface GalleryStory {
@@ -27,77 +28,12 @@ interface GalleryStory {
   images: string[];
 }
 
-const testImage1 =
-  "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D";
-const testImage2 =
-  "https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D";
-const testImage3 =
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D";
-const testImage4 =
-  "https://images.unsplash.com/flagged/photo-1620830102229-9db5c00d4afc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D";
-const testImage5 =
-  "https://media.istockphoto.com/id/2156079626/photo/bride-and-groom-wedding-with-dog.webp?a=1&b=1&s=612x612&w=0&k=20&c=Et2NAAOw4QK-VNebfRcQi5M2z4ZZfmUNPBgYK7dGoEU=";
-
-const mockGalleryStories: GalleryStory[] = [
-  {
-    id: "story-1",
-    title: "Sarah & James",
-    description:
-      "A romantic countryside wedding filled with laughter, tears, and endless joy. Every moment captured with authenticity and love.",
-    location: "Cotswolds, Gloucestershire",
-    ctaText: "View Full Gallery",
-    ctaLink: "/gallery/sarah-james",
-    images: [testImage1, testImage2, testImage3, testImage4, testImage5],
-  },
-  {
-    id: "story-2",
-    title: "Emma & Michael",
-    description:
-      "An intimate city celebration where modern elegance met timeless romance. A day of pure magic and genuine emotion.",
-    location: "Bristol Harbour",
-    ctaText: "See More Photos",
-    ctaLink: "/gallery/emma-michael",
-    images: [testImage1, testImage2, testImage3, testImage4, testImage5],
-  },
-  {
-    id: "story-3",
-    title: "Lucy & David",
-    description:
-      "A rustic barn wedding that perfectly captured their love for nature and each other. Authentic moments in a beautiful setting.",
-    location: "Somerset Countryside",
-    ctaText: "Explore Gallery",
-    ctaLink: "/gallery/lucy-david",
-    images: [testImage1, testImage2, testImage3, testImage4, testImage5],
-  },
-  {
-    id: "story-4",
-    title: "Rachel & Tom",
-    description:
-      "A sophisticated celebration of love in the heart of the city. Every detail thoughtfully captured with artistic vision.",
-    location: "Bristol City Centre",
-    ctaText: "View Complete Story",
-    ctaLink: "/gallery/rachel-tom",
-    images: [testImage1, testImage2, testImage3, testImage4, testImage5],
-  },
-  {
-    id: "story-5",
-    title: "Hannah & Chris",
-    description:
-      "A coastal wedding that embraced the natural beauty of the sea. Pure, candid moments of genuine happiness and love.",
-    location: "Cornwall Coast",
-    ctaText: "See Full Collection",
-    ctaLink: "/gallery/hannah-chris",
-    images: [testImage1, testImage2, testImage3, testImage4, testImage5],
-  },
-];
-
 const TWEEN_FACTOR_BASE = 0.15;
 
 export default function HorizontalGallery() {
-  const [galleryStories] = useState<GalleryStory[]>(mockGalleryStories);
-  const [activeThumbs, setActiveThumbs] = useState<number[]>(
-    new Array(galleryStories.length).fill(0)
-  );
+  const { categories, loading, error } = useS3ImageCategories();
+  const [galleryStories, setGalleryStories] = useState<GalleryStory[]>([]);
+  const [activeThumbs, setActiveThumbs] = useState<number[]>([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     dragFree: true,
@@ -115,15 +51,99 @@ export default function HorizontalGallery() {
   const [imageFadeKey, setImageFadeKey] = useState(0);
 
   // Refs for thumbnail buttons
-  const thumbButtonRefs = useRef(
-    galleryStories.map(() =>
-      Array(5)
-        .fill(null)
-        .map(() => createRef<HTMLButtonElement>())
-    )
+  const thumbButtonRefs = useRef<React.RefObject<HTMLButtonElement | null>[][]>(
+    []
   );
 
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
+  // Process S3 categories into gallery stories
+  useEffect(() => {
+    if (categories && categories.stories && categories.stories.length > 0) {
+      const storyFolders = [
+        "hannah-jake",
+        "beth-alex",
+        "kat-patrick",
+        "marj-ellis",
+      ];
+      const stories: GalleryStory[] = [];
+
+      // Group images by subfolder from the stories category
+      const groupedImages: Record<string, string[]> = {};
+
+      categories.stories.forEach((image) => {
+        // Extract subfolder from key like 'stories/amber-hugh/image.jpg'
+        const keyParts = image.key.split("/");
+        if (keyParts.length >= 3 && keyParts[0] === "stories") {
+          const subfolderName = keyParts[1];
+          if (!groupedImages[subfolderName]) {
+            groupedImages[subfolderName] = [];
+          }
+          groupedImages[subfolderName].push(image.url);
+        }
+      });
+
+      // Story descriptions to match your couples
+      const storyDescriptions: Record<
+        string,
+        { description: string; location: string }
+      > = {
+        "beth-alex": {
+          description:
+            "An urban city celebration where modern elegance met timeless romance. A day of pure magic and genuine emotion.",
+          location: "100 Barrington, London",
+        },
+        "hannah-jake": {
+          description:
+            "A theatrical city wedding with a modern twist, with a focus on the couple and their love story.",
+          location: "St. John & Asylum Chapel, London",
+        },
+        "kat-patrick": {
+          description:
+            "A romantic countryside wedding with a modern twist, capturing the romance of the south of France.",
+          location: "Chateau La Durantie, France",
+        },
+        "marj-ellis": {
+          description:
+            "A beautiful family centric city wedding. In the heart of Bristol City Centre",
+          location: "The Mount Without, Bristol",
+        },
+      };
+
+      storyFolders.forEach((folderName) => {
+        if (groupedImages[folderName] && groupedImages[folderName].length > 0) {
+          // Extract names from folder structure (e.g., "amber-hugh" -> "Amber & Hugh")
+          const names = folderName
+            .split("-")
+            .map((name) => name.charAt(0).toUpperCase() + name.slice(1));
+          const title = names.join(" & ");
+
+          const storyData = storyDescriptions[folderName];
+
+          const story: GalleryStory = {
+            id: `story-${folderName}`,
+            title,
+            description: storyData.description,
+            location: storyData.location,
+            ctaText: "View Full Gallery",
+            ctaLink: `/gallery/${folderName}`,
+            images: groupedImages[folderName].slice(0, 5), // Limit to 5 images for thumbnails
+          };
+          stories.push(story);
+        }
+      });
+
+      setGalleryStories(stories);
+      setActiveThumbs(new Array(stories.length).fill(0));
+
+      // Initialize thumbnail button refs
+      thumbButtonRefs.current = stories.map((story) =>
+        Array(story.images.length)
+          .fill(null)
+          .map(() => createRef<HTMLButtonElement>())
+      );
+    }
+  }, [categories]);
 
   // Parallax effect logic
   const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
@@ -214,6 +234,39 @@ export default function HorizontalGallery() {
     onPrevButtonClick,
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className={styles.embla}>
+        <div className={styles.loadingState}>
+          <p>Loading gallery stories...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className={styles.embla}>
+        <div className={styles.errorState}>
+          <p>Error loading gallery: {error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // No stories state
+  if (galleryStories.length === 0) {
+    return (
+      <div className={styles.embla}>
+        <div className={styles.emptyState}>
+          <p>No gallery stories found.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.embla}>
