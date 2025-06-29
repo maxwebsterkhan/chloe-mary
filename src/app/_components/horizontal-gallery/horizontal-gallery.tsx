@@ -36,8 +36,9 @@ export default function HorizontalGallery() {
   const [activeThumbs, setActiveThumbs] = useState<number[]>([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
-    dragFree: true,
+    dragFree: false,
     align: "start",
+    inViewThreshold: 0.5,
   });
 
   // Progress bar state
@@ -46,9 +47,6 @@ export default function HorizontalGallery() {
   // Parallax refs
   const tweenNodes = useRef<(HTMLElement | null)[]>([]);
   const tweenFactor = useRef(0);
-
-  // Animation state for hero image
-  const [imageFadeKey, setImageFadeKey] = useState(0);
 
   // Refs for thumbnail buttons
   const thumbButtonRefs = useRef<React.RefObject<HTMLButtonElement | null>[][]>(
@@ -286,11 +284,7 @@ export default function HorizontalGallery() {
                         <div className={styles.heroImageWrapper}>
                           <div className={styles.embla__parallax__bg}>
                             <Image
-                              key={
-                                imageFadeKey +
-                                "-" +
-                                (isMobile ? 0 : activeThumbs[index])
-                              }
+                              key={`${story.id}-${activeThumbs[index]}`}
                               src={
                                 story.images[isMobile ? 0 : activeThumbs[index]]
                               }
@@ -341,7 +335,6 @@ export default function HorizontalGallery() {
                                   newThumbs[index] = thumbIdx;
                                   return newThumbs;
                                 });
-                                setImageFadeKey((k) => k + 1);
                               }}
                               type="button"
                               role="tab"
@@ -379,7 +372,6 @@ export default function HorizontalGallery() {
                                     newThumbs[index] = thumbIdx;
                                     return newThumbs;
                                   });
-                                  setImageFadeKey((k) => k + 1);
                                 }
                               }}
                             >
