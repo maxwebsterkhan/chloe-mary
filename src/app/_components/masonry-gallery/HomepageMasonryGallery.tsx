@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
+import { Masonry } from "masonic";
 import styles from "./masonry-gallery.module.scss";
-import { X as XIcon } from "@phosphor-icons/react";
+import { XIcon } from "@phosphor-icons/react";
 import gsap from "gsap";
+import Image from "next/image";
 
 export default function HomepageMasonryGallery() {
   const { images, loading, error } = useS3Images({ prefix: "homepage/" });
@@ -14,25 +15,7 @@ export default function HomepageMasonryGallery() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Grid span logic to match the CSS example
-  const getCellClass = (idx: number) => {
-    if (idx === 0) return `${styles.imageCell} ${styles.span2x2}`;
-    if ((idx + 1) % 4 === 1) return `${styles.imageCell} ${styles.span2r}`;
-    if ((idx + 1) % 4 === 2) return `${styles.imageCell} ${styles.span2c}`;
-    return styles.imageCell;
-  };
-
-  // Close lightbox on ESC
-  useEffect(() => {
-    if (!lightbox) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleCloseLightbox();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [lightbox]);
-
-  // GSAP fade in/out
+  // Lightbox fade logic
   useEffect(() => {
     if (!lightbox || !imageWrapperRef.current) return;
     if (!isFadingOut) {
@@ -54,9 +37,44 @@ export default function HomepageMasonryGallery() {
     }
   }, [lightbox, isFadingOut]);
 
-  const handleCloseLightbox = () => {
-    setIsFadingOut(true);
-  };
+  const handleCloseLightbox = () => setIsFadingOut(true);
+
+  // Card renderer for masonic
+  const MasonryCard = ({ data }: { data: { url: string; key: string } }) => (
+    <img
+      src={data.url}
+      alt={`Wedding photo: ${data.key
+        .replace(/[-_]/g, " ")
+        .replace(/\.[^/.]+$/, "")}`}
+      className={styles.galleryImage}
+      onClick={() =>
+        setLightbox({
+          url: data.url,
+          alt: `Wedding photo: ${data.key
+            .replace(/[-_]/g, " ")
+            .replace(/\.[^/.]+$/, "")}`,
+        })
+      }
+      tabIndex={0}
+      role="button"
+      aria-label={`Wedding photo: ${data.key
+        .replace(/[-_]/g, " ")
+        .replace(/\.[^/.]+$/, "")}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ")
+          setLightbox({
+            url: data.url,
+            alt: `Wedding photo: ${data.key
+              .replace(/[-_]/g, " ")
+              .replace(/\.[^/.]+$/, "")}`,
+          });
+      }}
+    />
+  );
+
+  if (loading) return <p>Loading gallery...</p>;
+  if (error) return <p>Error loading images: {error}</p>;
+  if (!images.length) return null;
 
   return (
     <section
@@ -64,46 +82,13 @@ export default function HomepageMasonryGallery() {
       className={styles.masonrySection}
     >
       <div className={styles.masonryContainer}>
-        <div className={styles.gallery}>
-          {loading && <p>Loading gallery...</p>}
-          {error && <p>Error loading images: {error}</p>}
-          {!loading &&
-            !error &&
-            images.map((image, idx) => {
-              const alt = `Wedding photo: ${image.key
-                .replace(/[-_]/g, " ")
-                .replace(/\.[^/.]+$/, "")}`;
-              return (
-                <div
-                  key={image.key}
-                  className={getCellClass(idx)}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={alt}
-                  onClick={() => setLightbox({ url: image.url, alt })}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ")
-                      setLightbox({ url: image.url, alt });
-                  }}
-                  style={{ cursor: "zoom-in" }}
-                >
-                  <Image
-                    src={image.url}
-                    alt={alt}
-                    width={500}
-                    height={500}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "2px",
-                    }}
-                    sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
-                </div>
-              );
-            })}
-        </div>
+        <Masonry
+          items={images}
+          columnGutter={16}
+          columnWidth={320}
+          overscanBy={2}
+          render={MasonryCard}
+        />
       </div>
       {/* Lightbox Modal */}
       {lightbox && (
@@ -129,28 +114,11 @@ export default function HomepageMasonryGallery() {
             className={styles.lightboxImageWrapper}
             ref={imageWrapperRef}
             onClick={(e) => e.stopPropagation()}
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-            }}
           >
             <Image
               src={lightbox.url}
               alt={lightbox.alt}
-              width={1200}
-              height={800}
-              style={{
-                maxWidth: "90vw",
-                maxHeight: "90vh",
-                width: "auto",
-                height: "auto",
-                borderRadius: "2px",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.25)",
-                background: "#fff",
-              }}
+              className={styles.lightboxImage}
             />
           </div>
         </div>

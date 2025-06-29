@@ -75,9 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: fit-content;
-  max-width: 90vw;
-  max-height: 90vh;
+  height: 100%;
 }
 
 .lightboxAlt {
@@ -150,4 +148,21 @@
     font-size: 2rem;
     padding: 0.15em 0.3em;
   }
+}
+
+.galleryImage {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  cursor: zoom-in;
+}
+
+.lightboxImage {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  background: #fff;
 }
