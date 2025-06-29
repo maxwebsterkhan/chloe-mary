@@ -10,10 +10,10 @@ import Image from "next/image";
 const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/kind-words", label: "Kind Words" },
-  { href: "/connect", label: "Connect" },
-  { href: "/pricing", label: "Pricing" },
   { href: "/stories", label: "Stories" },
+  { href: "/kind-words", label: "Kind Words" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export default function Navigation() {

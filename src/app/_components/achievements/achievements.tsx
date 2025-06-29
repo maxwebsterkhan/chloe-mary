@@ -8,6 +8,9 @@ import {
 } from "../helpers/gsap-animations";
 import Image from "next/image";
 
+// Reordered for both desktop (2x2 grid) and mobile (stack) layouts
+// Desktop: dark light | light dark
+// Mobile: dark light dark light
 const achievements = [
   {
     title: "Professional Photos Top 50",
@@ -45,7 +48,6 @@ export default function Achievements() {
       achievementsRef.current.querySelectorAll(`.${styles.achievements__item}`)
     ) as HTMLElement[];
 
-    // Set up scroll trigger for stagger fade animation - only once
     createScrollTrigger(achievementsRef.current, {
       start: "top 75%",
       once: true,
@@ -54,12 +56,6 @@ export default function Achievements() {
       },
     });
   }, []);
-
-  // Responsive alternating pattern
-  const getCardVariant = (index: number) => {
-    // Desktop: checkerboard pattern (0,3 dark, 1,2 light)
-    return index === 0 || index === 3 ? "dark" : "light";
-  };
 
   return (
     <section ref={achievementsRef} className={styles.achievements}>
@@ -82,7 +78,9 @@ export default function Achievements() {
 
             const cardClasses = [
               styles.achievements__item,
-              styles[`achievements__item--${getCardVariant(index)}`],
+              styles[
+                `achievements__item--${index % 2 === 0 ? "dark" : "light"}`
+              ],
               achievement.link ? styles["achievements__item--linked"] : "",
             ]
               .filter(Boolean)
@@ -94,42 +92,27 @@ export default function Achievements() {
                 className={cardClasses}
                 style={{ "--index": index } as React.CSSProperties}
               >
-                {/* Decorative images for light cards */}
-                {getCardVariant(index) === "light" && (
-                  <>
-                    {index === 1 ? (
-                      <Image
-                        src="/polaroid.webp"
-                        alt=""
-                        width={90}
-                        height={90}
-                        className={styles.achievements__polaroid}
-                        style={{
-                          opacity: 0.3,
-                          position: "absolute",
-                          top: "1rem",
-                          right: "1rem",
-                          zIndex: 0,
-                          transform: "rotate(-5deg)",
-                        }}
-                      />
-                    ) : (
-                      <Image
-                        src="/floral.webp"
-                        alt=""
-                        width={120}
-                        height={120}
-                        className={styles.achievements__floral}
-                        style={{
-                          opacity: 0.25,
-                          position: "absolute",
-                          top: "1rem",
-                          right: "1rem",
-                          zIndex: 0,
-                        }}
-                      />
-                    )}
-                  </>
+                {/* Decorative images - only on light cards */}
+                {index % 2 === 1 && (
+                  <Image
+                    src={index === 1 ? "/floral.webp" : "/polaroid.webp"}
+                    alt=""
+                    width={90}
+                    height={90}
+                    className={
+                      index === 1
+                        ? styles.achievements__floral
+                        : styles.achievements__polaroid
+                    }
+                    style={{
+                      opacity: 0.3,
+                      position: "absolute",
+                      top: "1rem",
+                      right: "1rem",
+                      zIndex: 0,
+                      transform: index === 3 ? "rotate(-5deg)" : "none",
+                    }}
+                  />
                 )}
                 {achievement.link ? (
                   <a
