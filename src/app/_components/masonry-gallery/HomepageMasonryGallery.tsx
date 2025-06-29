@@ -30,7 +30,6 @@ export default function HomepageMasonryGallery() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-    // eslint-disable-next-line
   }, [lightbox]);
 
   // GSAP fade in/out
