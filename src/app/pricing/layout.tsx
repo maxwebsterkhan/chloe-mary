@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/chloe-mary-portrait.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
         alt: "Chloe Mary Photography - Wedding Photography Pricing",
-        type: "image/jpeg",
+        type: "image/webp",
       },
     ],
   },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description:
       "Transparent wedding photography pricing from £1,350. Full day coverage, intimate sessions & destination weddings.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait.jpg"],
+    images: ["/logo.webp"],
   },
   alternates: {
     canonical: "https://www.chloemary.com/pricing",

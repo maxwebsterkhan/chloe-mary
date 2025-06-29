@@ -45,11 +45,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/chloe-mary-portrait.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
         alt: "Chloe Mary Photography - Wedding Photography Stories",
-        type: "image/jpeg",
+        type: "image/webp",
       },
     ],
   },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description:
       "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing candid moments.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait.jpg"],
+    images: ["/logo.webp"],
   },
   alternates: {
     canonical: "https://www.chloemary.com/stories",

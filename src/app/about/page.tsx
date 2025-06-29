@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     type: "profile",
     images: [
       {
-        url: "/chloe-mary-portrait-2.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chloe Mary - Contemporary Wedding Photographer Bristol",
-        type: "image/jpeg",
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
+        alt: "Chloe Mary Photography - Contemporary Wedding Photographer Bristol",
+        type: "image/webp",
       },
     ],
   },
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     description:
       "Meet Chloe Mary, a contemporary documentary photographer passionate about capturing authentic love stories and candid moments.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait-2.jpg"],
+    images: ["/logo.webp"],
   },
   alternates: {
     canonical: "https://www.chloemary.com/about",
@@ -87,7 +87,7 @@ export default function About() {
               "Contemporary documentary photographer passionate about working with creative and carefree couples who value relaxed, artistic images that truly reflect who they are.",
             url: "https://www.chloemary.com",
             email: "hello@chloemary.com",
-            image: "https://www.chloemary.com/chloe-mary-portrait-2.jpg",
+            image: "https://www.chloemary.com/logo.webp",
             sameAs: [
               "https://www.instagram.com/chloemary_photo",
               "https://www.facebook.com/chloemary.photography",

@@ -104,25 +104,29 @@ export default function AboutStory() {
                     src={
                       aboutImages.find((img) =>
                         img.key.includes("chloe-mary-portrait.jpg")
-                      )?.url || "/chloe-mary-portrait.jpg"
+                      )?.url || "/logo.webp"
                     }
                     alt="Chloe Mary - Photographer"
                     width={600}
                     height={800}
                     className={styles.image}
                     style={{ opacity: 1 - scrollProgress }}
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <Image
                     src={
                       aboutImages.find((img) =>
                         img.key.includes("chloe-mary-portrait-2.jpg")
-                      )?.url || "/chloe-mary-portrait-2.jpg"
+                      )?.url || "/logo.webp"
                     }
                     alt="Chloe Mary - Photographer"
                     width={600}
                     height={800}
                     className={`${styles.image} ${styles.imageSecond}`}
                     style={{ opacity: scrollProgress }}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </>
               )}
@@ -142,7 +146,7 @@ export default function AboutStory() {
             }`}
           >
             <div className={styles.intro}>
-              <h2 className={styles.introTitle}>Meet Chloe</h2>
+              <h2 className={styles.introTitle}>Meet Me</h2>
               <p className={styles.introText}>
                 Mary is actually my middle name given to me in honour of my
                 great grandmother. I&apos;m a photographer based in Bristol who

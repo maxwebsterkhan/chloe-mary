@@ -5,44 +5,51 @@ import { animationUtils } from "../helpers/gsap-animations";
 import styles from "./stories-footer.module.scss";
 
 export default function StoriesFooter() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLHeadingElement>(null);
+  const footerTextRef = useRef<HTMLDivElement>(null);
+  const signatureRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const animations: gsap.core.Tween[] = [];
 
-    // Animate title with soft reveal
-    if (titleRef.current) {
-      const anim = animationUtils.softTitleReveal(titleRef.current, {
-        delay: 0.2,
+    // Animate header first
+    if (headerRef.current) {
+      const anim = animationUtils.softTitleReveal(headerRef.current, {
+        delay: 0.1,
       });
       if (anim) animations.push(anim);
     }
 
-    // Animate subtitle with slide in
-    if (subtitleRef.current) {
-      const anim = animationUtils.softSlideIn(subtitleRef.current, {
-        delay: 0.6,
+    // Animate footer text with soft reveal
+    if (footerTextRef.current) {
+      const anim = animationUtils.softSlideIn(footerTextRef.current, {
+        delay: 0.4,
       });
       if (anim) animations.push(anim);
     }
 
-    // Animate CTA with scale in
-    if (ctaRef.current) {
-      const anim = animationUtils.scaleIn(ctaRef.current, {
-        delay: 1.0,
-      });
-      if (anim) animations.push(anim);
-    }
+    // Animate signature with staggered reveal
+    if (signatureRef.current) {
+      const line = signatureRef.current.querySelector(
+        `.${styles.signatureLine}`
+      ) as HTMLElement;
+      const text = signatureRef.current.querySelector(
+        `.${styles.signatureText}`
+      ) as HTMLElement;
 
-    // Animate decorative line
-    if (lineRef.current) {
-      const anim = animationUtils.drawLineX(lineRef.current, {
-        delay: 1.8,
-      });
-      if (anim) animations.push(anim);
+      if (line) {
+        const lineAnim = animationUtils.drawLineX(line, {
+          delay: 0.8,
+        });
+        if (lineAnim) animations.push(lineAnim);
+      }
+
+      if (text) {
+        const textAnim = animationUtils.softSlideIn(text, {
+          delay: 1.2,
+        });
+        if (textAnim) animations.push(textAnim);
+      }
     }
 
     return () => {
@@ -51,30 +58,48 @@ export default function StoriesFooter() {
   }, []);
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <h2 ref={titleRef} className={styles.title}>
-              Ready to Tell Your Story?
-            </h2>
-            <div ref={lineRef} className={styles.decorativeLine}></div>
+    <div
+      className={styles.footer}
+      role="region"
+      aria-labelledby="stories-footer-header"
+    >
+      <div className={styles.footerContainer}>
+        <div className={styles.footerContent}>
+          <h3
+            ref={headerRef}
+            className={styles.footerHeader}
+            id="stories-footer-header"
+          >
+            Interested?
+          </h3>
+
+          <div ref={footerTextRef} className={styles.footerText}>
+            <p className={styles.footerParagraph}>
+              Every love story is unique, and these galleries represent just a
+              glimpse of the authentic moments I have the privilege to capture.
+              If you&apos;d like to discuss how we can tell your story together,
+              I&apos;d love to hear from you.
+            </p>
           </div>
 
-          <p ref={subtitleRef} className={styles.subtitle}>
-            Let&apos;s capture your unique love story with the same authenticity
-            and beauty you&apos;ve seen in these galleries. Every couple
-            deserves to have their special moments preserved forever.
-          </p>
-
-          <div className={styles.ctaSection}>
-            <a ref={ctaRef} href="/connect" className={styles.cta}>
-              <span className={styles.ctaText}>Start Your Journey</span>
-              <div className={styles.ctaAccent}></div>
-            </a>
+          <div ref={signatureRef} className={styles.footerSignature}>
+            <div
+              className={styles.signatureLine}
+              role="presentation"
+              aria-hidden="true"
+            ></div>
+            <span className={styles.signatureText}>
+              <a
+                href="/connect"
+                className={styles.signatureLink}
+                aria-label="Get in touch - Go to contact page to start your wedding photography enquiry"
+              >
+                Get in touch
+              </a>
+            </span>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

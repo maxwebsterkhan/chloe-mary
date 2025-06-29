@@ -5,7 +5,6 @@ import Navigation from "./_components/navigation/navigation";
 import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
 import FooterBoundary from "./_components/footer/footer-boundary";
 import SkipLink from "./_components/skip-link";
-import HorizontalGalleryTest from "./_components/horizontal-gallery/horizontal-gallery-test";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -101,11 +100,11 @@ export const metadata: Metadata = {
       "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, candid moments for creative couples. Top 50 UK photographer 2025.",
     images: [
       {
-        url: "/chloe-mary-portrait.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chloe Mary - Bristol Wedding Photographer",
-        type: "image/jpeg",
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
+        alt: "Chloe Mary Photography - Bristol Wedding Photographer",
+        type: "image/webp",
       },
     ],
   },
@@ -116,7 +115,7 @@ export const metadata: Metadata = {
     description:
       "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Capturing authentic, candid moments for creative couples.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait.jpg"],
+    images: ["/logo.webp"],
   },
   icons: {
     icon: [
@@ -236,7 +235,7 @@ export default function RootLayout({
                 "https://www.instagram.com/chloemary_photo",
                 "https://www.facebook.com/chloemary.photography",
               ],
-              image: "https://www.chloemary.com/chloe-mary-portrait.jpg",
+              image: "https://www.chloemary.com/logo.webp",
               logo: "https://www.chloemary.com/logo.webp",
             }),
           }}

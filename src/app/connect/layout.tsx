@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/chloe-mary-portrait.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
         alt: "Contact Chloe Mary - Bristol Wedding Photographer",
-        type: "image/jpeg",
+        type: "image/webp",
       },
     ],
   },
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     description:
       "Ready to capture your love story? Contact Chloe Mary for contemporary documentary wedding photography in Bristol.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait.jpg"],
+    images: ["/logo.webp"],
   },
   alternates: {
     canonical: "https://www.chloemary.com/connect",
@@ -129,7 +129,7 @@ export default function ConnectLayout({
                   "@id": "https://www.chloemary.com/about#person",
                   name: "Chloe Mary",
                   jobTitle: "Wedding Photographer",
-                  image: "https://www.chloemary.com/chloe-mary-portrait.jpg",
+                  image: "https://www.chloemary.com/logo.webp",
                   telephone: "07719011701", // Replace with actual number
                   email: "hello@chloemary.com",
                   url: "https://www.chloemary.com",

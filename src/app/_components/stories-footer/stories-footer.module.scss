@@ -2,195 +2,151 @@
 @use "../../_styles/tokens" as tokens;
 
 .footer {
+  padding: tokens.$spacing-xxl 0;
   background: var(--color-secondary);
-  padding: tokens.$spacing-xxl 0 tokens.$spacing-xl;
-  position: relative;
-  overflow: hidden;
+  border-top: tokens.$line-thickness-small solid rgba(0, 0, 0, 0.1);
 
   @include breakpoint-down("tablet") {
-    padding: tokens.$spacing-xl 0 tokens.$spacing-lg;
+    padding: tokens.$spacing-xl 0;
   }
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-lg 0 tokens.$spacing-md;
+    padding: tokens.$spacing-lg 0;
   }
 }
 
-.container {
+.footerContainer {
   width: 100%;
-  max-width: var(--max-width);
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
 
-  @include breakpoint-down("tablet") {
-    padding: 0 tokens.$spacing-sm;
-  }
-
   @include breakpoint-down("mobile") {
     padding: 0 tokens.$spacing-sm;
   }
 }
 
-.content {
+.footerContent {
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
 }
 
-.header {
-  margin-bottom: tokens.$spacing-xl;
-  position: relative;
-
-  @include breakpoint-down("tablet") {
-    margin-bottom: tokens.$spacing-lg;
-  }
-
-  @include breakpoint-down("mobile") {
-    margin-bottom: tokens.$spacing-md;
-  }
-}
-
-.title {
+.footerHeader {
   font-family: var(--font-inter-tight);
-  font-size: tokens.$font-size-xxl;
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: tokens.$letter-spacing-tight;
-  text-transform: uppercase;
+  font-size: tokens.$font-size-lg;
+  font-weight: 600;
   color: var(--color-primary);
   margin: 0 0 tokens.$spacing-lg 0;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
-  @include breakpoint-down("desktop-small") {
-    font-size: tokens.$font-size-xl;
-  }
+  letter-spacing: tokens.$letter-spacing-tight;
 
   @include breakpoint-down("tablet") {
-    font-size: tokens.$font-size-lg;
+    font-size: tokens.$font-size-md;
     margin-bottom: tokens.$spacing-md;
   }
 
   @include breakpoint-down("mobile") {
-    font-size: tokens.$font-size-md;
-    line-height: 1.1;
+    font-size: tokens.$font-size-sm;
+    margin-bottom: tokens.$spacing-sm;
   }
 }
 
-.decorativeLine {
-  width: 120px;
-  height: tokens.$line-thickness-medium;
-  background: var(--color-accent);
-  margin: 0 auto;
-  transform-origin: left;
-  transform: scaleX(0);
-
-  @include breakpoint-down("tablet") {
-    width: 80px;
-    height: tokens.$line-thickness-small;
-  }
+.footerText {
+  margin-bottom: tokens.$spacing-xl;
 
   @include breakpoint-down("mobile") {
-    width: 60px;
+    margin-bottom: tokens.$spacing-lg;
   }
 }
 
-.subtitle {
-  font-family: var(--font-poppins);
-  font-size: tokens.$font-size-body;
+.footerParagraph {
+  font-size: tokens.$font-size-sm;
+  line-height: 1.6;
+  color: var(--color-primary);
+  margin: 0;
   font-weight: 400;
-  line-height: 1.7;
-  color: #666;
-  margin: 0 0 tokens.$spacing-xl 0;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-
-  @include breakpoint-down("tablet") {
-    font-size: tokens.$font-size-sm;
-    line-height: 1.6;
-    margin-bottom: tokens.$spacing-lg;
-  }
 
   @include breakpoint-down("mobile") {
     font-size: tokens.$font-size-xs;
-    margin-bottom: tokens.$spacing-md;
   }
 }
 
-.ctaSection {
-  position: relative;
-  display: inline-block;
-}
-
-.cta {
-  display: inline-flex;
+.footerSignature {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: tokens.$spacing-md tokens.$spacing-xl;
-  background: var(--color-primary);
-  color: var(--color-secondary);
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-poppins);
-  font-weight: 500;
-  font-size: tokens.$font-size-xs;
-  letter-spacing: tokens.$letter-spacing-wide;
-  text-transform: uppercase;
-  transition: all 0.3s tokens.$animation-timing-function;
-  position: relative;
-  overflow: hidden;
+  gap: tokens.$spacing-md;
 
-  // Focus styles for keyboard navigation
+  @include breakpoint-down("mobile") {
+    gap: tokens.$spacing-sm;
+  }
+}
+
+.signatureLine {
+  width: 60px;
+  height: 1px;
+  background: #5a4329;
+  transform-origin: left;
+  transform: scaleX(0);
+
+  @include breakpoint-down("mobile") {
+    width: 40px;
+  }
+}
+
+.signatureText {
+  font-size: tokens.$font-size-sm;
+  color: #5a4329;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-style: italic;
+
+  @include breakpoint-down("mobile") {
+    font-size: tokens.$font-size-xs;
+  }
+}
+
+.signatureLink {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: tokens.$spacing-xs tokens.$spacing-sm;
+  border-radius: 4px;
+  margin: -#{tokens.$spacing-xs} -#{tokens.$spacing-sm};
+
   &:focus {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-    background: #333;
+    background: rgba(139, 109, 66, 0.1);
+    color: var(--color-primary);
+    text-decoration: underline;
   }
 
   &:hover {
-    background: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-
-    .ctaAccent {
-      transform: translateX(0);
-    }
+    color: var(--color-primary);
+    text-decoration: underline;
+    transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
   }
 
-  @include breakpoint-down("tablet") {
-    padding: tokens.$spacing-sm tokens.$spacing-lg;
-    font-size: tokens.$font-size-xxs;
+  @media (prefers-contrast: high) {
+    color: var(--color-primary);
+    text-decoration: underline;
+
+    &:focus {
+      outline: 3px solid;
+      background: var(--color-accent);
+      color: var(--color-secondary);
+    }
   }
 
-  @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-xs tokens.$spacing-md;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover,
+    &:active {
+      transform: none;
+    }
   }
-}
-
-.ctaText {
-  position: relative;
-  z-index: 2;
-}
-
-.ctaAccent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(139, 109, 66, 0.1) 0%,
-    rgba(139, 109, 66, 0.2) 100%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.4s tokens.$animation-timing-function;
-  z-index: 1;
 }

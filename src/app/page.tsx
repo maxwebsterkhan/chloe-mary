@@ -49,11 +49,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/chloe-mary-portrait.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chloe Mary - Bristol Wedding Photographer - Authentic Modern Love Stories",
-        type: "image/jpeg",
+        url: "/logo.webp",
+        width: 512,
+        height: 512,
+        alt: "Chloe Mary Photography - Bristol Wedding Photographer",
+        type: "image/webp",
       },
     ],
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     description:
       "Contemporary documentary wedding photographer in Bristol. Capturing authentic love stories and candid moments for creative couples.",
     creator: "@chloemary_photo",
-    images: ["/chloe-mary-portrait.jpg"],
+    images: ["/logo.webp"],
   },
   alternates: {
     canonical: "https://www.chloemary.com",
@@ -127,8 +127,7 @@ export default function Home() {
                 image: {
                   "@id": "https://www.chloemary.com/#primaryimage",
                 },
-                thumbnailUrl:
-                  "https://www.chloemary.com/chloe-mary-portrait.jpg",
+                thumbnailUrl: "https://www.chloemary.com/logo.webp",
                 datePublished: "2020-01-01T00:00:00+00:00",
                 dateModified: "2025-01-01T00:00:00+00:00",
                 description:
@@ -142,11 +141,12 @@ export default function Home() {
                 "@type": "ImageObject",
                 "@id": "https://www.chloemary.com/#primaryimage",
                 inLanguage: "en-GB",
-                url: "https://www.chloemary.com/chloe-mary-portrait.jpg",
-                contentUrl: "https://www.chloemary.com/chloe-mary-portrait.jpg",
-                width: 1200,
-                height: 630,
-                caption: "Chloe Mary - Bristol Wedding Photographer",
+                url: "https://www.chloemary.com/logo.webp",
+                contentUrl: "https://www.chloemary.com/logo.webp",
+                width: 512,
+                height: 512,
+                caption:
+                  "Chloe Mary Photography - Bristol Wedding Photographer",
               },
               {
                 "@type": "BreadcrumbList",
