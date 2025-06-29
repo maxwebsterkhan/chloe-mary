@@ -272,6 +272,46 @@ export default function HorizontalGallery() {
 
   return (
     <div className={styles.embla}>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Wedding Photography Gallery Stories",
+            description:
+              "A collection of wedding photography stories featuring real couples and their special days",
+            itemListElement: galleryStories.map((story, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "CreativeWork",
+                name: `${story.title} Wedding Photography`,
+                description: story.description,
+                location: {
+                  "@type": "Place",
+                  name: story.location,
+                },
+                url: story.ctaLink,
+                image: story.images[0],
+                author: {
+                  "@type": "Person",
+                  name: "Chloe Mary",
+                },
+                creator: {
+                  "@type": "Person",
+                  name: "Chloe Mary",
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Chloe Mary Photography",
+                },
+              },
+            })),
+          }),
+        }}
+      />
       <div className={styles.embla__viewport} ref={emblaRef}>
         <div className={styles.embla__container}>
           {galleryStories.map((story, index) => (
@@ -298,6 +338,7 @@ export default function HorizontalGallery() {
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
                               loading="lazy"
                               quality={90}
+                              priority={index === 0}
                             />
                           </div>
                         </div>
@@ -398,6 +439,8 @@ export default function HorizontalGallery() {
                             className={styles.ctaTextLink}
                             target="_blank"
                             rel="noopener noreferrer"
+                            title={`View complete ${story.title} wedding photography collection on Pic-Time`}
+                            aria-label={`View full ${story.title} wedding gallery on Pic-Time`}
                           >
                             <span>View</span>
                             <span>Gallery</span>
