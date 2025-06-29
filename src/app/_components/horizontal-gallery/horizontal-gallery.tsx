@@ -336,7 +336,7 @@ export default function HorizontalGallery() {
                                 styles.fadeInHeroImage
                               }
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
-                              loading="lazy"
+                              loading={index === 0 ? undefined : "lazy"}
                               quality={90}
                               priority={index === 0}
                             />
