@@ -6,6 +6,7 @@ import {
   animationUtils,
   createScrollTrigger,
 } from "../helpers/gsap-animations";
+import Image from "next/image";
 
 const achievements = [
   {
@@ -93,6 +94,43 @@ export default function Achievements() {
                 className={cardClasses}
                 style={{ "--index": index } as React.CSSProperties}
               >
+                {/* Decorative images for light cards */}
+                {getCardVariant(index) === "light" && (
+                  <>
+                    {index === 1 ? (
+                      <Image
+                        src="/polaroid.webp"
+                        alt=""
+                        width={90}
+                        height={90}
+                        className={styles.achievements__polaroid}
+                        style={{
+                          opacity: 0.3,
+                          position: "absolute",
+                          top: "1rem",
+                          right: "1rem",
+                          zIndex: 0,
+                          transform: "rotate(-5deg)",
+                        }}
+                      />
+                    ) : (
+                      <Image
+                        src="/floral.webp"
+                        alt=""
+                        width={120}
+                        height={120}
+                        className={styles.achievements__floral}
+                        style={{
+                          opacity: 0.25,
+                          position: "absolute",
+                          top: "1rem",
+                          right: "1rem",
+                          zIndex: 0,
+                        }}
+                      />
+                    )}
+                  </>
+                )}
                 {achievement.link ? (
                   <a
                     href={achievement.link}

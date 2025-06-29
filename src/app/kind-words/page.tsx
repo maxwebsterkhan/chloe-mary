@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./kind-words.module.scss";
 import ExpandableText from "../_components/expandable-text/expandable-text";
+import StoriesFooter from "../_components/stories-footer/stories-footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -524,6 +525,8 @@ export default function KindWords() {
           </div>
         </section>
       </main>
+
+      <StoriesFooter />
     </div>
   );
 }

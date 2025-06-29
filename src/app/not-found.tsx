@@ -49,7 +49,7 @@ export default function NotFound() {
       .to(
         frontNoteRef.current,
         {
-          y: window.innerHeight + 100,
+          y: (typeof window !== "undefined" ? window.innerHeight : 800) + 100,
           rotation: -45,
           scale: 0.8,
           duration: 1.2,

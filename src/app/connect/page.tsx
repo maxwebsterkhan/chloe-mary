@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import styles from "./connect.module.scss";
 import { Skeleton } from "@radix-ui/themes";
+import Image from "next/image";
 
 export default function ConnectPage() {
   // Refs for animations
@@ -834,6 +835,20 @@ export default function ConnectPage() {
 
               {/* Form Section */}
               <div ref={formSectionRef} className={styles.formSection}>
+                {/* Cherub Logo Centerpiece */}
+                <div className={styles.cherubLogo}>
+                  <Image
+                    src="/cherub.webp"
+                    alt="Chloe Mary Photography"
+                    width={200}
+                    height={173}
+                    style={{
+                      opacity: 0.8,
+                      filter: "grayscale(100%)",
+                    }}
+                  />
+                </div>
+
                 <div className={styles.formContainer}>
                   <div className={styles.formHeader}>
                     <h2 className={styles.formTitle}>Get In Touch</h2>

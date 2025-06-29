@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import styles from "./pricing.module.scss";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import gsap from "gsap";
+import Image from "next/image";
+import StoriesFooter from "../_components/stories-footer/stories-footer";
 
 export default function PricingPage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -222,6 +224,20 @@ export default function PricingPage() {
           ref={fullDayRef}
           className={`${styles.section} ${styles.sectionLight}`}
         >
+          {/* Decorative images for light section */}
+          <Image
+            src="/floral.webp"
+            alt=""
+            width={140}
+            height={140}
+            style={{
+              opacity: 0.22,
+              position: "absolute",
+              top: "3rem",
+              right: "3rem",
+              zIndex: 0,
+            }}
+          />
           <div className={styles.container}>
             <div className={styles.sectionLayout}>
               <div className={styles.sectionMeta}>
@@ -370,6 +386,21 @@ export default function PricingPage() {
           ref={destinationRef}
           className={`${styles.section} ${styles.sectionLight}`}
         >
+          {/* Decorative images for light section */}
+          <Image
+            src="/polaroid.webp"
+            alt=""
+            width={100}
+            height={100}
+            style={{
+              opacity: 0.25,
+              position: "absolute",
+              bottom: "3rem",
+              left: "2rem",
+              zIndex: 0,
+              transform: "rotate(-8deg)",
+            }}
+          />
           <div className={styles.container}>
             <div className={styles.sectionLayout}>
               <div className={styles.sectionMeta}>
@@ -540,6 +571,8 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
+
+      <StoriesFooter />
     </div>
   );
 }

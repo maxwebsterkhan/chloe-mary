@@ -250,6 +250,15 @@
 }
 
 // Testimonials Section
+.testimonials {
+  padding: tokens.$spacing-xxl 0;
+  background: var(--color-secondary);
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-lg 0;
+  }
+}
+
 .testimonialsSection {
   padding: tokens.$spacing-xxl 0;
   background: var(--color-secondary);

@@ -653,14 +653,14 @@
 }
 
 .formContainer {
-  padding: tokens.$spacing-xl;
+  padding: 0 tokens.$spacing-xl tokens.$spacing-xl tokens.$spacing-xl;
 
   @include breakpoint-down("tablet") {
-    padding: tokens.$spacing-lg;
+    padding: 0 tokens.$spacing-lg tokens.$spacing-lg tokens.$spacing-lg;
   }
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-md 0; // Remove left/right padding on mobile
+    padding: 0 0 tokens.$spacing-md 0; // Remove left/right padding on mobile
   }
 }
 
@@ -1033,4 +1033,21 @@
   transform: rotate(45deg);
   background: var(--color-accent);
   opacity: 0.6;
+}
+
+// Cherub Logo Centerpiece
+.cherubLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: tokens.$spacing-xl;
+  margin-bottom: tokens.$spacing-sm;
+
+  @include breakpoint-down("tablet") {
+    padding-top: tokens.$spacing-lg;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding-top: tokens.$spacing-md;
+  }
 }
