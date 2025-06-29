@@ -38,11 +38,72 @@ export const metadata: Metadata = {
   description:
     "Contemporary documentary wedding photographer based in Bristol, serving London, UK & internationally. Passionate about capturing authentic, candid moments for creative couples who value natural, artistic images. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025.",
   keywords: [
+    // Primary location keywords
     "bristol wedding photographer",
+    "bristol photographer",
     "london wedding photographer",
+    "london photographer",
     "uk wedding photography",
+    "uk photographer",
+    "uk wedding photographer",
+
+    // Regional variations
+    "bath wedding photographer",
+    "somerset wedding photographer",
+    "gloucestershire wedding photographer",
+    "cotswolds wedding photographer",
+    "devon wedding photographer",
+    "cornwall wedding photographer",
+
+    // Intent-based keywords
+    "hire wedding photographer bristol",
+    "book wedding photographer london",
+    "find wedding photographer uk",
+    "wedding photographer near me bristol",
+    "wedding photographer near me london",
+
+    // Service variations
     "international wedding photographer",
     "destination wedding photographer",
+    "european wedding photographer",
+    "overseas wedding photographer",
+    "abroad wedding photographer",
+    "international photographer",
+    "destination photographer",
+    "wedding photographer abroad",
+    "uk photographer working internationally",
+    "british photographer overseas",
+
+    // Specific international regions
+    "france wedding photographer",
+    "italy wedding photographer",
+    "spain wedding photographer",
+    "portugal wedding photographer",
+    "greece wedding photographer",
+    "tuscany wedding photographer",
+    "provence wedding photographer",
+    "amalfi coast wedding photographer",
+    "santorini wedding photographer",
+    "ibiza wedding photographer",
+    "mallorca wedding photographer",
+
+    // International cities
+    "paris wedding photographer",
+    "rome wedding photographer",
+    "barcelona wedding photographer",
+    "amsterdam wedding photographer",
+    "berlin wedding photographer",
+    "prague wedding photographer",
+    "vienna wedding photographer",
+
+    // Broader international terms
+    "worldwide wedding photographer",
+    "global wedding photographer",
+    "travel wedding photographer",
+    "elopement photographer abroad",
+    "destination elopement photographer",
+
+    // Style-specific keywords
     "contemporary documentary photographer",
     "creative wedding photography",
     "artistic wedding photographer bristol",
@@ -51,22 +112,31 @@ export const metadata: Metadata = {
     "natural wedding photographer uk",
     "authentic wedding photography",
     "unposed wedding photography",
-    "professional photos top 50",
-    "who what wear wedding photographer",
-    "authentic love stories",
-    "memento vivere photography",
-    // 2025 SEO: Added semantic and intent-based keywords
     "emotional wedding photography",
     "documentary wedding photographer",
     "fine art wedding photography bristol",
     "fine art wedding photography london",
-    "wedding photographer near me bristol",
-    "wedding photographer near me london",
+
+    // Package/pricing keywords
     "bristol wedding photography packages",
     "london wedding photography packages",
-    "uk destination wedding photographer",
-    "european wedding photographer",
-    "overseas wedding photographer",
+    "wedding photography pricing uk",
+    "affordable wedding photographer bristol",
+    "luxury wedding photographer london",
+
+    // Brand/recognition keywords
+    "professional photos top 50",
+    "who what wear wedding photographer",
+    "authentic love stories",
+    "memento vivere photography",
+
+    // Venue-specific (popular wedding venues)
+    "clifton wedding photographer",
+    "harbourside wedding photographer",
+    "bristol harbour wedding photographer",
+    "shoreditch wedding photographer",
+    "islington wedding photographer",
+    "hackney wedding photographer",
   ],
   authors: [{ name: "Chloe Mary", url: "https://www.chloemary.com" }],
   creator: "Chloe Mary Photography",

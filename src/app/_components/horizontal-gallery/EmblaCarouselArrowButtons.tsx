@@ -5,10 +5,7 @@ import React, {
   useState,
 } from "react";
 import { EmblaCarouselType } from "embla-carousel";
-import {
-  ArrowFatLineLeftIcon,
-  ArrowFatLineRightIcon,
-} from "@phosphor-icons/react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
 
 type UsePrevNextButtonsType = {
   prevBtnDisabled: boolean;
@@ -61,7 +58,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
   const { children, className, ...restProps } = props;
   return (
     <button className={className} type="button" {...restProps}>
-      <ArrowFatLineLeftIcon color="#ffffff" size={32} weight="fill" />
+      <ArrowLeftIcon color="#ffffff" size={32} />
       {children}
     </button>
   );
@@ -71,7 +68,7 @@ export const NextButton: React.FC<PropType> = (props) => {
   const { children, className, ...restProps } = props;
   return (
     <button className={className} type="button" {...restProps}>
-      <ArrowFatLineRightIcon color="#ffffff" size={32} weight="fill" />
+      <ArrowRightIcon color="#ffffff" size={32} />
       {children}
     </button>
   );
