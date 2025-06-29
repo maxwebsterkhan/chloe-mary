@@ -9,13 +9,13 @@ import React, {
 } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import { EmblaCarouselType } from "embla-carousel";
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import styles from "./horizontal-gallery.module.scss";
-import { useMediaQuery } from "react-responsive";
 
 interface GalleryStory {
   id: string;
@@ -126,56 +126,61 @@ export default function HorizontalGallery() {
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   // Parallax effect logic
-  const setTweenNodes = useCallback((emblaApi: any): void => {
+  const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode: HTMLElement) => {
       return slideNode.querySelector(`.${styles.embla__parallax__bg}`);
     });
   }, []);
 
-  const setTweenFactor = useCallback((emblaApi: any) => {
+  const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
   }, []);
 
-  const tweenParallax = useCallback((emblaApi: any, eventName?: string) => {
-    const engine = emblaApi.internalEngine();
-    const scrollProgress = emblaApi.scrollProgress();
-    const slidesInView = emblaApi.slidesInView();
-    const isScrollEvent = eventName === "scroll";
+  const tweenParallax = useCallback(
+    (emblaApi: EmblaCarouselType, eventName?: string) => {
+      const engine = emblaApi.internalEngine();
+      const scrollProgress = emblaApi.scrollProgress();
+      const slidesInView = emblaApi.slidesInView();
+      const isScrollEvent = eventName === "scroll";
 
-    emblaApi
-      .scrollSnapList()
-      .forEach((scrollSnap: number, snapIndex: number) => {
-        let diffToTarget = scrollSnap - scrollProgress;
-        const slidesInSnap = engine.slideRegistry[snapIndex];
+      emblaApi
+        .scrollSnapList()
+        .forEach((scrollSnap: number, snapIndex: number) => {
+          let diffToTarget = scrollSnap - scrollProgress;
+          const slidesInSnap = engine.slideRegistry[snapIndex];
 
-        slidesInSnap.forEach((slideIndex: number) => {
-          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
+          slidesInSnap.forEach((slideIndex: number) => {
+            if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
 
-          if (engine.options.loop) {
-            engine.slideLooper.loopPoints.forEach((loopItem: any) => {
-              const target = loopItem.target();
-              if (slideIndex === loopItem.index && target !== 0) {
-                const sign = Math.sign(target);
-                if (sign === -1) {
-                  diffToTarget = scrollSnap - (1 + scrollProgress);
+            if (engine.options.loop) {
+              engine.slideLooper.loopPoints.forEach(
+                (loopItem: { target: () => number; index: number }) => {
+                  const target = loopItem.target();
+                  if (slideIndex === loopItem.index && target !== 0) {
+                    const sign = Math.sign(target);
+                    if (sign === -1) {
+                      diffToTarget = scrollSnap - (1 + scrollProgress);
+                    }
+                    if (sign === 1) {
+                      diffToTarget = scrollSnap + (1 - scrollProgress);
+                    }
+                  }
                 }
-                if (sign === 1) {
-                  diffToTarget = scrollSnap + (1 - scrollProgress);
-                }
-              }
-            });
-          }
+              );
+            }
 
-          const translate = diffToTarget * (-1 * tweenFactor.current) * 100;
-          const tweenNode = tweenNodes.current[slideIndex];
-          if (tweenNode) {
-            (
-              tweenNode as HTMLElement
-            ).style.transform = `translateX(${translate}%)`;
-          }
+            const translate = diffToTarget * (-1 * tweenFactor.current) * 100;
+            const tweenNode = tweenNodes.current[slideIndex];
+            if (tweenNode) {
+              (
+                tweenNode as HTMLElement
+              ).style.transform = `translateX(${translate}%)`;
+            }
+          });
         });
-      });
-  }, []);
+    },
+    []
+  );
 
   // Progress bar effect
   useEffect(() => {
@@ -252,100 +257,95 @@ export default function HorizontalGallery() {
                           </p>
                         </div>
                       </div>
-                      {!isMobile && (
-                        <div className={styles.thumbsCtaRow}>
-                          <div
-                            className={styles.thumbsRowUnified}
-                            role="tablist"
-                            aria-label={`Gallery thumbnails for ${story.title}`}
-                          >
-                            {story.images.map((image, thumbIdx) => (
-                              <button
-                                key={thumbIdx}
-                                ref={thumbButtonRefs.current[index][thumbIdx]}
-                                className={
-                                  styles.thumbButton +
-                                  (activeThumbs[index] === thumbIdx
-                                    ? " " + styles.activeThumb
-                                    : "")
-                                }
-                                aria-selected={activeThumbs[index] === thumbIdx}
-                                aria-label={`Show image ${thumbIdx + 1} for ${
-                                  story.title
-                                }`}
-                                tabIndex={
-                                  activeThumbs[index] === thumbIdx ? 0 : -1
-                                }
-                                onClick={() => {
+                      <div className={styles.thumbsCtaRow}>
+                        <div
+                          className={styles.thumbsRowUnified}
+                          role="tablist"
+                          aria-label={`Gallery thumbnails for ${story.title}`}
+                        >
+                          {story.images.map((image, thumbIdx) => (
+                            <button
+                              key={thumbIdx}
+                              ref={thumbButtonRefs.current[index][thumbIdx]}
+                              className={
+                                styles.thumbButton +
+                                (activeThumbs[index] === thumbIdx
+                                  ? " " + styles.activeThumb
+                                  : "")
+                              }
+                              aria-selected={activeThumbs[index] === thumbIdx}
+                              aria-label={`Show image ${thumbIdx + 1} for ${
+                                story.title
+                              }`}
+                              tabIndex={
+                                activeThumbs[index] === thumbIdx ? 0 : -1
+                              }
+                              onClick={() => {
+                                setActiveThumbs((prev) => {
+                                  const newThumbs = [...prev];
+                                  newThumbs[index] = thumbIdx;
+                                  return newThumbs;
+                                });
+                                setImageFadeKey((k) => k + 1);
+                              }}
+                              type="button"
+                              role="tab"
+                              onKeyDown={(e) => {
+                                if (e.key === "ArrowRight") {
+                                  e.preventDefault();
+                                  const next =
+                                    (thumbIdx + 1) % story.images.length;
+                                  thumbButtonRefs.current[index][
+                                    next
+                                  ].current?.focus();
+                                } else if (e.key === "ArrowLeft") {
+                                  e.preventDefault();
+                                  const prev =
+                                    (thumbIdx - 1 + story.images.length) %
+                                    story.images.length;
+                                  thumbButtonRefs.current[index][
+                                    prev
+                                  ].current?.focus();
+                                } else if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault();
                                   setActiveThumbs((prev) => {
                                     const newThumbs = [...prev];
                                     newThumbs[index] = thumbIdx;
                                     return newThumbs;
                                   });
                                   setImageFadeKey((k) => k + 1);
-                                }}
-                                type="button"
-                                role="tab"
-                                onKeyDown={(e) => {
-                                  if (e.key === "ArrowRight") {
-                                    e.preventDefault();
-                                    const next =
-                                      (thumbIdx + 1) % story.images.length;
-                                    thumbButtonRefs.current[index][
-                                      next
-                                    ].current?.focus();
-                                  } else if (e.key === "ArrowLeft") {
-                                    e.preventDefault();
-                                    const prev =
-                                      (thumbIdx - 1 + story.images.length) %
-                                      story.images.length;
-                                    thumbButtonRefs.current[index][
-                                      prev
-                                    ].current?.focus();
-                                  } else if (
-                                    e.key === "Enter" ||
-                                    e.key === " "
-                                  ) {
-                                    e.preventDefault();
-                                    setActiveThumbs((prev) => {
-                                      const newThumbs = [...prev];
-                                      newThumbs[index] = thumbIdx;
-                                      return newThumbs;
-                                    });
-                                    setImageFadeKey((k) => k + 1);
-                                  }
-                                }}
-                              >
-                                <span className="sr-only">{`Show image ${
-                                  thumbIdx + 1
-                                }`}</span>
-                                <Image
-                                  src={image}
-                                  alt={`Thumbnail ${thumbIdx + 1} for ${
-                                    story.title
-                                  }`}
-                                  fill
-                                  className={styles.thumbImageUnified}
-                                  loading="lazy"
-                                />
-                              </button>
-                            ))}
-                          </div>
-                          <div className={styles.ctaTextWithDivider}>
-                            <a
-                              href={story.ctaLink}
-                              className={styles.ctaTextLink}
+                                }
+                              }}
                             >
-                              <span>View</span>
-                              <span>Gallery</span>
-                            </a>
-                            <span
-                              className={styles.ctaDivider}
-                              aria-hidden="true"
-                            ></span>
-                          </div>
+                              <span className="sr-only">{`Show image ${
+                                thumbIdx + 1
+                              }`}</span>
+                              <Image
+                                src={image}
+                                alt={`Thumbnail ${thumbIdx + 1} for ${
+                                  story.title
+                                }`}
+                                fill
+                                className={styles.thumbImageUnified}
+                                loading="lazy"
+                              />
+                            </button>
+                          ))}
                         </div>
-                      )}
+                        <div className={styles.ctaTextWithDivider}>
+                          <a
+                            href={story.ctaLink}
+                            className={styles.ctaTextLink}
+                          >
+                            <span>View</span>
+                            <span>Gallery</span>
+                          </a>
+                          <span
+                            className={styles.ctaDivider}
+                            aria-hidden="true"
+                          ></span>
+                        </div>
+                      </div>
                       <div className={styles.bottomSectionUnified}>
                         <p className={styles.storyDescription}>
                           {story.description}
