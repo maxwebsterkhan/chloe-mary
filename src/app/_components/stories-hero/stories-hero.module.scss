@@ -119,6 +119,17 @@
   margin-bottom: tokens.$spacing-lg;
   font-weight: 300;
   line-height: 1.6;
+  font-display: swap;
+  content-visibility: auto;
+
+  @include breakpoint-down("tablet") {
+    font-size: tokens.$font-size-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: tokens.$font-size-xs;
+    line-height: 1.5;
+  }
 }
 
 .heroDecor {
