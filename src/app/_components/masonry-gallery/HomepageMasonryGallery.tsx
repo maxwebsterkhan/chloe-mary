@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useS3Images } from "@/hooks/useS3Images";
@@ -5,7 +6,6 @@ import { Masonry } from "masonic";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
 import gsap from "gsap";
-import Image from "next/image";
 
 export default function HomepageMasonryGallery() {
   const { images, loading, error } = useS3Images({ prefix: "homepage/" });
@@ -115,7 +115,7 @@ export default function HomepageMasonryGallery() {
             ref={imageWrapperRef}
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
+            <img
               src={lightbox.url}
               alt={lightbox.alt}
               className={styles.lightboxImage}
