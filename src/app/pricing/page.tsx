@@ -228,8 +228,8 @@ export default function PricingPage() {
           <Image
             src="/floral.webp"
             alt=""
-            width={140}
-            height={140}
+            width={168}
+            height={168}
             style={{
               opacity: 0.22,
               position: "absolute",
@@ -390,13 +390,13 @@ export default function PricingPage() {
           <Image
             src="/polaroid.webp"
             alt=""
-            width={100}
-            height={100}
+            width={168}
+            height={168}
             style={{
               opacity: 0.25,
               position: "absolute",
-              bottom: "3rem",
-              left: "2rem",
+              top: "3rem",
+              right: "3rem",
               zIndex: 0,
               transform: "rotate(-8deg)",
             }}
