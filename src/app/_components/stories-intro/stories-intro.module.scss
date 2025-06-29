@@ -1,0 +1,146 @@
+@use "../../_styles/breakpoints" as *;
+@use "../../_styles/tokens" as tokens;
+
+.intro {
+  padding: tokens.$spacing-xxl tokens.$spacing-md;
+  background-color: var(--color-primary);
+
+  @include breakpoint-down("tablet") {
+    padding: tokens.$spacing-xl tokens.$spacing-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-xl tokens.$spacing-sm;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  position: relative;
+  margin-bottom: tokens.$spacing-lg;
+
+  @include breakpoint-down("mobile") {
+    margin-bottom: tokens.$spacing-md;
+  }
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--color-secondary);
+  margin: 0;
+  letter-spacing: -0.01em;
+  opacity: 0.1; // Start hidden for GSAP animation
+
+  @include breakpoint-down("tablet") {
+    // Remove transform
+  }
+
+  @include breakpoint-down("mobile") {
+    // Remove transform
+  }
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: tokens.$spacing-xxs 0 0 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary) 0%,
+    #d4c4a0 50%,
+    #b8a082 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  position: relative;
+  opacity: 0.1; // Start hidden for GSAP typewriter animation
+
+  @include breakpoint-down("tablet") {
+    font-size: 0.8rem;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$spacing-md;
+
+  @include breakpoint-down("mobile") {
+    gap: tokens.$spacing-sm;
+  }
+}
+
+// Base paragraph styles for GSAP animations
+.paragraph {
+  font-size: tokens.$font-size-body;
+  line-height: 1.7;
+  color: rgba(243, 240, 235, 0.85);
+  margin: 0;
+  max-width: 700px;
+  opacity: 1;
+
+  @include breakpoint-down("tablet") {
+    font-size: tokens.$font-size-xs;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+// Left-aligned paragraph
+.paragraphLeft {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 650px;
+}
+
+// Right-aligned paragraph
+.paragraphRight {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 600px;
+}
+
+// Center-aligned paragraph
+.paragraphCenter {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+}
+
+// Philosophy quote special styling
+.philosophy {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-secondary) !important;
+  font-size: 1.3rem !important;
+  position: relative;
+
+  @include breakpoint-down("tablet") {
+    font-size: tokens.$font-size-sm !important;
+  }
+
+  @include breakpoint-down("mobile") {
+    font-size: tokens.$font-size-body !important;
+  }
+}

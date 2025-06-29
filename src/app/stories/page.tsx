@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import StoriesHero from "@/app/_components/stories-hero/stories-hero";
+import StoriesIntro from "@/app/_components/stories-intro/stories-intro";
 import HorizontalGallery from "@/app/_components/horizontal-gallery/horizontal-gallery";
 import StoriesFooter from "@/app/_components/stories-footer/stories-footer";
 
@@ -137,6 +138,7 @@ export default function Page() {
 
       <StoriesHero />
       <main id="main" tabIndex={-1}>
+        <StoriesIntro />
         <HorizontalGallery />
         <StoriesFooter />
       </main>
