@@ -23,9 +23,9 @@ export default function WelcomeInfo() {
         </div>
       </div>
 
-      <div className={styles.container}>
-        <div className={styles.sections}>
-          <div className={styles.section}>
+      <div className={styles.sections}>
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
             <div className={styles.sectionTitle}>
               <div className={styles.decorLine}></div>
               <h3>Formals</h3>
@@ -98,8 +98,10 @@ export default function WelcomeInfo() {
               </ul>
             </div>
           </div>
+        </div>
 
-          <div className={styles.section}>
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
             <div className={styles.sectionTitle}>
               <div className={styles.decorLine}></div>
               <h3>Confetti</h3>
@@ -159,8 +161,10 @@ export default function WelcomeInfo() {
               </ul>
             </div>
           </div>
+        </div>
 
-          <div className={styles.section}>
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
             <div className={styles.sectionTitle}>
               <div className={styles.decorLine}></div>
               <h3>Portraits</h3>
@@ -200,8 +204,10 @@ export default function WelcomeInfo() {
               </p>
             </div>
           </div>
+        </div>
 
-          <div className={styles.section}>
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
             <div className={styles.sectionTitle}>
               <div className={styles.decorLine}></div>
               <h3>Timeline</h3>
@@ -252,8 +258,10 @@ export default function WelcomeInfo() {
               </ul>
             </div>
           </div>
+        </div>
 
-          <div className={styles.section}>
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
             <div className={styles.sectionTitle}>
               <div className={styles.decorLine}></div>
               <h3>Final Advice</h3>

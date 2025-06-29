@@ -8,8 +8,8 @@
 .intro {
   text-align: center;
   background: var(--color-primary);
-  padding: tokens.$spacing-xxl tokens.$spacing-md;
-  margin-bottom: tokens.$spacing-xxl;
+  padding: tokens.$spacing-xl tokens.$spacing-md;
+  margin-bottom: tokens.$spacing-xl;
 
   .introContent {
     max-width: 650px;
@@ -45,8 +45,8 @@
   }
 
   @include breakpoint-down("mobile") {
-    padding: tokens.$spacing-xl tokens.$spacing-sm;
-    margin-bottom: tokens.$spacing-xl;
+    padding: tokens.$spacing-lg tokens.$spacing-sm;
+    margin-bottom: tokens.$spacing-lg;
   }
 }
 
@@ -63,18 +63,72 @@
 
 .sections {
   display: grid;
-  gap: tokens.$spacing-xl;
+  gap: 0;
 }
 
 .section {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: tokens.$spacing-lg;
-  align-items: start;
+  padding: tokens.$spacing-xxl 0;
+  background: var(--color-secondary);
 
-  @include breakpoint-down("tablet") {
-    grid-template-columns: 1fr;
-    gap: tokens.$spacing-md;
+  &:nth-child(even) {
+    background: var(--color-primary);
+
+    .sectionTitle {
+      h3,
+      .subtitle {
+        color: var(--color-secondary);
+      }
+
+      .decorLine {
+        background: var(--color-secondary);
+      }
+    }
+
+    .content {
+      color: var(--color-secondary);
+
+      p,
+      li {
+        color: var(--color-secondary);
+      }
+
+      .highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.12) 100%
+        );
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      li::before {
+        background: var(--color-secondary);
+      }
+
+      .numbered li::before {
+        color: var(--color-secondary);
+      }
+    }
+  }
+
+  .sectionInner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 tokens.$spacing-md;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: tokens.$spacing-lg;
+    align-items: start;
+
+    @include breakpoint-down("tablet") {
+      grid-template-columns: 1fr;
+      gap: tokens.$spacing-md;
+      padding: 0 tokens.$spacing-sm;
+    }
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-xl 0;
   }
 }
 
