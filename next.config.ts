@@ -92,7 +92,6 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
 
   // Additional build optimizations
-  swcMinify: true,
   reactStrictMode: true,
   
   // Configure TypeScript for better performance
