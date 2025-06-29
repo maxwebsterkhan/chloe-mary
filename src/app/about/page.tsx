@@ -143,7 +143,9 @@ export default function About() {
         }}
       />
       <AboutHero />
-      <AboutStory />
+      <main id="main" tabIndex={-1}>
+        <AboutStory />
+      </main>
     </>
   );
 }

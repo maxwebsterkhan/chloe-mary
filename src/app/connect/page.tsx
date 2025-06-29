@@ -711,159 +711,164 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      {/* Content Section */}
-      <section ref={contentRef} className={styles.content}>
-        <div className={styles.contentContainer}>
-          <div className={styles.contentLayout}>
-            {/* Text Content */}
-            <div ref={textSectionRef} className={styles.textSection}>
-              <div ref={philosophyRef} className={styles.philosophySection}>
-                <div className={styles.philosophyQuote}>
-                  <blockquote className={styles.quote}>
-                    &ldquo;Every love story is unique, and your wedding
-                    photography should be too. I believe in creating images that
-                    feel authentically <em>you</em> — not just beautiful, but
-                    deeply personal.&rdquo;
-                  </blockquote>
-                  <div className={styles.quoteAttribution}>— Chloe Mary</div>
+      <main id="main" tabIndex={-1}>
+        {/* Content Section */}
+        <section ref={contentRef} className={styles.content}>
+          <div className={styles.contentContainer}>
+            <div className={styles.contentLayout}>
+              {/* Text Content */}
+              <div ref={textSectionRef} className={styles.textSection}>
+                <div ref={philosophyRef} className={styles.philosophySection}>
+                  <div className={styles.philosophyQuote}>
+                    <blockquote className={styles.quote}>
+                      &ldquo;Every love story is unique, and your wedding
+                      photography should be too. I believe in creating images
+                      that feel authentically <em>you</em> — not just beautiful,
+                      but deeply personal.&rdquo;
+                    </blockquote>
+                    <div className={styles.quoteAttribution}>— Chloe Mary</div>
+                  </div>
+                </div>
+
+                {/* Spacer between Philosophy and Process */}
+                <div ref={spacer1Ref} className={styles.sectionSpacer}>
+                  <div className={styles.decorativeDivider}>
+                    <div className={styles.dividerLine}></div>
+                    <div className={styles.dividerDot}></div>
+                    <div className={styles.dividerLine}></div>
+                  </div>
+                </div>
+
+                <div ref={processRef} className={styles.processSection}>
+                  <h2 className={styles.processTitle}>My Process</h2>
+                  <div className={styles.processSteps}>
+                    <div className={styles.processStep}>
+                      <div className={styles.stepNumber}>01</div>
+                      <div className={styles.stepContent}>
+                        <h3 className={styles.stepTitle}>Initial Enquiry</h3>
+                        <p className={styles.stepDescription}>
+                          Share your wedding details, vision, and what drew you
+                          to my work. I love learning about what makes your
+                          relationship unique and understanding your photography
+                          style preferences.
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.processStep}>
+                      <div className={styles.stepNumber}>02</div>
+                      <div className={styles.stepContent}>
+                        <h3 className={styles.stepTitle}>Personal Response</h3>
+                        <p className={styles.stepDescription}>
+                          I&apos;ll send you a thoughtful, personalised response
+                          within a few days, including my availability, package
+                          information, and answers to any questions you might
+                          have about my approach.
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.processStep}>
+                      <div className={styles.stepNumber}>03</div>
+                      <div className={styles.stepContent}>
+                        <h3 className={styles.stepTitle}>
+                          Complimentary Consultation
+                        </h3>
+                        <p className={styles.stepDescription}>
+                          We&apos;ll have a relaxed video chat to get to know
+                          each other better. This helps me understand your
+                          vision and ensures we&apos;re a perfect match before
+                          your special day.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Spacer between Process and Ready */}
+                <div ref={spacer2Ref} className={styles.sectionSpacer}>
+                  <div className={styles.elegantDivider}>
+                    <div className={styles.elegantLine}></div>
+                    <div className={styles.elegantCenter}>
+                      <div className={styles.elegantDot}></div>
+                      <div className={styles.elegantDiamond}></div>
+                      <div className={styles.elegantDot}></div>
+                    </div>
+                    <div className={styles.elegantLine}></div>
+                  </div>
+                </div>
+
+                <div ref={readyRef} className={styles.readySection}>
+                  <div className={styles.readyContent}>
+                    <div className={styles.readyLabel}>ARE YOU READY?</div>
+                    <h2 className={styles.readyTitle}>
+                      Let&apos;s Create Something
+                      <span className={styles.readyAccent}>Extraordinary</span>
+                      Together
+                    </h2>
+                    <div className={styles.readyDivider}>
+                      <div className={styles.readyLine}></div>
+                      <div className={styles.readyDot}></div>
+                      <div className={styles.readyLine}></div>
+                    </div>
+                    <p className={styles.readyText}>
+                      I can&apos;t wait to hear about your love story and learn
+                      what makes your relationship special.
+                    </p>
+                    <div className={styles.readyAction}>
+                      <span className={styles.actionArrow}>↓</span>
+                      <span className={styles.actionText}>
+                        Start your enquiry below
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Spacer between Philosophy and Process */}
-              <div ref={spacer1Ref} className={styles.sectionSpacer}>
+              {/* Spacer between Ready and Form */}
+              <div ref={spacer3Ref} className={styles.sectionSpacer}>
                 <div className={styles.decorativeDivider}>
                   <div className={styles.dividerLine}></div>
-                  <div className={styles.dividerDot}></div>
+                  <div className={styles.dividerShape}></div>
                   <div className={styles.dividerLine}></div>
                 </div>
               </div>
 
-              <div ref={processRef} className={styles.processSection}>
-                <h2 className={styles.processTitle}>My Process</h2>
-                <div className={styles.processSteps}>
-                  <div className={styles.processStep}>
-                    <div className={styles.stepNumber}>01</div>
-                    <div className={styles.stepContent}>
-                      <h3 className={styles.stepTitle}>Initial Enquiry</h3>
-                      <p className={styles.stepDescription}>
-                        Share your wedding details, vision, and what drew you to
-                        my work. I love learning about what makes your
-                        relationship unique and understanding your photography
-                        style preferences.
-                      </p>
-                    </div>
+              {/* Form Section */}
+              <div ref={formSectionRef} className={styles.formSection}>
+                <div className={styles.formContainer}>
+                  <div className={styles.formHeader}>
+                    <h2 className={styles.formTitle}>Get In Touch</h2>
+                    <p className={styles.formSubtitle}>
+                      Tell me about your special day
+                    </p>
                   </div>
-                  <div className={styles.processStep}>
-                    <div className={styles.stepNumber}>02</div>
-                    <div className={styles.stepContent}>
-                      <h3 className={styles.stepTitle}>Personal Response</h3>
-                      <p className={styles.stepDescription}>
-                        I&apos;ll send you a thoughtful, personalised response
-                        within a few days, including my availability, package
-                        information, and answers to any questions you might have
-                        about my approach.
-                      </p>
-                    </div>
-                  </div>
-                  <div className={styles.processStep}>
-                    <div className={styles.stepNumber}>03</div>
-                    <div className={styles.stepContent}>
-                      <h3 className={styles.stepTitle}>
-                        Complimentary Consultation
-                      </h3>
-                      <p className={styles.stepDescription}>
-                        We&apos;ll have a relaxed video chat to get to know each
-                        other better. This helps me understand your vision and
-                        ensures we&apos;re a perfect match before your special
-                        day.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Spacer between Process and Ready */}
-              <div ref={spacer2Ref} className={styles.sectionSpacer}>
-                <div className={styles.elegantDivider}>
-                  <div className={styles.elegantLine}></div>
-                  <div className={styles.elegantCenter}>
-                    <div className={styles.elegantDot}></div>
-                    <div className={styles.elegantDiamond}></div>
-                    <div className={styles.elegantDot}></div>
+                  <div
+                    className={styles.iframeWrapper}
+                    ref={iframeContainerRef}
+                  >
+                    {!iframeVisible && <Skeleton width="100%" height="800px" />}
+                    {iframeVisible && !iframeLoaded && (
+                      <Skeleton width="100%" height="800px" />
+                    )}
+                    {iframeVisible && (
+                      <iframe
+                        src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
+                        width="100%"
+                        height="800"
+                        title="Contact Form - Chloe Mary Photography"
+                        className={styles.contactIframe}
+                        ref={iframeRef}
+                        onLoad={handleIframeLoad}
+                        style={{ display: iframeLoaded ? "block" : "none" }}
+                      ></iframe>
+                    )}
                   </div>
-                  <div className={styles.elegantLine}></div>
-                </div>
-              </div>
-
-              <div ref={readyRef} className={styles.readySection}>
-                <div className={styles.readyContent}>
-                  <div className={styles.readyLabel}>ARE YOU READY?</div>
-                  <h2 className={styles.readyTitle}>
-                    Let&apos;s Create Something
-                    <span className={styles.readyAccent}>Extraordinary</span>
-                    Together
-                  </h2>
-                  <div className={styles.readyDivider}>
-                    <div className={styles.readyLine}></div>
-                    <div className={styles.readyDot}></div>
-                    <div className={styles.readyLine}></div>
-                  </div>
-                  <p className={styles.readyText}>
-                    I can&apos;t wait to hear about your love story and learn
-                    what makes your relationship special.
-                  </p>
-                  <div className={styles.readyAction}>
-                    <span className={styles.actionArrow}>↓</span>
-                    <span className={styles.actionText}>
-                      Start your enquiry below
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Spacer between Ready and Form */}
-            <div ref={spacer3Ref} className={styles.sectionSpacer}>
-              <div className={styles.decorativeDivider}>
-                <div className={styles.dividerLine}></div>
-                <div className={styles.dividerShape}></div>
-                <div className={styles.dividerLine}></div>
-              </div>
-            </div>
-
-            {/* Form Section */}
-            <div ref={formSectionRef} className={styles.formSection}>
-              <div className={styles.formContainer}>
-                <div className={styles.formHeader}>
-                  <h2 className={styles.formTitle}>Get In Touch</h2>
-                  <p className={styles.formSubtitle}>
-                    Tell me about your special day
-                  </p>
-                </div>
-
-                <div className={styles.iframeWrapper} ref={iframeContainerRef}>
-                  {!iframeVisible && <Skeleton width="100%" height="800px" />}
-                  {iframeVisible && !iframeLoaded && (
-                    <Skeleton width="100%" height="800px" />
-                  )}
-                  {iframeVisible && (
-                    <iframe
-                      src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
-                      width="100%"
-                      height="800"
-                      title="Contact Form - Chloe Mary Photography"
-                      className={styles.contactIframe}
-                      ref={iframeRef}
-                      onLoad={handleIframeLoad}
-                      style={{ display: iframeLoaded ? "block" : "none" }}
-                    ></iframe>
-                  )}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer Section */}
       <section ref={footerRef} className={styles.footer}>

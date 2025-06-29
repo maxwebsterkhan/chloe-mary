@@ -135,8 +135,8 @@ export default function Page() {
         }}
       />
 
-      <main>
-        <StoriesHero />
+      <StoriesHero />
+      <main id="main" tabIndex={-1}>
         <HorizontalGallery />
         <StoriesFooter />
       </main>

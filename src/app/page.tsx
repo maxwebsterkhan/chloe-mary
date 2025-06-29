@@ -164,8 +164,10 @@ export default function Home() {
         }}
       />
       <HomeHero />
-      <QuoteIntro />
-      <Achievements />
+      <main id="main" tabIndex={-1}>
+        <QuoteIntro />
+        <Achievements />
+      </main>
     </>
   );
 }
