@@ -46,7 +46,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Full Day Essential Coverage",
             description:
-              "Up to 9 hours of coverage with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
+              "Up to 9 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
               price: "3500",
@@ -58,9 +58,9 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Full Day Extensive Coverage",
+            name: "Full Day Extensive Documentation",
             description:
-              "Up to 12 hours of coverage with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
+              "Up to 12 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
               price: "4500",

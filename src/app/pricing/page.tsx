@@ -268,7 +268,7 @@ export default function PricingPage() {
                     <div className={styles.priceDetails}>
                       <span className={styles.priceAmount}>£3,500</span>
                       <span className={styles.priceDesc}>
-                        Up to 9 hours of coverage
+                        Up to 9 hours of documentation
                       </span>
                     </div>
                   </div>
@@ -278,7 +278,7 @@ export default function PricingPage() {
                     <div className={styles.priceDetails}>
                       <span className={styles.priceAmount}>£4,500</span>
                       <span className={styles.priceDesc}>
-                        Up to 12 hours of coverage
+                        Up to 12 hours of documentation
                       </span>
                     </div>
                   </div>
@@ -339,7 +339,9 @@ export default function PricingPage() {
                     <div className={styles.priceLabel}>FOCUSED</div>
                     <div className={styles.priceDetails}>
                       <span className={styles.priceAmount}>£1,350</span>
-                      <span className={styles.priceDesc}>Up to 3 hours</span>
+                      <span className={styles.priceDesc}>
+                        Up to 3 hours of documentation
+                      </span>
                       <span className={styles.availability}>
                         Limited peak season availability
                       </span>
@@ -350,7 +352,9 @@ export default function PricingPage() {
                     <div className={styles.priceLabel}>EXTENDED</div>
                     <div className={styles.priceDetails}>
                       <span className={styles.priceAmount}>£2,100</span>
-                      <span className={styles.priceDesc}>Up to 5 hours</span>
+                      <span className={styles.priceDesc}>
+                        Up to 5 hours of documentation
+                      </span>
                       <span className={styles.availability}>
                         Limited peak season availability
                       </span>
@@ -437,7 +441,7 @@ export default function PricingPage() {
                         From £4,250
                       </span>
                       <span className={styles.destinationDesc}>
-                        9 hours of documentation
+                        Up to 9 hours of documentation
                       </span>
                     </div>
                   </div>
@@ -451,7 +455,7 @@ export default function PricingPage() {
                         From £4,750
                       </span>
                       <span className={styles.destinationDesc}>
-                        9 hours of documentation
+                        Up to 9 hours of documentation
                       </span>
                     </div>
                   </div>
