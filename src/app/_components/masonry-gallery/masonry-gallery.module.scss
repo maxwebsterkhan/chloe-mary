@@ -1,0 +1,56 @@
+@use "../../_styles/tokens" as tokens;
+@use "../../_styles/breakpoints" as *;
+
+.masonrySection {
+  margin: 2rem 0;
+}
+
+.masonryContainer {
+  width: 100%;
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;
+  padding: 0 tokens.$spacing-md;
+
+  @include breakpoint-down("tablet") {
+    padding: 0 tokens.$spacing-sm;
+  }
+  @include breakpoint-down("mobile") {
+    padding: 0 tokens.$spacing-sm;
+  }
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  grid-auto-rows: 12.5rem;
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+}
+
+.imageCell {
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.imageCell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  grid-area: 1 / 1 / -1 / -1;
+}
+
+// Grid span logic
+.imageCell.span2x2 {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+.imageCell.span2r {
+  grid-row: span 2;
+}
+.imageCell.span2c {
+  grid-column: span 2;
+}

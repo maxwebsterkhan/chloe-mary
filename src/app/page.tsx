@@ -3,6 +3,8 @@ import HomeHero from "./_components/home-hero/home-hero";
 import QuoteIntro from "./_components/quote-intro/quote-intro";
 import Achievements from "./_components/achievements/achievements";
 
+import HomepageMasonryGallery from "./_components/masonry-gallery/HomepageMasonryGallery";
+
 export const metadata: Metadata = {
   title:
     "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
@@ -166,6 +168,23 @@ export default function Home() {
       <HomeHero />
       <main id="main" tabIndex={-1}>
         <QuoteIntro />
+        <HomepageMasonryGallery />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ImageGallery",
+              name: "Homepage Masonry Gallery",
+              description:
+                "A curated selection of wedding photography by Chloe Mary Photography, Bristol.",
+              publisher: {
+                "@type": "Organization",
+                name: "Chloe Mary Photography",
+              },
+            }),
+          }}
+        />
         <Achievements />
       </main>
     </>
