@@ -277,9 +277,7 @@ export default function HorizontalGallery() {
                               aria-label={`Show image ${thumbIdx + 1} for ${
                                 story.title
                               }`}
-                              tabIndex={
-                                activeThumbs[index] === thumbIdx ? 0 : -1
-                              }
+                              tabIndex={0}
                               onClick={() => {
                                 setActiveThumbs((prev) => {
                                   const newThumbs = [...prev];
@@ -305,6 +303,17 @@ export default function HorizontalGallery() {
                                     story.images.length;
                                   thumbButtonRefs.current[index][
                                     prev
+                                  ].current?.focus();
+                                } else if (e.key === "Home") {
+                                  e.preventDefault();
+                                  thumbButtonRefs.current[
+                                    index
+                                  ][0].current?.focus();
+                                } else if (e.key === "End") {
+                                  e.preventDefault();
+                                  const lastIndex = story.images.length - 1;
+                                  thumbButtonRefs.current[index][
+                                    lastIndex
                                   ].current?.focus();
                                 } else if (e.key === "Enter" || e.key === " ") {
                                   e.preventDefault();
