@@ -8,11 +8,17 @@ export async function GET(request: NextRequest) {
     
     const images = await listImages(prefix);
     
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       images,
       count: images.length,
     });
+
+    // Add cache headers for better performance
+    response.headers.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+    response.headers.set('Vary', 'Accept-Encoding');
+    
+    return response;
   } catch (error) {
     console.error('Error fetching images:', error);
     return NextResponse.json(

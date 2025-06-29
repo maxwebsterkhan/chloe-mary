@@ -15,12 +15,18 @@ export async function GET(
     
     const url = await getImageUrl(decodedKey, expiresIn);
     
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       key: decodedKey,
       url,
       expiresIn,
     });
+
+    // Add cache headers for better performance
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    response.headers.set('Vary', 'Accept-Encoding');
+    
+    return response;
   } catch (error) {
     console.error('Error getting image URL:', error);
     return NextResponse.json(

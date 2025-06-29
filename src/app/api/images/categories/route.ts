@@ -5,11 +5,17 @@ export async function GET() {
   try {
     const categorizedImages = await getImagesByCategory();
     
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       categories: categorizedImages,
       categoryCount: Object.keys(categorizedImages).length,
     });
+
+    // Add cache headers for better performance
+    response.headers.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+    response.headers.set('Vary', 'Accept-Encoding');
+    
+    return response;
   } catch (error) {
     console.error('Error fetching categorized images:', error);
     return NextResponse.json(
