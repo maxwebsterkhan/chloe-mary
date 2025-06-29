@@ -164,7 +164,7 @@ export default function KindWords() {
               <h1 className={styles.heroTitle}>
                 BEAUTIFUL
                 <span className={styles.titleAccent}>PEOPLE</span>
-                <span className={styles.titleSecondary}>& THEIR STORIES</span>
+                <span className={styles.titleSecondary}>& THEIR MEMORIES</span>
               </h1>
             </div>
             <div className={styles.heroRight}>
