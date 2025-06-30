@@ -179,12 +179,13 @@
       }
 
       a {
-        color: #d4c4a0;
+        color: var(--color-accent);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
 
         &:hover {
           color: var(--color-secondary);
+          transform: translateX(5px);
         }
       }
 
