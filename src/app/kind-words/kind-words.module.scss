@@ -422,7 +422,7 @@
   // Simple size and style variations - remove fixed heights
   &.compact {
     .testimonialText {
-      font-size: 0.9rem;
+      font-size: 1rem;
       line-height: 1.4;
     }
   }
@@ -431,7 +431,7 @@
     padding: tokens.$spacing-xl;
 
     .testimonialText {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
       line-height: 1.5;
     }
