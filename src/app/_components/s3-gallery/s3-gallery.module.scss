@@ -1,8 +1,19 @@
+@use "../../_styles/tokens" as tokens;
+@use "../../_styles/breakpoints" as *;
+
 .gallery {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: tokens.$spacing-xl tokens.$spacing-md;
+
+  @include breakpoint-down("tablet") {
+    padding: tokens.$spacing-lg tokens.$spacing-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-md tokens.$spacing-sm;
+  }
 }
 
 .grid {

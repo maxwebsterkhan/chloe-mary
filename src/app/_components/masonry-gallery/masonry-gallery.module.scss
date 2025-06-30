@@ -2,7 +2,15 @@
 @use "../../_styles/breakpoints" as *;
 
 .masonrySection {
-  margin: 2rem 0;
+  padding: tokens.$spacing-xl 0;
+
+  @include breakpoint-down("tablet") {
+    padding: tokens.$spacing-lg 0;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-md 0;
+  }
 }
 
 .masonryContainer {

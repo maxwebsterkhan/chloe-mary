@@ -90,12 +90,14 @@
   min-width: 100dvw;
   max-width: 100dvw;
   height: auto;
-  padding: tokens.$spacing-md tokens.$spacing-md tokens.$spacing-lg
-    tokens.$spacing-md;
+  padding: tokens.$spacing-xl tokens.$spacing-md;
 
   @include breakpoint-down("tablet") {
-    padding: tokens.$spacing-sm tokens.$spacing-sm tokens.$spacing-md
-      tokens.$spacing-sm;
+    padding: tokens.$spacing-lg tokens.$spacing-sm;
+  }
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-md tokens.$spacing-sm;
   }
 
   // Hide inactive stories from screen readers
