@@ -2,7 +2,6 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useS3Images } from "@/hooks/useS3Images";
-import { Masonry } from "masonic";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
 import { gsap } from "gsap";
@@ -44,39 +43,6 @@ export default function HomepageMasonryGallery() {
 
   const handleCloseLightbox = () => setIsFadingOut(true);
 
-  // Card renderer for masonic
-  const MasonryCard = ({ data }: { data: { url: string; key: string } }) => (
-    <img
-      src={data.url}
-      alt={`Wedding photo: ${data.key
-        .replace(/[-_]/g, " ")
-        .replace(/\.[^/.]+$/, "")}`}
-      className={styles.galleryImage}
-      onClick={() =>
-        setLightbox({
-          url: data.url,
-          alt: `Wedding photo: ${data.key
-            .replace(/[-_]/g, " ")
-            .replace(/\.[^/.]+$/, "")}`,
-        })
-      }
-      tabIndex={0}
-      role="button"
-      aria-label={`Wedding photo: ${data.key
-        .replace(/[-_]/g, " ")
-        .replace(/\.[^/.]+$/, "")}`}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ")
-          setLightbox({
-            url: data.url,
-            alt: `Wedding photo: ${data.key
-              .replace(/[-_]/g, " ")
-              .replace(/\.[^/.]+$/, "")}`,
-          });
-      }}
-    />
-  );
-
   if (loading) return <p>Loading gallery...</p>;
   if (error) return <p>Error loading images: {error}</p>;
   if (!images.length) return null;
@@ -87,13 +53,40 @@ export default function HomepageMasonryGallery() {
       className={styles.masonrySection}
     >
       <div className={styles.masonryContainer}>
-        <Masonry
-          items={images}
-          columnGutter={32}
-          columnWidth={320}
-          overscanBy={2}
-          render={MasonryCard}
-        />
+        <div className={styles.gallery}>
+          {images.map((image) => (
+            <img
+              key={image.key}
+              src={image.url}
+              alt={`Wedding photo: ${image.key
+                .replace(/[-_]/g, " ")
+                .replace(/\.[^/.]+$/, "")}`}
+              className={styles.galleryImage}
+              onClick={() =>
+                setLightbox({
+                  url: image.url,
+                  alt: `Wedding photo: ${image.key
+                    .replace(/[-_]/g, " ")
+                    .replace(/\.[^/.]+$/, "")}`,
+                })
+              }
+              tabIndex={0}
+              role="button"
+              aria-label={`Wedding photo: ${image.key
+                .replace(/[-_]/g, " ")
+                .replace(/\.[^/.]+$/, "")}`}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ")
+                  setLightbox({
+                    url: image.url,
+                    alt: `Wedding photo: ${image.key
+                      .replace(/[-_]/g, " ")
+                      .replace(/\.[^/.]+$/, "")}`,
+                  });
+              }}
+            />
+          ))}
+        </div>
       </div>
       {/* Lightbox Modal */}
       {lightbox && (
