@@ -48,10 +48,10 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Security headers for better SEO trust signals
+  // Minimal headers - let Next.js handle most caching
   async headers() {
     return [
-      // General headers for all pages
+      // Security headers only (no aggressive caching)
       {
         source: '/(.*)',
         headers: [
@@ -79,29 +79,12 @@ const nextConfig: NextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains',
           },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, must-revalidate',
-          },
-          {
-            key: 'Link',
-            value: '</logo.webp>; rel=preload; as=image',
-          },
+          // Remove the aggressive Cache-Control header - let Next.js handle it
         ],
       },
-      // Specific caching headers for images
+      // Only cache truly static assets that won't change
       {
-        source: '/api/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // Cache static images in public folder - using individual patterns
-      {
-        source: '/(.*).webp',
+        source: '/favicon.ico',
         headers: [
           {
             key: 'Cache-Control',
@@ -110,66 +93,11 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/(.*).jpg',
+        source: '/site.webmanifest',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).jpeg',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).png',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).gif',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).svg',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(.*).ico',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // Cache S3 images (if they're served through a specific path)
-      {
-        source: '/s3-images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=86400',
           },
         ],
       },
@@ -189,15 +117,6 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=86400, must-revalidate',
-          },
-        ],
-      },
-      {
-        source: '/site.webmanifest',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

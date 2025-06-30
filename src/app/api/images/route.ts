@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
       count: images.length,
     });
 
-    // Add cache headers for better performance
-    response.headers.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+    // Let Next.js handle caching with its defaults
+    // Next.js 15: GET route handlers are not cached by default (which is perfect for dynamic S3 data)
     response.headers.set('Vary', 'Accept-Encoding');
     
     return response;
