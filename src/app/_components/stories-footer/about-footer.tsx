@@ -25,11 +25,16 @@ export default function AboutFooter() {
       });
     }
 
-    // Animate signature with floating entrance
+    // Animate signature line
     if (signatureRef.current) {
-      animationUtils.floatingEntrance(signatureRef.current, {
-        delay: 0.5,
-      });
+      const signatureLine = signatureRef.current.querySelector(
+        `.${styles.signatureLine}`
+      ) as HTMLElement;
+      if (signatureLine) {
+        animationUtils.drawLineX(signatureLine, {
+          delay: 0.5,
+        });
+      }
     }
   });
 
