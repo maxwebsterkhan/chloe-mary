@@ -206,85 +206,6 @@ export default function KindWords() {
         <section ref={testimonialsRef} className={styles.testimonials}>
           <div className={styles.testimonialsContainer}>
             <div className={styles.testimonialsGrid}>
-              {/* Testimonial 1 - Katie & Ben */}
-              <ExpandableText
-                className={`${styles.testimonialCard} ${styles.theme1} ${styles.featured}`}
-                maxHeight={200}
-              >
-                <div data-animate>
-                  <div className={styles.testimonialText}>
-                    &ldquo;I found Chloe on Instagram and immediately fell in
-                    love with her work. Every photo was magical and full of
-                    emotion. When I got in touch, she was so understanding and
-                    really took the time to get to know us. On the day itself,
-                    she was incredible. The way she captured our day was
-                    everything I could have hoped for and so much more. I
-                    honestly can&apos;t put into words how much I love our
-                    wedding photos. They are beautiful beyond words and I will
-                    treasure them forever. Chloe is not just a photographer but
-                    an artist who captures love in its purest form. Thank you so
-                    much for everything, Chloe. You are absolutely amazing!
-                    Working with you was one of the best decisions we made for
-                    our wedding.&rdquo;
-                  </div>
-                  <div className={styles.testimonialAuthor}>Katie & Ben</div>
-                </div>
-              </ExpandableText>
-
-              {/* Testimonial 2 - Izzy & Dan */}
-              <div
-                className={`${styles.testimonialCard} ${styles.theme2}`}
-                data-animate
-              >
-                <div className={styles.testimonialText}>
-                  &ldquo;Chloe was absolutely perfect as our wedding
-                  photographer! Her work speaks for itself but more than that,
-                  she was just lovely to be around on our wedding day. She made
-                  us feel so relaxed and comfortable, and really helped us enjoy
-                  every moment. The photos are stunning - exactly what we
-                  dreamed of!&rdquo;
-                </div>
-                <div className={styles.testimonialAuthor}>Izzy & Dan</div>
-              </div>
-
-              {/* Testimonial 3 - Sophie & Mark */}
-              <ExpandableText
-                className={`${styles.testimonialCard} ${styles.theme3}`}
-                maxHeight={200}
-              >
-                <div data-animate>
-                  <div className={styles.testimonialText}>
-                    &ldquo;Chloe was recommended to us by a friend and we are so
-                    grateful for that recommendation! From our first
-                    conversation, she was warm, professional, and really
-                    listened to what we wanted from our wedding photography. On
-                    the day, she was brilliant - capturing all the candid
-                    moments we treasured while also making sure we got the
-                    formal shots our families wanted. The final gallery exceeded
-                    our expectations in every way. The photos are absolutely
-                    beautiful and tell the story of our day perfectly. We
-                    couldn&apos;t be happier with our choice and would recommend
-                    Chloe to anyone looking for a talented, professional, and
-                    lovely photographer.&rdquo;
-                  </div>
-                  <div className={styles.testimonialAuthor}>Sophie & Mark</div>
-                </div>
-              </ExpandableText>
-
-              {/* Testimonial 4 - Emma & Tom */}
-              <div
-                className={`${styles.testimonialCard} ${styles.theme4}`}
-                data-animate
-              >
-                <div className={styles.testimonialText}>
-                  &ldquo;We are absolutely in love with our wedding photos!
-                  Chloe captured our day so beautifully. She has such a natural
-                  eye for those perfect candid moments that tell the real story
-                  of the day. Thank you so much, Chloe!&rdquo;
-                </div>
-                <div className={styles.testimonialAuthor}>Emma & Tom</div>
-              </div>
-
               {/* Testimonial 5 - Hannah & Jake */}
               <ExpandableText
                 className={`${styles.testimonialCard} ${styles.theme5} ${styles.featured}`}
@@ -457,6 +378,166 @@ export default function KindWords() {
                     Chloe.&rdquo;
                   </div>
                   <div className={styles.testimonialAuthor}>Hayley & Grant</div>
+                </div>
+              </ExpandableText>
+
+              {/* Testimonial 11 - Amy & Campbell */}
+              <ExpandableText
+                className={`${styles.testimonialCard} ${styles.theme2} ${styles.featured}`}
+                maxHeight={200}
+              >
+                <div data-animate>
+                  <div className={styles.testimonialText}>
+                    &ldquo;Wow - Chloe. Not really sure how to put into words
+                    the magic you&apos;ve created with our wedding photos. From
+                    the first zoom chat with you we knew you were going to be
+                    different from the typical photographers (fully supporting
+                    our request of a maximum of 10 minutes couples photos) and
+                    then to the detail and thoughtfulness in the pre-wedding
+                    questionnaire (we particularly appreciated being asked the
+                    sensitive question about whether there was any family drama
+                    that you needed to be aware of and avoid capturing people
+                    together). The photos themselves give us goosebumps (and
+                    have made Amy cry on more than one occasion), and we are so
+                    grateful to be able to re-live the day over and over again
+                    through the memories you captured. You seemed to be able to
+                    get right to the heart of our &ldquo;vibe&rdquo; so quickly
+                    - nothing too gushy for us, lots of hilarious moments and
+                    silly faces (including dogs and kids!), and secret shots
+                    taken that in the whirlwind of the day, we hadn&apos;t even
+                    noticed had happened. The speedy turnaround of the previews
+                    in a week meant we had the joy of looking through photos
+                    while on our honeymoon. That was a really special moment.
+                    Not sure how to put our thanks into the right words - except
+                    to say you are so talented and we feel so lucky to have had
+                    you as part of our wedding day.&rdquo;
+                  </div>
+                  <div className={styles.testimonialAuthor}>Amy & Campbell</div>
+                </div>
+              </ExpandableText>
+
+              {/* Testimonial 12 - Laura & Alex */}
+              <div
+                className={`${styles.testimonialCard} ${styles.theme4}`}
+                data-animate
+              >
+                <div className={styles.testimonialText}>
+                  &ldquo;Chloe was the person I was most excited for to have as
+                  part of our day and I was not disappointed. She just slotted
+                  in perfectly to the day creating genuine connections with our
+                  guests and we&apos;ve received nothing but love from them
+                  about how she worked. And then the photos themselves were just
+                  to die for. Chloe has the amazing ability to capture parts of
+                  the day you won&apos;t have thought about photographing and
+                  bring them to life to create a beautiful narrative. I
+                  couldn&apos;t recommend Chloe enough. 10/10 would get a
+                  divorce just to have her at another wedding.&rdquo;
+                </div>
+                <div className={styles.testimonialAuthor}>Laura & Alex</div>
+              </div>
+
+              {/* Testimonial 13 - Emily & Matt */}
+              <ExpandableText
+                className={`${styles.testimonialCard} ${styles.theme5} ${styles.featured}`}
+                maxHeight={200}
+              >
+                <div data-animate>
+                  <div className={styles.testimonialText}>
+                    &ldquo;The only easy part of wedding planning for me was
+                    choosing a photographer&apos; I had seen Chloe&apos;s
+                    stunning work on Instagram and knew instantly that she was
+                    the person I wanted to capture our day (and as someone who
+                    is outrageously indecisive this was a big BIG deal). We
+                    couldn&apos;t be any happier with how beautiful the photos
+                    are. We chose Chloe based on her documentary and
+                    storytelling style, which she absolutely delivered on. I
+                    don&apos;t like having my photo taken, so was clear I
+                    didn&apos;t want posed photos (apart from the few she quite
+                    rightly said my older family members would want for the
+                    mantelpiece) I hardly noticed Chloe (and her second
+                    photographer Hana) capturing all the beautiful moments
+                    throughout the day, they worked so seamlessly and I trusted
+                    them fully to tell the story of the day. I can&apos;t really
+                    put into words how grateful I am for having these memories
+                    to look back on and savour with the people I love the most.
+                    Thank you thank you thank you Chloe!&rdquo;
+                  </div>
+                  <div className={styles.testimonialAuthor}>Emily & Matt</div>
+                </div>
+              </ExpandableText>
+
+              {/* Testimonial 14 - Billie & Alex */}
+              <div
+                className={`${styles.testimonialCard} ${styles.theme1}`}
+                data-animate
+              >
+                <div className={styles.testimonialText}>
+                  &ldquo;Hiring Chloe as our photographer was the best and
+                  easiest decision. From the minute we found our venue, we knew
+                  she was the photographer for us. She made us feel completely
+                  at ease and we had so much fun in our portrait session. She
+                  was considerate and warm and we loved sharing our special day
+                  with her! She made something we were quite nervous about so
+                  fun and exciting. The photos are incredible - still can&apos;t
+                  believe that it is actually us in the pictures! Chloe, you
+                  really are amazing! Thank you&rdquo;
+                </div>
+                <div className={styles.testimonialAuthor}>Billie & Alex</div>
+              </div>
+
+              {/* Testimonial 15 - Alice & Jacob */}
+              <div
+                className={`${styles.testimonialCard} ${styles.theme2}`}
+                data-animate
+              >
+                <div className={styles.testimonialText}>
+                  &ldquo;Chloe was by far one of the best decisions we made for
+                  our wedding day. I was so excited to work with her after
+                  seeing her work, but all expectations were completely
+                  exceeded. Just as important as the photos themselves, was how
+                  seamlessly Chloe fitted into the day, particularly in the
+                  morning getting ready she was so ready to jump in and help
+                  with everything and really helped to keep the vibes very calm
+                  and positive! All the communication in the run up was also
+                  very smooth. Would recommend Chloe to everyone!&rdquo;
+                </div>
+                <div className={styles.testimonialAuthor}>Alice & Jacob</div>
+              </div>
+
+              {/* Testimonial 16 - Alex & Eve */}
+              <ExpandableText
+                className={`${styles.testimonialCard} ${styles.theme5} ${styles.featured}`}
+                maxHeight={200}
+              >
+                <div data-animate>
+                  <div className={styles.testimonialText}>
+                    &ldquo;Chloe was nothing short of perfect for us. Why?
+                    It&apos;s easier to break it down!&apos; Standing Out From
+                    Other Photographers - Chloe&apos;s work stood out as there
+                    weren&apos;t any poses or over the top staged fake looking
+                    shots that make you not want to have a wedding at all. Her
+                    work stood out as she got those moments that most
+                    photographers wouldn&apos;t bother with and went for
+                    personality over photoshop. I personally thought it was like
+                    if Richard Avedon ever did weddings. Communication before
+                    hand - nothing was ever an issue and I always felt like I
+                    was chatting to a friend. She made us laugh and won my
+                    husband over from the first call with being authentic and
+                    getting us from the get go, nothing forced and not boasting
+                    about how big her other clients went on their weddings
+                    (believe me we had a lot of photographers who wouldn&apos;t
+                    even meet with us before knowing what designer my dress was
+                    going to be or if our wedding was over £50k) On the day -
+                    Chloe was everything on the day, stylist, therapist and
+                    cheerleader - God I needed it. It was very special having
+                    her with us getting ready capturing both intimate moments
+                    and beautiful candid scenes. Afterwards - The results of her
+                    work are just so incredible and gentle with a powerful, raw
+                    authenticity. We were left in tears at how special and
+                    unique we felt the photos were to us and that just like from
+                    the first meeting with Chloe, we just got us.&rdquo;
+                  </div>
+                  <div className={styles.testimonialAuthor}>Alex & Eve</div>
                 </div>
               </ExpandableText>
             </div>
