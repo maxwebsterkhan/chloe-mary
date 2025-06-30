@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import styles from "./expandable-text.module.scss";
 
 interface ExpandableTextProps {
@@ -12,47 +13,52 @@ interface ExpandableTextProps {
 
 export default function ExpandableText({
   children,
-  maxHeight = 120,
+  maxHeight = 150,
   className = "",
 }: ExpandableTextProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showToggle, setShowToggle] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (textRef.current) {
-      // Set initial collapsed height
-      gsap.set(textRef.current, {
-        height: maxHeight,
-        overflow: "hidden",
-      });
-    }
-  }, [maxHeight]);
+  useGSAP(
+    () => {
+      if (textRef.current) {
+        gsap.set(textRef.current, {
+          height: "auto",
+        });
 
-  const toggleExpanded = () => {
+        const fullHeight = textRef.current.scrollHeight;
+
+        if (fullHeight > maxHeight) {
+          setShowToggle(true);
+          gsap.set(textRef.current, { height: maxHeight });
+        }
+      }
+    },
+    { scope: textRef }
+  );
+
+  const toggleExpansion = () => {
     if (!textRef.current) return;
 
-    if (isExpanded) {
-      // Collapse
+    if (!isExpanded) {
       gsap.to(textRef.current, {
-        height: maxHeight,
+        height: "auto",
         duration: 0.5,
-        ease: "power2.inOut",
+        ease: "power2.out",
       });
-      setIsExpanded(false);
     } else {
-      // Expand - get the natural height
-      const currentHeight = textRef.current.offsetHeight;
-      gsap.set(textRef.current, { height: "auto" });
-      const autoHeight = textRef.current.offsetHeight;
+      const currentHeight = textRef.current.scrollHeight;
       gsap.set(textRef.current, { height: currentHeight });
 
       gsap.to(textRef.current, {
-        height: autoHeight,
+        height: maxHeight,
         duration: 0.5,
-        ease: "power2.inOut",
+        ease: "power2.out",
       });
-      setIsExpanded(true);
     }
+
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -62,16 +68,19 @@ export default function ExpandableText({
         {children}
       </div>
 
-      {/* Gradient overlay when collapsed */}
-      {!isExpanded && <div className={styles.fadeOverlay} />}
+      {/* Gradient overlay when collapsed and toggle is available */}
+      {!isExpanded && showToggle && <div className={styles.fadeOverlay} />}
 
-      <button
-        onClick={toggleExpanded}
-        className={styles.toggleButton}
-        aria-label={isExpanded ? "Read less" : "Read more"}
-      >
-        {isExpanded ? "Read less" : "Read more"}
-      </button>
+      {/* Only show toggle button if content is long enough */}
+      {showToggle && (
+        <button
+          onClick={toggleExpansion}
+          className={styles.toggleButton}
+          aria-label={isExpanded ? "Read less" : "Read more"}
+        >
+          {isExpanded ? "Read less" : "Read more"}
+        </button>
+      )}
     </div>
   );
 }

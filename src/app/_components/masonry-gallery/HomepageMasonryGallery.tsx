@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useS3Images } from "@/hooks/useS3Images";
 import { Masonry } from "masonic";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function HomepageMasonryGallery() {
   const { images, loading, error } = useS3Images({ prefix: "homepage/" });
@@ -15,27 +16,31 @@ export default function HomepageMasonryGallery() {
   const [isFadingOut, setIsFadingOut] = useState(false);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Lightbox fade logic
-  useEffect(() => {
-    if (!lightbox || !imageWrapperRef.current) return;
-    if (!isFadingOut) {
-      gsap.fromTo(
-        imageWrapperRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.32, ease: "power2.out" }
-      );
-    } else {
-      gsap.to(imageWrapperRef.current, {
-        opacity: 0,
-        duration: 0.32,
-        ease: "power2.out",
-        onComplete: () => {
-          setLightbox(null);
-          setIsFadingOut(false);
-        },
-      });
-    }
-  }, [lightbox, isFadingOut]);
+  // Lightbox fade logic using useGSAP
+  useGSAP(
+    () => {
+      if (!lightbox || !imageWrapperRef.current) return;
+
+      if (!isFadingOut) {
+        gsap.fromTo(
+          imageWrapperRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.32, ease: "power2.out" }
+        );
+      } else {
+        gsap.to(imageWrapperRef.current, {
+          opacity: 0,
+          duration: 0.32,
+          ease: "power2.out",
+          onComplete: () => {
+            setLightbox(null);
+            setIsFadingOut(false);
+          },
+        });
+      }
+    },
+    { dependencies: [lightbox, isFadingOut], scope: imageWrapperRef }
+  );
 
   const handleCloseLightbox = () => setIsFadingOut(true);
 

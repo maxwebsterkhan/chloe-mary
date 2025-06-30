@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import styles from "./loading.module.scss";
 
 export default function Loading() {
   const bubbleLoaderRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       if (bubbleLoaderRef.current) {
@@ -44,7 +45,7 @@ export default function Loading() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
+  });
 
   return (
     <div

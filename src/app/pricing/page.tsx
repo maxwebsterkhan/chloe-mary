@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./pricing.module.scss";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import StoriesFooter from "../_components/stories-footer/stories-footer";
 
@@ -19,7 +20,7 @@ export default function PricingPage() {
   const destinationRef = useRef<HTMLElement>(null);
   const inclusionsRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     // Hero animations
     if (heroRef.current) {
       const tl = gsap.timeline({ delay: 0.5 });
@@ -152,7 +153,7 @@ export default function PricingPage() {
         });
       }
     });
-  }, []);
+  });
 
   return (
     <div className={styles.pricingPage}>

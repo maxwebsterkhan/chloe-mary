@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import styles from "./kind-words.module.scss";
 import ExpandableText from "../_components/expandable-text/expandable-text";
 import KindWordsFooter from "../_components/stories-footer/kind-words-footer";
@@ -13,146 +14,140 @@ export default function KindWords() {
   const heroRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero animations
-      if (heroRef.current) {
-        const tl = gsap.timeline();
+  useGSAP(() => {
+    // Hero animations
+    if (heroRef.current) {
+      const tl = gsap.timeline();
 
-        tl.from(`.${styles.heroLabel}`, {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        })
-          .from(
-            `.${styles.heroTitle}`,
-            {
-              x: -100,
-              rotationY: -15,
-              opacity: 0,
-              duration: 1.4,
-              ease: "back.out(1.7)",
-            },
-            "-=0.4"
-          )
-          .from(
-            `.${styles.heroSubtitle}`,
-            {
-              y: 30,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.6"
-          )
-          .from(
-            `.${styles.decorLine}`,
-            {
-              scaleX: 0,
-              transformOrigin: "left center",
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.4"
-          )
-          .from(
-            `.${styles.decorText}`,
-            {
-              x: -20,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.6"
-          )
-          .from(
-            `.${styles.metricLabel}`,
-            {
-              y: 15,
-              opacity: 0,
-              duration: 0.6,
-              ease: "power2.out",
-              stagger: 0.08,
-            },
-            "-=0.3"
-          )
-          .from(
-            `.${styles.metricValue}`,
-            {
-              y: 20,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.out",
-              stagger: 0.1,
-            },
-            "-=0.2"
-          )
-          .from(
-            `.${styles.metricDivider}`,
-            {
-              scaleY: 0,
-              duration: 0.6,
-              ease: "power2.out",
-              stagger: 0.1,
-            },
-            "-=0.4"
-          )
-          .from(
-            `.${styles.metricLine}`,
-            {
-              scaleX: 0,
-              duration: 0.8,
-              ease: "power2.out",
-            },
-            "-=0.2"
-          );
-
-        // Animate gradient
-        const gradientElement = document.querySelector(
-          `.${styles.titleAccent}`
+      tl.from(`.${styles.heroLabel}`, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      })
+        .from(
+          `.${styles.heroTitle}`,
+          {
+            x: -100,
+            rotationY: -15,
+            opacity: 0,
+            duration: 1.4,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4"
+        )
+        .from(
+          `.${styles.heroSubtitle}`,
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.6"
+        )
+        .from(
+          `.${styles.decorLine}`,
+          {
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
+        .from(
+          `.${styles.decorText}`,
+          {
+            x: -20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.6"
+        )
+        .from(
+          `.${styles.metricLabel}`,
+          {
+            y: 15,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.08,
+          },
+          "-=0.3"
+        )
+        .from(
+          `.${styles.metricValue}`,
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.1,
+          },
+          "-=0.2"
+        )
+        .from(
+          `.${styles.metricDivider}`,
+          {
+            scaleY: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.1,
+          },
+          "-=0.4"
+        )
+        .from(
+          `.${styles.metricLine}`,
+          {
+            scaleX: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.2"
         );
-        if (gradientElement) {
-          gsap.set(gradientElement, {
-            backgroundPosition: "-100% 0%",
-          });
 
-          gsap.to(gradientElement, {
-            backgroundPosition: "100% 0%",
-            duration: 6,
-            ease: "power1.inOut",
-            repeat: -1,
-            delay: 1.5,
-          });
-        }
-      }
+      // Animate gradient
+      const gradientElement = document.querySelector(`.${styles.titleAccent}`);
+      if (gradientElement) {
+        gsap.set(gradientElement, {
+          backgroundPosition: "-100% 0%",
+        });
 
-      // Testimonials animations
-      if (testimonialsRef.current) {
-        const testimonials =
-          testimonialsRef.current.querySelectorAll("[data-animate]");
-        testimonials.forEach((card) => {
-          gsap.fromTo(
-            card,
-            { y: 60, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%", // Adjust as needed
-                once: true,
-              },
-            }
-          );
+        gsap.to(gradientElement, {
+          backgroundPosition: "100% 0%",
+          duration: 6,
+          ease: "power1.inOut",
+          repeat: -1,
+          delay: 1.5,
         });
       }
-    });
+    }
 
-    return () => ctx.revert();
-  }, []);
+    // Testimonials animations
+    if (testimonialsRef.current) {
+      const testimonials =
+        testimonialsRef.current.querySelectorAll("[data-animate]");
+      testimonials.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%", // Adjust as needed
+              once: true,
+            },
+          }
+        );
+      });
+    }
+  }); // useGSAP automatically handles cleanup
 
   return (
     <div className={styles.kindWordsPage}>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import styles from "./connect.module.scss";
 import { Skeleton } from "@radix-ui/themes";
@@ -34,7 +35,7 @@ export default function ConnectPage() {
   const iframeContainerRef = useRef<HTMLDivElement>(null);
 
   // Hero animations
-  useEffect(() => {
+  useGSAP(() => {
     const tl = gsap.timeline({ delay: 0.5 });
 
     // Connect page: Gentle fade + soft scale variation
@@ -130,10 +131,10 @@ export default function ConnectPage() {
         delay: 1.5,
       });
     }
-  }, []);
+  });
 
   // Philosophy section animation
-  useEffect(() => {
+  useGSAP(() => {
     if (philosophyRef.current) {
       createScrollTrigger(philosophyRef.current, {
         start: "top 85%",
@@ -174,10 +175,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Spacer 1 animation (decorativeDivider)
-  useEffect(() => {
+  useGSAP(() => {
     if (spacer1Ref.current) {
       createScrollTrigger(spacer1Ref.current, {
         start: "top 90%",
@@ -199,9 +200,9 @@ export default function ConnectPage() {
               {
                 scaleX: 1,
                 opacity: 1,
-                duration: 0.8,
+                duration: 1.2,
                 ease: "power2.out",
-                stagger: 0.1,
+                stagger: 0.2,
               },
               0
             );
@@ -210,24 +211,23 @@ export default function ConnectPage() {
           if (dot) {
             tl.fromTo(
               dot,
-              { scale: 0, opacity: 0, rotation: 180 },
+              { scale: 0, opacity: 0 },
               {
                 scale: 1,
                 opacity: 1,
-                rotation: 0,
                 duration: 0.6,
                 ease: "back.out(1.7)",
               },
-              0.3
+              0.4
             );
           }
         },
       });
     }
-  }, []);
+  });
 
   // Spacer 2 animation (elegantDivider)
-  useEffect(() => {
+  useGSAP(() => {
     if (spacer2Ref.current) {
       createScrollTrigger(spacer2Ref.current, {
         start: "top 90%",
@@ -292,10 +292,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Spacer 3 animation (decorativeDivider with shape)
-  useEffect(() => {
+  useGSAP(() => {
     if (spacer3Ref.current) {
       createScrollTrigger(spacer3Ref.current, {
         start: "top 90%",
@@ -342,10 +342,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Process section animation
-  useEffect(() => {
+  useGSAP(() => {
     if (processRef.current) {
       createScrollTrigger(processRef.current, {
         start: "top 80%",
@@ -402,10 +402,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Ready section animation
-  useEffect(() => {
+  useGSAP(() => {
     if (readyRef.current) {
       createScrollTrigger(readyRef.current, {
         start: "top 80%",
@@ -526,10 +526,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Form section animation
-  useEffect(() => {
+  useGSAP(() => {
     if (formSectionRef.current) {
       createScrollTrigger(formSectionRef.current, {
         start: "top 80%",
@@ -586,10 +586,10 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
   // Footer animation
-  useEffect(() => {
+  useGSAP(() => {
     if (footerRef.current) {
       createScrollTrigger(footerRef.current, {
         start: "top 90%",
@@ -638,9 +638,9 @@ export default function ConnectPage() {
         },
       });
     }
-  }, []);
+  });
 
-  useEffect(() => {
+  useGSAP(() => {
     // Intersection Observer for iframe lazy loading
     const iframeObserver = new IntersectionObserver(
       (entries) => {
@@ -669,7 +669,7 @@ export default function ConnectPage() {
         iframeObserver.unobserve(currentIframeContainer);
       }
     };
-  }, []);
+  });
 
   // Handle iframe load event
   const handleIframeLoad = () => {

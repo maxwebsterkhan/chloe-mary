@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import styles from "./not-found.module.scss";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function NotFound() {
   const containerRef = useRef<HTMLDivElement>(null);
   const frontNoteRef = useRef<HTMLDivElement>(null);
   const backNoteRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!containerRef.current || !frontNoteRef.current || !backNoteRef.current)
       return;
 
@@ -71,7 +72,7 @@ export default function NotFound() {
         },
         "-=0.8"
       );
-  }, []);
+  });
 
   return (
     <main className={styles.notFound} ref={containerRef}>
