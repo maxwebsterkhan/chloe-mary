@@ -31,9 +31,10 @@ export default function StoriesHero() {
           </div>
           <div ref={rightRef} className={styles.heroRight}>
             <p className={styles.heroSubtitle}>
-              True stories of love, laughter, and connection—told through
-              candid, heartfelt photography. Every gallery is a window into
-              genuine moments and the beauty of your day.
+              Each gallery is a celebration of genuine emotion and unforgettable
+              moments that make each day truly special.
+              <br />
+              <br />
             </p>
             <div className={styles.heroDecor}>
               <div className={styles.decorLine}></div>

@@ -787,9 +787,9 @@ export default function ConnectPage() {
                         <h3 className={styles.stepTitle}>Secure Your Date</h3>
                         <p className={styles.stepDescription}>
                           Once you&apos;re ready to move forward, we&apos;ll
-                          sign a contract and you&apos;ll leave a non-refundable
-                          deposit to secure your wedding date. This ensures your
-                          special day is reserved exclusively for you.
+                          sign a contract and you&apos;ll pay a non-refundable
+                          deposit to reserve your wedding date. This ensures
+                          your special day is reserved exclusively for you.
                         </p>
                       </div>
                     </div>

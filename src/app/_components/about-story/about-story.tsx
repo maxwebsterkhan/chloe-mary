@@ -231,8 +231,8 @@ export default function AboutStory() {
         >
           <div className={styles.closingStatement}>
             <p className={styles.closingTextLarge}>
-              I want to show my couples just how much love and life was present
-              on their wedding day
+              My goal is to show my couples just how much love and life was
+              present on their wedding day
             </p>
             <p className={styles.closingTextSmall}>
               and just how perfect they were as their true, unvarnished selves.

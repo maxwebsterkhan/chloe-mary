@@ -35,7 +35,7 @@ export default function HorizontalGallery() {
   const [galleryStories, setGalleryStories] = useState<GalleryStory[]>([]);
   const [activeThumbs, setActiveThumbs] = useState<number[]>([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     dragFree: false,
     align: "start",
     inViewThreshold: 0.5,
@@ -88,13 +88,13 @@ export default function HorizontalGallery() {
       > = {
         "beth-alex": {
           description:
-            "An urban city celebration where modern elegance met timeless romance. A day of pure magic and genuine emotion.",
+            "An urban city celebration where modern elegance meets timeless romance. Infused with cinematic flair with the ceremony taking place at the the Ritzy Picture House.",
           location: "100 Barrington, London",
           picTimeUrl: "https://chloemaryphoto.pic-time.com/INDUdpnmxfz33",
         },
         "hannah-jake": {
           description:
-            "A theatrical city wedding with a modern twist, with a focus on the couple and their love story.",
+            "Where creativity meets drama: A stylish South London wedding celebration for creative couple Hannah and Jake. Taking place at the iconic Asylum Chapel & St John Smithfield.",
           location: "St. John & Asylum Chapel, London",
           picTimeUrl: "https://chloemaryphoto.pic-time.com/cduUXU5KYqrs4",
         },
@@ -106,7 +106,7 @@ export default function HorizontalGallery() {
         },
         "marj-ellis": {
           description:
-            "A beautiful family centric city wedding. In the heart of Bristol City Centre",
+            "A family centric city weddings at the Mount Without, Bristol for high school sweethearts, enriched with heartfelt nods to the couples Fillapino and Greek heritage.",
           location: "The Mount Without, Bristol",
           picTimeUrl: "https://chloemaryphoto.pic-time.com/y00bovLaECnZY",
         },

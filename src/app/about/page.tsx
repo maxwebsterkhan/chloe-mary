@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import AboutHero from "../_components/about-hero/about-hero";
 import AboutStory from "../_components/about-story/about-story";
-import StoriesFooter from "../_components/stories-footer/stories-footer";
+import AboutFooter from "../_components/stories-footer/about-footer";
 
 export const metadata: Metadata = {
   title: "About Chloe Mary | Contemporary Wedding Photographer Bristol",
@@ -147,7 +147,7 @@ export default function About() {
       <main id="main" tabIndex={-1}>
         <AboutStory />
       </main>
-      <StoriesFooter />
+      <AboutFooter />
     </>
   );
 }
