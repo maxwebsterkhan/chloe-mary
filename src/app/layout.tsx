@@ -191,18 +191,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/logo.webp", sizes: "32x32", type: "image/webp" },
-      { url: "/logo.webp", sizes: "16x16", type: "image/webp" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
     shortcut: "/favicon.ico",
-    apple: [{ url: "/logo.webp", sizes: "180x180", type: "image/webp" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#8b6d42",
+      },
+    ],
   },
-  alternates: {
-    canonical: "https://www.chloemary.com",
-  },
-  category: "Photography",
-  classification: "Wedding Photography Services",
   other: {
+    "msapplication-TileColor": "#f3f0eb",
+    "msapplication-config": "/browserconfig.xml",
     "geo.region": "GB-ENG",
     "geo.placename": "Bristol",
     "geo.position": "51.4545;-2.5879",
@@ -210,6 +216,11 @@ export const metadata: Metadata = {
     "business-type": "Photography Services",
     "service-area": "Bristol, London, UK & International",
   },
+  alternates: {
+    canonical: "https://www.chloemary.com",
+  },
+  category: "Photography",
+  classification: "Wedding Photography Services",
 };
 
 export default function RootLayout({

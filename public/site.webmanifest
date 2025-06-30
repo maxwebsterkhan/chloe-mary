@@ -11,15 +11,15 @@
   "lang": "en-GB",
   "icons": [
     {
-      "src": "/logo.webp",
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/logo.webp",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -31,4 +31,4 @@
       "label": "Chloe Mary - Bristol & London Wedding Photographer - UK & International"
     }
   ]
-} 
+}
