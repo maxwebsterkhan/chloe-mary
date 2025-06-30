@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useCallback, useRef, useEffect } from "react";
+import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
@@ -43,7 +43,7 @@ function Lightbox({ image, onClose }: LightboxProps) {
   return (
     <FocusTrap
       focusTrapOptions={{
-        clickOutsideDeactivates: false, // Don't let focus-trap handle closing
+        clickOutsideDeactivates: false,
       }}
     >
       <div
@@ -64,17 +64,18 @@ function Lightbox({ image, onClose }: LightboxProps) {
         >
           <XIcon size={32} weight="bold" />
         </button>
-        <div
-          className={styles.lightboxImageWrapper}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className={styles.lightboxImageWrapper}>
           <h2 id="lightbox-heading" className={styles.visuallyHidden}>
             {image.alt}
           </h2>
-          <img
+          <Image
             src={image.url}
             alt={image.alt}
             className={styles.lightboxImage}
+            width={1200}
+            height={1600}
+            priority={true}
+            quality={90}
           />
         </div>
       </div>
@@ -102,8 +103,12 @@ export default function HomepageMasonryGallery() {
     setSelectedImage(null);
   }, []);
 
-  if (loading) return <p>Loading gallery...</p>;
-  if (error) return <p>Error loading images: {error}</p>;
+  if (loading)
+    return <div className={styles.loadingState}>Loading gallery...</div>;
+  if (error)
+    return (
+      <div className={styles.errorState}>Error loading images: {error}</div>
+    );
   if (!images.length) return null;
 
   return (
@@ -113,15 +118,17 @@ export default function HomepageMasonryGallery() {
     >
       <div className={styles.masonryContainer}>
         <div className={styles.gallery}>
-          {images.map((image) => {
+          {images.map((image, index) => {
             const alt = `Wedding photo: ${image.key
               .replace(/[-_]/g, " ")
               .replace(/\.[^/.]+$/, "")}`;
             return (
-              <img
+              <Image
                 key={image.key}
                 src={image.url}
                 alt={alt}
+                width={800}
+                height={1067}
                 className={styles.galleryImage}
                 onClick={() => handleImageSelect(image)}
                 tabIndex={0}
@@ -133,6 +140,10 @@ export default function HomepageMasonryGallery() {
                     handleImageSelect(image);
                   }
                 }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={index < 4}
+                loading={index < 4 ? "eager" : "lazy"}
+                quality={85}
               />
             );
           })}

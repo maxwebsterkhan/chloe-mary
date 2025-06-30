@@ -74,7 +74,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Focused Session",
             description:
-              "Up to 3 hours coverage, perfect for intimate sessions. Limited peak season availability.",
+              "Up to 3 hours coverage, perfect for intimate celebrations. Limited peak season availability.",
             offers: {
               "@type": "Offer",
               price: "1350",
@@ -88,7 +88,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Extended Session",
             description:
-              "Up to 5 hours coverage for intimate sessions. Limited peak season availability.",
+              "Up to 5 hours coverage for intimate celebrations. Limited peak season availability.",
             offers: {
               "@type": "Offer",
               price: "2100",
