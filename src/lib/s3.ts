@@ -53,8 +53,11 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
           new GetObjectCommand({
             Bucket: BUCKET_NAME,
             Key: obj.Key!,
+            ResponseCacheControl: 'public, max-age=604800, stale-while-revalidate=86400', // Cache for 1 week, stale for 1 day
           }),
-          { expiresIn: 3600 } // URL expires in 1 hour
+          { 
+            expiresIn: 604800, // URL valid for 1 week
+          }
         );
 
         return {
