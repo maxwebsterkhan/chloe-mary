@@ -788,8 +788,8 @@ export default function ConnectPage() {
                         <p className={styles.stepDescription}>
                           Once you&apos;re ready to move forward, we&apos;ll
                           sign a contract and you&apos;ll pay a non-refundable
-                          deposit to reserve your wedding date. This ensures
-                          your special day is reserved exclusively for you.
+                          deposit to secure your wedding date. This ensures your
+                          special day is reserved exclusively for you.
                         </p>
                       </div>
                     </div>
