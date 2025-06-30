@@ -6,7 +6,7 @@ import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import StoriesFooter from "../_components/stories-footer/stories-footer";
+import PricingFooter from "../_components/stories-footer/pricing-footer";
 
 export default function PricingPage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -175,7 +175,7 @@ export default function PricingPage() {
             </div>
             <div className={styles.heroRight}>
               <p ref={subtitleRef} className={styles.heroSubtitle}>
-                Full day coverage, intimate sessions
+                Full day coverage, intimate celebrations
                 <br />& destination weddings.
               </p>
 
@@ -577,7 +577,7 @@ export default function PricingPage() {
         </section>
       </main>
 
-      <StoriesFooter />
+      <PricingFooter />
     </div>
   );
 }

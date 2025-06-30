@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Wedding Photography Pricing | Chloe Mary Photography - Bristol & UK",
   description:
-    "Transparent wedding photography pricing from £1,350. Full day coverage, intimate sessions & destination weddings. Professional editing, online gallery access, and personal printing rights included. Based in Bristol, serving UK & beyond.",
+    "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings. Professional editing, online gallery access, and personal printing rights included. Based in Bristol, serving UK & beyond.",
   keywords: [
     "wedding photography pricing",
     "bristol wedding photographer prices",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Wedding Photography Pricing | Chloe Mary Photography",
     description:
-      "Transparent wedding photography pricing from £1,350. Full day coverage, intimate sessions & destination weddings. Based in Bristol, serving UK & beyond.",
+      "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings. Based in Bristol, serving UK & beyond.",
     url: "https://www.chloemary.com/pricing",
     siteName: "Chloe Mary Photography",
     locale: "en_GB",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wedding Photography Pricing | Chloe Mary Photography",
     description:
-      "Transparent wedding photography pricing from £1,350. Full day coverage, intimate sessions & destination weddings.",
+      "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings.",
     creator: "@chloemary_photo",
     images: ["/logo.webp"],
   },
@@ -208,7 +208,7 @@ export default function PricingLayout({
                 url: "https://www.chloemary.com/pricing",
                 name: "Wedding Photography Pricing | Chloe Mary Photography",
                 description:
-                  "Transparent wedding photography pricing from £1,350. Full day coverage, intimate sessions & destination weddings.",
+                  "Transparent wedding photography pricing from £1,350. Full day coverage, intimate  sessions & destination weddings.",
                 isPartOf: {
                   "@id": "https://www.chloemary.com/#website",
                 },
