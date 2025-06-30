@@ -101,12 +101,8 @@ export default function AboutStory() {
               ) : (
                 <>
                   <Image
-                    src={
-                      aboutImages.find((img) =>
-                        img.key.includes("chloe-mary-portrait.jpg")
-                      )?.url || "/logo.webp"
-                    }
-                    alt="Chloe Mary - Photographer"
+                    src={aboutImages[1]?.url || "/logo.webp"}
+                    alt="A photo of Chloe Mary a documentary photographer based in Bristol and the UK but also overseas."
                     width={600}
                     height={800}
                     className={styles.image}
@@ -115,12 +111,8 @@ export default function AboutStory() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <Image
-                    src={
-                      aboutImages.find((img) =>
-                        img.key.includes("chloe-mary-portrait-2.jpg")
-                      )?.url || "/logo.webp"
-                    }
-                    alt="Chloe Mary - Photographer"
+                    src={aboutImages[0]?.url || "/logo.webp"}
+                    alt="A photo of Chloe Mary a documentary photographer based in Bristol and the UK but also overseas."
                     width={600}
                     height={800}
                     className={`${styles.image} ${styles.imageSecond}`}

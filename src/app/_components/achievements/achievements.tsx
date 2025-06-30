@@ -7,6 +7,7 @@ import {
   createScrollTrigger,
 } from "../helpers/gsap-animations";
 import Image from "next/image";
+import { useS3Images } from "@/hooks/useS3Images";
 
 // Reordered for both desktop (2x2 grid) and mobile (stack) layouts
 // Desktop: dark light | light dark
@@ -38,8 +39,26 @@ const achievements = [
   },
 ];
 
+// Helper function to generate alt text from image key
+function generateAltText(key: string): string {
+  // Remove the folder prefix and file extension
+  const filename = key.split("/").pop()?.split(".")[0] || "";
+
+  // Replace hyphens and underscores with spaces
+  const words = filename.replace(/[-_]/g, " ");
+
+  // Capitalize first letter of each word
+  const formattedText = words
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+
+  return formattedText;
+}
+
 export default function Achievements() {
   const achievementsRef = useRef<HTMLElement>(null);
+  const { images: awardImages, loading } = useS3Images({ prefix: "awards" });
 
   useEffect(() => {
     if (!achievementsRef.current) return;
@@ -64,15 +83,29 @@ export default function Achievements() {
           {achievements.map((achievement, index) => {
             const CardContent = (
               <div className={styles.achievements__content}>
-                <div className={styles.achievements__year}>
-                  {achievement.year}
+                {!loading && awardImages[index] && (
+                  <div className={styles.achievements__imageWrapper}>
+                    <Image
+                      src={awardImages[index].url}
+                      alt={generateAltText(awardImages[index].key)}
+                      fill
+                      className={styles.achievements__image}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                    <div className={styles.achievements__imageOverlay} />
+                  </div>
+                )}
+                <div className={styles.achievements__textContent}>
+                  <div className={styles.achievements__year}>
+                    {achievement.year}
+                  </div>
+                  <h3 className={styles.achievements__title}>
+                    {achievement.title}
+                  </h3>
+                  <p className={styles.achievements__subtitle}>
+                    {achievement.subtitle}
+                  </p>
                 </div>
-                <h3 className={styles.achievements__title}>
-                  {achievement.title}
-                </h3>
-                <p className={styles.achievements__subtitle}>
-                  {achievement.subtitle}
-                </p>
               </div>
             );
 
@@ -92,28 +125,6 @@ export default function Achievements() {
                 className={cardClasses}
                 style={{ "--index": index } as React.CSSProperties}
               >
-                {/* Decorative images - only on light cards */}
-                {index % 2 === 1 && (
-                  <Image
-                    src={index === 1 ? "/floral.webp" : "/polaroid.webp"}
-                    alt=""
-                    width={90}
-                    height={90}
-                    className={
-                      index === 1
-                        ? styles.achievements__floral
-                        : styles.achievements__polaroid
-                    }
-                    style={{
-                      opacity: 0.3,
-                      position: "absolute",
-                      top: "1rem",
-                      right: "1rem",
-                      zIndex: 0,
-                      transform: index === 3 ? "rotate(-5deg)" : "none",
-                    }}
-                  />
-                )}
                 {achievement.link ? (
                   <a
                     href={achievement.link}
