@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import styles from "./achievements.module.scss";
 import {
   animationUtils,
@@ -8,6 +8,7 @@ import {
 } from "../helpers/gsap-animations";
 import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
+import { gsap } from "gsap";
 
 // Reordered for both desktop (2x2 grid) and mobile (stack) layouts
 // Desktop: dark light | light dark
@@ -56,10 +57,19 @@ function generateAltText(key: string): string {
   return formattedText;
 }
 
+type AchievementRefs = {
+  item: HTMLDivElement | null;
+  textContent: HTMLDivElement | null;
+  imageWrapper: HTMLDivElement | null;
+  overlay: HTMLDivElement | null;
+};
+
 export default function Achievements() {
   const achievementsRef = useRef<HTMLElement>(null);
+  const achievementRefs = useRef<(AchievementRefs | null)[]>([]);
   const { images: awardImages, loading } = useS3Images({ prefix: "awards" });
 
+  // Handle scroll animations
   useEffect(() => {
     if (!achievementsRef.current) return;
 
@@ -76,26 +86,128 @@ export default function Achievements() {
     });
   }, []);
 
+  // Handle hover animations
+  useLayoutEffect(() => {
+    // Store all contexts for cleanup
+    const contexts: {
+      item: HTMLDivElement;
+      timeline: gsap.core.Timeline;
+      handleEnter: () => void;
+      handleLeave: () => void;
+    }[] = [];
+
+    achievementRefs.current.forEach((refs) => {
+      if (
+        !refs?.item ||
+        !refs.textContent ||
+        !refs.imageWrapper ||
+        !refs.overlay
+      )
+        return;
+
+      // Create hover animation timeline
+      const hoverTimeline = gsap.timeline({ paused: true });
+
+      // Set initial states
+      gsap.set(refs.imageWrapper, { scale: 1 });
+      gsap.set(refs.overlay, { opacity: 0.7 });
+      gsap.set(refs.textContent, { y: 0 });
+
+      hoverTimeline
+        .to(refs.imageWrapper, {
+          scale: 1.05,
+          duration: 0.5,
+          ease: "power2.out",
+        })
+        .to(
+          refs.overlay,
+          {
+            opacity: 0.85,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          refs.textContent,
+          {
+            y: -10,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          0
+        );
+
+      // Add event listeners
+      const handleEnter = () => hoverTimeline.play();
+      const handleLeave = () => hoverTimeline.reverse();
+
+      refs.item.addEventListener("mouseenter", handleEnter);
+      refs.item.addEventListener("mouseleave", handleLeave);
+
+      // Store context for cleanup
+      contexts.push({
+        item: refs.item,
+        timeline: hoverTimeline,
+        handleEnter,
+        handleLeave,
+      });
+    });
+
+    // Cleanup function
+    return () => {
+      contexts.forEach(({ item, timeline, handleEnter, handleLeave }) => {
+        timeline.kill();
+        item.removeEventListener("mouseenter", handleEnter);
+        item.removeEventListener("mouseleave", handleLeave);
+      });
+    };
+  }, [loading, awardImages]); // Re-run when images are loaded
+
   return (
     <section ref={achievementsRef} className={styles.achievements}>
       <div className={styles.achievements__container}>
         <div className={styles.achievements__grid}>
           {achievements.map((achievement, index) => {
+            // Initialize refs for this achievement
+            achievementRefs.current[index] = {
+              item: null,
+              textContent: null,
+              imageWrapper: null,
+              overlay: null,
+            };
+
             const CardContent = (
               <div className={styles.achievements__content}>
                 {!loading && awardImages[index] && (
-                  <div className={styles.achievements__imageWrapper}>
+                  <div
+                    ref={(el) => {
+                      if (el) achievementRefs.current[index]!.imageWrapper = el;
+                    }}
+                    className={styles.achievements__imageWrapper}
+                  >
                     <Image
                       src={awardImages[index].url}
                       alt={generateAltText(awardImages[index].key)}
                       fill
                       className={styles.achievements__image}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      priority={index < 2}
                     />
-                    <div className={styles.achievements__imageOverlay} />
+                    <div
+                      ref={(el) => {
+                        if (el) achievementRefs.current[index]!.overlay = el;
+                      }}
+                      className={styles.achievements__imageOverlay}
+                    />
                   </div>
                 )}
-                <div className={styles.achievements__textContent}>
+                <div
+                  ref={(el) => {
+                    if (el) achievementRefs.current[index]!.textContent = el;
+                  }}
+                  className={styles.achievements__textContent}
+                >
                   <div className={styles.achievements__year}>
                     {achievement.year}
                   </div>
@@ -122,6 +234,9 @@ export default function Achievements() {
             return (
               <div
                 key={index}
+                ref={(el) => {
+                  if (el) achievementRefs.current[index]!.item = el;
+                }}
                 className={cardClasses}
                 style={{ "--index": index } as React.CSSProperties}
               >

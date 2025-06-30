@@ -1,47 +1,106 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useS3Images } from "@/hooks/useS3Images";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
+import { FocusTrap } from "focus-trap-react";
 
-export default function HomepageMasonryGallery() {
-  const { images, loading, error } = useS3Images({ prefix: "homepage/" });
-  const [lightbox, setLightbox] = useState<null | { url: string; alt: string }>(
-    null
-  );
-  const [isFadingOut, setIsFadingOut] = useState(false);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
+type ImageData = { url: string; key: string };
 
-  // Lightbox fade logic using useGSAP
-  useGSAP(
-    () => {
-      if (!lightbox || !imageWrapperRef.current) return;
+interface LightboxProps {
+  image: { url: string; alt: string };
+  onClose: () => void;
+}
 
-      if (!isFadingOut) {
-        gsap.fromTo(
-          imageWrapperRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.32, ease: "power2.out" }
-        );
-      } else {
-        gsap.to(imageWrapperRef.current, {
-          opacity: 0,
-          duration: 0.32,
-          ease: "power2.out",
-          onComplete: () => {
-            setLightbox(null);
-            setIsFadingOut(false);
-          },
-        });
+function Lightbox({ image, onClose }: LightboxProps) {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  // Autofocus close button on mount
+  useEffect(() => {
+    closeBtnRef.current?.focus();
+  }, []);
+
+  // Close on Escape key
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  // Only close if overlay itself is clicked, not its children
+  const handleOverlayClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget) {
+        onClose();
       }
     },
-    { dependencies: [lightbox, isFadingOut], scope: imageWrapperRef }
+    [onClose]
   );
 
-  const handleCloseLightbox = () => setIsFadingOut(true);
+  return (
+    <FocusTrap
+      focusTrapOptions={{
+        clickOutsideDeactivates: false, // Don't let focus-trap handle closing
+      }}
+    >
+      <div
+        className={styles.lightboxOverlay}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lightbox-heading"
+        onClick={handleOverlayClick}
+        tabIndex={-1}
+      >
+        <button
+          ref={closeBtnRef}
+          className={styles.lightboxClose}
+          aria-label="Close image view"
+          onClick={onClose}
+          type="button"
+          autoFocus
+        >
+          <XIcon size={32} weight="bold" />
+        </button>
+        <div
+          className={styles.lightboxImageWrapper}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <h2 id="lightbox-heading" className={styles.visuallyHidden}>
+            {image.alt}
+          </h2>
+          <img
+            src={image.url}
+            alt={image.alt}
+            className={styles.lightboxImage}
+          />
+        </div>
+      </div>
+    </FocusTrap>
+  );
+}
+
+export default function HomepageMasonryGallery() {
+  const { images = [], loading, error } = useS3Images({ prefix: "homepage/" });
+  const [selectedImage, setSelectedImage] = useState<{
+    url: string;
+    alt: string;
+  } | null>(null);
+
+  const handleImageSelect = useCallback((image: ImageData) => {
+    setSelectedImage({
+      url: image.url,
+      alt: `Wedding photo: ${image.key
+        .replace(/[-_]/g, " ")
+        .replace(/\.[^/.]+$/, "")}`,
+    });
+  }, []);
+
+  const handleLightboxClose = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
 
   if (loading) return <p>Loading gallery...</p>;
   if (error) return <p>Error loading images: {error}</p>;
@@ -54,72 +113,33 @@ export default function HomepageMasonryGallery() {
     >
       <div className={styles.masonryContainer}>
         <div className={styles.gallery}>
-          {images.map((image) => (
-            <img
-              key={image.key}
-              src={image.url}
-              alt={`Wedding photo: ${image.key
-                .replace(/[-_]/g, " ")
-                .replace(/\.[^/.]+$/, "")}`}
-              className={styles.galleryImage}
-              onClick={() =>
-                setLightbox({
-                  url: image.url,
-                  alt: `Wedding photo: ${image.key
-                    .replace(/[-_]/g, " ")
-                    .replace(/\.[^/.]+$/, "")}`,
-                })
-              }
-              tabIndex={0}
-              role="button"
-              aria-label={`Wedding photo: ${image.key
-                .replace(/[-_]/g, " ")
-                .replace(/\.[^/.]+$/, "")}`}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ")
-                  setLightbox({
-                    url: image.url,
-                    alt: `Wedding photo: ${image.key
-                      .replace(/[-_]/g, " ")
-                      .replace(/\.[^/.]+$/, "")}`,
-                  });
-              }}
-            />
-          ))}
+          {images.map((image) => {
+            const alt = `Wedding photo: ${image.key
+              .replace(/[-_]/g, " ")
+              .replace(/\.[^/.]+$/, "")}`;
+            return (
+              <img
+                key={image.key}
+                src={image.url}
+                alt={alt}
+                className={styles.galleryImage}
+                onClick={() => handleImageSelect(image)}
+                tabIndex={0}
+                role="button"
+                aria-label={alt}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleImageSelect(image);
+                  }
+                }}
+              />
+            );
+          })}
         </div>
       </div>
-      {/* Lightbox Modal */}
-      {lightbox && (
-        <div
-          className={styles.lightboxOverlay}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-          onClick={handleCloseLightbox}
-        >
-          <button
-            className={styles.lightboxClose}
-            aria-label="Close image view"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCloseLightbox();
-            }}
-            type="button"
-          >
-            <XIcon size={32} weight="bold" />
-          </button>
-          <div
-            className={styles.lightboxImageWrapper}
-            ref={imageWrapperRef}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={lightbox.url}
-              alt={lightbox.alt}
-              className={styles.lightboxImage}
-            />
-          </div>
-        </div>
+      {selectedImage && (
+        <Lightbox image={selectedImage} onClose={handleLightboxClose} />
       )}
     </section>
   );
