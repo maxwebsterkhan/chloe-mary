@@ -4,7 +4,7 @@
 .achievements {
   position: relative;
   padding: tokens.$spacing-xl tokens.$spacing-md;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
 
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-lg tokens.$spacing-sm;

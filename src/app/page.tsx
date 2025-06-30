@@ -168,7 +168,7 @@ export default function Home() {
       <HomeHero />
       <main id="main" tabIndex={-1}>
         <QuoteIntro />
-        <HomepageMasonryGallery />
+        <Achievements />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -185,7 +185,7 @@ export default function Home() {
             }),
           }}
         />
-        <Achievements />
+        <HomepageMasonryGallery />
       </main>
     </>
   );

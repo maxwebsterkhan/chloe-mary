@@ -3,7 +3,7 @@
 
 .intro {
   padding: tokens.$spacing-xl tokens.$spacing-md;
-  background-color: #101010;
+  background-color: var(--color-primary);
   min-height: 90vh;
   display: flex;
   align-items: center;

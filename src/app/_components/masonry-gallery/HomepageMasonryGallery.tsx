@@ -89,7 +89,7 @@ export default function HomepageMasonryGallery() {
       <div className={styles.masonryContainer}>
         <Masonry
           items={images}
-          columnGutter={16}
+          columnGutter={32}
           columnWidth={320}
           overscanBy={2}
           render={MasonryCard}
