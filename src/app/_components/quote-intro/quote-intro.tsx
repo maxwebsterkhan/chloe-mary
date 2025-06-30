@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import styles from "./quote-intro.module.scss";
 import { createScrollTrigger } from "../helpers/gsap-animations";
 import gsap from "gsap";
+import { useS3Images } from "@/hooks/useS3Images";
+import Image from "next/image";
 
 export default function QuoteIntro() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,6 +14,10 @@ export default function QuoteIntro() {
   const paragraphLeftRef = useRef<HTMLParagraphElement>(null);
   const paragraphRightRef = useRef<HTMLParagraphElement>(null);
   const paragraphCenterRef = useRef<HTMLParagraphElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  const { images, loading } = useS3Images({ prefix: "intro/" });
+  const introImage = images[0]; // Get the first image from the intro folder
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -32,13 +38,15 @@ export default function QuoteIntro() {
     if (paragraphCenterRef.current) {
       gsap.set(paragraphCenterRef.current, { opacity: 0 });
     }
+    if (imageRef.current) {
+      gsap.set(imageRef.current, { opacity: 0 });
+    }
 
     // Set up scroll trigger to start animations when section comes into view - only once
     createScrollTrigger(sectionRef.current, {
-      start: "top 80%", // Start earlier so animations are more immediate
+      start: "top 80%",
       once: true,
       onEnter: () => {
-        // Create a fast, simple timeline
         const tl = gsap.timeline();
 
         // 1. First: "Hi, I'm Chloe" - simple fade in
@@ -56,7 +64,6 @@ export default function QuoteIntro() {
 
         // 2. Second: "Self Professed Queen of Monochrome" - simple fade in
         if (taglineRef.current) {
-          console.log("Starting tagline animation");
           tl.to(
             taglineRef.current,
             {
@@ -68,7 +75,7 @@ export default function QuoteIntro() {
           );
         }
 
-        // 3. Third: First two paragraphs - slide up
+        // 3. Third: Paragraphs - slide up
         if (paragraphLeftRef.current) {
           tl.fromTo(
             paragraphLeftRef.current,
@@ -87,13 +94,23 @@ export default function QuoteIntro() {
           );
         }
 
-        // 4. Finally: Philosophy quote - simple fade with slight scale
+        // 4. Philosophy quote - simple fade with slight scale
         if (paragraphCenterRef.current) {
           tl.fromTo(
             paragraphCenterRef.current,
             { opacity: 0, scale: 0.9 },
             { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.2)" },
             1.2
+          );
+        }
+
+        // 5. Image fade in
+        if (imageRef.current) {
+          tl.fromTo(
+            imageRef.current,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+            0.3
           );
         }
       },
@@ -103,43 +120,53 @@ export default function QuoteIntro() {
   return (
     <section ref={sectionRef} className={styles.intro}>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <h2 ref={greetingRef} className={styles.greeting}>
-            Hi, I&apos;m Chloe
-          </h2>
-          <p ref={taglineRef} className={styles.tagline}>
-            &quot;Self Professed Queen of Monochrome&quot;
-          </p>
-        </div>
-
         <div className={styles.content}>
-          <div className={styles.description}>
-            <p
-              ref={paragraphLeftRef}
-              className={`${styles.paragraphLeft} ${styles.paragraph}`}
-            >
-              I&apos;m drawn to creative, carefree couples who seek images that
-              capture not just how you look, but who you truly are-relaxed,
-              authentic and beautifully yourselves.
-            </p>
+          <div className={styles.textContent}>
+            <div className={styles.header}>
+              <h2 ref={greetingRef} className={styles.greeting}>
+                Hi, I&apos;m Chloe
+              </h2>
+              <p ref={taglineRef} className={styles.tagline}>
+                &quot;Self Professed Queen of Monochrome&quot;
+              </p>
+            </div>
 
-            <p
-              ref={paragraphRightRef}
-              className={`${styles.paragraphRight} ${styles.paragraph}`}
-            >
-              Instead of orchestrating moments, I move quietly through your day
-              as a trusted presence. Your story writes itself while I quietly
-              document each moment-the stolen glances, whispered promises and
-              authentic emotions that make your love uniquely yours.
-            </p>
+            <div className={styles.description}>
+              <p ref={paragraphLeftRef} className={styles.paragraph}>
+                I&apos;m drawn to creative, carefree couples who seek images
+                that capture not just how you look, but who you truly
+                are-relaxed, authentic and beautifully yourselves.
+              </p>
 
-            <p
-              ref={paragraphCenterRef}
-              className={`${styles.philosophy} ${styles.paragraphCenter} ${styles.paragraph}`}
-            >
-              &quot;Because what truly matters isn&apos;t how it all looked, but
-              how it felt.&quot;
-            </p>
+              <p ref={paragraphRightRef} className={styles.paragraph}>
+                Instead of orchestrating moments, I move quietly through your
+                day as a trusted presence. Your story writes itself while I
+                quietly document each moment-the stolen glances, whispered
+                promises and authentic emotions that make your love uniquely
+                yours.
+              </p>
+
+              <p
+                ref={paragraphCenterRef}
+                className={`${styles.philosophy} ${styles.paragraph}`}
+              >
+                &quot;Because what truly matters isn&apos;t how it all looked,
+                but how it felt.&quot;
+              </p>
+            </div>
+          </div>
+
+          <div ref={imageRef} className={styles.imageContent}>
+            {!loading && introImage && (
+              <Image
+                src={introImage.url}
+                alt="Chloe Mary Photography Introduction"
+                className={styles.image}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
+              />
+            )}
           </div>
         </div>
       </div>
