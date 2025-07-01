@@ -204,8 +204,22 @@ export default function KindWords() {
       {/* Main Content */}
       <main className={styles.main}>
         <section ref={testimonialsRef} className={styles.testimonials}>
-          <div className={styles.testimonialsContainer}>
+          <div className={styles.container}>
             <div className={styles.testimonialsGrid}>
+              {/* Testimonial 1 */}
+              <div
+                className={`${styles.testimonialCard} ${styles.theme1}`}
+                data-animate
+              >
+                <p className={styles.testimonialText}>
+                  &ldquo;Chloe was absolutely amazing on our wedding day! She
+                  made us feel so comfortable and relaxed, and captured the most
+                  beautiful moments. We couldn&apos;t be happier with our photos
+                  - they&apos;re everything we hoped for and more!&rdquo;
+                </p>
+                <div className={styles.testimonialAuthor}>Sarah & James</div>
+              </div>
+
               {/* Testimonial 5 - Hannah & Jake */}
               <ExpandableText
                 className={`${styles.testimonialCard} ${styles.theme5} ${styles.featured}`}

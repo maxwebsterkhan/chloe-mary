@@ -24,7 +24,7 @@
 
 .heroContainer {
   width: 100%;
-  max-width: 100rem;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
 
@@ -271,7 +271,7 @@
 
 .container {
   width: 100%;
-  max-width: 100rem;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
 
@@ -411,12 +411,12 @@
 
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-md;
-    border-radius: 12px;
+    border-radius: 2px;
   }
 
   @include breakpoint-down("mobile") {
     padding: tokens.$spacing-sm;
-    border-radius: 12px;
+    border-radius: 2px;
   }
 
   // Simple size and style variations - remove fixed heights
