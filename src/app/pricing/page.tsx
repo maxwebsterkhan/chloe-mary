@@ -226,19 +226,7 @@ export default function PricingPage() {
           className={`${styles.section} ${styles.sectionLight}`}
         >
           {/* Decorative images for light section */}
-          <Image
-            src="/floral.webp"
-            alt=""
-            width={168}
-            height={168}
-            style={{
-              opacity: 0.22,
-              position: "absolute",
-              top: "3rem",
-              right: "3rem",
-              zIndex: 0,
-            }}
-          />
+
           <div className={styles.container}>
             <div className={styles.sectionLayout}>
               <div className={styles.sectionMeta}>
@@ -391,21 +379,6 @@ export default function PricingPage() {
           ref={destinationRef}
           className={`${styles.section} ${styles.sectionLight}`}
         >
-          {/* Decorative images for light section */}
-          <Image
-            src="/polaroid.webp"
-            alt=""
-            width={168}
-            height={168}
-            style={{
-              opacity: 0.25,
-              position: "absolute",
-              top: "3rem",
-              right: "3rem",
-              zIndex: 0,
-              transform: "rotate(-8deg)",
-            }}
-          />
           <div className={styles.container}>
             <div className={styles.sectionLayout}>
               <div className={styles.sectionMeta}>
