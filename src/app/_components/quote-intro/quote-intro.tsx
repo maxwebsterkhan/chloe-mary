@@ -6,6 +6,7 @@ import { createScrollTrigger } from "../helpers/gsap-animations";
 import gsap from "gsap";
 import { useS3Images } from "@/hooks/useS3Images";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function QuoteIntro() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,6 +15,7 @@ export default function QuoteIntro() {
   const paragraphLeftRef = useRef<HTMLParagraphElement>(null);
   const paragraphRightRef = useRef<HTMLParagraphElement>(null);
   const paragraphCenterRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
   const { images, loading } = useS3Images({ prefix: "intro/" });
@@ -37,6 +39,9 @@ export default function QuoteIntro() {
     }
     if (paragraphCenterRef.current) {
       gsap.set(paragraphCenterRef.current, { opacity: 0 });
+    }
+    if (ctaRef.current) {
+      gsap.set(ctaRef.current, { opacity: 0 });
     }
     if (imageRef.current) {
       gsap.set(imageRef.current, { opacity: 0 });
@@ -104,7 +109,17 @@ export default function QuoteIntro() {
           );
         }
 
-        // 5. Image fade in
+        // 5. CTA - subtle fade in
+        if (ctaRef.current) {
+          tl.fromTo(
+            ctaRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+            1.6
+          );
+        }
+
+        // 6. Image fade in
         if (imageRef.current) {
           tl.fromTo(
             imageRef.current,
@@ -155,6 +170,15 @@ export default function QuoteIntro() {
                 &quot;Because what truly matters isn&apos;t how it all looked,
                 but how it felt.&quot;
               </p>
+
+              <div ref={ctaRef} className={styles.cta}>
+                <div className={styles.ctaLine}></div>
+                <Link href="/about" className={styles.ctaLink}>
+                  <span className={styles.ctaText}>
+                    Learn More About My Story
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
 
