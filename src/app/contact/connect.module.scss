@@ -639,10 +639,9 @@
 
 // Form Section
 .formSection {
-  background: #fff;
   border-radius: 2px;
   padding: 0; // Remove padding to let form breathe
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  background-color: var(--color-secondary);
   border: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden; // Ensure border-radius is respected
@@ -718,7 +717,7 @@
 
 .contactIframe {
   width: 100%;
-  height: 900px;
+  height: 1065px;
   border: none;
   display: block;
 

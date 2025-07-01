@@ -5,7 +5,7 @@ import styles from "./pricing.module.scss";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
+
 import PricingFooter from "../_components/stories-footer/pricing-footer";
 
 export default function PricingPage() {
