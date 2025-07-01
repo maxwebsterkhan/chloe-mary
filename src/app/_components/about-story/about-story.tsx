@@ -29,12 +29,15 @@ export default function AboutStory() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target === content) {
-            setIsContentVisible(entry.isIntersecting);
-          } else if (entry.target === philosophy) {
-            setIsPhilosophyVisible(entry.isIntersecting);
-          } else if (entry.target === closing) {
-            setIsClosingVisible(entry.isIntersecting);
+          // Only trigger animations when entering viewport, not when leaving
+          if (entry.isIntersecting) {
+            if (entry.target === content) {
+              setIsContentVisible(true);
+            } else if (entry.target === philosophy) {
+              setIsPhilosophyVisible(true);
+            } else if (entry.target === closing) {
+              setIsClosingVisible(true);
+            }
           }
         });
       },

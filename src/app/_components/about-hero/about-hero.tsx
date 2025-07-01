@@ -35,13 +35,11 @@ export default function AboutHero() {
         if (shape) animationUtils.scaleIn(shape as HTMLElement, { delay: 2 });
       }
 
-      // Set up scroll trigger for visibility state
+      // Set up scroll trigger for visibility state (once only)
       createScrollTrigger(titleSectionRef.current, {
         start: "top 80%",
+        once: true,
         onEnter: () => setIsVisible(true),
-        onLeave: () => setIsVisible(false),
-        onEnterBack: () => setIsVisible(true),
-        onLeaveBack: () => setIsVisible(false),
       });
     }
   }, []);
