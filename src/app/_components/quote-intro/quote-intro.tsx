@@ -135,7 +135,9 @@ export default function QuoteIntro() {
               <p ref={paragraphLeftRef} className={styles.paragraph}>
                 I&apos;m drawn to creative, carefree couples who seek images
                 that capture not just how you look, but who you truly
-                are-relaxed, authentic and beautifully yourselves.
+                are-relaxed, authentic and beautifully yourselves. No need for
+                lengthy shot lists or endless posed photos, my approach is all
+                about letting your true selves shine through.
               </p>
 
               <p ref={paragraphRightRef} className={styles.paragraph}>

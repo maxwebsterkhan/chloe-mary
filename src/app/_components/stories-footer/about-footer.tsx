@@ -59,7 +59,7 @@ export default function AboutFooter() {
               I believe in capturing love stories that are as unique as the
               couples who live them. If my approach to documentary photography
               resonates with you, and you&apos;re looking for someone to capture
-              the authentic, unguarded moments of your special day, I&apos;d
+              the authentic, unfiltered moments of your special day, I&apos;d
               love to hear your story.
             </p>
           </div>

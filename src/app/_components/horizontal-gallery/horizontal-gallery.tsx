@@ -100,13 +100,13 @@ export default function HorizontalGallery() {
         },
         "kat-patrick": {
           description:
-            "A romantic countryside wedding with a modern twist, capturing the romance of the south of France.",
+            "A romantic countryside wedding with a modern twist, capturing the charm and warmth of the south of France.",
           location: "Chateau La Durantie, France",
           picTimeUrl: "https://chloemaryphoto.pic-time.com/i0561DkOwQM8Q",
         },
         "marj-ellis": {
           description:
-            "A family centric city weddings at the Mount Without, Bristol for high school sweethearts, enriched with heartfelt nods to the couples Fillapino and Greek heritage.",
+            "A family centric city  at the Mount Without Bristol for high school sweethearts, enriched with heartfelt nods to the couples Filipino and Greek heritage.",
           location: "The Mount Without, Bristol",
           picTimeUrl: "https://chloemaryphoto.pic-time.com/y00bovLaECnZY",
         },
