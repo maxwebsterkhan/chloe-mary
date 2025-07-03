@@ -144,18 +144,22 @@ export default function PricingPage() {
         inclusionsRef.current,
       ];
 
+      // Different trigger points based on screen size
+      const isMobile = window.innerWidth <= 768;
+      const startTrigger = isMobile ? "bottom bottom" : "top top";
+
       // Create individual pinning for each section
       sections.forEach((section, index) => {
         const isLast = index === sections.length - 1;
 
         ScrollTrigger.create({
           trigger: section,
-          start: "bottom bottom", // Pin when bottom of section hits bottom of viewport
+          start: startTrigger, // Mobile: "bottom bottom", Desktop: "top top"
           end: "bottom top",
           pin: !isLast, // Don't pin the last section
           pinSpacing: false,
           anticipatePin: 1,
-          scrub: 0.5, // Add smooth scrub transition
+          scrub: isMobile ? 0.5 : 1, // Slower scrub on mobile, faster on desktop
         });
       });
     }
