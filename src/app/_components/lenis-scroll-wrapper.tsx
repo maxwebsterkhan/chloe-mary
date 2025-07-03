@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import "lenis/dist/lenis.css"; // Critical CSS import
+import "lenis/dist/lenis.css";
 
 interface LenisScrollWrapperProps {
   children: React.ReactNode;
@@ -14,15 +14,15 @@ export default function LenisScrollWrapper({
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.4, // Increased for smoother motion
-      easing: (t) => 1 - Math.pow(1 - t, 3), // Smoother cubic easing
+      duration: 1.4,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
-      autoRaf: true, // Use built-in RAF
+      autoRaf: true,
     });
 
     lenisRef.current = lenis;
