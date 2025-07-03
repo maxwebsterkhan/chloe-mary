@@ -204,43 +204,30 @@ export default function HomepageMasonryGallery() {
               .replace(/[-_]/g, " ")
               .replace(/\.[^/.]+$/, "")}`;
 
-            // Get responsive width for inline styles
-            const getImageWidth = () => {
-              if (typeof window !== "undefined") {
-                if (window.innerWidth <= 768) return "250px";
-                if (window.innerWidth <= 1024) return "300px";
-                return "400px";
-              }
-              return "400px"; // default
-            };
-
             return (
               <div key={image.key} className={styles.imageWrapper}>
-                <Image
-                  src={image.url}
-                  alt={alt}
-                  width={0}
-                  height={0}
-                  className={styles.galleryImage}
-                  onClick={() => handleImageSelect(image)}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={alt}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      handleImageSelect(image);
-                    }
-                  }}
-                  style={{
-                    width: getImageWidth(),
-                    height: "auto",
-                  }}
-                  sizes="(max-width: 768px) 250px, (max-width: 1024px) 300px, 400px"
-                  priority={index < 4}
-                  loading={index < 4 ? "eager" : "lazy"}
-                  quality={85}
-                />
+                <div className={styles.imageContainer}>
+                  <Image
+                    src={image.url}
+                    alt={alt}
+                    fill
+                    className={styles.galleryImage}
+                    onClick={() => handleImageSelect(image)}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={alt}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleImageSelect(image);
+                      }
+                    }}
+                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 50vw"
+                    priority={index < 4}
+                    loading={index < 4 ? "eager" : "lazy"}
+                    quality={85}
+                  />
+                </div>
               </div>
             );
           })}
