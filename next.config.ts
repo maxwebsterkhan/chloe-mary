@@ -31,7 +31,12 @@ const nextConfig: NextConfig = {
         source: '/uploads/:path*',
         destination: '/img/:path*',
         permanent: true,
-      }
+      },
+      {
+        source: '/edits',
+        destination: '/',
+        permanent: true,
+      },
     ];
   },
   
