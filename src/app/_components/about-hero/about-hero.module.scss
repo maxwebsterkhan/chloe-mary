@@ -626,6 +626,13 @@
 }
 
 .scrollIndicator {
+  // Button reset styles
+  background: none;
+  border: none;
+  font: inherit;
+  outline: none;
+
+  // Existing custom styles
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -637,16 +644,19 @@
     transform: translateY(-3px);
 
     .scrollLine {
-      background: linear-gradient(
-        180deg,
-        var(--color-accent) 0%,
-        var(--color-primary) 100%
-      );
+      &::after {
+        opacity: 1;
+      }
     }
 
     .scrollText {
       color: var(--color-accent);
     }
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 }
 
@@ -665,7 +675,24 @@
     transparent 100%
   );
   margin-bottom: 1rem;
-  transition: all 0.3s ease-out;
+  position: relative;
+  transition: opacity 0.3s ease-out;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      var(--color-accent) 0%,
+      var(--color-primary) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
 
   @include breakpoint-down("mobile") {
     height: 40px;

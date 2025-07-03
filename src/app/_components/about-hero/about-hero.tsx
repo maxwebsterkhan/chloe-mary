@@ -159,25 +159,17 @@ export default function AboutHero() {
 
             {/* Enhanced scroll indicator */}
             <div className={styles.scrollSection}>
-              <div
+              <button
                 className={styles.scrollIndicator}
                 onClick={handleScrollClick}
-                role="button"
-                tabIndex={0}
                 aria-label="Scroll to discover my story"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleScrollClick();
-                  }
-                }}
               >
                 <div className={styles.scrollContent}>
                   <div className={styles.scrollLine}></div>
                   <span className={styles.scrollText}>DISCOVER</span>
                   <span className={styles.scrollSubtext}>My Story</span>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
