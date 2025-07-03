@@ -75,7 +75,7 @@ export default function AboutHero() {
                 <div className={styles.preTitleLine}></div>
               </div>
 
-              <h1 className={styles.heroTitle}>
+              <h1 className={styles.heroTitle} aria-label="Nostalgia Lover">
                 <span className={styles.heroTitleWord}>NOSTALGIA</span>
                 <span className={styles.heroTitleWord}>LOVER</span>
               </h1>
@@ -91,7 +91,10 @@ export default function AboutHero() {
             <div className={styles.traitsSection}>
               <div className={styles.traitPrimary}>
                 <div className={styles.traitIcon}>—</div>
-                <h2 className={styles.traitTitleLarge}>
+                <h2
+                  className={styles.traitTitleLarge}
+                  aria-label="Embracer of the imperfect"
+                >
                   <span className={styles.traitWord}>EMBRACER</span>
                   <span className={styles.traitWord}>OF THE</span>
                   <span className={styles.traitWordAccent}>IMPERFECT</span>
@@ -101,20 +104,29 @@ export default function AboutHero() {
 
               <div className={styles.traitSecondary}>
                 <div className={styles.traitGrid}>
-                  <div className={styles.traitItem}>
+                  <div
+                    className={styles.traitItem}
+                    aria-label="Collector of memories"
+                  >
                     <span className={styles.traitLabel}>Collector</span>
                     <span className={styles.traitText}>OF MEMORIES</span>
                   </div>
-                  <div className={styles.traitItem}>
-                    <span className={styles.traitLabel}>Preserver</span>
-                    <span className={styles.traitText}>OF LEGACIES</span>
+                  <div
+                    className={styles.traitItem}
+                    aria-label="Keeper of stories"
+                  >
+                    <span className={styles.traitLabel}>Keeper</span>
+                    <span className={styles.traitText}>OF STORIES</span>
                   </div>
                 </div>
               </div>
 
               <div className={styles.traitHighlight}>
                 <div className={styles.highlightBox}>
-                  <h2 className={styles.traitTitleSpecial}>
+                  <h2
+                    className={styles.traitTitleSpecial}
+                    aria-label="Extroverted Introvert"
+                  >
                     <span className={styles.specialWordGradient}>
                       EXTROVERTED
                     </span>
@@ -150,6 +162,15 @@ export default function AboutHero() {
               <div
                 className={styles.scrollIndicator}
                 onClick={handleScrollClick}
+                role="button"
+                tabIndex={0}
+                aria-label="Scroll to discover my story"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleScrollClick();
+                  }
+                }}
               >
                 <div className={styles.scrollContent}>
                   <div className={styles.scrollLine}></div>
