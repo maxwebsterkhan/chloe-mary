@@ -280,12 +280,25 @@ export default function PricingPage() {
                     <span className={styles.sectionSubLabel}>FULL DAY</span>
                   </div>
 
-                  <div className={`${styles.metaNote} ${styles.animateIn}`}>
-                    <span className={styles.noteHighlight}>INCLUDED</span>
-                    <p>Two rolls of black and white film</p>
-                    <span className={styles.noteAddition}>
-                      Additional rolls available for £50 each
-                    </span>
+                  <div
+                    className={`${styles.metaExtensions} ${styles.animateIn}`}
+                  >
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        Two rolls of black and white
+                      </span>
+                    </div>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        ADDITIONAL FILM
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        £50 per film roll
+                      </span>
+                    </div>
                   </div>
                 </div>
 
@@ -318,13 +331,24 @@ export default function PricingPage() {
                   </div>
 
                   <div
-                    className={`${styles.mobileMetaNote} ${styles.animateIn}`}
+                    className={`${styles.mobileMetaExtensions} ${styles.animateIn}`}
                   >
-                    <span className={styles.noteHighlight}>INCLUDED</span>
-                    <p>Two rolls of black and white film</p>
-                    <span className={styles.noteAddition}>
-                      Additional rolls available for £50 each
-                    </span>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        Two rolls of black and white
+                      </span>
+                    </div>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        ADDITIONAL FILM
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        £50 per film roll
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -436,14 +460,25 @@ export default function PricingPage() {
                     <span className={styles.sectionSubLabel}>DESTINATIONS</span>
                   </div>
 
-                  <div className={`${styles.metaNote} ${styles.animateIn}`}>
-                    <span className={styles.noteHighlight}>
-                      ADVENTURE INCLUDES
-                    </span>
-                    <p>Two rolls of black and white film</p>
-                    <span className={styles.noteAddition}>
-                      Additional rolls available for £50 each
-                    </span>
+                  <div
+                    className={`${styles.metaExtensions} ${styles.animateIn}`}
+                  >
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        Two rolls of black and white
+                      </span>
+                    </div>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        ADDITIONAL FILM
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        £50 per film roll
+                      </span>
+                    </div>
                   </div>
                 </div>
 
@@ -484,15 +519,24 @@ export default function PricingPage() {
                   </div>
 
                   <div
-                    className={`${styles.mobileMetaNote} ${styles.animateIn}`}
+                    className={`${styles.mobileMetaExtensions} ${styles.animateIn}`}
                   >
-                    <span className={styles.noteHighlight}>
-                      ADVENTURE INCLUDES
-                    </span>
-                    <p>One roll of black and white film</p>
-                    <span className={styles.noteAddition}>
-                      Additional rolls available for £50 each
-                    </span>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        Two rolls of black and white
+                      </span>
+                    </div>
+                    <div className={styles.extensionItem}>
+                      <span className={styles.extensionLabel}>
+                        ADDITIONAL FILM
+                      </span>
+                      <span className={styles.extensionPrice}>
+                        £50 per film roll
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
