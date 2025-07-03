@@ -6,6 +6,7 @@ import LenisScrollWrapper from "./_components/lenis-scroll-wrapper";
 import FooterBoundary from "./_components/footer/footer-boundary";
 import SkipLink from "./_components/skip-link";
 import StructuredData from "./_components/seo/structured-data";
+import { Analytics } from "@vercel/analytics/next";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -334,6 +335,7 @@ export default function RootLayout({
           <FooterBoundary />
         </LenisScrollWrapper>
       </body>
+      <Analytics />
     </html>
   );
 }

@@ -14,8 +14,14 @@ export default function LenisScrollWrapper({
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.4, // Increased for smoother motion
+      easing: (t) => 1 - Math.pow(1 - t, 3), // Smoother cubic easing
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
       autoRaf: true, // Use built-in RAF
     });
 
