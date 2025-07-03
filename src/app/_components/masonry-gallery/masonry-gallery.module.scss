@@ -1,6 +1,105 @@
 @use "../../_styles/tokens" as tokens;
 @use "../../_styles/breakpoints" as *;
 
+// Horizontal Gallery Styles
+.horizontalSection {
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-primary);
+  height: fit-content;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.horizontalContainer {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.horizontalGallery {
+  display: flex;
+  gap: 32px;
+  height: 100vh;
+  align-items: center;
+  will-change: transform;
+  min-width: fit-content;
+
+  @include breakpoint-down("tablet") {
+    gap: 24px;
+  }
+
+  @include breakpoint-down("mobile") {
+    gap: 16px;
+  }
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &:first-child {
+    padding-left: tokens.$spacing-md;
+
+    @include breakpoint-down("tablet") {
+      padding-left: tokens.$spacing-sm;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding-left: tokens.$spacing-sm;
+    }
+  }
+
+  &:last-child {
+    padding-right: tokens.$spacing-md;
+
+    @include breakpoint-down("tablet") {
+      padding-right: tokens.$spacing-sm;
+    }
+
+    @include breakpoint-down("mobile") {
+      padding-right: tokens.$spacing-sm;
+    }
+  }
+}
+
+.galleryImage {
+  width: 400px;
+  height: auto;
+  max-height: 90vh;
+  border-radius: 2px;
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  @include breakpoint-down("tablet") {
+    width: 300px;
+    height: auto;
+    max-height: 85vh;
+  }
+
+  @include breakpoint-down("mobile") {
+    width: 250px;
+    height: auto;
+    max-height: 80vh;
+  }
+}
+
+// Legacy Masonry Styles (keeping for reference but not used)
 .masonrySection {
   padding: tokens.$spacing-xl 0;
   background-color: var(--color-primary);
@@ -19,7 +118,6 @@
   max-width: var(--max-width, 1200px);
   margin: 0 auto;
   padding: 0 tokens.$spacing-md;
-  // pointer-events: none;
 
   @include breakpoint-down("tablet") {
     padding: 0 tokens.$spacing-sm;
@@ -35,17 +133,7 @@
   line-height: 0;
 }
 
-.galleryImage {
-  width: 100%;
-  height: auto;
-  margin-bottom: 32px;
-  display: block;
-  border-radius: 2px;
-  cursor: zoom-in;
-  break-inside: avoid;
-  line-height: 0;
-}
-
+// Lightbox Styles (unchanged)
 .lightboxOverlay {
   position: fixed;
   top: 0;
@@ -164,4 +252,45 @@
   border-radius: 2px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   background: #fff;
+}
+
+// Loading and error states
+.loadingState,
+.errorState {
+  padding: tokens.$spacing-xl;
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  font-size: 1.1rem;
+}
+
+// Scroll Progress Indicator
+.scrollProgress {
+  position: absolute;
+  bottom: tokens.$spacing-md;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+
+  @include breakpoint-down("tablet") {
+    bottom: tokens.$spacing-sm;
+    width: 150px;
+  }
+
+  @include breakpoint-down("mobile") {
+    bottom: tokens.$spacing-sm;
+    width: 120px;
+  }
+}
+
+.scrollProgressBar {
+  height: 100%;
+  background: var(--color-secondary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }

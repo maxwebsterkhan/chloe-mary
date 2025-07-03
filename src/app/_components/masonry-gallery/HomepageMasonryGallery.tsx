@@ -5,6 +5,11 @@ import { useS3Images } from "@/hooks/useS3Images";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
 import { FocusTrap } from "focus-trap-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 type ImageData = { url: string; key: string };
 
@@ -90,6 +95,11 @@ export default function HomepageMasonryGallery() {
     alt: string;
   } | null>(null);
 
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
   const handleImageSelect = useCallback((image: ImageData) => {
     setSelectedImage({
       url: image.url,
@@ -103,6 +113,76 @@ export default function HomepageMasonryGallery() {
     setSelectedImage(null);
   }, []);
 
+  // Setup GSAP ScrollTrigger for horizontal scrolling
+  useEffect(() => {
+    if (
+      !galleryRef.current ||
+      !containerRef.current ||
+      !sectionRef.current ||
+      images.length === 0
+    )
+      return;
+
+    const gallery = galleryRef.current;
+    const section = sectionRef.current;
+
+    const updateScrollTrigger = () => {
+      // Kill existing ScrollTrigger if it exists
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "horizontal-gallery") {
+          trigger.kill();
+        }
+      });
+
+      // Let the gallery determine its natural width
+      gallery.style.width = "auto";
+
+      // Force a reflow to get the actual width
+      const galleryWidth = gallery.scrollWidth;
+      const containerWidth =
+        containerRef.current?.offsetWidth || window.innerWidth;
+
+      // Only create ScrollTrigger if content is wider than container
+      if (galleryWidth > containerWidth) {
+        ScrollTrigger.create({
+          id: "horizontal-gallery",
+          trigger: section,
+          start: "top top",
+          end: () => `+=${galleryWidth - containerWidth}`,
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            setScrollProgress(self.progress * 100);
+          },
+          animation: gsap.to(gallery, {
+            x: -(galleryWidth - containerWidth),
+            ease: "none",
+          }),
+        });
+      }
+    };
+
+    // Initial setup
+    updateScrollTrigger();
+
+    // Update on window resize
+    const handleResize = () => {
+      updateScrollTrigger();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.id === "horizontal-gallery") {
+          trigger.kill();
+        }
+      });
+    };
+  }, [images.length]);
+
   if (loading)
     return <div className={styles.loadingState}>Loading gallery...</div>;
   if (error)
@@ -113,40 +193,65 @@ export default function HomepageMasonryGallery() {
 
   return (
     <section
-      aria-label="Homepage Masonry Gallery"
-      className={styles.masonrySection}
+      ref={sectionRef}
+      aria-label="Homepage Horizontal Gallery"
+      className={styles.horizontalSection}
     >
-      <div className={styles.masonryContainer}>
-        <div className={styles.gallery}>
+      <div ref={containerRef} className={styles.horizontalContainer}>
+        <div ref={galleryRef} className={styles.horizontalGallery}>
           {images.map((image, index) => {
             const alt = `Wedding photo: ${image.key
               .replace(/[-_]/g, " ")
               .replace(/\.[^/.]+$/, "")}`;
+
+            // Get responsive width for inline styles
+            const getImageWidth = () => {
+              if (typeof window !== "undefined") {
+                if (window.innerWidth <= 768) return "250px";
+                if (window.innerWidth <= 1024) return "300px";
+                return "400px";
+              }
+              return "400px"; // default
+            };
+
             return (
-              <Image
-                key={image.key}
-                src={image.url}
-                alt={alt}
-                width={800}
-                height={1067}
-                className={styles.galleryImage}
-                onClick={() => handleImageSelect(image)}
-                tabIndex={0}
-                role="button"
-                aria-label={alt}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleImageSelect(image);
-                  }
-                }}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority={index < 4}
-                loading={index < 4 ? "eager" : "lazy"}
-                quality={85}
-              />
+              <div key={image.key} className={styles.imageWrapper}>
+                <Image
+                  src={image.url}
+                  alt={alt}
+                  width={0}
+                  height={0}
+                  className={styles.galleryImage}
+                  onClick={() => handleImageSelect(image)}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={alt}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleImageSelect(image);
+                    }
+                  }}
+                  style={{
+                    width: getImageWidth(),
+                    height: "auto",
+                  }}
+                  sizes="(max-width: 768px) 250px, (max-width: 1024px) 300px, 400px"
+                  priority={index < 4}
+                  loading={index < 4 ? "eager" : "lazy"}
+                  quality={85}
+                />
+              </div>
             );
           })}
+        </div>
+
+        {/* Scroll Progress Indicator */}
+        <div className={styles.scrollProgress}>
+          <div
+            className={styles.scrollProgressBar}
+            style={{ width: `${scrollProgress}%` }}
+          />
         </div>
       </div>
       {selectedImage && (
