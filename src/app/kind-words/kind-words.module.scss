@@ -285,18 +285,27 @@
 }
 
 .testimonialsGrid {
-  display: flex;
-  flex-direction: column;
-  gap: tokens.$spacing-lg;
-  max-width: 800px;
+  column-count: auto;
+  column-width: 300px;
+  column-gap: tokens.$spacing-lg;
+  max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  @include breakpoint-down("tablet") {
+    column-width: 280px;
+    column-gap: tokens.$spacing-md;
+  }
 
   @include breakpoint-down("mobile") {
-    gap: tokens.$spacing-md;
+    column-count: 1;
+    column-width: auto;
+    column-gap: tokens.$spacing-md;
   }
 }
 
-// All testimonials - storytelling flow with varied presentation
+// Testimonial card positioning and sizing
 .testimonialCard {
   padding: tokens.$spacing-lg;
   border-radius: 2px;
@@ -304,56 +313,38 @@
   flex-direction: column;
   gap: tokens.$spacing-sm;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
   box-sizing: border-box;
   position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  break-inside: avoid;
+  margin-bottom: tokens.$spacing-lg;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
 
-  // Alternating alignment for visual interest
-  &:nth-child(even) {
-    align-self: flex-end;
-    max-width: 85%;
-
-    @include breakpoint-down("tablet") {
-      align-self: stretch;
-      max-width: 100%;
-    }
-  }
-
-  &:nth-child(odd) {
-    align-self: flex-start;
-    max-width: 85%;
-
-    @include breakpoint-down("tablet") {
-      align-self: stretch;
-      max-width: 100%;
-    }
-  }
-
-  // Featured testimonials (larger, full width)
-  &:nth-child(3n) {
-    align-self: stretch;
-    max-width: 100%;
-    padding: tokens.$spacing-xl;
+  // Featured testimonials (larger, more prominent)
+  &.featured {
     background: var(--color-primary);
     color: var(--color-secondary);
+    z-index: 2;
+    min-height: 300px;
 
     .testimonialAuthor {
       color: rgba(243, 240, 235, 0.8);
     }
 
     .testimonialText {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
-    @include breakpoint-down("mobile") {
-      padding: tokens.$spacing-lg;
+    @include breakpoint-down("tablet") {
+      min-height: 250px;
     }
   }
 
@@ -412,76 +403,40 @@
   @include breakpoint-down("tablet") {
     padding: tokens.$spacing-md;
     border-radius: 2px;
+    margin-bottom: tokens.$spacing-md;
   }
 
   @include breakpoint-down("mobile") {
     padding: tokens.$spacing-sm;
     border-radius: 2px;
+    margin-bottom: tokens.$spacing-md;
   }
 
-  // Simple size and style variations - remove fixed heights
+  // Simple size and style variations
   &.compact {
     .testimonialText {
-      font-size: 1rem;
+      font-size: 0.8rem;
       line-height: 1.4;
-    }
-  }
-
-  &.featured {
-    padding: tokens.$spacing-xl;
-
-    .testimonialText {
-      font-size: 1rem;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    @include breakpoint-down("tablet") {
-      padding: tokens.$spacing-lg;
-    }
-
-    @include breakpoint-down("mobile") {
-      padding: tokens.$spacing-md;
     }
   }
 
   &.highlight {
     .testimonialText {
-      font-size: 1.05rem;
+      font-size: 0.85rem;
       font-weight: 500;
+    }
+  }
+
+  // Enhanced hover effects
+  &:hover {
+    .testimonialAuthor {
+      transform: translateX(4px);
     }
   }
 }
 
-// Remove old testimonial classes
-.testimonialFeatured,
-.testimonialCompact,
-.testimonialQuoteStyle,
-.testimonialMedium,
-.testimonialHighlight {
-  @extend .testimonialCard;
-}
-
-.testimonialQuote {
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 600;
-  line-height: 1.3;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.testimonialContinue {
-  font-size: tokens.$font-size-md;
-  line-height: 1.6;
-  opacity: 0.9;
-  position: relative;
-  z-index: 1;
-  margin: 0;
-}
-
 .testimonialText {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   margin-bottom: tokens.$spacing-sm;
   font-style: italic;
@@ -494,6 +449,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: auto;
+  transition: transform 0.3s ease;
 }
 
 .testimonialDivider {
@@ -565,38 +521,18 @@
   }
 }
 
-.quoteText {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--color-primary);
-  margin-bottom: tokens.$spacing-md;
-  font-style: italic;
-}
-
-.quoteAuthor {
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent);
-}
-
-.highlightLabel {
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  opacity: 0.8;
-  margin-bottom: tokens.$spacing-sm;
-}
-
 .kindWordsFooter {
   text-align: center;
   padding: tokens.$spacing-xl;
   background: rgba(0, 0, 0, 0.02);
   border-radius: 2px;
-  margin-top: tokens.$spacing-xl;
+  margin-top: tokens.$spacing-xxl;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-lg;
+    margin-top: tokens.$spacing-lg;
+  }
 }
 
 .footerText {
@@ -617,8 +553,3 @@
     opacity: 0.8;
   }
 }
-
-// Remove CSS-only comment
-// Remove CSS-only comment
-
-// Remove CSS animation class - all animations handled by GSAP

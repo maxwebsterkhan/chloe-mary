@@ -18,43 +18,71 @@ export default function ExpandableText({
 }: ExpandableTextProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showToggle, setShowToggle] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
+  const fullHeightRef = useRef<number>(0);
 
   useGSAP(
     () => {
-      if (textRef.current) {
+      if (textRef.current && !isAnimating) {
+        // Temporarily set height to auto to get full height
         gsap.set(textRef.current, {
           height: "auto",
         });
 
         const fullHeight = textRef.current.scrollHeight;
+        fullHeightRef.current = fullHeight;
 
         if (fullHeight > maxHeight) {
           setShowToggle(true);
           gsap.set(textRef.current, { height: maxHeight });
+        } else {
+          setShowToggle(false);
+          gsap.set(textRef.current, { height: "auto" });
         }
       }
     },
-    { scope: textRef }
+    { scope: textRef, dependencies: [isAnimating] }
   );
 
   const toggleExpansion = () => {
-    if (!textRef.current) return;
+    if (!textRef.current || isAnimating) return;
+
+    setIsAnimating(true);
+
+    // Find the testimonials grid and add animating class
+    const gridContainer =
+      textRef.current.closest(".testimonialsGrid") ||
+      document.querySelector(".testimonialsGrid");
+    if (gridContainer) {
+      gridContainer.classList.add("animating");
+    }
 
     if (!isExpanded) {
       gsap.to(textRef.current, {
-        height: "auto",
-        duration: 0.5,
+        height: fullHeightRef.current,
+        duration: 1.2,
         ease: "power2.out",
+        onComplete: () => {
+          setIsAnimating(false);
+          // Remove animating class after animation completes
+          if (gridContainer) {
+            gridContainer.classList.remove("animating");
+          }
+        },
       });
     } else {
-      const currentHeight = textRef.current.scrollHeight;
-      gsap.set(textRef.current, { height: currentHeight });
-
       gsap.to(textRef.current, {
         height: maxHeight,
-        duration: 0.5,
+        duration: 1.2,
         ease: "power2.out",
+        onComplete: () => {
+          setIsAnimating(false);
+          // Remove animating class after animation completes
+          if (gridContainer) {
+            gridContainer.classList.remove("animating");
+          }
+        },
       });
     }
 
@@ -77,6 +105,7 @@ export default function ExpandableText({
           onClick={toggleExpansion}
           className={styles.toggleButton}
           aria-label={isExpanded ? "Read less" : "Read more"}
+          disabled={isAnimating}
         >
           {isExpanded ? "Read less" : "Read more"}
         </button>
