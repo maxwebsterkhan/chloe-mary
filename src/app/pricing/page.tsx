@@ -130,39 +130,70 @@ export default function PricingPage() {
     }
 
     // Create pinning animation for pricing sections
-    if (
-      pricingSectionsRef.current &&
-      fullDayRef.current &&
-      setHoursRef.current &&
-      destinationRef.current &&
-      inclusionsRef.current
-    ) {
-      const sections = [
-        fullDayRef.current,
-        setHoursRef.current,
-        destinationRef.current,
-        inclusionsRef.current,
-      ];
+    const createPinningAnimations = () => {
+      if (
+        pricingSectionsRef.current &&
+        fullDayRef.current &&
+        setHoursRef.current &&
+        destinationRef.current &&
+        inclusionsRef.current
+      ) {
+        const sections = [
+          fullDayRef.current,
+          setHoursRef.current,
+          destinationRef.current,
+          inclusionsRef.current,
+        ];
 
-      // Different trigger points based on screen size
-      const isMobile = window.innerWidth <= 768;
-      const startTrigger = isMobile ? "bottom bottom" : "top top";
+        // Different trigger points based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const startTrigger = isMobile ? "bottom bottom" : "top top";
 
-      // Create individual pinning for each section
-      sections.forEach((section, index) => {
-        const isLast = index === sections.length - 1;
+        // Create individual pinning for each section
+        sections.forEach((section, index) => {
+          const isLast = index === sections.length - 1;
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: startTrigger, // Mobile: "bottom bottom", Desktop: "top top"
-          end: "bottom top",
-          pin: !isLast, // Don't pin the last section
-          pinSpacing: false,
-          anticipatePin: 1,
-          scrub: isMobile ? 0.5 : 1, // Slower scrub on mobile, faster on desktop
+          ScrollTrigger.create({
+            trigger: section,
+            start: startTrigger, // Mobile: "bottom bottom", Desktop: "top top"
+            end: "bottom top",
+            pin: !isLast, // Don't pin the last section
+            pinSpacing: false,
+            anticipatePin: 1,
+            scrub: isMobile ? 0.5 : 1, // Slower scrub on mobile, faster on desktop
+          });
         });
+      }
+    };
+
+    // Initial setup
+    createPinningAnimations();
+
+    // Handle window resize
+    const handleResize = () => {
+      // Clear existing pricing ScrollTriggers
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (
+          trigger.vars.trigger &&
+          (trigger.vars.trigger === fullDayRef.current ||
+            trigger.vars.trigger === setHoursRef.current ||
+            trigger.vars.trigger === destinationRef.current ||
+            trigger.vars.trigger === inclusionsRef.current)
+        ) {
+          trigger.kill();
+        }
       });
-    }
+
+      // Recreate with new settings
+      createPinningAnimations();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   });
 
   return (
