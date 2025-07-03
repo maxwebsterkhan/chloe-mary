@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kind Words & Testimonials | Chloe Mary Photography Bristol",
+  title: "Kind Words & Testimonials | Chloe Mary Bristol",
   description:
-    "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings. 5-star Google rating. Contemporary documentary wedding photography in Bristol and beyond.",
+    "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings. 5-star Google rating. Contemporary documentary wedding photography in Bristol and beyond.",
   keywords: [
     "wedding photography testimonials",
     "bristol wedding photographer reviews",
-    "chloe mary photography reviews",
+    "Chloe Mary reviews",
     "wedding photography testimonials uk",
     "happy couples testimonials",
     "5 star wedding photographer bristol",
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     "natural wedding photography reviews",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Kind Words & Testimonials | Chloe Mary Photography",
+    title: "Kind Words & Testimonials | Chloe Mary",
     description:
-      "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings. 5-star Google rating.",
+      "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings. 5-star Google rating.",
     url: "https://www.chloemary.com/kind-words",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
     images: [
@@ -45,16 +45,16 @@ export const metadata: Metadata = {
         url: "/logo.webp",
         width: 512,
         height: 512,
-        alt: "Chloe Mary Photography - Wedding Photography Testimonials",
+        alt: "Chloe Mary - Wedding Photography Testimonials",
         type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kind Words & Testimonials | Chloe Mary Photography",
+    title: "Kind Words & Testimonials | Chloe Mary",
     description:
-      "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings.",
+      "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings.",
     creator: "@chloemary_photo",
     images: ["/logo.webp"],
   },
@@ -85,9 +85,9 @@ export default function KindWordsLayout({
             "@type": "WebPage",
             "@id": "https://www.chloemary.com/kind-words",
             url: "https://www.chloemary.com/kind-words",
-            name: "Kind Words & Testimonials | Chloe Mary Photography",
+            name: "Kind Words & Testimonials | Chloe Mary",
             description:
-              "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary Photography for their weddings.",
+              "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings.",
             isPartOf: {
               "@id": "https://www.chloemary.com/#website",
             },
@@ -102,7 +102,7 @@ export default function KindWordsLayout({
               ratingCount: "200",
               itemReviewed: {
                 "@type": "ProfessionalService",
-                name: "Chloe Mary Photography",
+                name: "Chloe Mary",
                 description:
                   "Contemporary documentary wedding photography services",
                 url: "https://www.chloemary.com",

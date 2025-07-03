@@ -5,7 +5,7 @@ import HorizontalGallery from "@/app/_components/horizontal-gallery/horizontal-g
 import StoriesFooter from "@/app/_components/stories-footer/stories-footer";
 
 export const metadata: Metadata = {
-  title: "Wedding Photography Stories | Chloe Mary Photography Bristol",
+  title: "Wedding Photography Stories | Chloe Mary Bristol",
   description:
     "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories across Bristol and the UK.",
   keywords: [
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     "photographer portfolio uk",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Wedding Photography Stories | Chloe Mary Photography",
+    title: "Wedding Photography Stories | Chloe Mary",
     description:
       "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories.",
     url: "https://www.chloemary.com/stories",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
     images: [
@@ -55,14 +55,14 @@ export const metadata: Metadata = {
         url: "/logo.webp",
         width: 512,
         height: 512,
-        alt: "Chloe Mary Photography - Wedding Photography Stories",
+        alt: "Chloe Mary - Wedding Photography Stories",
         type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wedding Photography Stories | Chloe Mary Photography",
+    title: "Wedding Photography Stories | Chloe Mary",
     description:
       "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing candid moments.",
     creator: "@chloemary_photo",
@@ -90,7 +90,7 @@ export default function Page() {
             "@type": "CollectionPage",
             "@id": "https://www.chloemary.com/stories",
             url: "https://www.chloemary.com/stories",
-            name: "Wedding Photography Stories | Chloe Mary Photography",
+            name: "Wedding Photography Stories | Chloe Mary",
             description:
               "Explore authentic wedding photography stories captured by Chloe Mary. Contemporary documentary wedding photography showcasing real couples and their beautiful love stories.",
             isPartOf: {

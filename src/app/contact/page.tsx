@@ -864,7 +864,7 @@ export default function ConnectPage() {
                 <div className={styles.cherubLogo}>
                   <Image
                     src="/cherub.webp"
-                    alt="Chloe Mary Photography"
+                    alt="Chloe Mary"
                     width={200}
                     height={173}
                     style={{
@@ -895,7 +895,7 @@ export default function ConnectPage() {
                         src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
                         width="100%"
                         height="800"
-                        title="Contact Form - Chloe Mary Photography"
+                        title="Contact Form - Chloe Mary"
                         className={styles.contactIframe}
                         ref={iframeRef}
                         onLoad={handleIframeLoad}

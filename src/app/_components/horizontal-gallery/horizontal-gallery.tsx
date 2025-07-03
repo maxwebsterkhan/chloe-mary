@@ -305,7 +305,7 @@ export default function HorizontalGallery() {
                 },
                 publisher: {
                   "@type": "Organization",
-                  name: "Chloe Mary Photography",
+                  name: "Chloe Mary",
                 },
               },
             })),

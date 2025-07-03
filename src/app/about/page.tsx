@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     "documentary photographer uk",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     description:
       "Meet Chloe Mary, a contemporary documentary photographer passionate about capturing authentic love stories and candid moments. Based in Bristol, working with creative couples across the UK.",
     url: "https://www.chloemary.com/about",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "profile",
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: "/logo.webp",
         width: 512,
         height: 512,
-        alt: "Chloe Mary Photography - Contemporary Wedding Photographer Bristol",
+        alt: "Chloe Mary - Contemporary Wedding Photographer Bristol",
         type: "image/webp",
       },
     ],
@@ -108,7 +108,7 @@ export default function About() {
             },
             worksFor: {
               "@type": "Organization",
-              name: "Chloe Mary Photography",
+              name: "Chloe Mary",
               url: "https://www.chloemary.com",
             },
             hasOccupation: {

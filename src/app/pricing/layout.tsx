@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wedding Photography Pricing | Chloe Mary Photography - Bristol & UK",
+  title: "Wedding Photography Pricing | Chloe Mary - Bristol & UK",
   description:
     "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings. Professional editing, online gallery access, and personal printing rights included. Based in Bristol, serving UK & beyond.",
   keywords: [
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     "luxury wedding photographer london",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -46,11 +46,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Wedding Photography Pricing | Chloe Mary Photography",
+    title: "Wedding Photography Pricing | Chloe Mary",
     description:
       "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings. Based in Bristol, serving UK & beyond.",
     url: "https://www.chloemary.com/pricing",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
     images: [
@@ -58,14 +58,14 @@ export const metadata: Metadata = {
         url: "/logo.webp",
         width: 512,
         height: 512,
-        alt: "Chloe Mary Photography - Wedding Photography Pricing",
+        alt: "Chloe Mary - Wedding Photography Pricing",
         type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wedding Photography Pricing | Chloe Mary Photography",
+    title: "Wedding Photography Pricing | Chloe Mary",
     description:
       "Transparent wedding photography pricing from £1,350. Full day coverage, intimate celebrations & destination weddings.",
     creator: "@chloemary_photo",
@@ -98,7 +98,7 @@ export default function PricingLayout({
               {
                 "@type": "ProfessionalService",
                 "@id": "https://www.chloemary.com/#organization",
-                name: "Chloe Mary Photography",
+                name: "Chloe Mary",
                 description:
                   "Professional wedding photography services in Bristol and across the UK",
                 url: "https://www.chloemary.com",
@@ -206,7 +206,7 @@ export default function PricingLayout({
                 "@type": "WebPage",
                 "@id": "https://www.chloemary.com/pricing",
                 url: "https://www.chloemary.com/pricing",
-                name: "Wedding Photography Pricing | Chloe Mary Photography",
+                name: "Wedding Photography Pricing | Chloe Mary",
                 description:
                   "Transparent wedding photography pricing from £1,350. Full day coverage, intimate  sessions & destination weddings.",
                 isPartOf: {

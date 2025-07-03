@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     "professional photos top 50 photographer contact",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Ready to capture your love story? Contact Chloe Mary for contemporary documentary wedding photography in Bristol. Complimentary consultations available.",
     url: "https://www.chloemary.com/connect",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
     images: [
@@ -121,7 +121,7 @@ export default function ConnectLayout({
                 "@type": "ContactPage",
                 "@id": "https://www.chloemary.com/connect#contactpage",
                 url: "https://www.chloemary.com/connect",
-                name: "Contact Chloe Mary Photography",
+                name: "Contact Chloe Mary",
                 description:
                   "Get in touch with Chloe Mary for wedding photography enquiries. Complimentary video consultations available.",
                 provider: {

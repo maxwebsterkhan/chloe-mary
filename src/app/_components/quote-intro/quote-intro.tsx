@@ -186,7 +186,7 @@ export default function QuoteIntro() {
             {!loading && introImage && (
               <Image
                 src={introImage.url}
-                alt="Chloe Mary Photography Introduction"
+                alt="Chloe Mary Introduction"
                 className={styles.image}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

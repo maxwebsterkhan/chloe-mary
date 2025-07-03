@@ -7,7 +7,7 @@ import HomepageMasonryGallery from "./_components/masonry-gallery/HomepageMasonr
 
 export const metadata: Metadata = {
   title:
-    "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
+    "Chloe Mary | Bristol Wedding Photographer - Authentic Modern Love Stories",
   description:
     "Contemporary documentary wedding photographer in Bristol. Passionate about capturing authentic love stories and candid moments for creative couples. Professional Photos Top 50 UK 2025. Featured on Who What Wear 2025. Memento vivere - remember to live.",
   keywords: [
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     "documentary wedding photography bristol",
   ],
   authors: [{ name: "Chloe Mary" }],
-  creator: "Chloe Mary Photography",
-  publisher: "Chloe Mary Photography",
+  creator: "Chloe Mary",
+  publisher: "Chloe Mary",
   robots: {
     index: true,
     follow: true,
@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
+      "Chloe Mary | Bristol Wedding Photographer - Authentic Modern Love Stories",
     description:
       "Contemporary documentary wedding photographer in Bristol. Capturing authentic love stories and candid moments for creative couples. Top 50 UK photographer 2025.",
     url: "https://www.chloemary.com",
-    siteName: "Chloe Mary Photography",
+    siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
     images: [
@@ -54,14 +54,14 @@ export const metadata: Metadata = {
         url: "/logo.webp",
         width: 512,
         height: 512,
-        alt: "Chloe Mary Photography - Bristol Wedding Photographer",
+        alt: "Chloe Mary - Bristol Wedding Photographer",
         type: "image/webp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chloe Mary Photography | Bristol Wedding Photographer",
+    title: "Chloe Mary | Bristol Wedding Photographer",
     description:
       "Contemporary documentary wedding photographer in Bristol. Capturing authentic love stories and candid moments for creative couples.",
     creator: "@chloemary_photo",
@@ -93,7 +93,7 @@ export default function Home() {
                 "@type": "WebSite",
                 "@id": "https://www.chloemary.com/#website",
                 url: "https://www.chloemary.com",
-                name: "Chloe Mary Photography",
+                name: "Chloe Mary",
                 description:
                   "Contemporary documentary wedding photographer in Bristol capturing authentic modern love stories and candid moments.",
                 publisher: {
@@ -116,7 +116,7 @@ export default function Home() {
                 "@type": "WebPage",
                 "@id": "https://www.chloemary.com/#webpage",
                 url: "https://www.chloemary.com",
-                name: "Chloe Mary Photography | Bristol Wedding Photographer - Authentic Modern Love Stories",
+                name: "Chloe Mary | Bristol Wedding Photographer - Authentic Modern Love Stories",
                 isPartOf: {
                   "@id": "https://www.chloemary.com/#website",
                 },
@@ -147,8 +147,7 @@ export default function Home() {
                 contentUrl: "https://www.chloemary.com/logo.webp",
                 width: 512,
                 height: 512,
-                caption:
-                  "Chloe Mary Photography - Bristol Wedding Photographer",
+                caption: "Chloe Mary - Bristol Wedding Photographer",
               },
               {
                 "@type": "BreadcrumbList",
@@ -177,10 +176,10 @@ export default function Home() {
               "@type": "ImageGallery",
               name: "Homepage Masonry Gallery",
               description:
-                "A curated selection of wedding photography by Chloe Mary Photography, Bristol.",
+                "A curated selection of wedding photography by Chloe Mary, Bristol.",
               publisher: {
                 "@type": "Organization",
-                name: "Chloe Mary Photography",
+                name: "Chloe Mary",
               },
             }),
           }}

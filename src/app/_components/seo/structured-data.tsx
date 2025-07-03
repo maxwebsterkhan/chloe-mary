@@ -3,7 +3,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "PhotographyBusiness",
     "@id": "https://www.chloemary.com",
-    name: "Chloe Mary Photography",
+    name: "Chloe Mary",
     image: "https://www.chloemary.com/logo.webp",
     url: "https://www.chloemary.com",
     email: "hello@chloemary.com",
