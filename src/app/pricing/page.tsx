@@ -150,11 +150,12 @@ export default function PricingPage() {
 
         ScrollTrigger.create({
           trigger: section,
-          start: "top top",
-          end: isLast ? "bottom top" : "bottom top",
+          start: "bottom bottom", // Pin when bottom of section hits bottom of viewport
+          end: "bottom top",
           pin: !isLast, // Don't pin the last section
           pinSpacing: false,
           anticipatePin: 1,
+          scrub: 0.5, // Add smooth scrub transition
         });
       });
     }
