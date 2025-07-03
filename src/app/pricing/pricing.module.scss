@@ -313,6 +313,29 @@
   }
 }
 
+// Pinning Container for Scroll Animation
+.pricingSectionsContainer {
+  position: relative;
+}
+
+.pinnedSection {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  @include breakpoint-down("tablet") {
+    min-height: 70vh;
+  }
+
+  @include breakpoint-down("mobile") {
+    min-height: auto;
+    padding: tokens.$spacing-xl 0;
+  }
+}
+
 // Bespoke Section Layout with Alternating Themes
 .section {
   padding: tokens.$spacing-xxl 0;
