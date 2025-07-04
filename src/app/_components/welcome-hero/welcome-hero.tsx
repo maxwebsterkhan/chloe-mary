@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import CMImage from "@/components/CMImage";
 import styles from "./welcome-hero.module.scss";
 import { useS3Images } from "@/hooks/useS3Images";
 
@@ -14,7 +14,7 @@ export default function WelcomeHero() {
     <section className={styles.hero}>
       <div className={styles.heroImageWrapper}>
         {welcomeImage && (
-          <Image
+          <CMImage
             src={welcomeImage.url}
             alt="Welcome Pack"
             fill

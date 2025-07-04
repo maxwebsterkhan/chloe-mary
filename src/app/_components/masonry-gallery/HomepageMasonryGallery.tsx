@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import Image from "next/image";
+import CMImage from "@/components/CMImage";
 import { useS3Images } from "@/hooks/useS3Images";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
@@ -74,7 +74,7 @@ function Lightbox({ image, onClose }: LightboxProps) {
           <h2 id="lightbox-heading" className={styles.visuallyHidden}>
             {image.alt}
           </h2>
-          <Image
+          <CMImage
             src={image.url}
             alt={image.alt}
             className={styles.lightboxImage}
@@ -300,21 +300,15 @@ export default function HomepageMasonryGallery() {
 
                 return (
                   <div key={image.key} className={styles.emblaSlide}>
-                    <Image
+                    <CMImage
                       src={image.url}
                       alt={alt}
                       width={1046}
                       height={1920}
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 356px, (max-width: 768px) 364px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, 1050px"
+                      sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1440px) 25vw, 20vw"
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
-                      quality={
-                        typeof window !== "undefined" &&
-                        window.innerWidth <= 480
-                          ? 65
-                          : 75
-                      }
                       style={{
                         objectFit: "cover",
                         width: "100%",
@@ -355,20 +349,15 @@ export default function HomepageMasonryGallery() {
             return (
               <div key={image.key} className={styles.imageWrapper}>
                 <div className={styles.imageContainer}>
-                  <Image
+                  <CMImage
                     src={image.url}
                     alt={alt}
                     width={1046}
                     height={1920}
                     className={styles.galleryImage}
-                    sizes="(max-width: 480px) 356px, (max-width: 768px) 364px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, 1050px"
+                    sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1440px) 25vw, 20vw"
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
-                    quality={
-                      typeof window !== "undefined" && window.innerWidth <= 480
-                        ? 65
-                        : 75
-                    }
                     style={{
                       objectFit: "cover",
                       width: "100%",

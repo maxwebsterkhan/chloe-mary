@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import CMImage from "@/components/CMImage";
 import { useS3Images } from "@/hooks/useS3Images";
 import { Skeleton } from "@radix-ui/themes";
 import styles from "./s3-gallery.module.scss";
@@ -85,7 +85,7 @@ export default function S3Gallery({
               role="button"
               aria-label={`View ${alt} in full size`}
             >
-              <Image
+              <CMImage
                 src={image.url}
                 alt={alt}
                 fill
@@ -93,7 +93,6 @@ export default function S3Gallery({
                 sizes={imageSizes}
                 loading={index < 4 ? "eager" : "lazy"}
                 priority={index < 2}
-                quality={index < 4 ? 75 : 65}
               />
             </div>
           );
@@ -104,7 +103,7 @@ export default function S3Gallery({
       {selectedImage && (
         <div className={styles.lightbox} onClick={() => setSelectedImage(null)}>
           <div className={styles.lightboxContent}>
-            <Image
+            <CMImage
               src={selectedImage}
               alt="Selected gallery image"
               width={1200}
@@ -112,8 +111,6 @@ export default function S3Gallery({
               className={styles.lightboxImage}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
               sizes="(max-width: 768px) 95vw, (max-width: 1200px) 90vw, 1200px"
-              quality={80}
-              priority
             />
             <button
               className={styles.closeButton}

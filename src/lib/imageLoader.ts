@@ -14,7 +14,7 @@ interface ImageRequest {
       height?: number;
       fit: 'cover' | 'contain' | 'fill' | 'inside' | 'outside';
     };
-    format: 'webp';
+    format: 'webp' | 'auto';
     quality: number;
   };
 }

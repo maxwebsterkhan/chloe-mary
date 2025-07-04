@@ -7,7 +7,7 @@ import React, {
   useCallback,
   createRef,
 } from "react";
-import Image from "next/image";
+import CMImage from "@/components/CMImage";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType } from "embla-carousel";
 import { usePrevNextButtons } from "./EmblaCarouselArrowButtons";
@@ -265,7 +265,7 @@ export default function HorizontalGallery() {
                       <div className={styles.heroImageContainerUnified}>
                         <div className={styles.heroImageWrapper}>
                           <div className={styles.embla__parallax__bg}>
-                            <Image
+                            <CMImage
                               key={`${story.id}-${activeThumbs[index]}`}
                               src={
                                 story.images[isMobile ? 0 : activeThumbs[index]]
@@ -277,7 +277,7 @@ export default function HorizontalGallery() {
                                 " " +
                                 styles.fadeInHeroImage
                               }
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, (max-width: 1920px) 80vw, 70vw"
                               loading={index === 0 ? undefined : "lazy"}
                               quality={95}
                               priority={index === 0}
@@ -359,7 +359,7 @@ export default function HorizontalGallery() {
                                 }
                               }}
                             >
-                              <Image
+                              <CMImage
                                 src={image}
                                 alt={`${
                                   story.title

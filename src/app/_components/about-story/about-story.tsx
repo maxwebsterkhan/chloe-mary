@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./about-story.module.scss";
-import Image from "next/image";
+import CMImage from "@/components/CMImage";
 import { useS3Images } from "@/hooks/useS3Images";
 
 export default function AboutStory() {
@@ -103,7 +103,7 @@ export default function AboutStory() {
                 <div className={styles.imageLoadingPlaceholder}>Loading...</div>
               ) : (
                 <>
-                  <Image
+                  <CMImage
                     src={aboutImages[1]?.url || "/logo.webp"}
                     alt="A photo of Chloe Mary a documentary photographer based in Bristol and the UK but also overseas."
                     width={600}
@@ -113,7 +113,7 @@ export default function AboutStory() {
                     priority
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <Image
+                  <CMImage
                     src={aboutImages[0]?.url || "/logo.webp"}
                     alt="A photo of Chloe Mary a documentary photographer based in Bristol and the UK but also overseas."
                     width={600}
