@@ -133,7 +133,6 @@ export default function Navigation() {
         <Image
           src="/logo.webp"
           alt="CM Logo"
-          unoptimized
           width={66}
           height={32}
           sizes="66px"
