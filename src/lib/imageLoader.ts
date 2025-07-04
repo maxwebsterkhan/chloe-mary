@@ -46,6 +46,13 @@ function getOptimalQuality(width: number): number {
  * Generates a CloudFront URL with image transformations
  */
 export function generateImageUrl({ src, width, quality }: ImageLoaderProps): string {
+  // ---------------------------------------------------------------------
+  // 1. Normalise width BEFORE any calculations. If Next.js supplies 0 or
+  //    a tiny value because the element was hidden during first paint, we
+  //    fall back to 320 px – the smallest practical mobile width.
+  // ---------------------------------------------------------------------
+  const effectiveWidth = Math.max(width, 320);
+
   // If src starts with 'http' or points to a Next.js public asset (starts with '/'), just return it untouched
   if (src.startsWith('/') && !src.startsWith('/uploads/') && !src.startsWith('/img/')) {
     return src;
@@ -60,21 +67,26 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
     cleanKey = cleanKey.replace(/^https?:\/\/[^/]+\//, '');
   }
 
-  // Adjust width based on device pixel ratio for high-res displays
-  let targetWidth = width;
-  if (typeof window !== 'undefined') {
-    const dpr = window.devicePixelRatio || 1;
-    // Allow higher DPR multipliers for photography
-    const effectiveDpr = Math.min(dpr, width <= 768 ? 2 : 3);
-    targetWidth = Math.round(width * effectiveDpr);
-  }
+  // Use the width provided by Next.js (after normalisation); the browser
+  // selects an appropriate candidate from the srcset based on DPR.
+  let targetWidth = effectiveWidth;
 
-  // Increased maximum widths for high-res displays
+  // Cap target width to a reasonable maximum (4K on desktop, 1600px on narrow screens)
+  const MAX_DESKTOP_WIDTH = 3840;
+  const MAX_MOBILE_WIDTH = 1600;
+
   if (typeof window !== 'undefined') {
-    const maxWidth = window.innerWidth <= 768 ? 1600 : 3840;
-    targetWidth = Math.min(targetWidth, maxWidth);
+    const isMobileScreen = window.innerWidth <= 768;
+    targetWidth = Math.min(targetWidth, isMobileScreen ? MAX_MOBILE_WIDTH : MAX_DESKTOP_WIDTH);
+
+    // For high-DPR mobile / tablet screens we allow up to 2× width when the logical
+    // width is <= 1200 px. This gives crisper images without huge files.
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (targetWidth <= 1200) {
+      targetWidth = Math.round(targetWidth * dpr);
+    }
   } else {
-    targetWidth = Math.min(targetWidth, 3840);
+    targetWidth = Math.min(targetWidth, MAX_DESKTOP_WIDTH);
   }
 
   // Build the image request object
