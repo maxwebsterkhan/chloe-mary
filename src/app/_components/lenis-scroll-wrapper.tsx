@@ -15,6 +15,12 @@ export default function LenisScrollWrapper({ children }: Props) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Skip Lenis on small touch devices – let native scroll handle it
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (isMobile) {
+      return;
+    }
+
     /* 1 — Create Lenis with autoRaf:false so GSAP drives it */
     const lenis = new Lenis({ autoRaf: false });
     lenisRef.current = lenis;
