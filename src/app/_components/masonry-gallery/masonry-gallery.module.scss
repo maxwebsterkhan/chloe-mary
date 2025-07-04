@@ -30,6 +30,7 @@
   align-items: center;
   will-change: transform;
   min-width: fit-content;
+  touch-action: pan-y;
 
   @include breakpoint-down("tablet") {
     gap: 24px;

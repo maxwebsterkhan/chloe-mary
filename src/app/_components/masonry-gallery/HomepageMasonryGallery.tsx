@@ -146,15 +146,20 @@ export default function HomepageMasonryGallery() {
       const containerWidth =
         containerRef.current?.offsetWidth || window.innerWidth;
 
+      const trackLength = galleryWidth - containerWidth;
+      const MAX_PER_GESTURE = isMobile ? 600 : trackLength; // cap horizontal travel per swipe on mobile
+      const endDistance = Math.min(trackLength, MAX_PER_GESTURE);
+
       // Only create ScrollTrigger if content is wider than container
       if (galleryWidth > containerWidth) {
         ScrollTrigger.create({
           id: "horizontal-gallery",
           trigger: section,
           start: "top top",
-          end: () => `+=${galleryWidth - containerWidth}`,
+          end: () => `+=${endDistance}`,
           pin: true,
           pinType: isMobile ? "fixed" : undefined,
+          anticipatePin: 1,
           scrub: 0.25,
           onUpdate: (self) => {
             const progress =
@@ -171,7 +176,7 @@ export default function HomepageMasonryGallery() {
             }
           },
           animation: gsap.to(gallery, {
-            x: -(galleryWidth - containerWidth),
+            x: -trackLength,
             ease: "none",
             force3D: false,
           }),
