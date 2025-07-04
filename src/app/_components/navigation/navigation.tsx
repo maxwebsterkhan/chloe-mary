@@ -133,6 +133,7 @@ export default function Navigation() {
         <Image
           src="/logo.webp"
           alt="CM Logo"
+          unoptimized
           width={66}
           height={32}
           className={styles.navigation__logoImage}

@@ -305,7 +305,7 @@ export default function HomepageMasonryGallery() {
                       alt={alt}
                       fill
                       className={styles.galleryImage}
-                      sizes="80vw"
+                      sizes="(max-width: 480px) 100vw, 80vw"
                       priority={index < 2}
                       quality={70}
                     />

@@ -42,15 +42,19 @@ const nextConfig: NextConfig = {
   
   // Image configuration - direct serving without optimization
   images: {
-    unoptimized: true, // Serve images directly without Vercel processing
+    loader: 'custom',
+    loaderFile: './cloudfrontLoader.js',
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.amazonaws.com',
+        hostname: 'd3enbndjwmdc7e.cloudfront.net',
         port: '',
         pathname: '/**',
       },
     ],
+    unoptimized: false,
   },
   
   // Minimal headers - let Next.js handle most caching

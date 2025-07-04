@@ -21,6 +21,7 @@ export default function WelcomeHero() {
             className={styles.heroImage}
             priority
             quality={90}
+            sizes="(max-width: 768px) 100vw, 60vw"
           />
         )}
         <div className={styles.heroOverlay} />

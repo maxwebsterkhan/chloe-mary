@@ -1,5 +1,5 @@
-import { S3Client, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import { cfImage } from './cfImage';
 
 // Initialize S3 client
 const s3Client = new S3Client({
@@ -46,28 +46,12 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
       )
     );
 
-    const images: S3Image[] = await Promise.all(
-      imageObjects.map(async (obj) => {
-        const url = await getSignedUrl(
-          s3Client,
-          new GetObjectCommand({
-            Bucket: BUCKET_NAME,
-            Key: obj.Key!,
-            ResponseCacheControl: 'public, max-age=604800, stale-while-revalidate=86400', // Cache for 1 week, stale for 1 day
-          }),
-          { 
-            expiresIn: 604800, // URL valid for 1 week
-          }
-        );
-
-        return {
-          key: obj.Key!,
-          url,
-          lastModified: obj.LastModified,
-          size: obj.Size,
-        };
-      })
-    );
+    const images: S3Image[] = imageObjects.map((obj) => ({
+      key: obj.Key!,
+      url: cfImage(obj.Key!),
+      lastModified: obj.LastModified,
+      size: obj.Size,
+    }));
 
     return images;
   } catch (error) {
@@ -79,14 +63,10 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
 /**
  * Get a signed URL for a specific image
  */
-export async function getImageUrl(key: string, expiresIn = 3600): Promise<string> {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export async function getImageUrl(key: string, _expiresIn?: number): Promise<string> {
   try {
-    const command = new GetObjectCommand({
-      Bucket: BUCKET_NAME,
-      Key: key,
-    });
-
-    const url = await getSignedUrl(s3Client, command, { expiresIn });
+    const url = await cfImage(key);
     return url;
   } catch (error) {
     console.error(`Error getting signed URL for ${key}:`, error);
