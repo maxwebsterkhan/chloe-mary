@@ -26,25 +26,20 @@ function getOptimalQuality(width: number): number {
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
     
-    // Adjust quality based on size and DPR
-    if (width >= 1920) {
-      return dpr > 1 ? 85 : 80;
-    } else if (width >= 1200) {
-      return dpr > 1 ? 82 : 78;
-    } else if (width >= 800) {
-      return dpr > 1 ? 80 : 75;
-    } else if (width >= 400) {
-      return dpr > 1 ? 75 : 70;
-    }
-    return 65; // Smaller images
+    // Mobile-first quality settings
+    if (width <= 480) return dpr > 1 ? 70 : 65;
+    if (width <= 768) return dpr > 1 ? 75 : 70;
+    if (width <= 1024) return dpr > 1 ? 80 : 75;
+    if (width <= 1440) return dpr > 1 ? 82 : 78;
+    return dpr > 1 ? 85 : 82;
   }
 
-  // Fallback quality settings for SSR
-  if (width >= 1920) return 80;
-  if (width >= 1200) return 78;
-  if (width >= 800) return 75;
-  if (width >= 400) return 70;
-  return 65;
+  // Server-side quality settings
+  if (width <= 480) return 65;
+  if (width <= 768) return 70;
+  if (width <= 1024) return 75;
+  if (width <= 1440) return 78;
+  return 82;
 }
 
 /**
@@ -69,13 +64,18 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
   let targetWidth = width;
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
-    // Cap the DPR multiplier at 2x for performance
-    const effectiveDpr = Math.min(dpr, 2);
+    // Cap the DPR multiplier at 1.5x for mobile, 2x for desktop
+    const effectiveDpr = Math.min(dpr, width <= 768 ? 1.5 : 2);
     targetWidth = Math.round(width * effectiveDpr);
   }
 
-  // Cap maximum width to prevent oversized images
-  targetWidth = Math.min(targetWidth, 1400);
+  // Cap maximum width based on viewport
+  if (typeof window !== 'undefined') {
+    const maxWidth = window.innerWidth <= 768 ? 800 : 1400;
+    targetWidth = Math.min(targetWidth, maxWidth);
+  } else {
+    targetWidth = Math.min(targetWidth, 1400);
+  }
 
   // Build the image request object
   const request: ImageRequest = {

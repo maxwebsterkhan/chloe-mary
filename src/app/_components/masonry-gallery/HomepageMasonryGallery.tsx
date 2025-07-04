@@ -306,10 +306,15 @@ export default function HomepageMasonryGallery() {
                       width={1046}
                       height={1920}
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 350px, (max-width: 768px) 365px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, (max-width: 2560px) 1050px, 1400px"
+                      sizes="(max-width: 480px) 356px, (max-width: 768px) 364px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, 1050px"
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
-                      quality={index === 0 ? 85 : index < 3 ? 80 : 75}
+                      quality={
+                        typeof window !== "undefined" &&
+                        window.innerWidth <= 480
+                          ? 65
+                          : 75
+                      }
                       style={{
                         objectFit: "cover",
                         width: "100%",
@@ -356,10 +361,14 @@ export default function HomepageMasonryGallery() {
                     width={1046}
                     height={1920}
                     className={styles.galleryImage}
-                    sizes="(max-width: 480px) 350px, (max-width: 768px) 365px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, (max-width: 2560px) 1050px, 1400px"
+                    sizes="(max-width: 480px) 356px, (max-width: 768px) 364px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, 1050px"
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
-                    quality={index === 0 ? 85 : index < 3 ? 80 : 75}
+                    quality={
+                      typeof window !== "undefined" && window.innerWidth <= 480
+                        ? 65
+                        : 75
+                    }
                     style={{
                       objectFit: "cover",
                       width: "100%",

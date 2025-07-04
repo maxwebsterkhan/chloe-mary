@@ -10,11 +10,7 @@ import React, {
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { EmblaCarouselType } from "embla-carousel";
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from "./EmblaCarouselArrowButtons";
+import { usePrevNextButtons } from "./EmblaCarouselArrowButtons";
 import { useS3ImageCategories } from "@/hooks/useS3Images";
 import styles from "./horizontal-gallery.module.scss";
 
@@ -31,18 +27,16 @@ interface GalleryStory {
 const TWEEN_FACTOR_BASE = 0.15;
 
 export default function HorizontalGallery() {
-  const { categories, loading, error } = useS3ImageCategories();
+  const { categories, loading } = useS3ImageCategories();
   const [galleryStories, setGalleryStories] = useState<GalleryStory[]>([]);
   const [activeThumbs, setActiveThumbs] = useState<number[]>([]);
+  const [progress, setProgress] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     dragFree: false,
     align: "start",
     inViewThreshold: 0.5,
   });
-
-  // Progress bar state
-  const [progress, setProgress] = useState(0);
 
   // Parallax refs
   const tweenNodes = useRef<(HTMLElement | null)[]>([]);
@@ -204,19 +198,6 @@ export default function HorizontalGallery() {
     []
   );
 
-  // Progress bar effect
-  useEffect(() => {
-    if (!emblaApi) return;
-    const updateProgress = () => {
-      setProgress(emblaApi.scrollProgress());
-    };
-    updateProgress();
-    emblaApi.on("scroll", updateProgress);
-    return () => {
-      emblaApi.off("scroll", updateProgress);
-    };
-  }, [emblaApi]);
-
   useEffect(() => {
     if (!emblaApi) return;
     setTweenNodes(emblaApi);
@@ -230,6 +211,19 @@ export default function HorizontalGallery() {
       .on("slideFocus", tweenParallax);
   }, [emblaApi, setTweenNodes, setTweenFactor, tweenParallax]);
 
+  // Progress bar effect
+  useEffect(() => {
+    if (!emblaApi) return;
+    const updateProgress = () => {
+      setProgress(emblaApi.scrollProgress());
+    };
+    updateProgress();
+    emblaApi.on("scroll", updateProgress);
+    return () => {
+      emblaApi.off("scroll", updateProgress);
+    };
+  }, [emblaApi]);
+
   const {
     prevBtnDisabled,
     nextBtnDisabled,
@@ -237,7 +231,6 @@ export default function HorizontalGallery() {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
-  // Loading state
   if (loading) {
     return (
       <div className={styles.embla}>
@@ -248,70 +241,8 @@ export default function HorizontalGallery() {
     );
   }
 
-  // Error state
-  if (error) {
-    return (
-      <div className={styles.embla}>
-        <div className={styles.errorState}>
-          <p>Error loading gallery: {error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  // No stories state
-  if (galleryStories.length === 0) {
-    return (
-      <div className={styles.embla}>
-        <div className={styles.emptyState}>
-          <p>No gallery stories found.</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.embla}>
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Wedding Photography Gallery Stories",
-            description:
-              "A collection of wedding photography stories featuring real couples and their special days",
-            itemListElement: galleryStories.map((story, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "CreativeWork",
-                name: `${story.title} Wedding Photography`,
-                description: story.description,
-                location: {
-                  "@type": "Place",
-                  name: story.location,
-                },
-                url: story.ctaLink,
-                image: story.images[0],
-                author: {
-                  "@type": "Person",
-                  name: "Chloe Mary",
-                },
-                creator: {
-                  "@type": "Person",
-                  name: "Chloe Mary",
-                },
-                publisher: {
-                  "@type": "Organization",
-                  name: "Chloe Mary",
-                },
-              },
-            })),
-          }),
-        }}
-      />
       <div className={styles.embla__viewport} ref={emblaRef}>
         <div className={styles.embla__container}>
           {galleryStories.map((story, index) => (
@@ -337,8 +268,9 @@ export default function HorizontalGallery() {
                               }
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
                               loading={index === 0 ? undefined : "lazy"}
-                              quality={index === 0 ? 85 : 75}
+                              quality={95}
                               priority={index === 0}
+                              style={{ objectFit: "cover" }}
                             />
                           </div>
                         </div>
@@ -416,9 +348,6 @@ export default function HorizontalGallery() {
                                 }
                               }}
                             >
-                              <span className="sr-only">{`Show image ${
-                                thumbIdx + 1
-                              }`}</span>
                               <Image
                                 src={image}
                                 alt={`${
@@ -428,7 +357,9 @@ export default function HorizontalGallery() {
                                 }`}
                                 fill
                                 className={styles.thumbImageUnified}
+                                sizes="100px"
                                 loading="lazy"
+                                quality={95}
                               />
                             </button>
                           ))}
@@ -473,16 +404,22 @@ export default function HorizontalGallery() {
       </div>
       <div className={styles.embla__controls}>
         <div className={styles.embla__buttons}>
-          <PrevButton
+          <button
+            className={styles.embla__button}
             onClick={onPrevButtonClick}
             disabled={prevBtnDisabled}
+            aria-label="Previous slide"
+          >
+            ←
+          </button>
+          <button
             className={styles.embla__button}
-          />
-          <NextButton
             onClick={onNextButtonClick}
             disabled={nextBtnDisabled}
-            className={styles.embla__button}
-          />
+            aria-label="Next slide"
+          >
+            →
+          </button>
         </div>
       </div>
     </div>
