@@ -12,6 +12,10 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  @include breakpoint-down("mobile") {
+    padding: tokens.$spacing-lg 0;
+  }
 }
 
 .horizontalContainer {
@@ -315,4 +319,48 @@
   .imageWrapper {
     height: 75vh;
   }
+}
+
+// Embla mobile carousel styles
+.emblaMobile {
+  width: 100%;
+  overflow: hidden;
+}
+
+.emblaViewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.emblaContainer {
+  display: flex;
+}
+
+.emblaSlide {
+  position: relative;
+  flex: 0 0 80%;
+  margin-right: 16px;
+  height: 70vh;
+
+  @include breakpoint-down("mobile") {
+    flex: 0 0 85%;
+    margin-right: 12px;
+    height: 65vh;
+  }
+}
+
+.scrollProgressMobile {
+  width: 150px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: tokens.$spacing-md auto 0 auto;
+}
+
+.scrollProgressBarMobile {
+  height: 100%;
+  background: var(--color-secondary);
+  width: 0%;
+  border-radius: 2px;
 }

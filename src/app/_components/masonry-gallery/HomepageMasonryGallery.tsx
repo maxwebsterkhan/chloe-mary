@@ -7,6 +7,7 @@ import { XIcon } from "@phosphor-icons/react";
 import { FocusTrap } from "focus-trap-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useEmblaCarousel from "embla-carousel-react";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -101,6 +102,69 @@ export default function HomepageMasonryGallery() {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const barSetterRef = useRef<((v: number) => void) | null>(null);
 
+  // Mobile progress bar refs
+  const progressBarMobileRef = useRef<HTMLDivElement>(null);
+  const barSetterMobileRef = useRef<((v: number) => void) | null>(null);
+
+  // Detect mobile once (client-side only) to avoid hydration mismatch
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= 767;
+  });
+  // Update on resize (optional)
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 767);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  /* ---------------- MOBILE EMBLA CAROUSEL ---------------- */
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    dragFree: true,
+    align: "start",
+    loop: false,
+  });
+
+  // When switching from mobile -> desktop, destroy Embla; when switching desktop -> mobile, reInit.
+  useEffect(() => {
+    if (isMobile) {
+      emblaApi?.reInit();
+    } else {
+      emblaApi?.destroy();
+    }
+  }, [isMobile, emblaApi]);
+
+  // Re-init Embla on resize to recalc slide sizes
+  useEffect(() => {
+    if (!isMobile || !emblaApi) return;
+    const onResize = () => emblaApi.reInit();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [isMobile, emblaApi]);
+
+  // Update mobile progress bar on Embla scroll
+  useEffect(() => {
+    if (!isMobile || !emblaApi || !progressBarMobileRef.current) return;
+    if (!barSetterMobileRef.current) {
+      barSetterMobileRef.current = gsap.quickSetter(
+        progressBarMobileRef.current,
+        "width",
+        "%"
+      ) as (v: number) => void;
+    }
+    const updateBar = () => {
+      const p = emblaApi.scrollProgress();
+      barSetterMobileRef.current?.(p * 100);
+    };
+    updateBar();
+    emblaApi.on("scroll", updateBar);
+    emblaApi.on("reInit", updateBar);
+    return () => {
+      emblaApi.off("scroll", updateBar);
+      emblaApi.off("reInit", updateBar);
+    };
+  }, [isMobile, emblaApi]);
+
   const handleImageSelect = useCallback((image: ImageData) => {
     setSelectedImage({
       url: image.url,
@@ -114,8 +178,16 @@ export default function HomepageMasonryGallery() {
     setSelectedImage(null);
   }, []);
 
-  // Setup GSAP ScrollTrigger for horizontal scrolling
+  // Skip ScrollTrigger setup on mobile – use Embla instead
   useEffect(() => {
+    if (isMobile) {
+      // Ensure any desktop triggers are killed when entering mobile mode
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.vars.id === "horizontal-gallery") t.kill();
+      });
+      return; // mobile handled by Embla
+    }
+
     if (
       !galleryRef.current ||
       !containerRef.current ||
@@ -126,9 +198,6 @@ export default function HomepageMasonryGallery() {
 
     const gallery = galleryRef.current;
     const section = sectionRef.current;
-
-    // Evaluate mobile breakpoint once per setup
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
     const updateScrollTrigger = () => {
       // Kill existing ScrollTrigger if it exists
@@ -203,7 +272,7 @@ export default function HomepageMasonryGallery() {
         }
       });
     };
-  }, [images.length]);
+  }, [images.length, isMobile]);
 
   if (loading)
     return <div className={styles.loadingState}>Loading gallery...</div>;
@@ -212,6 +281,50 @@ export default function HomepageMasonryGallery() {
       <div className={styles.errorState}>Error loading images: {error}</div>
     );
   if (!images.length) return null;
+
+  /* ------------------- RENDER ------------------- */
+  if (isMobile) {
+    return (
+      <section
+        ref={sectionRef}
+        aria-label="Homepage Gallery (Swipe)"
+        className={styles.horizontalSection}
+      >
+        <div className={styles.emblaMobile}>
+          <div className={styles.emblaViewport} ref={emblaRef}>
+            <div className={styles.emblaContainer}>
+              {images.map((image, index) => {
+                const alt = `Wedding photo: ${image.key
+                  .replace(/[-_]/g, " ")
+                  .replace(/\.[^/.]+$/, "")}`;
+
+                return (
+                  <div key={image.key} className={styles.emblaSlide}>
+                    <Image
+                      src={image.url}
+                      alt={alt}
+                      fill
+                      className={styles.galleryImage}
+                      sizes="80vw"
+                      priority={index < 2}
+                      quality={70}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.scrollProgressMobile}>
+            <div
+              ref={progressBarMobileRef}
+              className={styles.scrollProgressBarMobile}
+              style={{ width: "0%" }}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
