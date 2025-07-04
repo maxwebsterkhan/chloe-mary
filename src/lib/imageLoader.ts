@@ -7,6 +7,8 @@ interface ImageLoaderProps {
 }
 
 interface ImageRequest {
+  // Bump this value via NEXT_PUBLIC_IMG_VERSION env to invalidate CloudFront cache
+  v?: string;
   key: string;
   edits: {
     resize: {
@@ -91,6 +93,7 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
 
   // Build the image request object
   const request: ImageRequest = {
+    v: process.env.NEXT_PUBLIC_IMG_VERSION ?? '1',
     key: cleanKey,
     edits: {
       resize: {
