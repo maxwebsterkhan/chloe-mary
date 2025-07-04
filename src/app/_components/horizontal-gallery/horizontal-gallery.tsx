@@ -279,8 +279,6 @@ export default function HorizontalGallery() {
                               }
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, (max-width: 1920px) 80vw, 70vw"
                               loading={index === 0 ? undefined : "lazy"}
-                              quality={95}
-                              priority={index === 0}
                               style={{ objectFit: "cover" }}
                             />
                           </div>
@@ -370,7 +368,6 @@ export default function HorizontalGallery() {
                                 className={styles.thumbImageUnified}
                                 sizes="100px"
                                 priority={index === 0 && thumbIdx < 2}
-                                quality={85}
                               />
                             </button>
                           ))}
