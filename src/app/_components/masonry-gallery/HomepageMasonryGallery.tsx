@@ -303,18 +303,11 @@ export default function HomepageMasonryGallery() {
                     <CMImage
                       src={image.url}
                       alt={alt}
-                      width={1046}
-                      height={1920}
+                      fill
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1440px) 25vw, 20vw"
+                      sizes="(max-width: 480px) 80vw, (max-width: 768px) 40vw, 30vw"
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                      }}
                     />
                   </div>
                 );
@@ -352,18 +345,11 @@ export default function HomepageMasonryGallery() {
                   <CMImage
                     src={image.url}
                     alt={alt}
-                    width={1046}
-                    height={1920}
+                    fill
                     className={styles.galleryImage}
-                    sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1440px) 25vw, 20vw"
+                    sizes="(max-width: 480px) 80vw, (max-width: 768px) 40vw, 30vw"
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                      position: "absolute",
-                    }}
                     onClick={() => handleImageSelect(image)}
                     tabIndex={0}
                     role="button"
