@@ -1,4 +1,4 @@
-export const CF_DOMAIN = 'https://d3enbndjwmdc7e.cloudfront.net/';
+export const CF_DOMAIN = 'https://d3enbndjwmdc7e.cloudfront.net';
 
 interface ImageLoaderProps {
   src: string;
@@ -11,17 +11,29 @@ interface ImageRequest {
   edits: {
     resize: {
       width: number;
+      height?: number;
       fit: 'cover' | 'contain' | 'fill' | 'inside' | 'outside';
     };
-    format: 'webp' | 'jpeg' | 'png';
+    format: 'webp';
     quality: number;
   };
 }
 
 /**
+ * Calculates optimal quality based on image width
+ */
+function getOptimalQuality(width: number): number {
+  if (width <= 400) return 60; // Small thumbnails
+  if (width <= 800) return 70; // Medium images
+  if (width <= 1200) return 75; // Large images
+  if (width <= 1600) return 80; // XL images
+  return 85; // Max quality for very large images
+}
+
+/**
  * Generates a CloudFront URL with image transformations
  */
-export function generateImageUrl({ src, width }: ImageLoaderProps): string {
+export function generateImageUrl({ src, width, quality }: ImageLoaderProps): string {
   // If src starts with 'http' or points to a Next.js public asset (starts with '/'), just return it untouched
   if (src.startsWith('/') && !src.startsWith('/uploads/') && !src.startsWith('/img/')) {
     return src;
@@ -45,11 +57,11 @@ export function generateImageUrl({ src, width }: ImageLoaderProps): string {
         fit: 'cover'
       },
       format: 'webp',
-      quality: width >= 1200 ? 85 : width >= 800 ? 75 : 65
+      quality: quality || getOptimalQuality(width)
     }
   };
 
   // Convert to base64 and build the URL
   const base64Request = Buffer.from(JSON.stringify(request)).toString('base64');
-  return `${CF_DOMAIN}${base64Request}`;
+  return `${CF_DOMAIN}/${base64Request}`;
 } 

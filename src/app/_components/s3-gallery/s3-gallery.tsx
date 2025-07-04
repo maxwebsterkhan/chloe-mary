@@ -20,6 +20,11 @@ export default function S3Gallery({
   const { images, loading, error, refetch } = useS3Images({ prefix });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // Calculate responsive sizes based on columns
+  const imageSizes = `(max-width: 640px) 100vw, (max-width: 1024px) ${Math.floor(
+    100 / Math.min(columns, 2)
+  )}vw, ${Math.floor(100 / columns)}vw`;
+
   if (loading && showLoadingState) {
     return (
       <div className={styles.gallery}>
@@ -60,34 +65,38 @@ export default function S3Gallery({
         className={styles.grid}
         style={{ "--columns": columns } as React.CSSProperties}
       >
-        {images.map((image) => (
-          <div
-            key={image.key}
-            className={styles.imageItem}
-            onClick={() => setSelectedImage(image.url)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setSelectedImage(image.url);
-              }
-            }}
-            tabIndex={0}
-            role="button"
-            aria-label={`View ${image.key
-              .replace(/[-_]/g, " ")
-              .replace(/\.[^/.]+$/, "")} in full size`}
-          >
-            <Image
-              src={image.url}
-              alt={`Wedding photography: ${image.key
-                .replace(/[-_]/g, " ")
-                .replace(/\.[^/.]+$/, "")}`}
-              fill
-              className={styles.image}
-              sizes="400px"
-            />
-          </div>
-        ))}
+        {images.map((image, index) => {
+          const alt = `Wedding photography: ${image.key
+            .replace(/[-_]/g, " ")
+            .replace(/\.[^/.]+$/, "")}`;
+
+          return (
+            <div
+              key={image.key}
+              className={styles.imageItem}
+              onClick={() => setSelectedImage(image.url)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedImage(image.url);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`View ${alt} in full size`}
+            >
+              <Image
+                src={image.url}
+                alt={alt}
+                fill
+                className={styles.image}
+                sizes={imageSizes}
+                loading={index < 6 ? "eager" : "lazy"}
+                priority={index < 2}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Lightbox/Modal for selected image */}
@@ -101,6 +110,8 @@ export default function S3Gallery({
               height={800}
               className={styles.lightboxImage}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              sizes="95vw"
+              quality={85}
             />
             <button
               className={styles.closeButton}

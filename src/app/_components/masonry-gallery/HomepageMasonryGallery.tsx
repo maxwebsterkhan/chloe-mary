@@ -81,7 +81,8 @@ function Lightbox({ image, onClose }: LightboxProps) {
             width={1200}
             height={1600}
             priority={true}
-            quality={90}
+            quality={85}
+            sizes="95vw"
           />
         </div>
       </div>
@@ -305,9 +306,10 @@ export default function HomepageMasonryGallery() {
                       alt={alt}
                       fill
                       className={styles.galleryImage}
-                      sizes="700px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
                       priority={index < 2}
                       quality={70}
+                      loading={index < 4 ? "eager" : "lazy"}
                     />
                   </div>
                 );
@@ -357,10 +359,10 @@ export default function HomepageMasonryGallery() {
                         handleImageSelect(image);
                       }
                     }}
-                    sizes="700px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     priority={index < 4}
                     loading={index < 4 ? "eager" : "lazy"}
-                    quality={85}
+                    quality={75}
                   />
                 </div>
               </div>
