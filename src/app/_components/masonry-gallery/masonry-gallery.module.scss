@@ -304,3 +304,14 @@
   border-radius: 2px;
   transition: width 0.3s ease;
 }
+
+@media (max-width: 767px) {
+  .horizontalGallery {
+    height: auto;
+    will-change: auto;
+  }
+
+  .imageWrapper {
+    height: 75vh;
+  }
+}

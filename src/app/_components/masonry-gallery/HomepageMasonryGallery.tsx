@@ -127,6 +127,9 @@ export default function HomepageMasonryGallery() {
     const gallery = galleryRef.current;
     const section = sectionRef.current;
 
+    // Evaluate mobile breakpoint once per setup
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
     const updateScrollTrigger = () => {
       // Kill existing ScrollTrigger if it exists
       ScrollTrigger.getAll().forEach((trigger) => {
@@ -151,6 +154,7 @@ export default function HomepageMasonryGallery() {
           start: "top top",
           end: () => `+=${galleryWidth - containerWidth}`,
           pin: true,
+          pinType: isMobile ? "fixed" : undefined,
           scrub: 0.25,
           onUpdate: (self) => {
             const progress =
@@ -169,6 +173,7 @@ export default function HomepageMasonryGallery() {
           animation: gsap.to(gallery, {
             x: -(galleryWidth - containerWidth),
             ease: "none",
+            force3D: false,
           }),
         });
       }
