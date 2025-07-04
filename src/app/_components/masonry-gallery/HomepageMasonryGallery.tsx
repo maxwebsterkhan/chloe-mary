@@ -98,7 +98,8 @@ export default function HomepageMasonryGallery() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const barSetterRef = useRef<((v: number) => void) | null>(null);
 
   const handleImageSelect = useCallback((image: ImageData) => {
     setSelectedImage({
@@ -150,9 +151,20 @@ export default function HomepageMasonryGallery() {
           start: "top top",
           end: () => `+=${galleryWidth - containerWidth}`,
           pin: true,
-          scrub: 1,
+          scrub: 0.25,
           onUpdate: (self) => {
-            setScrollProgress(self.progress * 100);
+            const progress =
+              (self.scroll() - self.start) / (self.end - self.start);
+            if (progressBarRef.current) {
+              if (!barSetterRef.current) {
+                barSetterRef.current = gsap.quickSetter(
+                  progressBarRef.current,
+                  "width",
+                  "%"
+                ) as (v: number) => void;
+              }
+              barSetterRef.current?.(progress * 100);
+            }
           },
           animation: gsap.to(gallery, {
             x: -(galleryWidth - containerWidth),
@@ -236,8 +248,9 @@ export default function HomepageMasonryGallery() {
         {/* Scroll Progress Indicator */}
         <div className={styles.scrollProgress}>
           <div
+            ref={progressBarRef}
             className={styles.scrollProgressBar}
-            style={{ width: `${scrollProgress}%` }}
+            style={{ width: "0%" }}
           />
         </div>
       </div>
