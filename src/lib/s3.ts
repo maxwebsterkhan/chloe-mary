@@ -1,5 +1,4 @@
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
-import { cfImage } from './cfImage';
 
 // Initialize S3 client
 const s3Client = new S3Client({
@@ -38,7 +37,7 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
       return [];
     }
 
-    // Filter for image files and create signed URLs
+    // Filter for image files
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
     const imageObjects = response.Contents.filter(obj => 
       obj.Key && imageExtensions.some(ext => 
@@ -46,9 +45,10 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
       )
     );
 
+    // Return just the keys - let the Image component handle the transformation
     const images: S3Image[] = imageObjects.map((obj) => ({
       key: obj.Key!,
-      url: cfImage(obj.Key!),
+      url: obj.Key!, // Just return the key, let Next.js Image handle the transformation
       lastModified: obj.LastModified,
       size: obj.Size,
     }));
@@ -61,17 +61,10 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
 }
 
 /**
- * Get a signed URL for a specific image
+ * Get a URL for a specific image
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export async function getImageUrl(key: string, _expiresIn?: number): Promise<string> {
-  try {
-    const url = await cfImage(key);
-    return url;
-  } catch (error) {
-    console.error(`Error getting signed URL for ${key}:`, error);
-    throw new Error(`Failed to get URL for image: ${key}`);
-  }
+export async function getImageUrl(key: string): Promise<string> {
+  return key; // Just return the key, let Next.js Image handle the transformation
 }
 
 /**

@@ -4,25 +4,38 @@
 */
 /* eslint-disable */
 const CF_DOMAIN = 'https://d3enbndjwmdc7e.cloudfront.net/';
-const cfImage = require('./src/lib/cfImage').cfImage;
 
-module.exports = function cloudfrontLoader({ src, width }) {
-  // If src is a full URL, strip the domain (CloudFront or S3)
-  let key = src;
-  if (key.startsWith(CF_DOMAIN)) {
-    key = key.replace(CF_DOMAIN, '');
-  } else if (/^https?:\/\//.test(key)) {
-    // Remove any domain if present
-    key = key.replace(/^https?:\/\/[^/]+\//, '');
-  }
-  // Strip leading slash if present
-  key = key.replace(/^\//, '');
-
-  // Optionally, skip static assets
+function cloudfrontLoader({ src, width }) {
+  // If src starts with 'http' or points to a Next.js public asset (starts with '/'), just return it untouched
   if (src.startsWith('/') && !src.startsWith('/uploads/') && !src.startsWith('/img/')) {
     return src;
   }
 
-  // Prevent double format=webp (cfImage should handle this, but just in case)
-  return cfImage(key, { w: width });
-}; 
+  // Strip leading slash if present and any domain
+  let cleanKey = src.replace(/^\//, '');
+  if (cleanKey.startsWith(CF_DOMAIN)) {
+    cleanKey = cleanKey.replace(CF_DOMAIN, '');
+  } else if (/^https?:\/\//.test(cleanKey)) {
+    // Remove any domain if present
+    cleanKey = cleanKey.replace(/^https?:\/\/[^/]+\//, '');
+  }
+
+  // Build the image request object
+  const request = {
+    key: cleanKey,
+    edits: {
+      resize: {
+        width: width,
+        fit: 'cover'
+      },
+      format: 'webp',
+      quality: width >= 1200 ? 85 : width >= 800 ? 75 : 65
+    }
+  };
+
+  // Convert to base64 and build the URL
+  const base64Request = Buffer.from(JSON.stringify(request)).toString('base64');
+  return `${CF_DOMAIN}${base64Request}`;
+}
+
+module.exports = cloudfrontLoader; 
