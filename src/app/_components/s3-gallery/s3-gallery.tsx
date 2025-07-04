@@ -91,8 +91,9 @@ export default function S3Gallery({
                 fill
                 className={styles.image}
                 sizes={imageSizes}
-                loading={index < 6 ? "eager" : "lazy"}
+                loading={index < 4 ? "eager" : "lazy"}
                 priority={index < 2}
+                quality={index < 4 ? 75 : 65}
               />
             </div>
           );
@@ -110,8 +111,9 @@ export default function S3Gallery({
               height={800}
               className={styles.lightboxImage}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              sizes="95vw"
-              quality={85}
+              sizes="(max-width: 768px) 95vw, (max-width: 1200px) 90vw, 1200px"
+              quality={80}
+              priority
             />
             <button
               className={styles.closeButton}

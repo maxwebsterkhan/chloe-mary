@@ -189,8 +189,9 @@ export default function QuoteIntro() {
                 alt="Chloe Mary Introduction"
                 className={styles.image}
                 fill
-                sizes="600px"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 loading="lazy"
+                quality={75}
               />
             )}
           </div>

@@ -20,14 +20,34 @@ interface ImageRequest {
 }
 
 /**
- * Calculates optimal quality based on image width
+ * Calculates optimal quality based on image width and device DPR
  */
 function getOptimalQuality(width: number): number {
-  if (width <= 400) return 60; // Small thumbnails
-  if (width <= 800) return 70; // Medium images
-  if (width <= 1200) return 75; // Large images
-  if (width <= 1600) return 80; // XL images
-  return 85; // Max quality for very large images
+  // Always use maximum quality for 4K and high DPI displays
+  if (typeof window !== 'undefined') {
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Ultra high quality for 4K + high DPI
+    if (width >= 3840 && dpr > 1) return 100;
+    if (width >= 2560 && dpr > 1) return 100;
+    
+    // Very high quality for 4K standard
+    if (width >= 3840) return 95;
+    if (width >= 2560) return 95;
+    
+    // High quality for Retina/high DPI
+    if (dpr > 1) {
+      if (width >= 1920) return 95;
+      if (width >= 1050) return 90;
+      return 85;
+    }
+  }
+
+  // Higher base quality for all displays
+  if (width >= 1920) return 90;
+  if (width >= 1050) return 85;
+  if (width >= 800) return 80;
+  return 75;
 }
 
 /**
@@ -48,16 +68,23 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
     cleanKey = cleanKey.replace(/^https?:\/\/[^/]+\//, '');
   }
 
+  // Adjust width based on device pixel ratio
+  let targetWidth = width;
+  if (typeof window !== 'undefined') {
+    const dpr = window.devicePixelRatio || 1;
+    targetWidth = Math.round(width * dpr);
+  }
+
   // Build the image request object
   const request: ImageRequest = {
     key: cleanKey,
     edits: {
       resize: {
-        width,
-        fit: 'cover'
+        width: targetWidth,
+        fit: 'inside'
       },
       format: 'webp',
-      quality: quality || getOptimalQuality(width)
+      quality: quality || getOptimalQuality(targetWidth)
     }
   };
 

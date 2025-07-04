@@ -193,6 +193,8 @@ export default function Achievements() {
                       className={styles.achievements__image}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       priority={index < 2}
+                      quality={70}
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
                     <div
                       ref={(el) => {

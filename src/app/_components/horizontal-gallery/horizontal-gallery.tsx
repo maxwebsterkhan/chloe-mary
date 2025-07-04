@@ -337,7 +337,7 @@ export default function HorizontalGallery() {
                               }
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
                               loading={index === 0 ? undefined : "lazy"}
-                              quality={90}
+                              quality={index === 0 ? 85 : 75}
                               priority={index === 0}
                             />
                           </div>

@@ -78,11 +78,10 @@ function Lightbox({ image, onClose }: LightboxProps) {
             src={image.url}
             alt={image.alt}
             className={styles.lightboxImage}
-            width={1200}
-            height={1600}
+            width={3840}
+            height={2160}
             priority={true}
-            quality={85}
-            sizes="95vw"
+            sizes="(min-width: 2560px) 2560px, (min-width: 1920px) 1920px, 95vw"
           />
         </div>
       </div>
@@ -304,12 +303,19 @@ export default function HomepageMasonryGallery() {
                     <Image
                       src={image.url}
                       alt={alt}
-                      fill
+                      width={1046}
+                      height={1920}
                       className={styles.galleryImage}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1920px) 1050px, (max-width: 2560px) 1400px, (min-width: 3840px) 2100px, 1400px"
                       priority={index < 2}
-                      quality={70}
-                      loading={index < 4 ? "eager" : "lazy"}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      quality={100}
+                      style={{
+                        objectFit: "contain",
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                      }}
                     />
                   </div>
                 );
@@ -347,8 +353,19 @@ export default function HomepageMasonryGallery() {
                   <Image
                     src={image.url}
                     alt={alt}
-                    fill
+                    width={1046}
+                    height={1920}
                     className={styles.galleryImage}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1920px) 1050px, (max-width: 2560px) 1400px, (min-width: 3840px) 2100px, 1400px"
+                    priority={index < 2}
+                    loading={index < 3 ? "eager" : "lazy"}
+                    quality={100}
+                    style={{
+                      objectFit: "contain",
+                      width: "100%",
+                      height: "100%",
+                      position: "absolute",
+                    }}
                     onClick={() => handleImageSelect(image)}
                     tabIndex={0}
                     role="button"
@@ -359,10 +376,6 @@ export default function HomepageMasonryGallery() {
                         handleImageSelect(image);
                       }
                     }}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={index < 4}
-                    loading={index < 4 ? "eager" : "lazy"}
-                    quality={75}
                   />
                 </div>
               </div>

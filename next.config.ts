@@ -40,12 +40,12 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Image configuration - optimized for responsive design
+  // Image configuration - optimized for responsive design including 4K
   images: {
     loader: 'custom',
     loaderFile: './cloudfrontLoader.js',
-    deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920],
-    imageSizes: [16, 32, 64, 96, 128, 256, 384],
+    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1440, 1920, 2048, 2560, 3000, 3840, 4096, 5120],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024, 1400, 2100],
     remotePatterns: [
       {
         protocol: 'https',
