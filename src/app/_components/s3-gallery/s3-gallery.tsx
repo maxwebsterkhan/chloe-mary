@@ -84,7 +84,7 @@ export default function S3Gallery({
                 .replace(/\.[^/.]+$/, "")}`}
               fill
               className={styles.image}
-              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+              sizes="400px"
             />
           </div>
         ))}

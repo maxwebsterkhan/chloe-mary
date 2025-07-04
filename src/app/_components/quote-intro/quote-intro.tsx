@@ -189,7 +189,7 @@ export default function QuoteIntro() {
                 alt="Chloe Mary Introduction"
                 className={styles.image}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="600px"
                 loading="lazy"
               />
             )}

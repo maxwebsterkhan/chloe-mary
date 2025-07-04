@@ -305,7 +305,7 @@ export default function HomepageMasonryGallery() {
                       alt={alt}
                       fill
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 100vw, 80vw"
+                      sizes="700px"
                       priority={index < 2}
                       quality={70}
                     />
@@ -357,7 +357,7 @@ export default function HomepageMasonryGallery() {
                         handleImageSelect(image);
                       }
                     }}
-                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 50vw"
+                    sizes="700px"
                     priority={index < 4}
                     loading={index < 4 ? "eager" : "lazy"}
                     quality={85}
