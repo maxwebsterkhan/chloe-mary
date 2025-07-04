@@ -7,19 +7,16 @@ export async function GET(
 ) {
   try {
     const { key } = await params;
-    const { searchParams } = new URL(request.url);
-    const expiresIn = parseInt(searchParams.get('expires') || '3600');
     
     // Decode the key in case it was URL encoded
     const decodedKey = decodeURIComponent(key);
     
-    const url = await getImageUrl(decodedKey, expiresIn);
+    const url = await getImageUrl(decodedKey);
     
     const response = NextResponse.json({
       success: true,
       key: decodedKey,
       url,
-      expiresIn,
     });
 
     // Add cache headers for better performance
