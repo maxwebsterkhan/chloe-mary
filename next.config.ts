@@ -45,20 +45,26 @@ const nextConfig: NextConfig = {
     // Remove custom loader – use Next.js default `/ _next/image` optimisation
     deviceSizes: [320, 360, 414, 480, 560, 640, 750, 828, 960, 1120, 1280, 1536, 1920, 2560, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768],
-    remotePatterns: [
-      // Explicit bucket (preferred – fast fail if mis-configured)
-      {
-        protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_IMG_HOST ?? '',
-        pathname: '/**',
-      },
-      // Fallback – allow any AWS S3 domain so dev still works even if env var is missing
-      {
-        protocol: 'https',
-        hostname: '**.amazonaws.com',
-        pathname: '/**',
-      },
-    ],
+    remotePatterns: process.env.NEXT_PUBLIC_IMG_HOST
+      ? [
+          {
+            protocol: 'https',
+            hostname: process.env.NEXT_PUBLIC_IMG_HOST,
+            pathname: '/**',
+          },
+          {
+            protocol: 'https',
+            hostname: '**.amazonaws.com',
+            pathname: '/**',
+          },
+        ]
+      : [
+          {
+            protocol: 'https',
+            hostname: '**.amazonaws.com',
+            pathname: '/**',
+          },
+        ],
     // Ensure optimisation pipeline stays active
     unoptimized: false,
   },
