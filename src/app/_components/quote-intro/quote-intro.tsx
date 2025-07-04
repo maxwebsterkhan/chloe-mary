@@ -5,7 +5,7 @@ import styles from "./quote-intro.module.scss";
 import { createScrollTrigger } from "../helpers/gsap-animations";
 import gsap from "gsap";
 import { useS3Images } from "@/hooks/useS3Images";
-import CMImage from "@/components/CMImage";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function QuoteIntro() {
@@ -184,12 +184,12 @@ export default function QuoteIntro() {
 
           <div ref={imageRef} className={styles.imageContent}>
             {!loading && introImage && (
-              <CMImage
+              <Image
                 src={introImage.url}
                 alt="Chloe Mary Introduction"
                 className={styles.image}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                /* sizes omitted */
                 loading="lazy"
               />
             )}

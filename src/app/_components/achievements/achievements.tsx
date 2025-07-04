@@ -6,7 +6,7 @@ import {
   animationUtils,
   createScrollTrigger,
 } from "../helpers/gsap-animations";
-import CMImage from "@/components/CMImage";
+import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
 import { gsap } from "gsap";
 
@@ -186,12 +186,12 @@ export default function Achievements() {
                     }}
                     className={styles.achievements__imageWrapper}
                   >
-                    <CMImage
+                    <Image
                       src={awardImages[index].url}
                       alt={generateAltText(awardImages[index].key)}
                       fill
                       className={styles.achievements__image}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      /* sizes omitted */
                       priority={index < 2}
                       loading={index < 2 ? "eager" : "lazy"}
                     />

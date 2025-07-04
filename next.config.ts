@@ -42,18 +42,24 @@ const nextConfig: NextConfig = {
   
   // Image configuration - optimized for responsive design including 4K
   images: {
-    loader: 'custom',
-    loaderFile: './cloudfrontLoader.js',
-    deviceSizes: [320, 414, 560, 640, 750, 828, 960, 1120, 1280, 1536, 1920, 2560, 3840],
+    // Remove custom loader – use Next.js default `/ _next/image` optimisation
+    deviceSizes: [320, 360, 414, 480, 560, 640, 750, 828, 960, 1120, 1280, 1536, 1920, 2560, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768],
     remotePatterns: [
+      // Explicit bucket (preferred – fast fail if mis-configured)
       {
         protocol: 'https',
-        hostname: 'd3enbndjwmdc7e.cloudfront.net',
-        port: '',
+        hostname: process.env.NEXT_PUBLIC_IMG_HOST ?? '',
+        pathname: '/**',
+      },
+      // Fallback – allow any AWS S3 domain so dev still works even if env var is missing
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
         pathname: '/**',
       },
     ],
+    // Ensure optimisation pipeline stays active
     unoptimized: false,
   },
   

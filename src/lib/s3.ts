@@ -1,4 +1,5 @@
-import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import { S3Client, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 // Initialize S3 client
 const s3Client = new S3Client({
@@ -45,10 +46,14 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
       )
     );
 
-    // Return just the keys - let the Image component handle the transformation
-    const images: S3Image[] = imageObjects.map((obj) => ({
+    // Generate signed URLs in parallel
+    const signedUrls = await Promise.all(
+      imageObjects.map((obj) => getImageUrl(obj.Key!))
+    );
+
+    const images: S3Image[] = imageObjects.map((obj, idx) => ({
       key: obj.Key!,
-      url: obj.Key!, // Just return the key, let Next.js Image handle the transformation
+      url: signedUrls[idx],
       lastModified: obj.LastModified,
       size: obj.Size,
     }));
@@ -64,7 +69,10 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
  * Get a URL for a specific image
  */
 export async function getImageUrl(key: string): Promise<string> {
-  return key; // Just return the key, let Next.js Image handle the transformation
+  const cmd = new GetObjectCommand({ Bucket: BUCKET_NAME, Key: key });
+  // Default 1-hour expiry; adjust via env if needed
+  const expiresSec = Number(process.env.S3_SIGNED_URL_TTL ?? '3600');
+  return getSignedUrl(s3Client, cmd, { expiresIn: expiresSec });
 }
 
 /**

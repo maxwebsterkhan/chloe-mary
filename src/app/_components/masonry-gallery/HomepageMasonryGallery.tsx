@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import CMImage from "@/components/CMImage";
+import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
 import styles from "./masonry-gallery.module.scss";
 import { XIcon } from "@phosphor-icons/react";
@@ -74,14 +74,14 @@ function Lightbox({ image, onClose }: LightboxProps) {
           <h2 id="lightbox-heading" className={styles.visuallyHidden}>
             {image.alt}
           </h2>
-          <CMImage
+          <Image
             src={image.url}
             alt={image.alt}
             className={styles.lightboxImage}
             width={3840}
             height={2160}
             priority={true}
-            sizes="(min-width: 2560px) 2560px, (min-width: 1920px) 1920px, 95vw"
+            /* sizes omitted */
           />
         </div>
       </div>
@@ -300,12 +300,12 @@ export default function HomepageMasonryGallery() {
 
                 return (
                   <div key={image.key} className={styles.emblaSlide}>
-                    <CMImage
+                    <Image
                       src={image.url}
                       alt={alt}
                       fill
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 80vw, (max-width: 768px) 40vw, 30vw"
+                      /* sizes omitted */
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
                     />
@@ -342,12 +342,12 @@ export default function HomepageMasonryGallery() {
             return (
               <div key={image.key} className={styles.imageWrapper}>
                 <div className={styles.imageContainer}>
-                  <CMImage
+                  <Image
                     src={image.url}
                     alt={alt}
                     fill
                     className={styles.galleryImage}
-                    sizes="(max-width: 480px) 80vw, (max-width: 768px) 40vw, 30vw"
+                    /* sizes omitted */
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
                     onClick={() => handleImageSelect(image)}

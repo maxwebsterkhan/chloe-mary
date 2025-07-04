@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import styles from "./navigation.module.scss";
 import Link from "next/link";
-import CMImage from "@/components/CMImage";
+import Image from "next/image";
 
 const navigationItems = [
   { href: "/", label: "Home" },
@@ -130,7 +130,7 @@ export default function Navigation() {
       })}
     >
       <Link href="/" className={styles.navigation__logo}>
-        <CMImage
+        <Image
           src="/logo.webp"
           alt="CM Logo"
           unoptimized

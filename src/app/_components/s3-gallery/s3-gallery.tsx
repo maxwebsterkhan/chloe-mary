@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import CMImage from "@/components/CMImage";
+import Image from "next/image";
 import { useS3Images } from "@/hooks/useS3Images";
 import { Skeleton } from "@radix-ui/themes";
 import styles from "./s3-gallery.module.scss";
@@ -19,11 +19,6 @@ export default function S3Gallery({
 }: S3GalleryProps) {
   const { images, loading, error, refetch } = useS3Images({ prefix });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  // Calculate responsive sizes based on columns
-  const imageSizes = `(max-width: 640px) 100vw, (max-width: 1024px) ${Math.floor(
-    100 / Math.min(columns, 2)
-  )}vw, ${Math.floor(100 / columns)}vw`;
 
   if (loading && showLoadingState) {
     return (
@@ -85,12 +80,11 @@ export default function S3Gallery({
               role="button"
               aria-label={`View ${alt} in full size`}
             >
-              <CMImage
+              <Image
                 src={image.url}
                 alt={alt}
                 fill
                 className={styles.image}
-                sizes={imageSizes}
                 loading={index < 4 ? "eager" : "lazy"}
                 priority={index < 2}
               />
@@ -103,14 +97,13 @@ export default function S3Gallery({
       {selectedImage && (
         <div className={styles.lightbox} onClick={() => setSelectedImage(null)}>
           <div className={styles.lightboxContent}>
-            <CMImage
+            <Image
               src={selectedImage}
               alt="Selected gallery image"
               width={1200}
               height={800}
               className={styles.lightboxImage}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              sizes="(max-width: 768px) 95vw, (max-width: 1200px) 90vw, 1200px"
             />
             <button
               className={styles.closeButton}
