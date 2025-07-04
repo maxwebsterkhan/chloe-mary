@@ -306,12 +306,12 @@ export default function HomepageMasonryGallery() {
                       width={1046}
                       height={1920}
                       className={styles.galleryImage}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1920px) 1050px, (max-width: 2560px) 1400px, (min-width: 3840px) 2100px, 1400px"
+                      sizes="(max-width: 480px) 350px, (max-width: 768px) 365px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, (max-width: 2560px) 1050px, 1400px"
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
-                      quality={100}
+                      quality={index === 0 ? 85 : index < 3 ? 80 : 75}
                       style={{
-                        objectFit: "contain",
+                        objectFit: "cover",
                         width: "100%",
                         height: "100%",
                         position: "absolute",
@@ -356,12 +356,12 @@ export default function HomepageMasonryGallery() {
                     width={1046}
                     height={1920}
                     className={styles.galleryImage}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1920px) 1050px, (max-width: 2560px) 1400px, (min-width: 3840px) 2100px, 1400px"
+                    sizes="(max-width: 480px) 350px, (max-width: 768px) 365px, (max-width: 1024px) 400px, (max-width: 1440px) 600px, (max-width: 1920px) 800px, (max-width: 2560px) 1050px, 1400px"
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
-                    quality={100}
+                    quality={index === 0 ? 85 : index < 3 ? 80 : 75}
                     style={{
-                      objectFit: "contain",
+                      objectFit: "cover",
                       width: "100%",
                       height: "100%",
                       position: "absolute",

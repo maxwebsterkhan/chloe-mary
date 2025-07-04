@@ -44,8 +44,8 @@ const nextConfig: NextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './cloudfrontLoader.js',
-    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1440, 1920, 2048, 2560, 3000, 3840, 4096, 5120],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024, 1400, 2100],
+    deviceSizes: [350, 365, 400, 480, 600, 750, 828, 1080, 1200, 1400],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',

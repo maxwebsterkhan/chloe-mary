@@ -23,31 +23,28 @@ interface ImageRequest {
  * Calculates optimal quality based on image width and device DPR
  */
 function getOptimalQuality(width: number): number {
-  // Always use maximum quality for 4K and high DPI displays
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
     
-    // Ultra high quality for 4K + high DPI
-    if (width >= 3840 && dpr > 1) return 100;
-    if (width >= 2560 && dpr > 1) return 100;
-    
-    // Very high quality for 4K standard
-    if (width >= 3840) return 95;
-    if (width >= 2560) return 95;
-    
-    // High quality for Retina/high DPI
-    if (dpr > 1) {
-      if (width >= 1920) return 95;
-      if (width >= 1050) return 90;
-      return 85;
+    // Adjust quality based on size and DPR
+    if (width >= 1920) {
+      return dpr > 1 ? 85 : 80;
+    } else if (width >= 1200) {
+      return dpr > 1 ? 82 : 78;
+    } else if (width >= 800) {
+      return dpr > 1 ? 80 : 75;
+    } else if (width >= 400) {
+      return dpr > 1 ? 75 : 70;
     }
+    return 65; // Smaller images
   }
 
-  // Higher base quality for all displays
-  if (width >= 1920) return 90;
-  if (width >= 1050) return 85;
-  if (width >= 800) return 80;
-  return 75;
+  // Fallback quality settings for SSR
+  if (width >= 1920) return 80;
+  if (width >= 1200) return 78;
+  if (width >= 800) return 75;
+  if (width >= 400) return 70;
+  return 65;
 }
 
 /**
@@ -62,18 +59,23 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
   // Strip leading slash if present and any domain
   let cleanKey = src.replace(/^\//, '');
   if (cleanKey.startsWith(CF_DOMAIN)) {
-    cleanKey = cleanKey.replace(CF_DOMAIN, '');
+    cleanKey = cleanKey.replace(`${CF_DOMAIN}/`, '');
   } else if (/^https?:\/\//.test(cleanKey)) {
     // Remove any domain if present
     cleanKey = cleanKey.replace(/^https?:\/\/[^/]+\//, '');
   }
 
-  // Adjust width based on device pixel ratio
+  // Adjust width based on device pixel ratio, but cap it for performance
   let targetWidth = width;
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
-    targetWidth = Math.round(width * dpr);
+    // Cap the DPR multiplier at 2x for performance
+    const effectiveDpr = Math.min(dpr, 2);
+    targetWidth = Math.round(width * effectiveDpr);
   }
+
+  // Cap maximum width to prevent oversized images
+  targetWidth = Math.min(targetWidth, 1400);
 
   // Build the image request object
   const request: ImageRequest = {
@@ -81,7 +83,7 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
     edits: {
       resize: {
         width: targetWidth,
-        fit: 'inside'
+        fit: 'cover'
       },
       format: 'webp',
       quality: quality || getOptimalQuality(targetWidth)
