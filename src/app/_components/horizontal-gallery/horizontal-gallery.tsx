@@ -60,18 +60,22 @@ export default function HorizontalGallery() {
       ];
       const stories: GalleryStory[] = [];
 
-      // Group images by subfolder from the stories category
-      const groupedImages: Record<string, string[]> = {};
+      // Create a map to store the latest images for each story
+      const storyImages: Record<string, Set<string>> = {};
 
+      // First pass: Group images by story folder
       categories.stories.forEach((image) => {
-        // Extract subfolder from key like 'stories/amber-hugh/image.jpg'
         const keyParts = image.key.split("/");
         if (keyParts.length >= 3 && keyParts[0] === "stories") {
-          const subfolderName = keyParts[1];
-          if (!groupedImages[subfolderName]) {
-            groupedImages[subfolderName] = [];
+          const storyFolder = keyParts[1];
+
+          // Only process folders we want to show
+          if (!storyFolders.includes(storyFolder)) return;
+
+          if (!storyImages[storyFolder]) {
+            storyImages[storyFolder] = new Set();
           }
-          groupedImages[subfolderName].push(image.url);
+          storyImages[storyFolder].add(image.url);
         }
       });
 
@@ -106,28 +110,35 @@ export default function HorizontalGallery() {
         },
       };
 
-      storyFolders.forEach((folderName) => {
-        if (groupedImages[folderName] && groupedImages[folderName].length > 0) {
-          // Extract names from folder structure (e.g., "amber-hugh" -> "Amber & Hugh")
+      // Second pass: Create stories in the specified order
+      for (const folderName of storyFolders) {
+        if (storyImages[folderName]?.size > 0) {
           const names = folderName
             .split("-")
             .map((name) => name.charAt(0).toUpperCase() + name.slice(1));
           const title = names.join(" & ");
 
           const storyData = storyDescriptions[folderName];
+          if (!storyData) continue; // Skip if no description found
 
-          const story: GalleryStory = {
+          // Sort images and take first 5
+          const sortedImages = Array.from(storyImages[folderName])
+            .sort()
+            .slice(0, 5);
+
+          if (sortedImages.length === 0) continue; // Skip if no images
+
+          stories.push({
             id: `story-${folderName}`,
             title,
             description: storyData.description,
             location: storyData.location,
             ctaText: "View Full Gallery",
             ctaLink: storyData.picTimeUrl,
-            images: groupedImages[folderName].slice(0, 5), // Limit to 5 images for thumbnails
-          };
-          stories.push(story);
+            images: sortedImages,
+          });
         }
-      });
+      }
 
       setGalleryStories(stories);
       setActiveThumbs(new Array(stories.length).fill(0));
@@ -358,8 +369,8 @@ export default function HorizontalGallery() {
                                 fill
                                 className={styles.thumbImageUnified}
                                 sizes="100px"
-                                loading="lazy"
-                                quality={95}
+                                priority={index === 0 && thumbIdx < 2}
+                                quality={85}
                               />
                             </button>
                           ))}

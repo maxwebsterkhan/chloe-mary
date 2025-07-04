@@ -26,20 +26,20 @@ function getOptimalQuality(width: number): number {
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
     
-    // Mobile-first quality settings
-    if (width <= 480) return dpr > 1 ? 70 : 65;
-    if (width <= 768) return dpr > 1 ? 75 : 70;
-    if (width <= 1024) return dpr > 1 ? 80 : 75;
-    if (width <= 1440) return dpr > 1 ? 82 : 78;
-    return dpr > 1 ? 85 : 82;
+    // Photography-optimized quality settings
+    if (width <= 480) return dpr > 1 ? 85 : 80;
+    if (width <= 768) return dpr > 1 ? 90 : 85;
+    if (width <= 1024) return dpr > 1 ? 95 : 90;
+    if (width <= 1440) return dpr > 1 ? 95 : 92;
+    return dpr > 1 ? 100 : 95;
   }
 
-  // Server-side quality settings
-  if (width <= 480) return 65;
-  if (width <= 768) return 70;
-  if (width <= 1024) return 75;
-  if (width <= 1440) return 78;
-  return 82;
+  // Server-side quality settings - keep high for photography
+  if (width <= 480) return 80;
+  if (width <= 768) return 85;
+  if (width <= 1024) return 90;
+  if (width <= 1440) return 92;
+  return 95;
 }
 
 /**
@@ -60,21 +60,21 @@ export function generateImageUrl({ src, width, quality }: ImageLoaderProps): str
     cleanKey = cleanKey.replace(/^https?:\/\/[^/]+\//, '');
   }
 
-  // Adjust width based on device pixel ratio, but cap it for performance
+  // Adjust width based on device pixel ratio for high-res displays
   let targetWidth = width;
   if (typeof window !== 'undefined') {
     const dpr = window.devicePixelRatio || 1;
-    // Cap the DPR multiplier at 1.5x for mobile, 2x for desktop
-    const effectiveDpr = Math.min(dpr, width <= 768 ? 1.5 : 2);
+    // Allow higher DPR multipliers for photography
+    const effectiveDpr = Math.min(dpr, width <= 768 ? 2 : 3);
     targetWidth = Math.round(width * effectiveDpr);
   }
 
-  // Cap maximum width based on viewport
+  // Increased maximum widths for high-res displays
   if (typeof window !== 'undefined') {
-    const maxWidth = window.innerWidth <= 768 ? 800 : 1400;
+    const maxWidth = window.innerWidth <= 768 ? 1600 : 3840;
     targetWidth = Math.min(targetWidth, maxWidth);
   } else {
-    targetWidth = Math.min(targetWidth, 1400);
+    targetWidth = Math.min(targetWidth, 3840);
   }
 
   // Build the image request object
