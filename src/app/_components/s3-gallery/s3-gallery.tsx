@@ -87,6 +87,7 @@ export default function S3Gallery({
                 className={styles.image}
                 loading={index < 4 ? "eager" : "lazy"}
                 priority={index < 2}
+                sizes="(max-width: 768px) 95vw, 1200px"
               />
             </div>
           );

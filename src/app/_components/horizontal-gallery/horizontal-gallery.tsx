@@ -366,7 +366,7 @@ export default function HorizontalGallery() {
                                 }`}
                                 fill
                                 className={styles.thumbImageUnified}
-                                /* sizes omitted */
+                                sizes="100px"
                                 priority={index === 0 && thumbIdx < 2}
                               />
                             </button>

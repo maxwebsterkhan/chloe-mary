@@ -111,6 +111,7 @@ export default function AboutStory() {
                     className={styles.image}
                     style={{ opacity: 1 - scrollProgress }}
                     priority
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <Image
                     src={aboutImages[0]?.url || "/logo.webp"}
@@ -120,6 +121,7 @@ export default function AboutStory() {
                     className={`${styles.image} ${styles.imageSecond}`}
                     style={{ opacity: scrollProgress }}
                     loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </>
               )}

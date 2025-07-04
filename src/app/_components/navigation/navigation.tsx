@@ -136,6 +136,7 @@ export default function Navigation() {
           unoptimized
           width={66}
           height={32}
+          sizes="66px"
           className={styles.navigation__logoImage}
         />
       </Link>
