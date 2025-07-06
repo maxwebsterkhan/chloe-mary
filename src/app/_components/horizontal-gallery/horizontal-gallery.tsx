@@ -13,6 +13,7 @@ import { EmblaCarouselType } from "embla-carousel";
 import { usePrevNextButtons } from "./EmblaCarouselArrowButtons";
 import { useS3ImageCategories } from "@/hooks/useS3Images";
 import styles from "./horizontal-gallery.module.scss";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
 
 interface GalleryStory {
   id: string;
@@ -418,7 +419,7 @@ export default function HorizontalGallery() {
             disabled={prevBtnDisabled}
             aria-label="Previous slide"
           >
-            ←
+            <ArrowLeftIcon size={32} color="#fff" />
           </button>
           <button
             className={styles.embla__button}
@@ -426,7 +427,7 @@ export default function HorizontalGallery() {
             disabled={nextBtnDisabled}
             aria-label="Next slide"
           >
-            →
+            <ArrowRightIcon size={32} color="#fff" />
           </button>
         </div>
       </div>
