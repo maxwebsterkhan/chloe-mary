@@ -191,9 +191,10 @@ export default function Achievements() {
                       alt={generateAltText(awardImages[index].key)}
                       fill
                       className={styles.achievements__image}
-                      sizes="(max-width: 768px) 100vw, 25vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 35vw, 30vw"
                       priority={index < 2}
                       loading={index < 2 ? "eager" : "lazy"}
+                      quality={85}
                     />
                     <div
                       ref={(el) => {

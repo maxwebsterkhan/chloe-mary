@@ -278,7 +278,8 @@ export default function HorizontalGallery() {
                                 " " +
                                 styles.fadeInHeroImage
                               }
-                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 90vw"
+                              quality={90}
                               loading={index === 0 ? undefined : "lazy"}
                               style={{ objectFit: "cover" }}
                             />
@@ -367,7 +368,7 @@ export default function HorizontalGallery() {
                                 }`}
                                 fill
                                 className={styles.thumbImageUnified}
-                                sizes="100px"
+                                sizes="(max-width: 768px) 20vw, (max-width: 1200px) 15vw, 120px"
                                 priority={index === 0 && thumbIdx < 2}
                               />
                             </button>

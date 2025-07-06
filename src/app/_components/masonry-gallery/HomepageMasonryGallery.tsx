@@ -81,7 +81,8 @@ function Lightbox({ image, onClose }: LightboxProps) {
             width={3840}
             height={2160}
             priority={true}
-            sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 30vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+            quality={95}
           />
         </div>
       </div>
@@ -305,9 +306,10 @@ export default function HomepageMasonryGallery() {
                       alt={alt}
                       fill
                       className={styles.galleryImage}
-                      sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 30vw"
+                      sizes="(max-width: 480px) 100vw, (max-width: 768px) 60vw, (max-width: 1200px) 50vw, 40vw"
                       priority={index < 2}
                       loading={index < 3 ? "eager" : "lazy"}
+                      quality={85}
                     />
                   </div>
                 );
@@ -347,9 +349,10 @@ export default function HomepageMasonryGallery() {
                     alt={alt}
                     fill
                     className={styles.galleryImage}
-                    sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 30vw"
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 60vw, (max-width: 1200px) 50vw, 40vw"
                     priority={index < 2}
                     loading={index < 3 ? "eager" : "lazy"}
+                    quality={85}
                     onClick={() => handleImageSelect(image)}
                     tabIndex={0}
                     role="button"
