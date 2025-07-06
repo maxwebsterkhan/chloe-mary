@@ -278,7 +278,7 @@ export default function HorizontalGallery() {
                                 " " +
                                 styles.fadeInHeroImage
                               }
-                              /* sizes omitted */
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"
                               loading={index === 0 ? undefined : "lazy"}
                               style={{ objectFit: "cover" }}
                             />

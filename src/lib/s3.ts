@@ -70,8 +70,8 @@ export async function listImages(prefix?: string): Promise<S3Image[]> {
  */
 export async function getImageUrl(key: string): Promise<string> {
   const cmd = new GetObjectCommand({ Bucket: BUCKET_NAME, Key: key });
-  // Default 1-hour expiry; adjust via env if needed
-  const expiresSec = Number(process.env.S3_SIGNED_URL_TTL ?? '3600');
+  // Default 1-week expiry to match caching strategy; adjust via env if needed
+  const expiresSec = Number(process.env.S3_SIGNED_URL_TTL ?? '604800');
   return getSignedUrl(s3Client, cmd, { expiresIn: expiresSec });
 }
 

@@ -11,8 +11,8 @@ export async function GET() {
       categoryCount: Object.keys(categorizedImages).length,
     });
 
-    // Add cache headers for better performance
-    response.headers.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+    // Add cache headers - Cache for 1 week, stale-while-revalidate for 1 day
+    response.headers.set('Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=86400');
     response.headers.set('Vary', 'Accept-Encoding');
     
     return response;

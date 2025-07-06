@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
       count: images.length,
     });
 
-    // Add caching headers
-    response.headers.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+    // Add caching headers - Cache for 1 week, stale-while-revalidate for 1 day
+    response.headers.set('Cache-Control', 'public, s-maxage=604800, stale-while-revalidate=86400');
     response.headers.set('Vary', 'Accept-Encoding');
     
     return response;
