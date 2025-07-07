@@ -481,6 +481,10 @@
   flex-direction: row;
   gap: tokens.$spacing-sm;
   align-items: flex-start;
+
+  @include breakpoint-down("mobile") {
+    display: none;
+  }
 }
 
 .thumbButton {
@@ -891,7 +895,9 @@
   }
 
   @include breakpoint-down("mobile") {
-    display: none;
+    justify-content: center;
+    gap: 0;
+    margin-block: 1rem;
   }
 }
 
