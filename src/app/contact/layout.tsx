@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Contact Chloe Mary | Bristol Wedding Photographer - Get In Touch",
     description:
       "Ready to capture your love story? Contact Chloe Mary for contemporary documentary wedding photography in Bristol. Complimentary consultations available.",
-    url: "https://www.chloemary.com/connect",
+    url: "https://www.chloemary.com/contact",
     siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     images: ["/logo.webp"],
   },
   alternates: {
-    canonical: "https://www.chloemary.com/connect",
+    canonical: "https://www.chloemary.com/contact",
   },
   other: {
     "photographer-style": "Contemporary Documentary",
@@ -88,8 +88,8 @@ export default function ConnectLayout({
             "@graph": [
               {
                 "@type": "WebPage",
-                "@id": "https://www.chloemary.com/connect#webpage",
-                url: "https://www.chloemary.com/connect",
+                "@id": "https://www.chloemary.com/contact#webpage",
+                url: "https://www.chloemary.com/contact",
                 name: "Contact Chloe Mary | Bristol Wedding Photographer - Get In Touch",
                 isPartOf: {
                   "@id": "https://www.chloemary.com/#website",
@@ -100,7 +100,7 @@ export default function ConnectLayout({
                 description:
                   "Contact Chloe Mary for contemporary documentary wedding photography in Bristol. Complimentary consultations available for couples.",
                 breadcrumb: {
-                  "@id": "https://www.chloemary.com/connect#breadcrumb",
+                  "@id": "https://www.chloemary.com/contact#breadcrumb",
                 },
                 inLanguage: "en-GB",
                 potentialAction: [
@@ -108,7 +108,7 @@ export default function ConnectLayout({
                     "@type": "CommunicateAction",
                     target: {
                       "@type": "EntryPoint",
-                      urlTemplate: "https://www.chloemary.com/connect",
+                      urlTemplate: "https://www.chloemary.com/contact",
                       actionPlatform: [
                         "http://schema.org/DesktopWebPlatform",
                         "http://schema.org/MobileWebPlatform",
@@ -119,8 +119,8 @@ export default function ConnectLayout({
               },
               {
                 "@type": "ContactPage",
-                "@id": "https://www.chloemary.com/connect#contactpage",
-                url: "https://www.chloemary.com/connect",
+                "@id": "https://www.chloemary.com/contact#contactpage",
+                url: "https://www.chloemary.com/contact",
                 name: "Contact Chloe Mary",
                 description:
                   "Get in touch with Chloe Mary for wedding photography enquiries. Complimentary video consultations available.",
@@ -215,7 +215,7 @@ export default function ConnectLayout({
               },
               {
                 "@type": "BreadcrumbList",
-                "@id": "https://www.chloemary.com/connect#breadcrumb",
+                "@id": "https://www.chloemary.com/contact#breadcrumb",
                 itemListElement: [
                   {
                     "@type": "ListItem",
