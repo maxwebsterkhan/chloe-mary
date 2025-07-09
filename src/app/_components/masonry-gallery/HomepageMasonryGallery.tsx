@@ -99,7 +99,7 @@ export default function HomepageMasonryGallery() {
 
   const galleryRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const barSetterRef = useRef<((v: number) => void) | null>(null);
 
@@ -329,59 +329,61 @@ export default function HomepageMasonryGallery() {
   }
 
   return (
-    <section
+    <div
       ref={sectionRef}
+      className={styles.pinWrapper}
       aria-label="Homepage Horizontal Gallery"
-      className={styles.horizontalSection}
     >
-      <div ref={containerRef} className={styles.horizontalContainer}>
-        <div ref={galleryRef} className={styles.horizontalGallery}>
-          {images.map((image, index) => {
-            const alt = `Wedding photo: ${image.key
-              .replace(/[-_]/g, " ")
-              .replace(/\.[^/.]+$/, "")}`;
+      <section className={styles.horizontalSection}>
+        <div ref={containerRef} className={styles.horizontalContainer}>
+          <div ref={galleryRef} className={styles.horizontalGallery}>
+            {images.map((image, index) => {
+              const alt = `Wedding photo: ${image.key
+                .replace(/[-_]/g, " ")
+                .replace(/\.[^/.]+$/, "")}`;
 
-            return (
-              <div key={image.key} className={styles.imageWrapper}>
-                <div className={styles.imageContainer}>
-                  <Image
-                    src={image.url}
-                    alt={alt}
-                    fill
-                    className={styles.galleryImage}
-                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 60vw, (max-width: 1200px) 50vw, 40vw"
-                    priority={index < 2}
-                    loading={index < 3 ? "eager" : "lazy"}
-                    quality={85}
-                    onClick={() => handleImageSelect(image)}
-                    tabIndex={0}
-                    role="button"
-                    aria-label={alt}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        handleImageSelect(image);
-                      }
-                    }}
-                  />
+              return (
+                <div key={image.key} className={styles.imageWrapper}>
+                  <div className={styles.imageContainer}>
+                    <Image
+                      src={image.url}
+                      alt={alt}
+                      fill
+                      className={styles.galleryImage}
+                      sizes="(max-width: 480px) 100vw, (max-width: 768px) 60vw, (max-width: 1200px) 50vw, 40vw"
+                      priority={index < 2}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      quality={85}
+                      onClick={() => handleImageSelect(image)}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={alt}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleImageSelect(image);
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {/* Scroll Progress Indicator */}
-        <div className={styles.scrollProgress}>
-          <div
-            ref={progressBarRef}
-            className={styles.scrollProgressBar}
-            style={{ width: "0%" }}
-          />
+          {/* Scroll Progress Indicator */}
+          <div className={styles.scrollProgress}>
+            <div
+              ref={progressBarRef}
+              className={styles.scrollProgressBar}
+              style={{ width: "0%" }}
+            />
+          </div>
         </div>
-      </div>
-      {selectedImage && (
-        <Lightbox image={selectedImage} onClose={handleLightboxClose} />
-      )}
-    </section>
+        {selectedImage && (
+          <Lightbox image={selectedImage} onClose={handleLightboxClose} />
+        )}
+      </section>
+    </div>
   );
 }

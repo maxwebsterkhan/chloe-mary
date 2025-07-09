@@ -28,12 +28,25 @@ const FooterWrapper = ({
       const uncover = gsap.timeline({ paused: true });
       uncover.to(footer, { yPercent: 0, ease: "none" });
 
+      // Check if we're on homepage with gallery to add offset for pin duration
+      const galleryWrapper = document.querySelector(
+        '[aria-label="Homepage Horizontal Gallery"]'
+      );
+      const isHomepageWithGallery = !!galleryWrapper;
+
+      // Add offset on homepage to account for gallery pin duration
+      const startPosition = isHomepageWithGallery
+        ? "bottom bottom+=70vh"
+        : "bottom bottom";
+
       ScrollTrigger.create({
         trigger: boundary,
-        start: "bottom bottom",
+        start: startPosition,
         end: `+=${footerHeight}`,
         animation: uncover,
         scrub: true,
+        invalidateOnRefresh: true,
+        refreshPriority: -1, // Lower priority so gallery ScrollTrigger calculates first
       });
 
       // Observe boundary element for size changes

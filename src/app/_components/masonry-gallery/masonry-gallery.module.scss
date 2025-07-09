@@ -1,6 +1,17 @@
 @use "../../_styles/tokens" as tokens;
 @use "../../_styles/breakpoints" as *;
 
+// Pin Wrapper - 100vh to eliminate pin spacer gap
+.pinWrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden; // Only hide horizontal overflow, allow vertical for footer pinning
+  background-color: var(--color-primary);
+}
+
 // Horizontal Gallery Styles
 .horizontalSection {
   padding: 0;
@@ -8,7 +19,6 @@
   background-color: var(--color-primary);
   height: fit-content;
   width: 100vw;
-  overflow: hidden;
   display: flex;
   align-items: center;
   position: relative;
@@ -20,7 +30,7 @@
 
 .horizontalContainer {
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -30,7 +40,7 @@
 .horizontalGallery {
   display: flex;
   gap: 32px;
-  height: 100vh;
+  height: 70vh;
   align-items: center;
   will-change: transform;
   min-width: fit-content;
@@ -50,7 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 70vh;
 
   &:first-child {
     padding-left: tokens.$spacing-md;
@@ -80,20 +90,20 @@
 .imageContainer {
   position: relative;
   width: 50vw;
-  height: 90vh;
+  height: 60vh;
   max-width: 600px;
   min-width: 300px;
 
   @include breakpoint-down("tablet") {
     width: 60vw;
-    height: 85vh;
+    height: 55vh;
     max-width: 500px;
     min-width: 250px;
   }
 
   @include breakpoint-down("mobile") {
     width: 80vw;
-    height: 80vh;
+    height: 50vh;
     max-width: 400px;
     min-width: 200px;
   }
@@ -325,6 +335,11 @@
 .emblaMobile {
   width: 100%;
   overflow: hidden;
+  padding-top: tokens.$spacing-lg;
+
+  @include breakpoint-down("mobile") {
+    padding-top: tokens.$spacing-md;
+  }
 }
 
 .emblaViewport {
