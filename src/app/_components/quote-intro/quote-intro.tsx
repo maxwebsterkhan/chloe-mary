@@ -148,19 +148,20 @@ export default function QuoteIntro() {
 
             <div className={styles.description}>
               <p ref={paragraphLeftRef} className={styles.paragraph}>
-                I&apos;m drawn to creative, carefree couples who seek images
-                that capture not just how you look, but who you truly
-                are-relaxed, authentic and beautifully yourselves. No need for
-                lengthy shot lists or endless posed photos, my approach is all
-                about letting your true selves shine through.
+                I&apos;m drawn to creative, carefree couples who want images
+                that reflect not just how you look, but who you truly
+                are—relaxed, authentic, and beautifully yourselves. Forget
+                lengthy shot lists or hours spent posing; my approach is about
+                capturing your day as it naturally unfolds, letting your true
+                selves shine through.
               </p>
 
               <p ref={paragraphRightRef} className={styles.paragraph}>
-                Instead of orchestrating moments, I move quietly through your
-                day as a trusted presence. Your story writes itself while I
-                quietly document each moment-the stolen glances, whispered
-                promises and authentic emotions that make your love uniquely
-                yours.
+                Rather than orchestrating moments, I move through your day as a
+                trusted presence, observing how you share it with the people who
+                matter most. Your story writes itself while I document each
+                moment—the stolen glances, whispered promises, and authentic
+                emotions that make your love uniquely yours.
               </p>
 
               <p
@@ -170,15 +171,6 @@ export default function QuoteIntro() {
                 &quot;Because what truly matters isn&apos;t how it all looked,
                 but how it felt.&quot;
               </p>
-
-              <div ref={ctaRef} className={styles.cta}>
-                <div className={styles.ctaLine}></div>
-                <Link href="/about" className={styles.ctaLink}>
-                  <span className={styles.ctaText}>
-                    Learn More About My Story
-                  </span>
-                </Link>
-              </div>
             </div>
           </div>
 
@@ -195,6 +187,12 @@ export default function QuoteIntro() {
               />
             )}
           </div>
+        </div>
+        <div ref={ctaRef} className={styles.cta}>
+          <div className={styles.ctaLine}></div>
+          <Link href="/about" className={styles.ctaLink}>
+            <span className={styles.ctaText}>Learn More About My Story</span>
+          </Link>
         </div>
       </div>
     </section>

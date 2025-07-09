@@ -152,43 +152,41 @@ export default function AboutStory() {
             <div className={styles.story1}>
               <div className={styles.storyNumber}>01</div>
               <p className={styles.storyTextLarge}>
-                When I&apos;m not busy behind the camera, you can find me
-                roaming around the UK with my partner Max on our camping
-                adventures, usually by the coast.
+                I&apos;ve always been deeply inspired by the power of nostalgia.
+                From a young age, I was the curious child who captured life with
+                her little point-and-shoot camera.
               </p>
               <p className={styles.storyTextSmall}>
-                A place of silence where the salty air calms my head and my
-                creative soul can breathe.
+                Back in a time when none of us felt the pressure to be
+                &apos;picture perfect&apos;, but instead documented real moments
+                simply to relive them later, seeing the rawness and realness in
+                things.
               </p>
             </div>
 
             <div className={styles.pullQuote}>
               <blockquote className={styles.pullQuoteText}>
-                &quot;I was the curious child who captured life with her little
-                point-and-shoot camera&quot;
+                &quot;That feeling of authenticity still lives with me today,
+                and I strive to translate it into both my digital and film photo
+                work.&quot;
               </blockquote>
             </div>
 
             <div className={styles.story2}>
               <div className={styles.storyNumber}>02</div>
               <p className={styles.storyText}>
-                I&apos;ve always been deeply inspired by the power of nostalgia
-                and from a young age, I was the curious child who captured life
-                with her little point-and-shoot camera. Back in a time when none
-                of us felt the pressure to be &apos;picture perfect&apos; but
-                instead chose to document the real moments in our lives simply
-                to relive at a later date, seeing the rawness and realness in
-                things.
+                When I&apos;m not behind the camera, you&apos;ll find me roaming
+                around the UK with my partner Max on our camping adventures,
+                usually by the coast.
               </p>
             </div>
 
             <div className={styles.story3}>
               <div className={styles.highlight}>
-                <span className={styles.highlightLabel}>My Philosophy</span>
+                <span className={styles.highlightLabel}>The seaside</span>
                 <p className={styles.highlightText}>
-                  That feeling of authenticity still lives with me today and I
-                  strive to translate this into both my digital and film photo
-                  work.
+                  A place of silence where the salty air calms my head and my
+                  creative soul can breathe.
                 </p>
               </div>
             </div>

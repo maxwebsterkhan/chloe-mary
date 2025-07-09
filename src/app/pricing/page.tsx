@@ -659,6 +659,22 @@ export default function PricingPage() {
                         industry.
                       </div>
                     </div>
+                    <div
+                      className={`${styles.inclusionRow} ${styles.animateIn}`}
+                    >
+                      <div className={styles.inclusionLabel}>35MM FILM</div>
+                      <div className={styles.inclusionDesc}>
+                        Including 35mm black and white film photos in my work
+                        allows me to capture and convey a deep sense of
+                        nostalgia and emotion. The timeless quality of film,
+                        with its subtle grain and rich contrasts invites viewers
+                        to connect with the genuine, unscripted moments within
+                        each frame. By blending these classic, timeless feeling
+                        images with my digital work, I strive to create a visual
+                        narrative that feels both authentic and emotionally
+                        resonant and preserves the true essence of your day.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

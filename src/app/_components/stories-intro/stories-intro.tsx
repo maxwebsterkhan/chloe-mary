@@ -120,14 +120,14 @@ export default function StoriesIntro() {
               Each wedding tells a unique story—a celebration of love, laughter,
               and the magical chaos that makes every couple&apos;s day truly
               special. Here you&apos;ll find a collection of real moments from
-              real couples who trusted me to document their journey.
+              real couples who trusted me to document their story.
             </p>
 
             <p
               ref={paragraphRightRef}
               className={`${styles.paragraphRight} ${styles.paragraph}`}
             >
-              From intimate elopements to grand celebrations, these stories
+              From intimate elopements to grand celebrations, these galleries
               showcase the raw emotions, genuine connections, and authentic
               moments that happen when couples simply are themselves on their
               wedding day.
