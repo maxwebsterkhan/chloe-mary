@@ -20,6 +20,19 @@ const nextConfig: NextConfig = {
   // Redirect configuration for old site URLs
   async redirects() {
     return [
+      // HTTP to HTTPS redirect (if not handled by hosting provider)
+      {
+        source: '/(.*)',
+        destination: 'https://www.chloemary.com/$1',
+        permanent: true,
+        has: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+      },
       // Redirect old fees page to new pricing page
       {
         source: '/fees',
@@ -35,6 +48,11 @@ const nextConfig: NextConfig = {
       {
         source: '/edits',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/info',
+        destination: '/pricing',
         permanent: true,
       },
     ];
