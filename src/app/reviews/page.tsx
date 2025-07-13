@@ -4,13 +4,13 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import styles from "./kind-words.module.scss";
+import styles from "./reviews.module.scss";
 
-import KindWordsFooter from "../_components/stories-footer/kind-words-footer";
+import KindWordsFooter from "../_components/stories-footer/reviews-footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function KindWords() {
+export default function Reviews() {
   const heroRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
 

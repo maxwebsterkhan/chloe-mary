@@ -54,6 +54,25 @@ const nextConfig: NextConfig = {
         source: '/info',
         destination: '/pricing',
         permanent: true,
+      },    {
+        source: '/lbb',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/edits',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/moments',
+        destination: '/stories',
+        permanent: true,
+      },
+      {
+        source: '/journal/:path*',
+        destination: '/',
+        permanent: true,
       },
     ];
   },

@@ -11,7 +11,7 @@ const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/stories", label: "Stories" },
-  { href: "/kind-words", label: "Kind Words" },
+  { href: "/reviews", label: "Kind Words" },
   { href: "/pricing", label: "Pricing" },
   { href: "/contact", label: "Contact" },
 ] as const;

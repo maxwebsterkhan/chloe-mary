@@ -42,14 +42,14 @@ export default function KindWordsFooter() {
     <div
       className={styles.footer}
       role="region"
-      aria-labelledby="kind-words-footer-header"
+      aria-labelledby="reviews-footer-header"
     >
       <div className={styles.footerContainer}>
         <div className={styles.footerContent}>
           <h3
             ref={headerRef}
             className={styles.footerHeader}
-            id="kind-words-footer-header"
+            id="reviews-footer-header"
           >
             Ready to Add Your Story?
           </h3>

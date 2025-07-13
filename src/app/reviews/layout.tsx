@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kind Words & Testimonials | Chloe Mary Bristol",
+  title: "Reviews & Testimonials | Chloe Mary Bristol",
   description:
     "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings. 5-star Google rating. Contemporary documentary wedding photography in Bristol and beyond.",
   keywords: [
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Kind Words & Testimonials | Chloe Mary",
+    title: "Reviews & Testimonials | Chloe Mary",
     description:
       "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings. 5-star Google rating.",
-    url: "https://www.chloemary.com/kind-words",
+    url: "https://www.chloemary.com/reviews",
     siteName: "Chloe Mary",
     locale: "en_GB",
     type: "website",
@@ -52,14 +52,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kind Words & Testimonials | Chloe Mary",
+    title: "Reviews & Testimonials | Chloe Mary",
     description:
       "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings.",
     creator: "@chloemary_photo",
     images: ["/logo.webp"],
   },
   alternates: {
-    canonical: "https://www.chloemary.com/kind-words",
+    canonical: "https://www.chloemary.com/reviews",
   },
   other: {
     "review-count": "200+",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function KindWordsLayout({
+export default function ReviewsLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -83,9 +83,9 @@ export default function KindWordsLayout({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "@id": "https://www.chloemary.com/kind-words",
-            url: "https://www.chloemary.com/kind-words",
-            name: "Kind Words & Testimonials | Chloe Mary",
+            "@id": "https://www.chloemary.com/reviews",
+            url: "https://www.chloemary.com/reviews",
+            name: "Reviews & Testimonials | Chloe Mary",
             description:
               "Read heartfelt testimonials from 200+ happy couples who chose Chloe Mary for their weddings.",
             isPartOf: {
@@ -126,8 +126,8 @@ export default function KindWordsLayout({
                 {
                   "@type": "ListItem",
                   position: 2,
-                  name: "Kind Words",
-                  item: "https://www.chloemary.com/kind-words",
+                  name: "Reviews",
+                  item: "https://www.chloemary.com/reviews",
                 },
               ],
             },
