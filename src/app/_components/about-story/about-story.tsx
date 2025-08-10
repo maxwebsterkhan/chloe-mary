@@ -173,7 +173,7 @@ export default function AboutStory() {
                 &quot;That feeling of authenticity is at the heart of my work as
                 a story telling wedding photographer and I strive to create an
                 intimate retelling of your day, preserved with honesty using a
-                combination of 35mm film and digital photograph.
+                combination of 35mm film and digital photography.
               </blockquote>
             </div>
 
