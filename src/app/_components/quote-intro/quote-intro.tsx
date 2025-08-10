@@ -142,26 +142,34 @@ export default function QuoteIntro() {
                 Hi, I&apos;m Chloe
               </h2>
               <p ref={taglineRef} className={styles.tagline}>
-                &quot;Self Professed Queen of Monochrome&quot;
+                &quot;Self Professed Queen of Monochrome.
+                <br />
+                <br />
+                Named one of the Top 50 UK Wedding Photographers for 2024 &
+                2025.&quot;
               </p>
             </div>
 
             <div className={styles.description}>
               <p ref={paragraphLeftRef} className={styles.paragraph}>
-                I&apos;m drawn to creative, carefree couples who want images
-                that reflect not just how you look, but who you truly
-                are—relaxed, authentic, and beautifully yourselves. Forget
-                lengthy shot lists or hours spent posing; my approach is about
-                capturing your day as it naturally unfolds, letting your true
-                selves shine through.
+                I&apos;m a Bristol wedding photographer, London wedding
+                photographer & destination wedding photographer. Drawn towards
+                creative and carefree couples.
+                <br />
+                <br />I love to create wedding images that reflect not just how
+                you look, but who you truly are - relaxed, authentic &
+                beautifully yourselves. Forget lengthy shot lists or hours spent
+                stiffly posing, my documentary approach is about capturing your
+                day as it naturally unfolds, stripping away the artificiality
+                and creating photos that reflect your true story.
               </p>
 
               <p ref={paragraphRightRef} className={styles.paragraph}>
                 Rather than orchestrating moments, I move through your day as a
                 trusted presence, observing how you share it with the people who
                 matter most. Your story writes itself while I document each
-                moment—the stolen glances, whispered promises, and authentic
-                emotions that make your love uniquely yours.
+                moment as it happens, the stollen glances, the heartfelt
+                connections capturing what makes your wedding uniquely yours.
               </p>
 
               <p

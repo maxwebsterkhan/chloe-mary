@@ -27,7 +27,11 @@ export default function Footer() {
 
         <div className={styles.footer__bottom}>
           <div className={styles.footer__copyright}>
-            <p>All images are copyrighted to Chloe Mary</p>
+            <p>
+              Award winning UK wedding photographer 2025.
+              <br />
+              Bristol, London and desination wedding photographer
+            </p>
             <p>
               For non-wedding work and collaborations email{" "}
               <a href="mailto:hello@chloemary.com">hello@chloemary.com</a>

@@ -144,8 +144,12 @@ export default function AboutStory() {
               <h2 className={styles.introTitle}>Meet Me</h2>
               <p className={styles.introText}>
                 Hi, I&apos;m Chloe - Mary is actually my middle name given to me
-                in honour of my great grandmother. I&apos;m a photographer based
-                in Bristol who captures weddings for the creative and carefree.
+                in honour of my great grandmother, based in the vibrant city of
+                Bristol, I&apos;m an award winning UK wedding photographer with
+                over 7 years of experience. Known for my relaxed, documentary &
+                artistic style. Caputuring weddings for modern couples in
+                Bristol, London, throughout the UK & desinations around the
+                world.
               </p>
             </div>
 
@@ -166,9 +170,10 @@ export default function AboutStory() {
 
             <div className={styles.pullQuote}>
               <blockquote className={styles.pullQuoteText}>
-                &quot;That feeling of authenticity still lives with me today,
-                and I strive to translate it into both my digital and film photo
-                work.&quot;
+                &quot;That feeling of authenticity is at the heart of my work as
+                a story telling wedding photographer and I strive to create an
+                intimate retelling of your day, preserved with honesty using a
+                combination of 35mm film and digital photograph.
               </blockquote>
             </div>
 

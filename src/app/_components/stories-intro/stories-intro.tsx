@@ -117,7 +117,7 @@ export default function StoriesIntro() {
               ref={paragraphLeftRef}
               className={`${styles.paragraphLeft} ${styles.paragraph}`}
             >
-              Each wedding tells a unique story—a celebration of love, laughter,
+              Each wedding tells a unique story-a celebration of love, laughter,
               and the magical chaos that makes every couple&apos;s day truly
               special. Here you&apos;ll find a collection of real moments from
               real couples who trusted me to document their story.
@@ -127,10 +127,12 @@ export default function StoriesIntro() {
               ref={paragraphRightRef}
               className={`${styles.paragraphRight} ${styles.paragraph}`}
             >
-              From intimate elopements to grand celebrations, these galleries
-              showcase the raw emotions, genuine connections, and authentic
-              moments that happen when couples simply are themselves on their
-              wedding day.
+              From intimate London elopements to grand celebrations in France,
+              these galleries showcase the raw emotions, genuine connections and
+              authentic moments preserved through documentary photography. When
+              you let go and allow your true selves to shine, your story unfolds
+              in its most authentic form - creating images that reflect the true
+              spirit of your relationship.
             </p>
 
             <p
