@@ -168,7 +168,7 @@ export default function QuoteIntro() {
                 Rather than orchestrating moments, I move through your day as a
                 trusted presence, observing how you share it with the people who
                 matter most. Your story writes itself while I document each
-                moment as it happens, the stollen glances, the heartfelt
+                moment as it happens, the stolen glances, the heartfelt
                 connections capturing what makes your wedding uniquely yours.
               </p>
 
