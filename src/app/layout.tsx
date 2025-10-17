@@ -281,7 +281,7 @@ export default function RootLayout({
                 },
               ],
               serviceType: "Wedding Photography",
-              priceRange: "£1,350 - £4,750",
+              priceRange: "£1,350 - £5,000",
               paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
               currenciesAccepted: "GBP",
               foundingDate: "2018",

@@ -157,7 +157,7 @@ export default function ConnectLayout({
                       name: "Europe",
                     },
                   ],
-                  priceRange: "£1350-£4750",
+                  priceRange: "£1350-£5000",
                   serviceType: "Wedding Photography",
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",

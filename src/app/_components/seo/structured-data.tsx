@@ -8,7 +8,7 @@ export default function StructuredData() {
     url: "https://www.chloemary.com",
     email: "hello@chloemary.com",
     telephone: "",
-    priceRange: "££££",
+    priceRange: "£1,350 - £5,000",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bristol",
@@ -44,12 +44,12 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Full Day Essential Coverage",
+            name: "Essential Package",
             description:
-              "8hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
+              "8 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
-              price: "3500",
+              price: "3000",
               priceCurrency: "GBP",
             },
           },
@@ -58,12 +58,12 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Full Day Extensive Documentation",
+            name: "Signature Package",
             description:
-              "Up to 12 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
+              "10 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
-              price: "4500",
+              price: "3750",
               priceCurrency: "GBP",
             },
           },
@@ -86,9 +86,23 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Extended Session",
+            name: "Extensive Package",
             description:
-              "Up to 5 hours coverage for intimate celebrations. Limited peak season availability.",
+              "12 hours of documentation with professional editing, online gallery access, and personal printing rights. Includes two rolls of black and white film.",
+            offers: {
+              "@type": "Offer",
+              price: "4500",
+              priceCurrency: "GBP",
+            },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Enhanced Session",
+            description:
+              "5 hours coverage for intimate celebrations. Limited peak season availability.",
             offers: {
               "@type": "Offer",
               price: "2100",
@@ -102,10 +116,10 @@ export default function StructuredData() {
             "@type": "Service",
             name: "European Destination Wedding",
             description:
-              "9 hours of documentation for European destination weddings. Includes two rolls of black and white film.",
+              "10 hours of documentation for European destination weddings. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
-              price: "4250",
+              price: "4500",
               priceCurrency: "GBP",
             },
           },
@@ -116,10 +130,10 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Worldwide Destination Wedding",
             description:
-              "9 hours of documentation for worldwide destination weddings. Includes two rolls of black and white film.",
+              "10 hours of documentation for worldwide destination weddings. Includes two rolls of black and white film.",
             offers: {
               "@type": "Offer",
-              price: "4750",
+              price: "5000",
               priceCurrency: "GBP",
             },
           },
