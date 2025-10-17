@@ -312,19 +312,19 @@ export default function PricingPage() {
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                       <div className={styles.priceLabel}>ESSENTIAL</div>
                       <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£3,500</span>
+                        <span className={styles.priceAmount}>£3,000</span>
                         <span className={styles.priceDesc}>
-                          Up to 9 hours of documentation
+                          8 hours of documentation
                         </span>
                       </div>
                     </div>
 
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
-                      <div className={styles.priceLabel}>EXTENSIVE</div>
+                      <div className={styles.priceLabel}>SIGNATURE</div>
                       <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£4,500</span>
+                        <span className={styles.priceAmount}>£3,750</span>
                         <span className={styles.priceDesc}>
-                          Up to 12 hours of documentation
+                          10 hours of documentation
                         </span>
                       </div>
                     </div>
@@ -401,7 +401,7 @@ export default function PricingPage() {
                       <div className={styles.priceDetails}>
                         <span className={styles.priceAmount}>£1,350</span>
                         <span className={styles.priceDesc}>
-                          Up to 3 hours of documentation
+                          3 hours of documentation
                         </span>
                         <span className={styles.availability}>
                           Limited peak season availability
@@ -410,11 +410,11 @@ export default function PricingPage() {
                     </div>
 
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
-                      <div className={styles.priceLabel}>EXTENDED</div>
+                      <div className={styles.priceLabel}>ENHANCED</div>
                       <div className={styles.priceDetails}>
                         <span className={styles.priceAmount}>£2,100</span>
                         <span className={styles.priceDesc}>
-                          Up to 5 hours of documentation
+                          5 hours of documentation
                         </span>
                         <span className={styles.availability}>
                           Limited peak season availability
@@ -495,10 +495,10 @@ export default function PricingPage() {
                       <div className={styles.destinationRegion}>EUROPE</div>
                       <div className={styles.destinationDetails}>
                         <span className={styles.destinationPrice}>
-                          From £4,250
+                          From £4,500
                         </span>
                         <span className={styles.destinationDesc}>
-                          Up to 9 hours of documentation
+                          10 hours of documentation
                         </span>
                       </div>
                     </div>
@@ -509,10 +509,10 @@ export default function PricingPage() {
                       <div className={styles.destinationRegion}>WORLDWIDE</div>
                       <div className={styles.destinationDetails}>
                         <span className={styles.destinationPrice}>
-                          From £4,750
+                          From £5,000
                         </span>
                         <span className={styles.destinationDesc}>
-                          Up to 9 hours of documentation
+                          10 hours of documentation
                         </span>
                       </div>
                     </div>
@@ -569,6 +569,37 @@ export default function PricingPage() {
                   </h2>
 
                   <div className={styles.inclusionsList}>
+                    <div
+                      className={`${styles.inclusionRow} ${styles.animateIn} ${styles.bespokeExtras}`}
+                    >
+                      <div className={styles.inclusionLabel}>
+                        BESPOKE EXTRAS
+                      </div>
+                      <div className={styles.inclusionDesc}>
+                        Create a bespoke package tailored to your perfect day
+                        with premium add-ons:
+                        <ul className={styles.bespokeList}>
+                          <li>
+                            Additional hours from <strong>£375 per hour</strong>
+                          </li>
+                          <li>
+                            Extra rolls of film from{" "}
+                            <strong>£50 per roll</strong>
+                          </li>
+                          <li>
+                            Second photographers from <strong>£750</strong>
+                          </li>
+                          <li>
+                            Heritage albums from <strong>£500</strong>
+                          </li>
+                          <li>
+                            Extensive 12 hour package from{" "}
+                            <strong>£4,500</strong>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
                     <div
                       className={`${styles.inclusionRow} ${styles.animateIn}`}
                     >
