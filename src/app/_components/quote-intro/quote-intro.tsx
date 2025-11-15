@@ -154,7 +154,8 @@ export default function QuoteIntro() {
               <p ref={paragraphLeftRef} className={styles.paragraph}>
                 I&apos;m a Bristol wedding photographer, London wedding
                 photographer & destination wedding photographer. Drawn towards
-                creative and carefree couples.
+                creative and carefree couples who favour authenticity and
+                connection.
                 <br />
                 <br />I love to create wedding images that reflect not just how
                 you look, but who you truly are - relaxed, authentic &
@@ -167,9 +168,12 @@ export default function QuoteIntro() {
               <p ref={paragraphRightRef} className={styles.paragraph}>
                 Rather than orchestrating moments, I move through your day as a
                 trusted presence, observing how you share it with the people who
-                matter most. Your story writes itself while I document each
-                moment as it happens, the stolen glances, the heartfelt
-                connections capturing what makes your wedding uniquely yours.
+                matter most. Waiting for right moments rather than creating
+                them. Your story writes itself while I document each moment as
+                it happens, embracing the imperfections and beautifully chaotic
+                nature of the day, capturing the stolen glances, fleeting
+                moments and heartfelt connections that make your wedding
+                uniquely yours.
               </p>
 
               <p

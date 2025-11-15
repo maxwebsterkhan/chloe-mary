@@ -208,13 +208,17 @@ export default function AboutStory() {
           <div className={styles.philosophyContent}>
             <blockquote className={styles.quote}>
               <p className={styles.quoteText}>
-                &quot;My style blends a relaxed documentary approach with an
-                artful, editorial edge that resonates with modern lovers across
-                the UK and beyond. On your wedding day, I won&apos;t be
-                directing you or orchestrating moments; I&apos;ll be your
-                trusted partner capturing the joy, emotions, and connections as
-                they naturally unfold, aiding with a little artistic direction
-                if needed or wanted.&quot;
+                &quot;My style blends a documentary approach with an artful edge
+                appealing to couples planning a modern style of celebration who
+                want to prioritize the experience of the day rather than
+                performing for a camera. Combining a calm unobtrusive presence
+                with images that feel thoughtful and creatively considered.
+                <br />
+                <br />
+                On your day I won&apos;t choreograph moments, I will be your trusted
+                partner capturing the joy, emotions and connections as they
+                naturally unfold with artistic direction if needed or
+                wanted.&quot;
               </p>
             </blockquote>
           </div>
