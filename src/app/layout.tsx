@@ -3,8 +3,7 @@ import { Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./styles/globals.scss";
 import LenisProvider from "./_components/lenis-provider";
-import BoldNav from "./_components/navigation/bold-nav";
-import ThemeToggle from "./_components/theme-toggle/theme-toggle";
+import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
 
 const interTight = Inter_Tight({
@@ -188,8 +187,7 @@ export default function RootLayout({
           }}
         />
         <LenisProvider>
-          <BoldNav />
-          <ThemeToggle />
+          <Navigation />
           <div id="boundary">{children}</div>
           <Footer />
         </LenisProvider>

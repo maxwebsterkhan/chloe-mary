@@ -1,34 +1,41 @@
 .btn-darklight {
   color: #131313;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.25em;
-  outline: 0 transparent;
+  background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
   justify-content: center;
   align-items: center;
-  padding: 0 0.75em;
+  padding: 0;
   display: flex;
-  position: fixed;
-  top: 2em;
-  left: 2em;
-  z-index: 499;
-  overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  box-shadow: none;
   transition: color 0.4s cubic-bezier(0.35, 1, 0.6, 1);
+  overflow: hidden;
+}
+
+.btn-darklight:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 /* Invert icon color in dark mode */
 :global([data-theme-status="dark"]) .btn-darklight {
   color: #ffffff;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .btn-darklight__icon {
   width: 1.25em;
   height: 100%;
-  margin-right: 0.25em;
+  margin-right: 0;
   position: relative;
 }
 

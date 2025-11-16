@@ -21,13 +21,10 @@ const pageLinks: FooterLink[] = [
 
 const socialLinks: FooterLink[] = [
   { href: "https://instagram.com/bychloemary", label: "Instagram" },
-  { href: "#", label: "LinkedIn" },
-  { href: "#", label: "X/Twitter" },
 ];
 
 const contactLinks: FooterLink[] = [
   { href: "mailto:hello@chloemary.com", label: "hello@chloemary.com" },
-  { href: "tel:+441234567890", label: "+44 12 34 56 78 90" },
 ];
 
 export default function Footer() {
@@ -36,61 +33,50 @@ export default function Footer() {
   const footerDarkRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
     const footerWrap = footerWrapRef.current;
-    if (!footerWrap) return;
-
     const inner = footerInnerRef.current;
     const dark = footerDarkRef.current;
 
-    const scrollTriggerConfig = {
-      trigger: footerWrap,
-      start: "clamp(top bottom)",
-      end: "clamp(top top)",
-      scrub: true,
-    };
+    if (!footerWrap) return;
 
     const tl = gsap.timeline({
-      scrollTrigger: scrollTriggerConfig,
+      scrollTrigger: {
+        trigger: footerWrap,
+        start: "clamp(top bottom)",
+        end: "clamp(top top)",
+        scrub: true,
+      },
     });
 
     if (inner) {
-      tl.from(inner, {
-        yPercent: -25,
-        ease: "linear",
-      });
+      tl.from(inner, { yPercent: -25, ease: "linear" });
     }
 
     if (dark) {
-      tl.from(
-        dark,
-        {
-          opacity: 0.5,
-          ease: "linear",
-        },
-        "<"
-      );
+      tl.from(dark, { opacity: 0.5, ease: "linear" }, "<");
     }
 
-    // Cleanup
     return () => {
       tl.kill();
       ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === footerWrap) {
-          trigger.kill();
-        }
+        if (trigger.vars.trigger === footerWrap) trigger.kill();
       });
     };
   }, []);
 
   return (
-    <div ref={footerWrapRef} data-footer-parallax className={styles.footer__wrap}>
+    <div
+      ref={footerWrapRef}
+      data-footer-parallax
+      className={styles.footer__wrap}
+    >
       <footer
         ref={footerInnerRef}
         data-footer-parallax-inner
         className={styles.footer}
+        aria-label="Site footer"
       >
         <div className={`container ${styles.footer__container}`}>
           <div className={styles.footer__linksRow}>
@@ -109,52 +95,50 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-
             <div className={styles.footer__col}>
               <p className={styles.footer__eyebrow}>( Socials )</p>
               <div className={styles.footer__links}>
                 {socialLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.label}
                     href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     data-underline-link
                     className={styles.footer__a}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
-
             <div className={styles.footer__col}>
               <p className={styles.footer__eyebrow}>( Contact )</p>
               <div className={styles.footer__links}>
                 {contactLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.label}
                     href={link.href}
                     data-underline-link
                     className={styles.footer__a}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
           </div>
-
-          <div className={styles.footer__logoRow}>
-            <p className={styles.footer__tagline}>Let's Create Something Beautiful</p>
-          </div>
+        </div>
+        <div className={styles.footer__taglineWrapper}>
+          <p className={styles.footer__taglineSmall}>Let&apos;s Create</p>
+          <p className={styles.footer__taglineLarge}>Something Beautiful</p>
         </div>
       </footer>
       <div
         ref={footerDarkRef}
         data-footer-parallax-dark
         className={styles.footer__dark}
-      ></div>
+      />
     </div>
   );
 }
