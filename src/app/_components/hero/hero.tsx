@@ -62,6 +62,9 @@ export default function Hero({ imageUrl }: HeroProps) {
       });
 
       // Loop through each wrapper element
+      const isMobile = window.innerWidth <= 767;
+      const scrollDistanceMultiplier = isMobile ? 0.6 : 1; // Reduce scroll distance on mobile
+
       wrapperElements.forEach((element, index) => {
         const nextIndex = index + 1;
         if (nextIndex < wrapperElements.length) {
@@ -76,7 +79,8 @@ export default function Hero({ imageUrl }: HeroProps) {
             nextRect.top + scrollY + nextWrapperEl.offsetHeight / 2;
           const thisDistance =
             thisRect.top + scrollY + currentElement.offsetHeight / 2;
-          const offset = Math.abs(nextDistance - thisDistance);
+          const offset =
+            Math.abs(nextDistance - thisDistance) * scrollDistanceMultiplier;
 
           // Add the Flip.fit tween to the timeline
           const flipTween = Flip.fit(targetEl, nextWrapperEl, {
@@ -153,39 +157,52 @@ export default function Hero({ imageUrl }: HeroProps) {
   return (
     <div ref={heroRef} className={styles.hero__wrapper}>
       <section className={styles.hero__header}>
-        <span className={styles.hero__eyebrow}>Authentic Love Stories</span>
-        <h1 className={styles.hero__h1}>told by you</h1>
+        <div className={`container ${styles.hero__container}`}>
+          <span className={styles.hero__eyebrow}>Authentic Love Stories</span>
+          <h1 className={styles.hero__h1}>told by you</h1>
 
-        <div className={styles.hero__smallBox}>
-          <div className={styles.hero__before}></div>
-          <div data-flip-element="wrapper" className={styles.hero__flipWrapper}>
+          <div className={styles.hero__smallBox}>
+            <div className={styles.hero__before}></div>
             <div
-              ref={targetRef}
-              data-flip-element="target"
-              className={styles.hero__scaling}
+              data-flip-element="wrapper"
+              className={styles.hero__flipWrapper}
             >
-              <Image
-                src={imageUrl}
-                alt="Wedding photography"
-                fill
-                className={styles.hero__image}
-                priority
-                sizes="(max-width: 767px) 20em, 28em"
-              />
+              <div
+                ref={targetRef}
+                data-flip-element="target"
+                className={styles.hero__scaling}
+              >
+                <Image
+                  src={imageUrl}
+                  alt="Wedding photography"
+                  fill
+                  className={styles.hero__image}
+                  priority
+                  sizes="(max-width: 767px) 15em, 20em"
+                />
+              </div>
             </div>
           </div>
+          <h2 className={styles.hero__caption}>Captured by Chloe Mary</h2>
         </div>
       </section>
 
       <section className={styles.hero__video}>
-        <div className={styles.hero__bigBox}>
-          <div className={styles.hero__before}></div>
-          <div
-            data-flip-element="wrapper"
-            className={styles.hero__flipWrapper}
-          ></div>
+        <div className={`container ${styles.hero__container}`}>
+          <div className={styles.hero__bigBox}>
+            <div className={styles.hero__before}></div>
+            <div
+              data-flip-element="wrapper"
+              className={styles.hero__flipWrapper}
+            ></div>
+          </div>
         </div>
-        <h2 className={styles.hero__caption}>Captured by Chloe Mary</h2>
+        <div className={`container ${styles.hero__container}`}>
+          <div className={styles.hero__memento}>
+            <p className={styles.hero__mementoLatin}>MEMENTO VIVERE</p>
+            <p className={styles.hero__mementoEnglish}>REMEMBER TO LIVE</p>
+          </div>
+        </div>
       </section>
     </div>
   );
