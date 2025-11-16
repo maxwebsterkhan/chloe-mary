@@ -95,7 +95,6 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
       attributeFilter: ["data-theme-status"],
     });
 
-    // Add the link to all elements with [data-whatsapp-modal-link] attribute
     const linkElements = modalRef.current.querySelectorAll(
       "[data-whatsapp-modal-link]"
     );
@@ -107,7 +106,6 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
       }
     });
 
-    // Watch for modal status changes to control Lenis
     const modalStatusObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
