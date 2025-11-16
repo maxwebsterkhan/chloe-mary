@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedUnderline from "../animated-underline/animated-underline";
+import WhatsAppModal from "../whatsapp-modal/whatsapp-modal";
+import WhatsAppTrigger from "../whatsapp-modal/whatsapp-trigger";
 import styles from "./footer.module.scss";
 
 interface FooterLink {
@@ -138,6 +140,10 @@ export default function Footer() {
                     {link.label}
                   </AnimatedUnderline>
                 ))}
+                <WhatsAppTrigger
+                  whatsappUrl="https://wa.me/1234567890"
+                  className={styles.footer__a}
+                />
               </div>
             </div>
           </div>
@@ -152,6 +158,7 @@ export default function Footer() {
         data-footer-parallax-dark
         className={styles.footer__dark}
       />
+      <WhatsAppModal whatsappUrl="https://wa.me/1234567890" />
     </div>
   );
 }
