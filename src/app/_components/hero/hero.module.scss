@@ -57,7 +57,6 @@
 }
 
 .hero__memento {
-  text-align: center;
   margin-top: clamp(2em, 4vw, 4em);
   display: flex;
   flex-direction: column;
@@ -65,6 +64,7 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  align-items: flex-end;
 }
 
 .hero__mementoLatin {
@@ -78,6 +78,7 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-width: 100%;
+  text-align: right;
 }
 
 .hero__mementoEnglish {
@@ -90,6 +91,7 @@
   letter-spacing: 0.15em;
   font-family: var(--font-instrument-sans), Arial, sans-serif;
   max-width: 100%;
+  text-align: right;
 }
 
 .hero__video {
