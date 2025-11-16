@@ -5,7 +5,7 @@
 
 .hero__header {
   min-height: 100vh;
-  padding: 25vh 0 20vh;
+  padding: 20vh 0 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +21,6 @@
   display: flex;
   width: 100%;
 }
-
 
 .hero__h1 {
   text-align: center;
@@ -113,7 +112,6 @@
   margin-top: clamp(5vh, 10vw, 25vh);
 }
 
-
 .hero__bigBox {
   border-radius: 0.25em;
   width: 100%;
@@ -184,6 +182,4 @@
   .hero__smallBox {
     width: 15em;
   }
-
 }
-

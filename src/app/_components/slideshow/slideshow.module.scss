@@ -1,0 +1,127 @@
+.imgSlider {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  border-radius: 0.5em;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+.imgSliderList {
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  overflow: hidden;
+}
+
+.imgSlide {
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  grid-area: 1 / 1 / -1 / -1;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+}
+
+.imgSlide.isCurrent {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.imgSlideInner {
+  object-fit: cover;
+  will-change: transform;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.imgSliderNav {
+  z-index: 2;
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem;
+  pointer-events: none;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 95vw;
+  display: flex;
+  position: absolute;
+  bottom: 2rem;
+}
+
+.imgSliderThumb {
+  aspect-ratio: 1.5;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.3125rem;
+  width: 7rem;
+  transition: border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.imgSliderThumb:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.imgSliderThumb.isCurrent {
+  border-color: #fff;
+}
+
+/* Dark mode styles */
+:global([data-theme-status="dark"]) .imgSliderThumb {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+:global([data-theme-status="dark"]) .imgSliderThumb:hover {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme-status="dark"]) .imgSliderThumb.isCurrent {
+  border-color: var(--theme-text);
+}
+
+.sliderThumbImg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 991px) {
+  .imgSliderList {
+    width: 100%;
+  }
+
+  .imgSliderThumb {
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .imgSliderNav {
+    flex-flow: wrap;
+  }
+
+  .imgSliderThumb {
+    border-radius: 0.25rem;
+    width: 5rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .imgSliderThumb {
+    width: 4.5rem;
+  }
+}
