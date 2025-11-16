@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedUnderline from "../animated-underline/animated-underline";
@@ -31,6 +32,7 @@ export default function Footer() {
   const footerWrapRef = useRef<HTMLDivElement>(null);
   const footerInnerRef = useRef<HTMLElement>(null);
   const footerDarkRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -83,16 +85,27 @@ export default function Footer() {
             <div className={styles.footer__col}>
               <p className={styles.footer__eyebrow}>Pages</p>
               <div className={styles.footer__links}>
-                {pageLinks.map((link) => (
-                  <AnimatedUnderline
-                    key={link.label}
-                    href={link.href}
-                    useNextLink={true}
-                    className={styles.footer__a}
-                  >
-                    {link.label}
-                  </AnimatedUnderline>
-                ))}
+                {pageLinks.map((link) => {
+                  const isCurrent = pathname === link.href;
+                  return isCurrent ? (
+                    <span
+                      key={link.label}
+                      aria-current="page"
+                      className={styles.footer__a}
+                    >
+                      {link.label}
+                    </span>
+                  ) : (
+                    <AnimatedUnderline
+                      key={link.label}
+                      href={link.href}
+                      useNextLink={true}
+                      className={styles.footer__a}
+                    >
+                      {link.label}
+                    </AnimatedUnderline>
+                  );
+                })}
               </div>
             </div>
             <div className={styles.footer__col}>

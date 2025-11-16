@@ -110,17 +110,27 @@ export default function Navigation() {
                   className={styles["hamburger-nav__li"]}
                   role="none"
                 >
-                  <AnimatedUnderline
-                    href={link.href}
-                    useNextLink={true}
-                    aria-current={isCurrent ? "page" : undefined}
-                    className={styles["hamburger-nav__a"]}
-                    onClick={closeNavigation}
-                    role="menuitem"
-                    tabIndex={isActive ? 0 : -1}
-                  >
-                    {link.label}
-                  </AnimatedUnderline>
+                  {isCurrent ? (
+                    <span
+                      aria-current="page"
+                      className={styles["hamburger-nav__a"]}
+                      role="menuitem"
+                      tabIndex={isActive ? 0 : -1}
+                    >
+                      {link.label}
+                    </span>
+                  ) : (
+                    <AnimatedUnderline
+                      href={link.href}
+                      useNextLink={true}
+                      className={styles["hamburger-nav__a"]}
+                      onClick={closeNavigation}
+                      role="menuitem"
+                      tabIndex={isActive ? 0 : -1}
+                    >
+                      {link.label}
+                    </AnimatedUnderline>
+                  )}
                 </li>
               );
             })}
