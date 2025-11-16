@@ -1,10 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
+import { Bebas_Neue, Instrument_Sans, Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./styles/globals.scss";
 import LenisProvider from "./_components/lenis-provider";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
+import PageTransition from "./_components/page-transition/page-transition";
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -170,7 +184,7 @@ export default function RootLayout({
   return (
     <html lang="en-GB" data-theme-status="light">
       <body
-        className={`${interTight.variable} ${geistMono.variable} ${poppins.variable}`}
+        className={`${bebasNeue.className} ${instrumentSans.variable} ${interTight.variable} ${geistMono.variable} ${poppins.variable}`}
       >
         {/* Structured Data - Organization Schema */}
         <script
@@ -187,6 +201,7 @@ export default function RootLayout({
           }}
         />
         <LenisProvider>
+          <PageTransition />
           <Navigation />
           <div id="boundary">{children}</div>
           <Footer />

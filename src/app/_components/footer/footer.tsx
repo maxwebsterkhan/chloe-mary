@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AnimatedUnderline from "../animated-underline/animated-underline";
 import styles from "./footer.module.scss";
 
 interface FooterLink {
@@ -81,49 +81,49 @@ export default function Footer() {
         <div className={`container ${styles.footer__container}`}>
           <div className={styles.footer__linksRow}>
             <div className={styles.footer__col}>
-              <p className={styles.footer__eyebrow}>( Pages )</p>
+              <p className={styles.footer__eyebrow}>Pages</p>
               <div className={styles.footer__links}>
                 {pageLinks.map((link) => (
-                  <Link
+                  <AnimatedUnderline
                     key={link.label}
                     href={link.href}
-                    data-underline-link
+                    useNextLink={true}
                     className={styles.footer__a}
                   >
                     {link.label}
-                  </Link>
+                  </AnimatedUnderline>
                 ))}
               </div>
             </div>
             <div className={styles.footer__col}>
-              <p className={styles.footer__eyebrow}>( Socials )</p>
+              <p className={styles.footer__eyebrow}>Socials</p>
               <div className={styles.footer__links}>
                 {socialLinks.map((link) => (
-                  <a
+                  <AnimatedUnderline
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-underline-link
+                    as="a"
                     className={styles.footer__a}
                   >
                     {link.label}
-                  </a>
+                  </AnimatedUnderline>
                 ))}
               </div>
             </div>
             <div className={styles.footer__col}>
-              <p className={styles.footer__eyebrow}>( Contact )</p>
+              <p className={styles.footer__eyebrow}>Contact</p>
               <div className={styles.footer__links}>
                 {contactLinks.map((link) => (
-                  <a
+                  <AnimatedUnderline
                     key={link.label}
                     href={link.href}
-                    data-underline-link
+                    as="a"
                     className={styles.footer__a}
                   >
                     {link.label}
-                  </a>
+                  </AnimatedUnderline>
                 ))}
               </div>
             </div>

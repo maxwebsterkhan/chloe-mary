@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "../theme-toggle/theme-toggle";
+import AnimatedUnderline from "../animated-underline/animated-underline";
 import styles from "./navigation.module.scss";
 
 interface NavLink {
@@ -110,19 +110,17 @@ export default function Navigation() {
                   className={styles["hamburger-nav__li"]}
                   role="none"
                 >
-                  <Link
+                  <AnimatedUnderline
                     href={link.href}
+                    useNextLink={true}
                     aria-current={isCurrent ? "page" : undefined}
                     className={styles["hamburger-nav__a"]}
                     onClick={closeNavigation}
                     role="menuitem"
                     tabIndex={isActive ? 0 : -1}
                   >
-                    <span className={styles["hamburger-nav__p"]}>
-                      {link.label}
-                    </span>
-                    <span className={styles["hamburger-nav__dot"]}></span>
-                  </Link>
+                    {link.label}
+                  </AnimatedUnderline>
                 </li>
               );
             })}

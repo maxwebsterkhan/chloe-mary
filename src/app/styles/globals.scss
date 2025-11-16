@@ -131,6 +131,15 @@
   /* Theme Tokens - Light Mode (Default) */
   --theme-bg: var(--light-bg);
   --theme-text: var(--light-text);
+  
+  /* Navigation Colors - Light Mode (Default) */
+  --nav-text: var(--light-nav-text);
+  --nav-text-secondary: var(--light-nav-text-secondary);
+  --nav-active: var(--light-nav-active);
+  --nav-label: var(--light-nav-label);
+
+  /* Transition Color - Light Mode (Default) */
+  --transition-color: var(--light-transition-color);
 }
 
 /* Theme Tokens */
@@ -138,15 +147,42 @@
   /* Light Mode Colors */
   --light-bg: #ffffff;
   --light-text: #000000;
+  
+  /* Light Mode Navigation Colors */
+  --light-nav-text: #1a1a1a;
+  --light-nav-text-secondary: #4a4a4a;
+  --light-nav-active: #6a6a6a;
+  --light-nav-label: #5a5a5a;
+
+  /* Light Mode Transition Color */
+  --light-transition-color: #ff4c24;
 
   /* Dark Mode Colors */
   --dark-bg: #070915;
   --dark-text: #ffffff;
+  
+  /* Dark Mode Navigation Colors */
+  --dark-nav-text: #ffffff;
+  --dark-nav-text-secondary: #b8b8b8;
+  --dark-nav-active: #888888;
+  --dark-nav-label: #a0a0a0;
+
+  /* Dark Mode Transition Color */
+  --dark-transition-color: #ff4c24;
 }
 
 [data-theme-status="dark"] {
   --theme-bg: var(--dark-bg);
   --theme-text: var(--dark-text);
+  
+  /* Navigation Colors - Dark Mode */
+  --nav-text: var(--dark-nav-text);
+  --nav-text-secondary: var(--dark-nav-text-secondary);
+  --nav-active: var(--dark-nav-active);
+  --nav-label: var(--dark-nav-label);
+
+  /* Transition Color - Dark Mode */
+  --transition-color: var(--dark-transition-color);
 }
 
 /* Tablet */
@@ -207,33 +243,6 @@ body {
 [data-theme-status] body {
   background-color: var(--theme-bg);
   color: var(--theme-text);
-}
-
-/* Underline Link Animation */
-[data-underline-link] {
-  text-decoration: none;
-  position: relative;
-}
-
-[data-underline-link]::before {
-  content: "";
-  position: absolute;
-  bottom: -0.0625em;
-  left: 0;
-  width: 100%;
-  height: 0.1em;
-  background-color: currentColor;
-  transition: transform 0.735s cubic-bezier(0.625, 0.05, 0, 1);
-  transform-origin: right;
-  transform: scaleX(0) rotate(0.001deg);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  [data-hover]:hover [data-underline-link]::before,
-  [data-underline-link]:hover::before {
-    transform-origin: left;
-    transform: scaleX(1) rotate(0.001deg);
-  }
 }
 
 /* Page Content Wrapper */

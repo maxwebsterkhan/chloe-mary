@@ -6,13 +6,12 @@
 .footer {
   grid-column-gap: 7.5em;
   grid-row-gap: 7.5em;
-  letter-spacing: -0.02em;
   flex-flow: column;
   justify-content: space-between;
   min-height: 100svh;
   padding-top: calc(var(--size-font) * 2.5);
   padding-bottom: calc(var(--size-font) * 2.5);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   position: relative;
   color: var(--theme-text);
@@ -74,16 +73,21 @@
 }
 
 .footer__eyebrow {
-  opacity: 0.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin-bottom: 0;
-  font-size: 1.3125em;
-  font-weight: 600;
+  font-family: var(--font-instrument-sans), Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--nav-label);
+  transition: color 0.4s cubic-bezier(0.35, 1, 0.6, 1);
 }
 
 .footer__taglineSmall {
   opacity: 0.5;
+  font-family: var(--font-instrument-sans), Arial, sans-serif;
   font-size: 1.3125em;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
   margin: 0;
   margin-bottom: 0.25em;
@@ -105,10 +109,9 @@
 
 .footer__taglineLarge {
   font-size: clamp(2rem, 8vw, 10rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
   margin: 0;
-  letter-spacing: -0.03em;
   width: 100%;
   word-break: break-word;
   overflow-wrap: break-word;
