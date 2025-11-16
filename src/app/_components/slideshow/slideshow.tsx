@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
 import styles from "./slideshow.module.scss";
 
-gsap.registerPlugin(Observer, CustomEase);
+gsap.registerPlugin(Observer, ScrollTrigger, CustomEase);
 CustomEase.create("slideshow-wipe", "0.6, 0.08, 0.02, 0.99");
 
 interface SlideshowImage {
@@ -21,6 +22,7 @@ interface SlideshowProps {
 export default function Slideshow({ images }: SlideshowProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<Observer | null>(null);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -75,12 +77,12 @@ export default function Slideshow({ images }: SlideshowProps) {
         targetIndex !== null && targetIndex !== undefined
           ? targetIndex
           : direction === 1
-            ? current < length - 1
-              ? current + 1
-              : 0
-            : current > 0
-              ? current - 1
-              : length - 1;
+          ? current < length - 1
+            ? current + 1
+            : 0
+          : current > 0
+          ? current - 1
+          : length - 1;
 
       const currentSlide = ui.slides[previous];
       const currentInner = ui.inner[previous];
@@ -128,7 +130,10 @@ export default function Slideshow({ images }: SlideshowProps) {
 
     function onClick(event: Event) {
       const target = event.currentTarget as HTMLElement;
-      const targetIndex = parseInt(target.getAttribute("data-index") || "0", 10);
+      const targetIndex = parseInt(
+        target.getAttribute("data-index") || "0",
+        10
+      );
       if (targetIndex === current || animating) return;
       const direction = targetIndex > current ? 1 : -1;
       navigate(direction, targetIndex);
@@ -165,10 +170,50 @@ export default function Slideshow({ images }: SlideshowProps) {
 
     observerRef.current = observer;
 
+    // Create ScrollTrigger to pin and control horizontal scrolling
+    const scrollDistance = window.innerHeight * 0.6 * length;
+    let lastTriggeredIndex = 0;
+
+    scrollTriggerRef.current = ScrollTrigger.create({
+      trigger: el,
+      start: "top top",
+      end: `+=${scrollDistance}`,
+      pin: true,
+      scrub: 1,
+      snap: {
+        snapTo: (progress) => {
+          // Find the closest snap point
+          const targetIndex = Math.round(progress * (length - 1));
+          return targetIndex / (length - 1 || 1);
+        },
+        duration: { min: 0.2, max: 0.6 },
+        ease: "power1.inOut",
+      },
+      onUpdate: (self) => {
+        // Calculate which slide should be active based on scroll progress
+        const progress = self.progress;
+        const targetIndex = Math.min(
+          Math.round(progress * (length - 1)),
+          length - 1
+        );
+
+        // Only trigger navigation when we cross into a new slide section
+        if (targetIndex !== lastTriggeredIndex && targetIndex !== current) {
+          lastTriggeredIndex = targetIndex;
+          const direction = targetIndex > current ? 1 : -1;
+          navigate(direction, targetIndex);
+        }
+      },
+      invalidateOnRefresh: true,
+    });
+
     // Cleanup
     return () => {
       if (observerRef.current) {
         observerRef.current.kill();
+      }
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
       }
       ui.thumbs.forEach((thumb) => {
         thumb.removeEventListener("click", onClick);
@@ -220,4 +265,3 @@ export default function Slideshow({ images }: SlideshowProps) {
     </div>
   );
 }
-
