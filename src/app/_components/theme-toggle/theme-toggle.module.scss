@@ -1,0 +1,96 @@
+.btn-darklight {
+  color: #131313;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.25em;
+  outline: 0 transparent;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.75em;
+  display: flex;
+  position: fixed;
+  top: 2em;
+  left: 2em;
+  z-index: 499;
+  overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  transition: color 0.4s cubic-bezier(0.35, 1, 0.6, 1);
+}
+
+/* Invert icon color in dark mode */
+:global([data-theme-status="dark"]) .btn-darklight {
+  color: #ffffff;
+}
+
+.btn-darklight__icon {
+  width: 1.25em;
+  height: 100%;
+  margin-right: 0.25em;
+  position: relative;
+}
+
+.btn-darklight__word {
+  position: relative;
+}
+
+.btn-darklight__word-p {
+  margin-top: 0.05em;
+  margin-bottom: 0;
+  line-height: 1.2;
+  position: relative;
+}
+
+.btn-darklight__word-p.is--absolute {
+  opacity: 0;
+  letter-spacing: 0.025em;
+  position: absolute;
+  top: 0;
+}
+
+.btn-darklight__icon-box {
+  height: 100%;
+  padding-top: 0.66em;
+  padding-bottom: 0.66em;
+  display: flex;
+  position: relative;
+}
+
+.btn-darklight__icon-box.is--absolute {
+  position: absolute;
+}
+
+/* Button Word */
+:global([data-theme-status="dark"])
+  .btn-darklight
+  .btn-darklight__word
+  .btn-darklight__word-p,
+:global([data-theme-status="light"])
+  .btn-darklight
+  .btn-darklight__word
+  .btn-darklight__word-p.is--absolute {
+  opacity: 0;
+}
+
+:global([data-theme-status="light"])
+  .btn-darklight
+  .btn-darklight__word
+  .btn-darklight__word-p,
+:global([data-theme-status="dark"])
+  .btn-darklight
+  .btn-darklight__word
+  .btn-darklight__word-p.is--absolute {
+  opacity: 1;
+}
+
+/* Button Icon */
+.btn-darklight .btn-darklight__icon-box {
+  transition: transform 0.8s cubic-bezier(0.35, 1.5, 0.6, 1);
+  transform: translateY(0%) rotate(-90deg);
+}
+
+:global([data-theme-status="dark"]) .btn-darklight .btn-darklight__icon-box {
+  transform: translateY(-100%) rotate(0.001deg);
+}
