@@ -15,8 +15,12 @@
   grid-column-gap: 1.25em;
   grid-row-gap: 1.25em;
   pointer-events: auto;
-  background-color: #f8f6f3;
-  border-radius: 1.5em;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.25em;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
   flex-flow: column;
   align-items: center;
   width: 20em;
@@ -30,9 +34,9 @@
 
 :global([data-theme-status="dark"]) .whatsappModal__card {
   background-color: rgba(7, 9, 21, 0.95);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 :global([data-whatsapp-modal-status="active"]) .whatsappModal__card {
@@ -154,10 +158,9 @@
 }
 
 .whatsappModal__dark {
-  transition: all 0.6s cubic-bezier(0.625, 0.05, 0, 1),
-    background-color 0.4s cubic-bezier(0.35, 1, 0.6, 1);
+  transition: all 0.7s cubic-bezier(0.5, 0.5, 0, 1);
   pointer-events: auto;
-  background-color: #0003;
+  background-color: #000;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -167,12 +170,8 @@
   visibility: hidden;
 }
 
-:global([data-theme-status="dark"]) .whatsappModal__dark {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
 :global([data-whatsapp-modal-status="active"]) .whatsappModal__dark {
-  opacity: 1;
+  opacity: 0.33;
   visibility: visible;
 }
 

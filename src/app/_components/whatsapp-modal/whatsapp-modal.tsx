@@ -206,9 +206,9 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
             className={styles.whatsappModal__qrCanvas}
           />
           <div className={styles.whatsappModal__text}>
-            <h2 className={styles.whatsappModal__h2}>WhatsApp us</h2>
+            <h2 className={styles.whatsappModal__h2}>WhatsApp me</h2>
             <p className={styles.whatsappModal__p}>
-              Scan the QR Code to chat with our staff via your smartphone.
+              Scan the QR Code to chat with me on WhatsApp.
             </p>
           </div>
           <a
@@ -219,7 +219,7 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
             className={styles.whatsappModal__btn}
           >
             <span className={styles.whatsappModal__btnSpan}>
-              or chat via desktop
+              or chat via WhatsApp Web
             </span>
           </a>
           <div
