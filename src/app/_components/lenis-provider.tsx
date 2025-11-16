@@ -5,11 +5,6 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 /**
  * Global Lenis Smooth Scroll Provider
  *
@@ -65,26 +60,15 @@ export default function LenisProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    // Register ScrollTrigger plugin (client-side only)
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Integrate Lenis with GSAP ScrollTrigger
+    // Lenis (with GSAP ScrollTrigger)
+    const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
-
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-
     gsap.ticker.lagSmoothing(0);
 
     // Make lenis instance globally available for stop/start/scrollTo
@@ -103,4 +87,3 @@ export default function LenisProvider({
 
   return <>{children}</>;
 }
-
