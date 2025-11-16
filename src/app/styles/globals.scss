@@ -1,66 +1,59 @@
-@use "../_styles/breakpoints" as *;
-@use "../_styles/tokens" as tokens;
-
+/* Desktop */
 :root {
-  --color-primary: #0a0a0a;
-  --color-secondary: #f3f0eb;
-  --color-accent: #8b6d42;
-  --max-width: 1920px;
+  --size-unit: 16; /* body font-size in design - no px */
+  --size-container-ideal: 1440; /* screen-size in design - no px */
+  --size-container-min: 992px;
+  --size-container-max: 1920px;
+  --size-container: clamp(
+    var(--size-container-min),
+    100vw,
+    var(--size-container-max)
+  );
+  --size-font: calc(
+    var(--size-container) / (var(--size-container-ideal) / var(--size-unit))
+  );
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100%;
-  font-family: var(--font-poppins), sans-serif;
-  color: var(--color-primary);
-  background-color: var(--color-secondary);
-}
-
-body.scroll-locked {
-  position: fixed;
-  width: 100%;
-  overflow: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 tokens.$spacing-md;
-
-  @include breakpoint-down("tablet") {
-    padding: 0 tokens.$spacing-sm;
+/* Tablet */
+@media screen and (max-width: 991px) {
+  :root {
+    --size-container-ideal: 834; /* screen-size in design - no px */
+    --size-container-min: 768px;
+    --size-container-max: 991px;
   }
 }
 
-.container-fluid {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+/* Mobile Landscape */
+@media screen and (max-width: 767px) {
+  :root {
+    --size-container-ideal: 550; /* screen-size in design - no px */
+    --size-container-min: 480px;
+    --size-container-max: 767px;
+  }
 }
 
+/* Mobile Portrait */
+@media screen and (max-width: 479px) {
+  :root {
+    --size-container-ideal: 390; /* screen-size in design - no px */
+    --size-container-min: 320px;
+    --size-container-max: 479px;
+  }
+}
+
+/* Implementation */
 body {
-  position: relative;
-  width: 100%;
-  background-color: var(--color-secondary);
-  z-index: 1;
-  overflow-x: hidden;
+  font-size: var(--size-font);
 }
 
-.footer-element {
-  position: relative;
-  width: 100%;
-  z-index: -1;
-  box-sizing: border-box;
+.container {
+  max-width: var(--size-container);
+}
+
+.container.medium {
+  max-width: calc(var(--size-container) * 0.85);
+}
+
+.container.small {
+  max-width: calc(var(--size-container) * 0.7);
 }
