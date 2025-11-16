@@ -107,6 +107,34 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
       }
     });
 
+    // Watch for modal status changes to control Lenis
+    const modalStatusObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-whatsapp-modal-status"
+        ) {
+          const isActive =
+            modalRef.current?.getAttribute("data-whatsapp-modal-status") ===
+            "active";
+          if (window.lenis) {
+            if (isActive) {
+              window.lenis.stop();
+            } else {
+              window.lenis.start();
+            }
+          }
+        }
+      });
+    });
+
+    if (modalRef.current) {
+      modalStatusObserver.observe(modalRef.current, {
+        attributes: true,
+        attributeFilter: ["data-whatsapp-modal-status"],
+      });
+    }
+
     // Toggle open/close the modal
     const toggleButtons = modalRef.current.querySelectorAll(
       "[data-whatsapp-modal-toggle]"
@@ -144,6 +172,11 @@ export default function WhatsAppModal({ whatsappUrl }: WhatsAppModalProps) {
       });
       document.removeEventListener("keydown", handleKeyDown);
       observer.disconnect();
+      modalStatusObserver.disconnect();
+      // Ensure Lenis is started when component unmounts
+      if (window.lenis) {
+        window.lenis.start();
+      }
     };
   }, [whatsappUrl, scriptLoaded, generateQRCode]);
 

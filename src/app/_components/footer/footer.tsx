@@ -141,7 +141,7 @@ export default function Footer() {
                   </AnimatedUnderline>
                 ))}
                 <WhatsAppTrigger
-                  whatsappUrl="https://wa.me/1234567890"
+                  whatsappUrl="https://wa.me/447719011701"
                   className={styles.footer__a}
                 />
               </div>
@@ -158,7 +158,7 @@ export default function Footer() {
         data-footer-parallax-dark
         className={styles.footer__dark}
       />
-      <WhatsAppModal whatsappUrl="https://wa.me/1234567890" />
+      <WhatsAppModal whatsappUrl="https://wa.me/447719011701" />
     </div>
   );
 }
