@@ -23,6 +23,10 @@ export default function Slideshow({ images }: SlideshowProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<Observer | null>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const progressBarClickHandlerRef = useRef<
+    ((event: MouseEvent) => void) | null
+  >(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -37,25 +41,19 @@ export default function Slideshow({ images }: SlideshowProps) {
       inner: Array.from(
         el.querySelectorAll<HTMLElement>('[data-slideshow="parallax"]')
       ),
-      thumbs: Array.from(
-        el.querySelectorAll<HTMLElement>('[data-slideshow="thumb"]')
-      ),
     };
 
     let current = 0;
     const length = ui.slides.length;
     let animating = false;
     const animationDuration = 0.9;
+    let lastTriggeredIndex = 0;
 
     ui.slides.forEach((slide, index) => {
       slide.setAttribute("data-index", index.toString());
     });
-    ui.thumbs.forEach((thumb, index) => {
-      thumb.setAttribute("data-index", index.toString());
-    });
 
     ui.slides[current].classList.add(styles.isCurrent);
-    ui.thumbs[current].classList.add(styles.isCurrent);
 
     // Set initial positions for all slides
     ui.slides.forEach((slide, index) => {
@@ -98,8 +96,6 @@ export default function Slideshow({ images }: SlideshowProps) {
           onStart: function () {
             upcomingSlide.classList.add(styles.isCurrent);
             gsap.set(upcomingSlide, { opacity: 1 });
-            ui.thumbs[previous].classList.remove(styles.isCurrent);
-            ui.thumbs[current].classList.add(styles.isCurrent);
           },
           onComplete: function () {
             currentSlide.classList.remove(styles.isCurrent);
@@ -127,21 +123,6 @@ export default function Slideshow({ images }: SlideshowProps) {
           0
         );
     }
-
-    function onClick(event: Event) {
-      const target = event.currentTarget as HTMLElement;
-      const targetIndex = parseInt(
-        target.getAttribute("data-index") || "0",
-        10
-      );
-      if (targetIndex === current || animating) return;
-      const direction = targetIndex > current ? 1 : -1;
-      navigate(direction, targetIndex);
-    }
-
-    ui.thumbs.forEach((thumb) => {
-      thumb.addEventListener("click", onClick);
-    });
 
     const observer = Observer.create({
       target: el,
@@ -172,7 +153,6 @@ export default function Slideshow({ images }: SlideshowProps) {
 
     // Create ScrollTrigger to pin and control horizontal scrolling
     const scrollDistance = window.innerHeight * 0.6 * length;
-    let lastTriggeredIndex = 0;
 
     scrollTriggerRef.current = ScrollTrigger.create({
       trigger: el,
@@ -190,6 +170,9 @@ export default function Slideshow({ images }: SlideshowProps) {
         ease: "power1.inOut",
       },
       onUpdate: (self) => {
+        // Skip if animating
+        if (animating) return;
+
         // Calculate which slide should be active based on scroll progress
         const progress = self.progress;
         const targetIndex = Math.min(
@@ -207,6 +190,57 @@ export default function Slideshow({ images }: SlideshowProps) {
       invalidateOnRefresh: true,
     });
 
+    // Initialize progress bar
+    const progressBar = progressBarRef.current;
+    const progressBarWrap = el.querySelector<HTMLElement>(
+      `.${styles.progressBarWrap}`
+    );
+
+    if (progressBar && progressBarWrap) {
+      // Animate the progress bar based on the same ScrollTrigger progress
+      gsap.to(progressBar, {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top top",
+          end: `+=${scrollDistance}`,
+          scrub: 0.5,
+        },
+      });
+
+      // Click handler to scroll to a specific position
+      const handleProgressBarClick = (event: MouseEvent) => {
+        const clickX = event.clientX;
+        const progress = clickX / progressBarWrap.offsetWidth;
+
+        // Calculate the target scroll position within the slideshow section
+        // Get the element's position relative to document
+        const rect = el.getBoundingClientRect();
+        const elementTop = rect.top + window.scrollY;
+        const targetScrollPosition = elementTop + progress * scrollDistance;
+
+        const lenis = typeof window !== "undefined" ? window.lenis : null;
+        if (lenis) {
+          lenis.scrollTo(targetScrollPosition, {
+            duration: 0.725,
+            easing: (t: number) => {
+              // power3.out easing
+              return 1 - Math.pow(1 - t, 3);
+            },
+          });
+        } else {
+          window.scrollTo({
+            top: targetScrollPosition,
+            behavior: "smooth",
+          });
+        }
+      };
+
+      progressBarWrap.addEventListener("click", handleProgressBarClick);
+      progressBarClickHandlerRef.current = handleProgressBarClick;
+    }
+
     // Cleanup
     return () => {
       if (observerRef.current) {
@@ -215,14 +249,20 @@ export default function Slideshow({ images }: SlideshowProps) {
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
       }
-      ui.thumbs.forEach((thumb) => {
-        thumb.removeEventListener("click", onClick);
-      });
+      if (progressBarWrap && progressBarClickHandlerRef.current) {
+        progressBarWrap.removeEventListener(
+          "click",
+          progressBarClickHandlerRef.current
+        );
+      }
     };
   }, [images]);
 
   return (
     <div ref={containerRef} data-slideshow="wrap" className={styles.imgSlider}>
+      <div className={styles.progressBarWrap}>
+        <div ref={progressBarRef} className={styles.progressBar}></div>
+      </div>
       <div className={styles.imgSliderList}>
         {images.map((image, index) => (
           <div
@@ -239,25 +279,6 @@ export default function Slideshow({ images }: SlideshowProps) {
               src={image.src}
               draggable={false}
               className={styles.imgSlideInner}
-            />
-          </div>
-        ))}
-      </div>
-
-      <div className={styles.imgSliderNav}>
-        {images.map((image, index) => (
-          <div
-            key={`thumb-${index}`}
-            data-slideshow="thumb"
-            className={`${styles.imgSliderThumb} ${
-              index === 0 ? styles.isCurrent : ""
-            }`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={image.src}
-              alt={image.alt}
-              className={styles.sliderThumbImg}
             />
           </div>
         ))}

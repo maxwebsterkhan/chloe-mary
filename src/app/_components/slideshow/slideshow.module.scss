@@ -46,57 +46,33 @@
   position: absolute;
 }
 
-.imgSliderNav {
-  z-index: 2;
-  grid-column-gap: 0.5rem;
-  grid-row-gap: 0.5rem;
-  pointer-events: none;
-  flex-flow: wrap;
-  justify-content: center;
-  align-items: center;
-  max-width: 95vw;
-  display: flex;
-  position: absolute;
-  bottom: 2rem;
-}
-
-.imgSliderThumb {
-  aspect-ratio: 1.5;
-  pointer-events: auto;
+.progressBarWrap {
+  z-index: 10;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.3125rem;
-  width: 7rem;
-  transition: border-color 0.2s;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
+  height: 0.5rem;
+  transition: background-color 0.2s;
+  position: fixed;
+  inset: auto 0% 0%;
 }
 
-.imgSliderThumb:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+.progressBarWrap:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-.imgSliderThumb.isCurrent {
-  border-color: #fff;
+/* Dark mode hover */
+:global([data-theme-status="dark"]) .progressBarWrap:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Dark mode styles */
-:global([data-theme-status="dark"]) .imgSliderThumb {
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-:global([data-theme-status="dark"]) .imgSliderThumb:hover {
-  border-color: rgba(0, 0, 0, 0.4);
-}
-
-:global([data-theme-status="dark"]) .imgSliderThumb.isCurrent {
-  border-color: var(--theme-text);
-}
-
-.sliderThumbImg {
-  object-fit: cover;
+.progressBar {
+  transform-origin: 0%;
+  transform-style: preserve-3d;
+  background-color: #c79b71;
   width: 100%;
   height: 100%;
+  transform: scale3d(0, 1, 1);
+  transition: background-color 0.4s cubic-bezier(0.35, 1, 0.6, 1);
 }
 
 @media screen and (max-width: 991px) {
