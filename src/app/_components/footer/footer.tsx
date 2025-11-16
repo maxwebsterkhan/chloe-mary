@@ -24,6 +24,8 @@ const pageLinks: FooterLink[] = [
 
 const socialLinks: FooterLink[] = [
   { href: "https://instagram.com/bychloemary", label: "Instagram" },
+  { href: "https://uk.pinterest.com/bychloemary/", label: "Pinterest" },
+  { href: "https://www.tiktok.com/@bychloemary", label: "TikTok" },
 ];
 
 const contactLinks: FooterLink[] = [

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./page-transition.module.scss";
 
 export default function PageTransition() {
@@ -80,6 +81,12 @@ export default function PageTransition() {
         },
         onComplete: () => {
           gsap.set(transition, { display: "none" });
+          // Dispatch custom event to signal transition is complete
+          window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
+          // Refresh ScrollTrigger after transition completes to ensure animations recalculate
+          requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+          });
         },
         defaults: {
           ease: "linear",
@@ -161,6 +168,12 @@ export default function PageTransition() {
               router.push(destination);
               setTimeout(() => {
                 isTransitioningRef.current = false;
+                // Dispatch custom event to signal transition is complete
+                window.dispatchEvent(new CustomEvent("pageTransitionComplete"));
+                // Refresh ScrollTrigger after navigation to ensure animations recalculate
+                requestAnimationFrame(() => {
+                  ScrollTrigger.refresh();
+                });
               }, 100);
             },
           }

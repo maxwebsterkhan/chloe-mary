@@ -1,11 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Instrument_Sans, Inter_Tight, Geist_Mono, Poppins } from "next/font/google";
+import {
+  Bebas_Neue,
+  Instrument_Sans,
+  Inter_Tight,
+  Geist_Mono,
+  Poppins,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./styles/globals.scss";
 import LenisProvider from "./_components/lenis-provider";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
 import PageTransition from "./_components/page-transition/page-transition";
+import WelcomingLoader from "./_components/welcoming-loader/welcoming-loader";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -61,11 +68,11 @@ export const metadata: Metadata = {
     "authentic love stories",
     "candid wedding photography",
     "professional photos top 50",
-    "featured in vogue",
-    "featured in who what wear",
-    "featured in the world's best wedding photos",
-    "featured in the professional photo magazine",
-    "featured in the wedding photographer magazine",
+    "featured in Vogue",
+    "featured in Who What Wear",
+    "featured in the World's Best Wedding Photos",
+    "featured in the Professional Photo Magazine",
+    "featured in the Wedding Photographer Magazine",
   ],
   authors: [{ name: "Chloe Mary" }],
   creator: "Chloe Mary",
@@ -201,6 +208,7 @@ export default function RootLayout({
           }}
         />
         <LenisProvider>
+          <WelcomingLoader />
           <PageTransition />
           <Navigation />
           <div id="boundary">{children}</div>
