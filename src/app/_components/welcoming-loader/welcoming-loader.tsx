@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsapConfig";
 import styles from "./welcoming-loader.module.scss";
 
 export default function WelcomingLoader() {

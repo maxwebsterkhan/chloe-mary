@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
 import AnimatedUnderline from "../animated-underline/animated-underline";
 import WhatsAppModal from "../whatsapp-modal/whatsapp-modal";
 import WhatsAppTrigger from "../whatsapp-modal/whatsapp-trigger";
@@ -37,40 +37,90 @@ export default function Footer() {
   const footerInnerRef = useRef<HTMLElement>(null);
   const footerDarkRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
+  useGSAP(
+    () => {
+      const footerWrap = footerWrapRef.current;
+      const inner = footerInnerRef.current;
+      const dark = footerDarkRef.current;
+
+      if (!footerWrap) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footerWrap,
+          start: "clamp(top bottom)",
+          end: "clamp(top top)",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      if (inner) {
+        tl.from(inner, { yPercent: -25, ease: "linear" });
+      }
+
+      if (dark) {
+        tl.from(dark, { opacity: 0.5, ease: "linear" }, "<");
+      }
+
+      // Store the ScrollTrigger instance for cleanup
+      scrollTriggerRef.current = tl.scrollTrigger as ScrollTrigger;
+
+      ScrollTrigger.refresh();
+    },
+    { scope: footerWrapRef, dependencies: [pathname] }
+  );
+
+  // Watch for DOM height changes and refresh ScrollTrigger
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window === "undefined") return;
 
-    const footerWrap = footerWrapRef.current;
-    const inner = footerInnerRef.current;
-    const dark = footerDarkRef.current;
+    let resizeTimeout: NodeJS.Timeout;
+    const refreshScrollTrigger = () => {
+      // Debounce refresh calls to avoid excessive updates
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
+    };
 
-    if (!footerWrap) return;
+    // Watch for window resize
+    const handleResize = () => {
+      refreshScrollTrigger();
+    };
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: footerWrap,
-        start: "clamp(top bottom)",
-        end: "clamp(top top)",
-        scrub: true,
-      },
+    // Watch for DOM height changes using ResizeObserver
+    // This catches dynamic content loading, image loading, etc.
+    const resizeObserver = new ResizeObserver(() => {
+      refreshScrollTrigger();
     });
 
-    if (inner) {
-      tl.from(inner, { yPercent: -25, ease: "linear" });
+    // Observe the document body for overall page height changes
+    resizeObserver.observe(document.body);
+
+    // Also observe the main content area (where children are rendered)
+    const boundary = document.getElementById("boundary");
+    if (boundary) {
+      resizeObserver.observe(boundary);
     }
 
-    if (dark) {
-      tl.from(dark, { opacity: 0.5, ease: "linear" }, "<");
+    // Observe the footer element itself for any size changes
+    if (footerWrapRef.current) {
+      resizeObserver.observe(footerWrapRef.current);
     }
 
+    // Listen for window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
     return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === footerWrap) trigger.kill();
-      });
+      clearTimeout(resizeTimeout);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div

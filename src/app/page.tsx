@@ -1,9 +1,5 @@
 import { head } from "@vercel/blob";
 
-import Introduction from "./_components/introduction/introduction";
-import Slideshow from "./_components/slideshow/slideshow";
-import HomepageHero from "./_components/homepage-hero/HomepgeHero";
-
 export default async function Home() {
   // Get image URLs for hero and slideshow
   const heroBlob = await head("wedding-test.jpg");
@@ -53,11 +49,5 @@ export default async function Home() {
   // Use first 3 slideshow images as extra images for hero animation
   const heroExtraImages = slideshowImages.slice(0, 3).map((img) => img.src);
 
-  return (
-    <main id="main" tabIndex={-1}>
-      <HomepageHero images={[heroImageUrl, ...heroExtraImages]} />
-      <Introduction image1={introImage1} image2={introImage2} />
-      <Slideshow images={slideshowImages} />
-    </main>
-  );
+  return <main id="main" tabIndex={-1}></main>;
 }

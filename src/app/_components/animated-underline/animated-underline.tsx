@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsapConfig";
 import styles from "./animated-underline.module.scss";
 
 interface AnimatedUnderlineProps {
