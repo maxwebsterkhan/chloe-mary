@@ -1,5 +1,6 @@
 import { head } from "@vercel/blob";
 import Hero from "./_components/hero/hero";
+import Introduction from "./_components/introduction/introduction";
 import Slideshow from "./_components/slideshow/slideshow";
 
 export default async function Home() {
@@ -44,9 +45,14 @@ export default async function Home() {
     (img): img is { src: string; alt: string } => img !== null
   );
 
+  // Use the first two images from slideshow for introduction component
+  const introImage1 = slideshowImages[0]?.src || null;
+  const introImage2 = slideshowImages[1]?.src || null;
+
   return (
     <main id="main" tabIndex={-1}>
       <Hero imageUrl={heroImageUrl} />
+      <Introduction image1={introImage1} image2={introImage2} />
       <Slideshow images={slideshowImages} />
     </main>
   );
