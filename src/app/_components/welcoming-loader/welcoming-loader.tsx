@@ -4,7 +4,11 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsapConfig";
 import styles from "./welcoming-loader.module.scss";
 
-export default function WelcomingLoader() {
+interface WelcomingLoaderProps {
+  onComplete?: () => void;
+}
+
+export default function WelcomingLoader({ onComplete }: WelcomingLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wordsRef = useRef<HTMLDivElement>(null);
   const wordTargetRef = useRef<HTMLParagraphElement>(null);
@@ -20,15 +24,7 @@ export default function WelcomingLoader() {
 
     if (!container || !words || !wordTarget) return;
 
-    // Check if we've already shown the loader (using sessionStorage)
-    const hasShownLoader = sessionStorage.getItem("__welcoming-loader-shown");
-    if (hasShownLoader) {
-      // Hide immediately if already shown
-      gsap.set(container, { autoAlpha: 0, display: "none" });
-      return;
-    }
-
-    // Mark as shown
+    // Mark as shown immediately to prevent re-renders
     sessionStorage.setItem("__welcoming-loader-shown", "true");
     hasAnimatedRef.current = true;
 
@@ -85,8 +81,10 @@ export default function WelcomingLoader() {
 
     tl.call(() => {
       gsap.set(container, { display: "none" });
+      // Notify parent that animation is complete
+      onComplete?.();
     });
-  }, []);
+  }, [onComplete]);
 
   return (
     <div

@@ -8,18 +8,30 @@ export default function LoaderWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState<boolean | null>(null);
 
   useEffect(() => {
     // Check sessionStorage only client-side (safe after hydration)
-    if (sessionStorage.getItem("__welcoming-loader-shown")) {
+    const hasShownLoader = sessionStorage.getItem("__welcoming-loader-shown");
+    if (hasShownLoader) {
       setShowLoader(false);
-      return;
+    } else {
+      setShowLoader(true);
     }
-    // Your GSAP animation logic here, then:
-    sessionStorage.setItem("__welcoming-loader-shown", "true");
-    setShowLoader(false);
   }, []);
 
-  return showLoader ? <WelcomingLoader /> : <>{children}</>;
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+  };
+
+  // Don't render anything until we've checked sessionStorage to avoid flash
+  if (showLoader === null) {
+    return null;
+  }
+
+  return showLoader ? (
+    <WelcomingLoader onComplete={handleLoaderComplete} />
+  ) : (
+    <>{children}</>
+  );
 }
