@@ -53,7 +53,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
  * handles the Lenis animation frame updates.
  */
 
-export default function LenisProvider({
+export default function LenisWrapper({
   children,
 }: {
   children: React.ReactNode;

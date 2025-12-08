@@ -8,10 +8,10 @@ import {
 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./styles/globals.scss";
-import LenisProvider from "./_components/lenis-provider";
+import LenisWrapper from "./_providers/LenisWrapper";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
-import WelcomingLoader from "./_components/welcoming-loader/welcoming-loader";
+import LoaderWrapper from "./_providers/LoaderWrapper";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -206,12 +206,14 @@ export default function RootLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
-        <LenisProvider>
-          <WelcomingLoader />
+        <LenisWrapper>
+          <LoaderWrapper>
+            <Navigation />
+            <div id="boundary">{children}</div>
+            <Footer />
+          </LoaderWrapper>
           <Navigation />
-          <div id="boundary">{children}</div>
-          <Footer />
-        </LenisProvider>
+        </LenisWrapper>
       </body>
       <Analytics />
     </html>
