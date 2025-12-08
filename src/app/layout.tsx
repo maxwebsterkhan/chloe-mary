@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import {
   Bebas_Neue,
   Instrument_Sans,
@@ -188,10 +189,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB" data-theme-status="light">
+    <html lang="en-GB" suppressHydrationWarning>
       <body
         className={`${bebasNeue.className} ${instrumentSans.variable} ${interTight.variable} ${geistMono.variable} ${poppins.variable}`}
       >
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function getCookie(name) {
+                  const nameEQ = name + "=";
+                  const ca = document.cookie.split(";");
+                  for (let c of ca) {
+                    c = c.trim();
+                    if (c.startsWith(nameEQ)) return c.slice(nameEQ.length);
+                  }
+                  return null;
+                }
+                const cookieTheme = getCookie("theme");
+                const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                const theme = cookieTheme || (prefersDark ? "dark" : "light");
+                document.documentElement.setAttribute("data-theme-status", theme);
+              })();
+            `,
+          }}
+        />
         {/* Structured Data - Organization Schema */}
         <script
           type="application/ld+json"
@@ -212,7 +236,6 @@ export default function RootLayout({
             <div id="boundary">{children}</div>
             <Footer />
           </LoaderWrapper>
-          <Navigation />
         </LenisWrapper>
       </body>
       <Analytics />

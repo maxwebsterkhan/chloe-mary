@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { gsap } from "@/lib/gsapConfig";
 import styles from "./theme-toggle.module.scss";
 
 // ---- Cookie utilities ----
@@ -21,41 +22,45 @@ function getCookie(name: string): string | null {
 }
 
 export default function ThemeToggle() {
+  const [isMounted, setIsMounted] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
-  // ----- Ensure current theme is applied immediately and kept in sync -----
+  // Apply theme attribute to HTML (your SCSS selector target)
   const updateTheme = useCallback((newTheme: "light" | "dark") => {
+    if (typeof document === "undefined") return;
     document.documentElement.setAttribute("data-theme-status", newTheme);
   }, []);
 
-  // ----- Initialize from cookie or system preference -----
+  // Initialize theme from attribute set by blocking script
   useEffect(() => {
-    const cookieTheme = getCookie("theme");
-    if (cookieTheme === "dark" || cookieTheme === "light") {
-      setTheme(cookieTheme);
-      updateTheme(cookieTheme);
-    } else if (typeof window !== "undefined") {
-      const prefersDark = window.matchMedia?.(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      const initialTheme = prefersDark ? "dark" : "light";
-      setTheme(initialTheme);
-      updateTheme(initialTheme);
-    }
-  }, [updateTheme]);
+    if (typeof document === "undefined") return;
 
-  // ----- Theme toggle logic -----
+    // Read theme from attribute (already set by blocking script in head)
+    const initialTheme = (document.documentElement.getAttribute(
+      "data-theme-status"
+    ) || "light") as "light" | "dark";
+    setTheme(initialTheme);
+    setIsMounted(true);
+  }, []);
+
+  // 🎯 Smooth GSAP theme toggle (syncs with your SCSS transitions)
   const toggleTheme = useCallback(() => {
-    const currentTheme =
-      document.documentElement.getAttribute("data-theme-status") || "light";
-    const newTheme = currentTheme === "light" ? "dark" : "light";
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     updateTheme(newTheme);
     setCookie("theme", newTheme, 365);
-  }, [updateTheme]);
 
-  // ----- Keyboard shortcut (Shift + T) -----
+    // GSAP smooths any color/background transitions
+    gsap.to("html", {
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, [theme, updateTheme]);
+
+  // Keyboard shortcut (Shift + T) - accessibility
   useEffect(() => {
+    if (!isMounted) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       const tagName = (e.target as HTMLElement)?.tagName?.toLowerCase?.() ?? "";
       if (
@@ -63,14 +68,19 @@ export default function ThemeToggle() {
         (e.target as HTMLElement)?.isContentEditable
       )
         return;
+
       if (e.shiftKey && (e.key === "T" || e.key === "t")) {
         e.preventDefault();
         toggleTheme();
       }
     };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [toggleTheme]);
+  }, [toggleTheme, isMounted]);
+
+  // Prevent hydration mismatch
+  if (!isMounted) return null;
 
   return (
     <button

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "../theme-toggle/theme-toggle";
 import AnimatedUnderline from "../animated-underline/animated-underline";
@@ -22,30 +22,34 @@ const navLinks: NavLink[] = [
 
 export default function Navigation() {
   const [isActive, setIsActive] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const pathname = usePathname();
 
-  // Get current theme and observe changes
-  useEffect(() => {
+  // Theme observer - syncs with ThemeToggle changes
+  const updateTheme = useCallback(() => {
+    if (typeof document === "undefined") return;
     const currentTheme =
       document.documentElement.getAttribute("data-theme-status") || "light";
     setTheme(currentTheme as "light" | "dark");
+  }, []);
 
-    const observer = new MutationObserver(() => {
-      const newTheme =
-        document.documentElement.getAttribute("data-theme-status") || "light";
-      setTheme(newTheme as "light" | "dark");
-    });
+  useEffect(() => {
+    // Read initial theme from attribute (already set by blocking script)
+    updateTheme();
+    setIsMounted(true);
 
+    // Observe theme changes from ThemeToggle
+    const observer = new MutationObserver(updateTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme-status"],
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [updateTheme]);
 
-  // Toggle navigation menu
+  // Rest of your effects unchanged...
   const toggleNavigation = () => {
     setIsActive((prev) => !prev);
   };
@@ -54,7 +58,6 @@ export default function Navigation() {
     setIsActive(false);
   };
 
-  // Lenis scroll handling
   useEffect(() => {
     if (typeof window !== "undefined" && window?.lenis) {
       if (isActive) {
@@ -65,17 +68,33 @@ export default function Navigation() {
     }
   }, [isActive]);
 
-  // Close navigation on ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isActive) {
         closeNavigation();
       }
     };
-
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isActive]);
+
+  // Prevent hydration mismatch - render minimal nav until mounted
+  if (!isMounted) {
+    return (
+      <nav className={styles.navigation} aria-label="Main site navigation">
+        <div className={styles["hamburger-nav"]}>
+          <div className={styles["hamburger-nav__bg"]}></div>
+          <button
+            className={styles["hamburger-nav__toggle"]}
+            aria-label="Toggle navigation"
+          >
+            <span className={styles["hamburger-nav__toggle-bar"]}></span>
+            <span className={styles["hamburger-nav__toggle-bar"]}></span>
+          </button>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav
@@ -83,7 +102,6 @@ export default function Navigation() {
       className={styles.navigation}
       aria-label="Main site navigation"
     >
-      {/* Overlay for closing nav */}
       <div
         data-navigation-toggle="close"
         onClick={closeNavigation}
@@ -146,7 +164,6 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Hamburger toggle button */}
         <button
           type="button"
           data-navigation-toggle="toggle"
