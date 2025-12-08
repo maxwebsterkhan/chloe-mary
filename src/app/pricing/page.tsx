@@ -242,7 +242,7 @@ export default function PricingPage() {
               <div className={styles.heroMetrics}>
                 <div className={styles.metricGroup}>
                   <span className={styles.metricLabel}>Starting from</span>
-                  <span className={styles.metricValue}>£1,350</span>
+                  <span className={styles.metricValue}>£1,500</span>
                 </div>
                 <div className={styles.metricDivider}></div>
                 <div className={styles.metricGroup}>
@@ -287,17 +287,7 @@ export default function PricingPage() {
                       <span className={styles.extensionLabel}>
                         FILM INCLUDED
                       </span>
-                      <span className={styles.extensionPrice}>
-                        Two rolls of black and white
-                      </span>
-                    </div>
-                    <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>
-                        ADDITIONAL FILM
-                      </span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
-                      </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -310,22 +300,19 @@ export default function PricingPage() {
 
                   <div className={styles.priceMatrix}>
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
-                      <div className={styles.priceLabel}>ESSENTIAL</div>
-                      <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£3,000</span>
-                        <span className={styles.priceDesc}>
-                          8 hours of documentation
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                       <div className={styles.priceLabel}>SIGNATURE</div>
                       <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£3,750</span>
+                        <span className={styles.priceAmount}>£4,000</span>
                         <span className={styles.priceDesc}>
                           10 hours of documentation
                         </span>
+                      </div>
+                    </div>
+                    <div className={`${styles.priceBlock} ${styles.animateIn}`}>
+                      <div className={styles.priceLabel}>Additional hours</div>
+                      <div className={styles.priceDetails}>
+                        <span className={styles.priceAmount}>£400</span>
+                        <span className={styles.priceDesc}>per hour</span>
                       </div>
                     </div>
                   </div>
@@ -337,17 +324,7 @@ export default function PricingPage() {
                       <span className={styles.extensionLabel}>
                         FILM INCLUDED
                       </span>
-                      <span className={styles.extensionPrice}>
-                        Two rolls of black and white
-                      </span>
-                    </div>
-                    <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>
-                        ADDITIONAL FILM
-                      </span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
-                      </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -377,14 +354,14 @@ export default function PricingPage() {
                         EXTEND YOUR STORY
                       </span>
                       <span className={styles.extensionPrice}>
-                        £375 per additional hour
+                        £400 per additional hour
                       </span>
                     </div>
                     <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>FILM</span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
                       </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -399,7 +376,7 @@ export default function PricingPage() {
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                       <div className={styles.priceLabel}>FOCUSED</div>
                       <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£1,350</span>
+                        <span className={styles.priceAmount}>£1,500</span>
                         <span className={styles.priceDesc}>
                           3 hours of documentation
                         </span>
@@ -412,7 +389,7 @@ export default function PricingPage() {
                     <div className={`${styles.priceBlock} ${styles.animateIn}`}>
                       <div className={styles.priceLabel}>ENHANCED</div>
                       <div className={styles.priceDetails}>
-                        <span className={styles.priceAmount}>£2,100</span>
+                        <span className={styles.priceAmount}>£2,300</span>
                         <span className={styles.priceDesc}>
                           5 hours of documentation
                         </span>
@@ -431,14 +408,14 @@ export default function PricingPage() {
                         EXTEND YOUR STORY
                       </span>
                       <span className={styles.extensionPrice}>
-                        £375 per additional hour
+                        £400 per additional hour
                       </span>
                     </div>
                     <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>FILM</span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
+                      <span className={styles.extensionLabel}>
+                        FILM INCLUDED
                       </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -467,17 +444,7 @@ export default function PricingPage() {
                       <span className={styles.extensionLabel}>
                         FILM INCLUDED
                       </span>
-                      <span className={styles.extensionPrice}>
-                        Two rolls of black and white
-                      </span>
-                    </div>
-                    <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>
-                        ADDITIONAL FILM
-                      </span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
-                      </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -495,7 +462,7 @@ export default function PricingPage() {
                       <div className={styles.destinationRegion}>EUROPE</div>
                       <div className={styles.destinationDetails}>
                         <span className={styles.destinationPrice}>
-                          From £4,500
+                          From £4,750
                         </span>
                         <span className={styles.destinationDesc}>
                           10 hours of documentation
@@ -525,17 +492,7 @@ export default function PricingPage() {
                       <span className={styles.extensionLabel}>
                         FILM INCLUDED
                       </span>
-                      <span className={styles.extensionPrice}>
-                        Two rolls of black and white
-                      </span>
-                    </div>
-                    <div className={styles.extensionItem}>
-                      <span className={styles.extensionLabel}>
-                        ADDITIONAL FILM
-                      </span>
-                      <span className={styles.extensionPrice}>
-                        £50 per film roll
-                      </span>
+                      <span className={styles.extensionPrice}>35mm</span>
                     </div>
                   </div>
                 </div>
@@ -580,11 +537,7 @@ export default function PricingPage() {
                         with premium add-ons:
                         <ul className={styles.bespokeList}>
                           <li>
-                            Additional hours from <strong>£375 per hour</strong>
-                          </li>
-                          <li>
-                            Extra rolls of film from{" "}
-                            <strong>£50 per roll</strong>
+                            Additional hours from <strong>£400 per hour</strong>
                           </li>
                           <li>
                             Second photographers from <strong>£750</strong>
@@ -594,7 +547,7 @@ export default function PricingPage() {
                           </li>
                           <li>
                             Extensive 12 hour package from{" "}
-                            <strong>£4,500</strong>
+                            <strong>£4,750</strong>
                           </li>
                         </ul>
                       </div>
