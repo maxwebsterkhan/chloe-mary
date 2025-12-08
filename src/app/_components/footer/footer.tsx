@@ -35,7 +35,6 @@ const contactLinks: FooterLink[] = [
 export default function Footer() {
   const footerWrapRef = useRef<HTMLDivElement>(null);
   const footerInnerRef = useRef<HTMLElement>(null);
-  const footerDarkRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const refreshTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -65,9 +64,6 @@ export default function Footer() {
 
         if (footerInnerRef.current) {
           tl.from(footerInnerRef.current, { yPercent: -25, ease: "linear" });
-        }
-        if (footerDarkRef.current) {
-          tl.from(footerDarkRef.current, { opacity: 0.5, ease: "linear" }, "<");
         }
       }, footerWrap); // Scoped to footerWrap - auto-cleans on unmount
 
@@ -201,11 +197,6 @@ export default function Footer() {
           <p className={styles.footer__taglineLarge}>Something Beautiful</p>
         </div>
       </footer>
-      <div
-        ref={footerDarkRef}
-        data-footer-parallax-dark
-        className={styles.footer__dark}
-      />
       <WhatsAppModal whatsappUrl="https://wa.me/447719011701" />
     </div>
   );

@@ -124,21 +124,6 @@
   overflow-wrap: break-word;
 }
 
-.footer__dark {
-  opacity: 0;
-  pointer-events: none;
-  background-color: #201d1d;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-:global([data-theme-status="dark"]) .footer__dark {
-  background-color: var(--dark-bg);
-}
-
 @media screen and (max-width: 991px) {
   .footer__linksRow {
     flex-flow: column;

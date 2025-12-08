@@ -35,6 +35,11 @@ export default function WelcomingLoader({ onComplete }: WelcomingLoaderProps) {
 
     const tl = gsap.timeline();
 
+    tl.set(container, {
+      opacity: 1,
+      visibility: "visible",
+    });
+
     tl.set(words, {
       yPercent: 50,
     });

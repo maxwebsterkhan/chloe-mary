@@ -4,6 +4,8 @@
   position: fixed;
   inset: 0;
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .loadingScreen {
