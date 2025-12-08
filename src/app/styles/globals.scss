@@ -131,7 +131,7 @@
   /* Theme Tokens - Light Mode (Default) */
   --theme-bg: var(--light-bg);
   --theme-text: var(--light-text);
-  
+
   /* Navigation Colors - Light Mode (Default) */
   --nav-text: var(--light-nav-text);
   --nav-text-secondary: var(--light-nav-text-secondary);
@@ -147,7 +147,7 @@
   /* Light Mode Colors */
   --light-bg: #ffffff;
   --light-text: #000000;
-  
+
   /* Light Mode Navigation Colors */
   --light-nav-text: #1a1a1a;
   --light-nav-text-secondary: #4a4a4a;
@@ -160,7 +160,7 @@
   /* Dark Mode Colors */
   --dark-bg: #070915;
   --dark-text: #ffffff;
-  
+
   /* Dark Mode Navigation Colors */
   --dark-nav-text: #ffffff;
   --dark-nav-text-secondary: #b8b8b8;
@@ -174,7 +174,7 @@
 [data-theme-status="dark"] {
   --theme-bg: var(--dark-bg);
   --theme-text: var(--dark-text);
-  
+
   /* Navigation Colors - Dark Mode */
   --nav-text: var(--dark-nav-text);
   --nav-text-secondary: var(--dark-nav-text-secondary);
@@ -268,7 +268,8 @@ body {
 [data-theme-status="dark"] [data-glass-bg] {
   background-color: rgba(7, 9, 21, 0.85);
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Theme-aware text color - inverts in dark mode */

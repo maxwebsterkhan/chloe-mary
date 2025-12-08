@@ -11,7 +11,6 @@ import "./styles/globals.scss";
 import LenisProvider from "./_components/lenis-provider";
 import Navigation from "./_components/navigation/navigation";
 import Footer from "./_components/footer/footer";
-import PageTransition from "./_components/page-transition/page-transition";
 import WelcomingLoader from "./_components/welcoming-loader/welcoming-loader";
 
 const bebasNeue = Bebas_Neue({
@@ -209,7 +208,6 @@ export default function RootLayout({
         />
         <LenisProvider>
           <WelcomingLoader />
-          <PageTransition />
           <Navigation />
           <div id="boundary">{children}</div>
           <Footer />

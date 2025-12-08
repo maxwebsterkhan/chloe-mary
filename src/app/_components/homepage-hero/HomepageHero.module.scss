@@ -1,0 +1,183 @@
+/* Disable scroll during loading animation */
+main:has(.homepagehero-header.is--loading) {
+  height: 100dvh;
+}
+
+.homepagehero-header {
+  color: #f4f4f4;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hide loader initially if specified */
+.homepagehero-header.is--loading.is--hidden {
+  display: none;
+}
+
+/* Centered loader container */
+.homepagehero-loader {
+  color: #201d1d;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Large heading text */
+.homepagehero__h1 {
+  white-space: nowrap;
+  justify-content: center;
+  /* Scale with root font-size (var(--size-font)) for scaling system compatibility */
+  font-size: clamp(5.5rem, 12.5vw, 12.5rem);
+  font-weight: 500;
+  line-height: 0.75;
+  display: flex;
+  position: relative;
+}
+
+/* Left portion of split heading */
+.homepagehero__h1_start {
+  justify-content: flex-end;
+  width: 1.5256em;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Right portion of split heading */
+.homepagehero__h1_end {
+  justify-content: flex-start;
+  width: 1.525em;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Individual animated letters */
+.homepagehero__letter {
+  display: block;
+  position: relative;
+}
+
+/* Spacing for copyright symbol */
+.homepagehero__letter_white.is--space {
+  margin-left: 0.25em;
+}
+
+/* Expanding box that reveals image */
+.homepagehero-loader__box {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 0;
+  display: flex;
+  position: relative;
+}
+
+.homepagehero-loader__box_inner {
+  justify-content: center;
+  align-items: center;
+  min-width: 1em;
+  height: 95%;
+  display: flex;
+  position: relative;
+}
+
+/* Growing image container */
+.homepagehero__growing_image {
+  justify-content: center;
+  align-items: center;
+  width: 0%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+}
+
+.homepagehero__growing_image_wrap {
+  width: 100%;
+  min-width: 1em;
+  height: 100%;
+  position: absolute;
+}
+
+/* Main cover image */
+.homepagehero__cover_image {
+  pointer-events: none;
+  object-fit: cover;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Layered extra images with z-index */
+.homepagehero__cover_image_extra {
+  pointer-events: none;
+  object-fit: cover;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &.is--1 {
+    z-index: 3;
+  }
+
+  &.is--2 {
+    z-index: 2;
+  }
+
+  &.is--3 {
+    z-index: 1;
+  }
+}
+
+/* Header content wrapper */
+.homepagehero-header__content {
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+  padding: calc(var(--size-font) * 3);
+  display: flex;
+  position: relative;
+}
+
+.homepagehero-header__bottom {
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* White header letters */
+.homepagehero__letter_white {
+  display: block;
+  position: relative;
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 991px) {
+  .homepagehero__h1 {
+    /* Scale with root font-size for scaling system compatibility */
+    font-size: clamp(5.5rem, 9vw, 9rem);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .homepagehero__h1 {
+    /* Scale with root font-size for scaling system compatibility */
+    font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+  }
+}
