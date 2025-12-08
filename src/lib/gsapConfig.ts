@@ -5,11 +5,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import { CustomEase } from "gsap/CustomEase";
 import { SplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 
-// Register plugins (safe to call multiple times - GSAP handles duplicates gracefully)
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, Observer, CustomEase, SplitText);
+  gsap.registerPlugin(ScrollTrigger, Observer, CustomEase, SplitText, useGSAP);
 }
 
-export { gsap, ScrollTrigger, Observer, CustomEase, SplitText };
+export { gsap, ScrollTrigger, Observer, CustomEase, SplitText, useGSAP };
 

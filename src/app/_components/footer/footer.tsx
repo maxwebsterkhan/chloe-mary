@@ -2,8 +2,8 @@
 
 import { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsapConfig";
+
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsapConfig";
 import AnimatedUnderline from "../animated-underline/animated-underline";
 import WhatsAppModal from "../whatsapp-modal/whatsapp-modal";
 import WhatsAppTrigger from "../whatsapp-modal/whatsapp-trigger";
@@ -37,90 +37,86 @@ export default function Footer() {
   const footerInnerRef = useRef<HTMLElement>(null);
   const footerDarkRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const refreshTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useGSAP(
     () => {
       const footerWrap = footerWrapRef.current;
-      const inner = footerInnerRef.current;
-      const dark = footerDarkRef.current;
-
       if (!footerWrap) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footerWrap,
-          start: "clamp(top bottom)",
-          end: "clamp(top top)",
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      if (inner) {
-        tl.from(inner, { yPercent: -25, ease: "linear" });
+      // Kill existing footer trigger if it exists (TypeScript-safe)
+      const existingTrigger = ScrollTrigger.getById("footer-parallax");
+      if (existingTrigger) {
+        existingTrigger.kill();
       }
 
-      if (dark) {
-        tl.from(dark, { opacity: 0.5, ease: "linear" }, "<");
-      }
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            id: "footer-parallax", // Unique ID for targeted refresh/kill
+            trigger: footerWrap,
+            start: "clamp(top bottom)",
+            end: "clamp(top top)",
+            scrub: true,
+            invalidateOnRefresh: true,
+            refreshPriority: -1, // Run early in refresh cycle
+          },
+        });
 
-      // Store the ScrollTrigger instance for cleanup
-      scrollTriggerRef.current = tl.scrollTrigger as ScrollTrigger;
+        if (footerInnerRef.current) {
+          tl.from(footerInnerRef.current, { yPercent: -25, ease: "linear" });
+        }
+        if (footerDarkRef.current) {
+          tl.from(footerDarkRef.current, { opacity: 0.5, ease: "linear" }, "<");
+        }
+      }, footerWrap); // Scoped to footerWrap - auto-cleans on unmount
 
-      ScrollTrigger.refresh();
+      return () => ctx.revert(); // Perfect cleanup
     },
-    { scope: footerWrapRef, dependencies: [pathname] }
+    { scope: footerWrapRef } // No pathname dependency - we refresh manually instead
   );
 
-  // Watch for DOM height changes and refresh ScrollTrigger
+  // Route-aware refresh ONLY - no ResizeObserver spam
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let resizeTimeout: NodeJS.Timeout;
-    const refreshScrollTrigger = () => {
-      // Debounce refresh calls to avoid excessive updates
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-    };
-
-    // Watch for window resize
-    const handleResize = () => {
-      refreshScrollTrigger();
-    };
-
-    // Watch for DOM height changes using ResizeObserver
-    // This catches dynamic content loading, image loading, etc.
-    const resizeObserver = new ResizeObserver(() => {
-      refreshScrollTrigger();
-    });
-
-    // Observe the document body for overall page height changes
-    resizeObserver.observe(document.body);
-
-    // Also observe the main content area (where children are rendered)
-    const boundary = document.getElementById("boundary");
-    if (boundary) {
-      resizeObserver.observe(boundary);
+    // Clear any pending refresh
+    if (refreshTimeoutRef.current) {
+      clearTimeout(refreshTimeoutRef.current);
     }
 
-    // Observe the footer element itself for any size changes
-    if (footerWrapRef.current) {
-      resizeObserver.observe(footerWrapRef.current);
-    }
+    // Debounced refresh after route settles (300ms perfect for Next.js)
+    refreshTimeoutRef.current = setTimeout(() => {
+      ScrollTrigger.refresh(true); // Waits for RAF - handles layout fully
+    }, 300);
 
-    // Listen for window resize events
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup
     return () => {
-      clearTimeout(resizeTimeout);
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", handleResize);
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current);
+      }
     };
-  }, [pathname]);
+  }, [pathname]); // Only pathname - perfect trigger
+
+  // Minimal resize handling - no observers
+  useEffect(() => {
+    const handleResize = () => {
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current);
+      }
+      refreshTimeoutRef.current = setTimeout(
+        () => ScrollTrigger.refresh(true),
+        150
+      );
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -201,7 +197,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={styles.footer__taglineWrapper}>
-          <p className={styles.footer__taglineSmall}>Let&apos;s Create</p>
+          <p className={styles.footer__taglineSmall}>Let's Create</p>
           <p className={styles.footer__taglineLarge}>Something Beautiful</p>
         </div>
       </footer>
