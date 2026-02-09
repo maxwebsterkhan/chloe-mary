@@ -730,8 +730,8 @@ export default function ConnectPage() {
                         <p className={styles.stepDescription}>
                           I&apos;ll send you a thoughtful, personalised response
                           within a few days, including my availability, package
-                          information, and answers to any questions you might
-                          have about my approach.
+                          options, and answers to any questions you might have
+                          about my approach.
                         </p>
                       </div>
                     </div>
@@ -757,7 +757,7 @@ export default function ConnectPage() {
                           Once you&apos;re ready to move forward, we&apos;ll
                           sign a contract and you&apos;ll pay a non-refundable
                           deposit to secure your wedding date. This ensures your
-                          special day is reserved exclusively for you.
+                          date is reserved exclusively for you.
                         </p>
                       </div>
                     </div>
