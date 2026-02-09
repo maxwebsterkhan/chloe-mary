@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
@@ -25,12 +25,6 @@ export default function ConnectPage() {
   const spacer3Ref = useRef<HTMLDivElement>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
-
-  // Iframe optimization states
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [iframeVisible, setIframeVisible] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const iframeContainerRef = useRef<HTMLDivElement>(null);
 
   // Hero animations
   useGSAP(() => {
@@ -506,9 +500,6 @@ export default function ConnectPage() {
           const formHeader = formSectionRef.current?.querySelector(
             `.${styles.formHeader}`,
           );
-          const iframeWrapper = formSectionRef.current?.querySelector(
-            `.${styles.iframeWrapper}`,
-          );
 
           const tl = gsap.timeline();
 
@@ -535,21 +526,6 @@ export default function ConnectPage() {
                 0.2,
               );
             }
-          }
-
-          if (iframeWrapper) {
-            tl.fromTo(
-              iframeWrapper,
-              { opacity: 0, y: 60, scale: 0.95 },
-              {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 1.2,
-                ease: "back.out(1.2)",
-              },
-              0.4,
-            );
           }
         },
       });
@@ -607,42 +583,6 @@ export default function ConnectPage() {
       });
     }
   });
-
-  useGSAP(() => {
-    // Intersection Observer for iframe lazy loading
-    const iframeObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIframeVisible(true);
-            iframeObserver.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        rootMargin: "200px", // Start loading 200px before the iframe comes into view
-        threshold: 0.1,
-      },
-    );
-
-    // Capture the ref value to avoid stale closure issues
-    const currentIframeContainer = iframeContainerRef.current;
-
-    if (currentIframeContainer) {
-      iframeObserver.observe(currentIframeContainer);
-    }
-
-    return () => {
-      if (currentIframeContainer) {
-        iframeObserver.unobserve(currentIframeContainer);
-      }
-    };
-  });
-
-  // Handle iframe load event
-  const handleIframeLoad = () => {
-    setIframeLoaded(true);
-  };
 
   return (
     <div className={styles.connectPage}>
