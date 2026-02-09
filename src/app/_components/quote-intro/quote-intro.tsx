@@ -63,7 +63,7 @@ export default function QuoteIntro() {
               duration: 0.6,
               ease: "power2.out",
             },
-            0
+            0,
           );
         }
 
@@ -76,7 +76,7 @@ export default function QuoteIntro() {
               duration: 0.6,
               ease: "power2.out",
             },
-            0.3
+            0.3,
           );
         }
 
@@ -86,7 +86,7 @@ export default function QuoteIntro() {
             paragraphLeftRef.current,
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            0.6
+            0.6,
           );
         }
 
@@ -95,7 +95,7 @@ export default function QuoteIntro() {
             paragraphRightRef.current,
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            0.8
+            0.8,
           );
         }
 
@@ -105,7 +105,7 @@ export default function QuoteIntro() {
             paragraphCenterRef.current,
             { opacity: 0, scale: 0.9 },
             { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.2)" },
-            1.2
+            1.2,
           );
         }
 
@@ -115,7 +115,7 @@ export default function QuoteIntro() {
             ctaRef.current,
             { opacity: 0, y: 20 },
             { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-            1.6
+            1.6,
           );
         }
 
@@ -125,7 +125,7 @@ export default function QuoteIntro() {
             imageRef.current,
             { opacity: 0, scale: 1.05 },
             { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
-            0.3
+            0.3,
           );
         }
       },
@@ -145,8 +145,13 @@ export default function QuoteIntro() {
                 &quot;Self Professed Queen of Monochrome.
                 <br />
                 <br />
-                Named one of the Top 50 UK Wedding Photographers for 2024 &
-                2025.&quot;
+                Featured in British & Australian Vogue.
+                <br />
+                <br />
+                Named one of the Top 50
+                <br />
+                <br />
+                UK Wedding Photographers for 2024 & 2025.&quot;
               </p>
             </div>
 

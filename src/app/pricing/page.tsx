@@ -40,7 +40,7 @@ export default function PricingPage() {
             duration: 0.9,
             ease: "power2.out",
           },
-          0
+          0,
         );
       }
 
@@ -55,7 +55,7 @@ export default function PricingPage() {
             duration: 1.2,
             ease: "power3.out",
           },
-          0.15
+          0.15,
         );
       }
 
@@ -70,16 +70,16 @@ export default function PricingPage() {
             duration: 1.0,
             ease: "power2.out",
           },
-          0.4
+          0.4,
         );
       }
 
       if (decorRef.current) {
         const decorLine = decorRef.current.querySelector(
-          `.${styles.decorLine}`
+          `.${styles.decorLine}`,
         );
         const decorText = decorRef.current.querySelector(
-          `.${styles.decorText}`
+          `.${styles.decorText}`,
         );
 
         if (decorLine) {
@@ -91,7 +91,7 @@ export default function PricingPage() {
               duration: 0.9,
               ease: "power3.out",
             },
-            0.7
+            0.7,
           );
         }
 
@@ -106,7 +106,7 @@ export default function PricingPage() {
               duration: 0.8,
               ease: "power2.out",
             },
-            1.0
+            1.0,
           );
         }
       }
@@ -540,14 +540,11 @@ export default function PricingPage() {
                             Additional hours from <strong>£400 per hour</strong>
                           </li>
                           <li>
-                            Second photographers from <strong>£750</strong>
+                            Second photographers from{" "}
+                            <strong>£400 (half day)</strong>
                           </li>
                           <li>
                             Heritage albums from <strong>£500</strong>
-                          </li>
-                          <li>
-                            Extensive 12 hour package from{" "}
-                            <strong>£4,750</strong>
                           </li>
                         </ul>
                       </div>
@@ -648,15 +645,15 @@ export default function PricingPage() {
                     >
                       <div className={styles.inclusionLabel}>35MM FILM</div>
                       <div className={styles.inclusionDesc}>
-                        Including 35mm black and white film photos in my work
-                        allows me to capture and convey a deep sense of
-                        nostalgia and emotion. The timeless quality of film,
-                        with its subtle grain and rich contrasts invites viewers
-                        to connect with the genuine, unscripted moments within
-                        each frame. By blending these classic, timeless feeling
-                        images with my digital work, I strive to create a visual
-                        narrative that feels both authentic and emotionally
-                        resonant and preserves the true essence of your day.
+                        Including 35mm film photos in my work allows me to
+                        capture and convey a deep sense of nostalgia and
+                        emotion. The timeless quality of film, with its subtle
+                        grain and rich contrasts invites viewers to connect with
+                        the genuine, unscripted moments within each frame. By
+                        blending these classic, timeless feeling images with my
+                        digital work, I strive to create a visual narrative that
+                        feels both authentic and emotionally resonant and
+                        preserves the true essence of your day.
                       </div>
                     </div>
                   </div>

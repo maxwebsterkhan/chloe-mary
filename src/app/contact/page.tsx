@@ -5,8 +5,6 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { createScrollTrigger } from "../_components/helpers/gsap-animations";
 import styles from "./connect.module.scss";
-import { Skeleton } from "@radix-ui/themes";
-import Image from "next/image";
 
 export default function ConnectPage() {
   // Refs for animations
@@ -50,7 +48,7 @@ export default function ConnectPage() {
           duration: 1.0,
           ease: "power2.out",
         },
-        0
+        0,
       );
     }
 
@@ -65,7 +63,7 @@ export default function ConnectPage() {
           duration: 1.3,
           ease: "power3.out",
         },
-        0.2
+        0.2,
       );
     }
 
@@ -80,7 +78,7 @@ export default function ConnectPage() {
           duration: 1.0,
           ease: "power2.out",
         },
-        0.5
+        0.5,
       );
     }
 
@@ -97,7 +95,7 @@ export default function ConnectPage() {
             duration: 1.0,
             ease: "power3.out",
           },
-          0.8
+          0.8,
         );
       }
 
@@ -112,7 +110,7 @@ export default function ConnectPage() {
             duration: 0.8,
             ease: "power2.out",
           },
-          1.1
+          1.1,
         );
       }
     }
@@ -141,10 +139,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const quote = philosophyRef.current?.querySelector(
-            `.${styles.quote}`
+            `.${styles.quote}`,
           );
           const attribution = philosophyRef.current?.querySelector(
-            `.${styles.quoteAttribution}`
+            `.${styles.quoteAttribution}`,
           );
 
           const tl = gsap.timeline();
@@ -160,7 +158,7 @@ export default function ConnectPage() {
                 duration: 1.2,
                 ease: "back.out(1.2)",
               },
-              0
+              0,
             );
           }
 
@@ -169,7 +167,7 @@ export default function ConnectPage() {
               attribution,
               { opacity: 0, x: 30 },
               { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
-              0.4
+              0.4,
             );
           }
         },
@@ -185,10 +183,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const lines = spacer1Ref.current?.querySelectorAll(
-            `.${styles.dividerLine}`
+            `.${styles.dividerLine}`,
           );
           const dot = spacer1Ref.current?.querySelector(
-            `.${styles.dividerDot}`
+            `.${styles.dividerDot}`,
           );
 
           const tl = gsap.timeline();
@@ -204,7 +202,7 @@ export default function ConnectPage() {
                 ease: "power2.out",
                 stagger: 0.2,
               },
-              0
+              0,
             );
           }
 
@@ -218,7 +216,7 @@ export default function ConnectPage() {
                 duration: 0.6,
                 ease: "back.out(1.7)",
               },
-              0.4
+              0.4,
             );
           }
         },
@@ -234,13 +232,13 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const lines = spacer2Ref.current?.querySelectorAll(
-            `.${styles.elegantLine}`
+            `.${styles.elegantLine}`,
           );
           const dots = spacer2Ref.current?.querySelectorAll(
-            `.${styles.elegantDot}`
+            `.${styles.elegantDot}`,
           );
           const diamond = spacer2Ref.current?.querySelector(
-            `.${styles.elegantDiamond}`
+            `.${styles.elegantDiamond}`,
           );
 
           const tl = gsap.timeline();
@@ -256,7 +254,7 @@ export default function ConnectPage() {
                 ease: "power2.out",
                 stagger: 0.1,
               },
-              0
+              0,
             );
           }
 
@@ -271,7 +269,7 @@ export default function ConnectPage() {
                 ease: "back.out(1.7)",
                 stagger: 0.1,
               },
-              0.2
+              0.2,
             );
           }
 
@@ -286,7 +284,7 @@ export default function ConnectPage() {
                 duration: 0.6,
                 ease: "back.out(1.7)",
               },
-              0.4
+              0.4,
             );
           }
         },
@@ -302,10 +300,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const lines = spacer3Ref.current?.querySelectorAll(
-            `.${styles.dividerLine}`
+            `.${styles.dividerLine}`,
           );
           const shape = spacer3Ref.current?.querySelector(
-            `.${styles.dividerShape}`
+            `.${styles.dividerShape}`,
           );
 
           const tl = gsap.timeline();
@@ -321,7 +319,7 @@ export default function ConnectPage() {
                 ease: "power2.out",
                 stagger: 0.1,
               },
-              0
+              0,
             );
           }
 
@@ -336,7 +334,7 @@ export default function ConnectPage() {
                 duration: 0.8,
                 ease: "back.out(1.7)",
               },
-              0.3
+              0.3,
             );
           }
         },
@@ -352,10 +350,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const title = processRef.current?.querySelector(
-            `.${styles.processTitle}`
+            `.${styles.processTitle}`,
           );
           const steps = processRef.current?.querySelectorAll(
-            `.${styles.processStep}`
+            `.${styles.processStep}`,
           );
 
           const tl = gsap.timeline();
@@ -365,7 +363,7 @@ export default function ConnectPage() {
               title,
               { opacity: 0, y: 30 },
               { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-              0
+              0,
             );
           }
 
@@ -385,7 +383,7 @@ export default function ConnectPage() {
                     duration: 0.8,
                     ease: "back.out(1.7)",
                   },
-                  0.3 + index * 0.2
+                  0.3 + index * 0.2,
                 );
               }
 
@@ -394,7 +392,7 @@ export default function ConnectPage() {
                   stepContent,
                   { opacity: 0, x: 50 },
                   { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
-                  0.5 + index * 0.2
+                  0.5 + index * 0.2,
                 );
               }
             });
@@ -412,20 +410,20 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const label = readyRef.current?.querySelector(
-            `.${styles.readyLabel}`
+            `.${styles.readyLabel}`,
           );
           const title = readyRef.current?.querySelector(
-            `.${styles.readyTitle}`
+            `.${styles.readyTitle}`,
           );
           const accent = readyRef.current?.querySelector(
-            `.${styles.readyAccent}`
-          );
-          const divider = readyRef.current?.querySelector(
-            `.${styles.readyDivider}`
+            `.${styles.readyAccent}`,
           );
           const text = readyRef.current?.querySelector(`.${styles.readyText}`);
-          const action = readyRef.current?.querySelector(
-            `.${styles.readyAction}`
+          const ctaLink = readyRef.current?.querySelector(
+            `.${styles.readyCtaLink}`,
+          );
+          const include = readyRef.current?.querySelector(
+            `.${styles.readyInclude}`,
           );
 
           const tl = gsap.timeline();
@@ -433,29 +431,27 @@ export default function ConnectPage() {
           if (label) {
             tl.fromTo(
               label,
-              { opacity: 0, y: 20 },
-              { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-              0
+              { opacity: 0, y: 16 },
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+              0,
             );
           }
 
           if (title) {
             tl.fromTo(
               title,
-              { opacity: 0, y: 40, scale: 0.9 },
+              { opacity: 0, y: 32 },
               {
                 opacity: 1,
                 y: 0,
-                scale: 1,
-                duration: 1,
-                ease: "back.out(1.2)",
+                duration: 0.7,
+                ease: "power2.out",
               },
-              0.2
+              0.1,
             );
           }
 
           if (accent) {
-            // Animate the gradient text
             gsap.fromTo(
               accent,
               { backgroundPosition: "-100% 0%" },
@@ -464,64 +460,36 @@ export default function ConnectPage() {
                 duration: 2,
                 ease: "power2.inOut",
                 repeat: -1,
-                delay: 1,
-              }
-            );
-          }
-
-          if (divider) {
-            const dividerElements = divider.querySelectorAll("*");
-            tl.fromTo(
-              dividerElements,
-              { opacity: 0, scale: 0 },
-              {
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.7)",
-                stagger: 0.1,
+                delay: 0.8,
               },
-              0.6
             );
           }
 
           if (text) {
             tl.fromTo(
               text,
-              { opacity: 0, y: 20 },
-              { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-              0.8
+              { opacity: 0, y: 16 },
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+              0.4,
             );
           }
 
-          if (action) {
-            const arrow = action.querySelector(`.${styles.actionArrow}`);
-            const actionText = action.querySelector(`.${styles.actionText}`);
+          if (ctaLink) {
+            tl.fromTo(
+              ctaLink,
+              { opacity: 0, y: 12 },
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+              0.5,
+            );
+          }
 
-            if (arrow && actionText) {
-              tl.fromTo(
-                [arrow, actionText],
-                { opacity: 0, y: 20 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.8,
-                  ease: "power2.out",
-                  stagger: 0.1,
-                },
-                1
-              );
-
-              // Animate arrow bouncing
-              gsap.to(arrow, {
-                y: 5,
-                duration: 1,
-                ease: "power2.inOut",
-                repeat: -1,
-                yoyo: true,
-                delay: 2,
-              });
-            }
+          if (include) {
+            tl.fromTo(
+              include,
+              { opacity: 0, y: 12 },
+              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+              0.6,
+            );
           }
         },
       });
@@ -536,10 +504,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const formHeader = formSectionRef.current?.querySelector(
-            `.${styles.formHeader}`
+            `.${styles.formHeader}`,
           );
           const iframeWrapper = formSectionRef.current?.querySelector(
-            `.${styles.iframeWrapper}`
+            `.${styles.iframeWrapper}`,
           );
 
           const tl = gsap.timeline();
@@ -547,7 +515,7 @@ export default function ConnectPage() {
           if (formHeader) {
             const title = formHeader.querySelector(`.${styles.formTitle}`);
             const subtitle = formHeader.querySelector(
-              `.${styles.formSubtitle}`
+              `.${styles.formSubtitle}`,
             );
 
             if (title) {
@@ -555,7 +523,7 @@ export default function ConnectPage() {
                 title,
                 { opacity: 0, y: 30 },
                 { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-                0
+                0,
               );
             }
 
@@ -564,7 +532,7 @@ export default function ConnectPage() {
                 subtitle,
                 { opacity: 0, y: 20 },
                 { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-                0.2
+                0.2,
               );
             }
           }
@@ -580,7 +548,7 @@ export default function ConnectPage() {
                 duration: 1.2,
                 ease: "back.out(1.2)",
               },
-              0.4
+              0.4,
             );
           }
         },
@@ -596,10 +564,10 @@ export default function ConnectPage() {
         once: true,
         onEnter: () => {
           const footerText = footerRef.current?.querySelector(
-            `.${styles.footerText}`
+            `.${styles.footerText}`,
           );
           const signature = footerRef.current?.querySelector(
-            `.${styles.footerSignature}`
+            `.${styles.footerSignature}`,
           );
 
           const tl = gsap.timeline();
@@ -609,7 +577,7 @@ export default function ConnectPage() {
               footerText,
               { opacity: 0, y: 30 },
               { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-              0
+              0,
             );
           }
 
@@ -622,7 +590,7 @@ export default function ConnectPage() {
                 line,
                 { scaleX: 0 },
                 { scaleX: 1, duration: 0.8, ease: "power2.out" },
-                0.3
+                0.3,
               );
             }
 
@@ -631,7 +599,7 @@ export default function ConnectPage() {
                 text,
                 { opacity: 0, x: -20 },
                 { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" },
-                0.6
+                0.6,
               );
             }
           }
@@ -654,7 +622,7 @@ export default function ConnectPage() {
       {
         rootMargin: "200px", // Start loading 200px before the iframe comes into view
         threshold: 0.1,
-      }
+      },
     );
 
     // Capture the ref value to avoid stale closure issues
@@ -824,84 +792,27 @@ export default function ConnectPage() {
 
                 <div ref={readyRef} className={styles.readySection}>
                   <div className={styles.readyContent}>
-                    <div className={styles.readyLabel}>ARE YOU READY?</div>
+                    <p className={styles.readyLabel}>Let&apos;s talk</p>
                     <h2 className={styles.readyTitle}>
-                      Let&apos;s Create Something
-                      <span className={styles.readyAccent}>Extraordinary</span>
-                      Together
-                    </h2>
-                    <div className={styles.readyDivider}>
-                      <div className={styles.readyLine}></div>
-                      <div className={styles.readyDot}></div>
-                      <div className={styles.readyLine}></div>
-                    </div>
-                    <p className={styles.readyText}>
-                      I can&apos;t wait to hear about your love story and learn
-                      what makes your relationship special.
-                    </p>
-                    <div className={styles.readyAction}>
-                      <span className={styles.actionArrow}>↓</span>
-                      <span className={styles.actionText}>
-                        Start your enquiry below
+                      Your story deserves
+                      <span className={styles.readyAccent}>
+                        a real conversation.
                       </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Spacer between Ready and Form */}
-              <div ref={spacer3Ref} className={styles.sectionSpacer}>
-                <div className={styles.decorativeDivider}>
-                  <div className={styles.dividerLine}></div>
-                  <div className={styles.dividerShape}></div>
-                  <div className={styles.dividerLine}></div>
-                </div>
-              </div>
-
-              {/* Form Section */}
-              <div ref={formSectionRef} className={styles.formSection}>
-                {/* Cherub Logo Centerpiece */}
-                <div className={styles.cherubLogo}>
-                  <Image
-                    src="/cherub.webp"
-                    alt="Chloe Mary"
-                    width={200}
-                    height={173}
-                    style={{
-                      opacity: 0.8,
-                      filter: "grayscale(100%)",
-                    }}
-                  />
-                </div>
-
-                <div className={styles.formContainer}>
-                  <div className={styles.formHeader}>
-                    <h2 className={styles.formTitle}>Get In Touch</h2>
-                    <p className={styles.formSubtitle}>
-                      Tell me about your special day
+                    </h2>
+                    <p className={styles.readyText}>
+                      No long forms — just email me and we&apos;ll take it from
+                      there.
                     </p>
-                  </div>
-
-                  <div
-                    className={styles.iframeWrapper}
-                    ref={iframeContainerRef}
-                  >
-                    {!iframeVisible && <Skeleton width="100%" height="800px" />}
-                    {iframeVisible && !iframeLoaded && (
-                      <Skeleton width="100%" height="800px" />
-                    )}
-                    {iframeVisible && (
-                      <iframe
-                        src="https://app.studioninja.co/contactform/parser/0a800fc9-7033-1037-8170-3f8950262227/0a800fc8-7078-10f2-8170-817650cf2af9"
-                        width="100%"
-                        height="800"
-                        title="Contact Form - Chloe Mary"
-                        className={styles.contactIframe}
-                        ref={iframeRef}
-                        onLoad={handleIframeLoad}
-                        style={{ display: iframeLoaded ? "block" : "none" }}
-                      ></iframe>
-                    )}
+                    <a
+                      href="mailto:hello@chloemary.com"
+                      className={styles.readyCtaLink}
+                    >
+                      hello@chloemary.com
+                    </a>
+                    <p className={styles.readyInclude}>
+                      Include your name, date and location, a little about your
+                      story, and any questions.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -917,7 +828,7 @@ export default function ConnectPage() {
             <div className={styles.footerText}>
               <p className={styles.footerParagraph}>
                 Thank you so much for your interest in working with me. I limit
-                my bookings to just <strong>25 couples each year</strong>,
+                my bookings to just <strong>20 couples each year</strong>,
                 ensuring I can dedicate the time, attention, and personal care
                 that your love story deserves. This allows me to craft a truly
                 bespoke experience tailored to your unique vision.

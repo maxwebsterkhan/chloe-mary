@@ -8,7 +8,7 @@ export default function Footer() {
           <div className={styles.footer__main}>
             <h2 className={styles.footer__title}>
               <span>Let&apos;s Create</span>
-              <span>Something Beautiful</span>
+              <span>Something Real</span>
             </h2>
           </div>
 
